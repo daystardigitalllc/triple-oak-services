@@ -106,7 +106,7 @@ const uid = `choreo-${Math.random().toString(36).slice(2, 9)}`;
     {/* Hero image — scales up to fill the screen at the end of the scroll */}
     <div data-choreo-hero class="absolute inset-0 z-10 flex items-center justify-center opacity-0">
       <div data-choreo-hero-inner class="relative w-full h-full overflow-hidden rounded-custom">
-        <img src={images.hero.src} alt={images.hero.alt} class="w-full h-full object-cover object-top" />
+        <img src={images.hero.src} alt={images.hero.alt} class="w-full h-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
         <div data-choreo-hero-caption class="absolute bottom-10 left-0 right-0 flex flex-col items-center text-center px-6 opacity-0">
           <span class="text-[10px] font-extrabold uppercase tracking-widest text-white/80 mb-3">
