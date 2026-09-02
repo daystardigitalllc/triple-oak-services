@@ -25,14 +25,14 @@ import themeConfig from '../data/theme.config.json';
       <a href="/" class="hover:text-primary transition-colors">Home</a>
 
       <!-- Services Dropdown -->
-      <div class="relative group py-2">
-        <button class="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer">
+      <div class="relative group py-2" data-nav-dropdown>
+        <button type="button" aria-expanded="false" aria-haspopup="true" data-nav-dropdown-trigger class="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer">
           Services
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" data-nav-dropdown-chevron class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-        <div class="absolute left-0 top-full mt-1 hidden group-hover:block w-56 rounded-xl glass-panel p-2 shadow-xl border border-slate-200/50 dark:border-slate-800/50 bg-white/95 dark:bg-slate-950/95 animate-fade-in-up">
+        <div data-nav-dropdown-panel class="absolute left-0 top-full mt-1 hidden w-56 rounded-xl glass-panel p-2 shadow-xl border border-slate-200/50 dark:border-slate-800/50 bg-white/95 dark:bg-slate-950/95 animate-fade-in-up">
           {contentData.services.map((service) => (
             <a href={`/services/${service.slug}`} class="block px-4 py-2 text-sm rounded-lg text-slate-700 dark:text-slate-200 hover:bg-primary hover:text-white transition-all">
               {service.title}
@@ -42,14 +42,14 @@ import themeConfig from '../data/theme.config.json';
       </div>
 
       <!-- Locations Dropdown -->
-      <div class="relative group py-2">
-        <button class="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer">
+      <div class="relative group py-2" data-nav-dropdown>
+        <button type="button" aria-expanded="false" aria-haspopup="true" data-nav-dropdown-trigger class="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer">
           Locations
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" data-nav-dropdown-chevron class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-        <div class="absolute left-0 top-full mt-1 hidden group-hover:block w-56 rounded-xl glass-panel p-2 shadow-xl border border-slate-200/50 dark:border-slate-800/50 bg-white/95 dark:bg-slate-950/95 animate-fade-in-up">
+        <div data-nav-dropdown-panel class="absolute left-0 top-full mt-1 hidden w-56 rounded-xl glass-panel p-2 shadow-xl border border-slate-200/50 dark:border-slate-800/50 bg-white/95 dark:bg-slate-950/95 animate-fade-in-up">
           {businessData.locations.map((loc) => (
             <a href={`/locations/${loc.toLowerCase().replace(/ /g, '-')}`} class="block px-4 py-2 text-sm rounded-lg text-slate-700 dark:text-slate-200 hover:bg-primary hover:text-white transition-all">
               {loc}
@@ -205,4 +205,52 @@ import themeConfig from '../data/theme.config.json';
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
+
+  // Services / Locations dropdowns: click-toggle (desktop hover still works via CSS),
+  // so the button actually responds when a user clicks it instead of only hovering.
+  const dropdowns = document.querySelectorAll('[data-nav-dropdown]');
+  dropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector('[data-nav-dropdown-trigger]');
+    const panel = dropdown.querySelector('[data-nav-dropdown-panel]');
+    if (!trigger || !panel) return;
+
+    const close = () => {
+      panel.classList.add('hidden');
+      trigger.setAttribute('aria-expanded', 'false');
+    };
+    const open = () => {
+      dropdowns.forEach((other) => {
+        if (other !== dropdown) {
+          other.querySelector('[data-nav-dropdown-panel]')?.classList.add('hidden');
+          other.querySelector('[data-nav-dropdown-trigger]')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+      panel.classList.remove('hidden');
+      trigger.setAttribute('aria-expanded', 'true');
+    };
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      isOpen ? close() : open();
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    dropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.querySelector('[data-nav-dropdown-panel]')?.classList.add('hidden');
+        dropdown.querySelector('[data-nav-dropdown-trigger]')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdowns.forEach((dropdown) => {
+        dropdown.querySelector('[data-nav-dropdown-panel]')?.classList.add('hidden');
+        dropdown.querySelector('[data-nav-dropdown-trigger]')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 </script>

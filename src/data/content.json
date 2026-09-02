@@ -7,6 +7,7 @@
     "CTA",
     "Reviews",
     "GalleryScrollChoreography",
+    "CompareSlider",
     "FAQ",
     "QuoteFunnel"
   ],
@@ -78,6 +79,31 @@
       "heroCaption": "On the Job in Middle Tennessee",
       "ctaText": "See What Yours Could Look Like",
       "ctaHref": "#quote-funnel"
+    },
+    "compareShowcase": {
+      "badge": "Real Results",
+      "heading": "See the Transformation",
+      "subtitle": "Drag the slider to compare before and after on real Triple Oak Services job sites.",
+      "mode": "drag",
+      "initialPercentage": 50,
+      "showHandle": true,
+      "items": [
+        {
+          "label": "Full Tree Removal",
+          "before": { "src": "/images/before1.jpg", "alt": "Large tree down over the yard before Triple Oak Services removal" },
+          "after": { "src": "/images/after1.jpg", "alt": "Yard cleared to a flush-cut stump after tree removal" }
+        },
+        {
+          "label": "Large Tree Removal",
+          "before": { "src": "/images/before2.jpg", "alt": "Large tree before removal" },
+          "after": { "src": "/images/after2.jpg", "alt": "Property cleared and cleaned up after tree removal" }
+        },
+        {
+          "label": "Stump Grinding",
+          "before": { "src": "/images/before-stump1.jpg", "alt": "Tree stump before grinding" },
+          "after": { "src": "/images/after-stump1.jpg", "alt": "Yard cleared after stump grinding, ground level" }
+        }
+      ]
     }
   },
   "services": [
