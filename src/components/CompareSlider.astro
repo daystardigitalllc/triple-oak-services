@@ -82,6 +82,7 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
             data-autoplay={autoplay ? 'true' : 'false'}
             data-autoplay-duration={autoplayDuration}
             class="relative w-full aspect-[4/3] overflow-hidden rounded-custom shadow-lg select-none cursor-ew-resize bg-slate-200 dark:bg-slate-800"
+            style="touch-action: none;"
           >
             {/* After image (full, underneath) */}
             <img
@@ -180,28 +181,34 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
         card.addEventListener('mouseleave', startAutoplay);
         card.addEventListener('touchmove', (event) => setPercentage(percentageFromEvent(event)), { passive: true });
       } else {
-        // Pointer capture ties move/up events directly to this card's own
-        // pointerId, so a drag started here can never be picked up by (or
-        // leak into) another card's listeners, even if the pointer strays
-        // outside this card or the up/cancel event fires unexpectedly.
-        const endDrag = (event) => {
+        // Move/up listeners live on window for the duration of a drag so
+        // tracking keeps working even once the pointer leaves this card's
+        // bounds (this card's own `dragging` flag keeps it from reacting to
+        // any other card's drag). pointercancel and window blur are extra
+        // safety nets so a missed "up" can never leave a stale listener
+        // watching for the rest of the page's lifetime.
+        const onMove = (event) => {
+          if (!dragging) return;
+          setPercentage(percentageFromEvent(event));
+        };
+        const endDrag = () => {
           if (!dragging) return;
           dragging = false;
-          try { card.releasePointerCapture(event.pointerId); } catch {}
+          window.removeEventListener('pointermove', onMove);
+          window.removeEventListener('pointerup', endDrag);
+          window.removeEventListener('pointercancel', endDrag);
+          window.removeEventListener('blur', endDrag);
           startAutoplay();
         };
         card.addEventListener('pointerdown', (event) => {
           dragging = true;
           stopAutoplay();
-          try { card.setPointerCapture(event.pointerId); } catch {}
           setPercentage(percentageFromEvent(event));
+          window.addEventListener('pointermove', onMove);
+          window.addEventListener('pointerup', endDrag);
+          window.addEventListener('pointercancel', endDrag);
+          window.addEventListener('blur', endDrag);
         });
-        card.addEventListener('pointermove', (event) => {
-          if (!dragging) return;
-          setPercentage(percentageFromEvent(event));
-        });
-        card.addEventListener('pointerup', endDrag);
-        card.addEventListener('pointercancel', endDrag);
       }
 
       setPercentage(percentage);
