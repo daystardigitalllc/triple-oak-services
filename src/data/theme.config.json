@@ -1,8 +1,8 @@
 {
-  "primaryColor": "#2ee66b",
-  "primaryColorHover": "#22c55e",
+  "primaryColor": "#D9A441",
+  "primaryColorHover": "#B8842E",
   "secondaryColor": "#0a0f0a",
-  "accentColor": "#2ee66b",
+  "accentColor": "#3E8E51",
   "borderRadius": "0.5rem",
   "fontFamily": "Outfit",
   "style": "oak-city",

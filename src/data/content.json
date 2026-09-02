@@ -39,7 +39,8 @@
       "h1": "Experts in Tree Care You Can Trust",
       "supporting": "Triple Oak Services provides top-notch tree care for homeowners across the Nashville area, tree trimming, pruning, removal, and stump grinding, done safely and left clean. Ask about our current promotion.",
       "ctaText": "Get a Free Quote",
-      "badge": "⭐⭐⭐⭐⭐ Top Rated Local Tree Service"
+      "badge": "⭐⭐⭐⭐⭐ Top Rated Local Tree Service",
+      "bgImage": "/images/storm-damage-1.jpg"
     },
     "about": {
       "title": "About Triple Oak Services",
@@ -62,12 +63,28 @@
           "description": "Our technicians undergo constant training and safety certifications."
         }
       ]
+    },
+    "scrollShowcase": {
+      "badge": "Recent Work",
+      "heading": "A Few We're Proud Of",
+      "subtitle": "Real job sites from around the Nashville area, before and after our crew gets to work.",
+      "images": {
+        "topLeft":    { "src": "/images/before2.jpg",      "alt": "Large tree down before Triple Oak Services removal" },
+        "topRight":   { "src": "/images/after2.jpg",       "alt": "Property cleared and cleaned up after tree removal" },
+        "bottomLeft": { "src": "/images/before-stump1.jpg","alt": "Tree stump before grinding" },
+        "bottomRight":{ "src": "/images/after-stump1.jpg", "alt": "Yard cleared after stump grinding, ground level" },
+        "hero":       { "src": "/images/owner.jpg",        "alt": "Triple Oak Services crew member on a cut tree stump" }
+      },
+      "heroCaption": "On the Job in Middle Tennessee",
+      "ctaText": "See What Yours Could Look Like",
+      "ctaHref": "#quote-funnel"
     }
   },
   "services": [
     {
-      "slug": "tree-trimming---pruning",
+      "slug": "tree-trimming-pruning",
       "title": "Tree Trimming & Pruning",
+      "image": "/images/bucket-truck.jpg",
       "shortDescription": "Precision trimming and pruning that keeps your trees healthy, shaped, and safe year-round.",
       "longDescription": "Overgrown limbs put your roof, power lines, and family at risk. Our crew trims and prunes with the health of the tree in mind, removing dead or crossing branches, improving airflow and sunlight, and shaping trees to complement your property. Every cut is made using proper arborist technique, not just a chainsaw and a ladder.",
       "features": [
@@ -86,6 +103,7 @@
     {
       "slug": "tree-removal",
       "title": "Tree Removal",
+      "image": "/images/after1.jpg",
       "shortDescription": "Safe, complete removal of dead, dying, or unwanted trees of any size.",
       "longDescription": "When a tree is dead, diseased, leaning, or simply in the wrong spot, our team removes it safely and completely, protecting your home, fence, and landscaping in the process. We handle everything from single backyard trees to large, hazardous removals near structures and power lines, and we haul away every branch and log when we're done.",
       "features": [
@@ -104,6 +122,7 @@
     {
       "slug": "stump-grinding",
       "title": "Stump Grinding",
+      "image": "/images/after-stump1.jpg",
       "shortDescription": "Fast, thorough stump grinding that clears the way for a clean, usable yard.",
       "longDescription": "A leftover stump is a tripping hazard, a mower headache, and an eyesore. We grind stumps of any size down below grade so you can reclaim the space, replant, or landscape right over it. Fast turnaround, minimal mess, and a clean finish every time.",
       "features": [
@@ -122,6 +141,7 @@
     {
       "slug": "storm-damage-cleanup",
       "title": "Storm Damage Cleanup",
+      "image": "/images/storm-damage-1.jpg",
       "shortDescription": "Rapid response tree and debris cleanup after storms, straight-line winds, and fallen limbs.",
       "longDescription": "When a storm drops a tree on your property, you need someone there fast. We provide rapid-response storm cleanup, removing downed trees and limbs from roofs, driveways, fences, and yards, and clearing debris so your property is safe again.",
       "features": [
@@ -138,8 +158,9 @@
       ]
     },
     {
-      "slug": "land-clearing---maintenance",
+      "slug": "land-clearing-maintenance",
       "title": "Land Clearing & Maintenance",
+      "image": "/images/cleanup-trailer.jpg",
       "shortDescription": "Lot clearing, brush removal, and general land maintenance to open up and clean up your property.",
       "longDescription": "Whether you're clearing a lot for a new build, opening up an overgrown property line, or just need brush and undergrowth cleared out, we have the equipment and manpower to get it done efficiently and leave your land clean and usable.",
       "features": [
@@ -160,18 +181,10 @@
     {
       "slug": "nashville",
       "name": "Nashville",
-      "seoTitle": "Premium Tree Service Services in Nashville TN | Triple Oak Services",
-      "seoDescription": "Need Tree Service in Nashville, TN? Contact Triple Oak Services for premium services with warranties. Free estimates available.",
-      "intro": "Triple Oak Services proudly serves the Nashville, TN community with expert Tree Service services, reliable quality, and transparent pricing.",
+      "seoTitle": "Tree Service in Nashville, TN | Triple Oak Services",
+      "seoDescription": "Need tree trimming, removal, or stump grinding in Nashville, TN? Contact Triple Oak Services for expert tree care with free estimates.",
+      "intro": "Triple Oak Services proudly serves the Nashville, TN community with expert tree trimming, removal, stump grinding, and storm cleanup, backed by reliable quality and transparent pricing.",
       "ctaText": "Book in Nashville"
-    },
-    {
-      "slug": "tn",
-      "name": "TN",
-      "seoTitle": "Premium Tree Service Services in TN TN | Triple Oak Services",
-      "seoDescription": "Need Tree Service in TN, TN? Contact Triple Oak Services for premium services with warranties. Free estimates available.",
-      "intro": "Triple Oak Services proudly serves the TN, TN community with expert Tree Service services, reliable quality, and transparent pricing.",
-      "ctaText": "Book in TN"
     }
   ],
   "reviews": [

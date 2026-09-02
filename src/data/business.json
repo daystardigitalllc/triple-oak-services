@@ -1,7 +1,7 @@
 {
   "name": "Triple Oak Services",
   "industry": "Tree Service",
-  "logo": "/logo.svg",
+  "logo": "/logo.jpg",
   "phone": "615-561-0472",
   "email": "info@tripleoakservices.com",
   "bookingUrl": "",
@@ -24,8 +24,7 @@
     "zip": "37203"
   },
   "locations": [
-    "Nashville",
-    "TN"
+    "Nashville, TN"
   ],
   "services": [
     "Tree Trimming & Pruning",
