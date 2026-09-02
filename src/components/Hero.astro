@@ -44,100 +44,29 @@ const bgImage = contentData.home.hero.bgImage || '/hero-bg.jpg';
 
   {/* Static background trees, right side of hero. Pure decoration, never move. */}
   {layout === 'oak-city' && (
-    <div class="hidden lg:block absolute right-2 xl:right-8 bottom-0 z-[1] pointer-events-none w-[110px] xl:w-[135px] opacity-60">
-      <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
-        <path d="M96 415 C91 375 90 330 97 285 L123 285 C130 330 129 375 124 415 Z" fill="#241609" />
-        <g fill="#204a2b">
-          <circle cx="110" cy="200" r="60" />
-          <circle cx="66" cy="225" r="34" />
-          <circle cx="154" cy="220" r="36" />
-          <circle cx="86" cy="160" r="36" />
-          <circle cx="136" cy="156" r="36" />
-          <circle cx="110" cy="135" r="38" />
-        </g>
-      </svg>
-    </div>
-  )}
-  {layout === 'oak-city' && (
-    <div class="hidden lg:block absolute right-32 xl:right-48 bottom-0 z-[1] pointer-events-none w-[90px] xl:w-[110px] opacity-45">
-      <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
-        <path d="M96 415 C91 380 90 342 97 305 L123 305 C130 342 129 380 124 415 Z" fill="#1c1207" />
-        <g fill="#173a20">
-          <circle cx="110" cy="240" r="52" />
-          <circle cx="70" cy="262" r="30" />
-          <circle cx="150" cy="258" r="32" />
-          <circle cx="110" cy="188" r="34" />
-        </g>
-      </svg>
-    </div>
+    <img
+      src="/images/hero-tree.png"
+      alt=""
+      aria-hidden="true"
+      class="hidden lg:block absolute right-4 xl:right-10 bottom-0 z-[1] pointer-events-none w-[105px] xl:w-[125px] h-auto opacity-45 brightness-[0.55] saturate-75"
+    />
+    <img
+      src="/images/hero-tree.png"
+      alt=""
+      aria-hidden="true"
+      class="hidden lg:block absolute right-36 xl:right-52 bottom-0 z-[1] pointer-events-none w-[85px] xl:w-[100px] h-auto opacity-30 brightness-[0.5] saturate-75"
+    />
   )}
 
   {/* Falling tree, right side of hero. Rides scroll progress down through the section, then stays gone. */}
   {layout === 'oak-city' && (
-    <div
+    <img
       id="hero-falling-tree"
-      class="hidden lg:block absolute right-8 xl:right-20 bottom-0 z-[2] pointer-events-none w-[170px] xl:w-[210px]"
+      src="/images/hero-tree.png"
+      alt="Oak tree"
+      class="hidden lg:block absolute right-10 xl:right-24 bottom-0 z-[2] pointer-events-none w-[150px] xl:w-[180px] h-auto drop-shadow-[0_18px_20px_rgba(0,0,0,0.45)]"
       style="transform-origin: bottom center; will-change: transform, opacity;"
-    >
-      <svg viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-[0_18px_20px_rgba(0,0,0,0.45)]">
-        <defs>
-          <linearGradient id="tree-trunk-grad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#2b1a10" />
-            <stop offset="45%" stop-color="#5a3a22" />
-            <stop offset="100%" stop-color="#22140c" />
-          </linearGradient>
-          <radialGradient id="tree-canopy-grad" cx="38%" cy="32%" r="75%">
-            <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.55" />
-            <stop offset="35%" stop-color="var(--color-accent)" />
-            <stop offset="100%" stop-color="#1c3d24" />
-          </radialGradient>
-        </defs>
-
-        <ellipse cx="110" cy="410" rx="38" ry="8" fill="#000" opacity="0.28" />
-
-        <!-- Root flare -->
-        <path d="M110 415 C96 400 90 388 92 372 C86 386 78 396 64 402 C80 394 92 396 100 406 Z" fill="url(#tree-trunk-grad)" />
-        <path d="M110 415 C124 400 130 388 128 372 C134 386 142 396 156 402 C140 394 128 396 120 406 Z" fill="url(#tree-trunk-grad)" />
-
-        <!-- Trunk -->
-        <path d="M96 415 C90 370 89 320 96 275 C99 250 101 225 99 205 L121 205 C119 225 121 250 124 275 C131 320 130 370 124 415 Z" fill="url(#tree-trunk-grad)" />
-        <path d="M104 400 C100 355 100 310 106 270" stroke="#1c1008" stroke-width="2" stroke-linecap="round" opacity="0.5" fill="none" />
-        <path d="M116 395 C119 352 118 308 114 268" stroke="#1c1008" stroke-width="2" stroke-linecap="round" opacity="0.4" fill="none" />
-
-        <!-- Branch forks reaching into the canopy -->
-        <path d="M110 260 C90 235 72 222 46 214" stroke="url(#tree-trunk-grad)" stroke-width="12" stroke-linecap="round" fill="none" />
-        <path d="M112 250 C132 222 152 208 178 198" stroke="url(#tree-trunk-grad)" stroke-width="11" stroke-linecap="round" fill="none" />
-        <path d="M108 230 C104 200 106 178 116 155" stroke="url(#tree-trunk-grad)" stroke-width="10" stroke-linecap="round" fill="none" />
-
-        <!-- Canopy: layered irregular clusters for a fuller, hand-drawn oak crown -->
-        <g fill="url(#tree-canopy-grad)">
-          <circle cx="110" cy="150" r="78" />
-          <circle cx="48" cy="188" r="44" />
-          <circle cx="176" cy="182" r="46" />
-          <circle cx="34" cy="140" r="34" />
-          <circle cx="190" cy="132" r="36" />
-          <circle cx="62" cy="98" r="44" />
-          <circle cx="160" cy="92" r="44" />
-          <circle cx="110" cy="66" r="46" />
-          <circle cx="86" cy="200" r="34" />
-          <circle cx="138" cy="204" r="32" />
-        </g>
-
-        <!-- Depth shading, lower/inner lobes -->
-        <g fill="#1c3d24" opacity="0.45">
-          <circle cx="70" cy="205" r="26" />
-          <circle cx="150" cy="200" r="24" />
-          <circle cx="110" cy="188" r="30" />
-        </g>
-
-        <!-- Dappled highlight, matching the logo's lighter leaf clusters -->
-        <g fill="var(--color-primary)" opacity="0.4">
-          <circle cx="80" cy="100" r="20" />
-          <circle cx="132" cy="86" r="18" />
-          <circle cx="100" cy="130" r="16" />
-        </g>
-      </svg>
-    </div>
+    />
   )}
 
   <!-- Glowing Background blobs (disabled for contractor theme via CSS property glow-display) -->
@@ -347,10 +276,7 @@ const bgImage = contentData.home.hero.bgImage || '/hero-bg.jpg';
         )}
 
         <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.05] uppercase">
-          {h1.split(' ').slice(0, -2).join(' ')} <span id="typewriter-text" class="text-primary border-r-4 border-primary/70 pr-2 animate-caret"></span>
-          <noscript>
-            <span class="text-primary">{h1.split(' ').slice(-2).join(' ')}</span>
-          </noscript>
+          {h1.split(' ').slice(0, -2).join(' ')} <span class="text-primary">{h1.split(' ').slice(-2).join(' ')}</span>
         </h1>
         
         <p class="text-lg md:text-xl text-slate-200 leading-relaxed max-w-2xl mx-auto font-normal">
@@ -367,57 +293,10 @@ const bgImage = contentData.home.hero.bgImage || '/hero-bg.jpg';
           </a>
         </div>
 
-        <div id="typewriter-config" data-words={JSON.stringify(themeConfig.typewriterWords && themeConfig.typewriterWords.length > 0 ? themeConfig.typewriterWords : ["Tree Care", "Emergency Response", "Stump Removal"])} class="hidden"></div>
       </div>
     )}
   </div>
 </section>
-
-{layout === 'oak-city' && (
-  <script>
-    const configEl = document.getElementById('typewriter-config');
-    const words = configEl ? JSON.parse(configEl.getAttribute('data-words') || '[]') : [];
-    
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const txtElement = document.getElementById('typewriter-text');
-    
-    function type() {
-      if (!txtElement || words.length === 0) return;
-      
-      const currentWord = words[wordIndex];
-      if (isDeleting) {
-        txtElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        txtElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-      }
-      
-      let typeSpeed = 120;
-      if (isDeleting) {
-        typeSpeed /= 2;
-      }
-      
-      if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 1800; // Pause at end of word
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 400; // Pause before next word
-      }
-      
-      setTimeout(type, typeSpeed);
-    }
-    
-    // Start typewriter effect after page load
-    if (txtElement && words.length > 0) {
-      type();
-    }
-  </script>
-)}
 
 {layout === 'oak-city' && (
   <script>
