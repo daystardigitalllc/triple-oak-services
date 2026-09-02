@@ -38,32 +38,9 @@
   "home": {
     "hero": {
       "h1": "Middle Tennessee Tree Services",
-      "supporting": "Triple Oak Services provides top-notch tree care for homeowners across the Nashville area, tree trimming, pruning, removal, and stump grinding, done safely and left clean. Ask about our current promotion.",
+      "supporting": "Tree trimming, pruning, removal, and stump grinding for homeowners across the Nashville area, done safely and left clean. Ask about our current promotion.",
       "ctaText": "Get a Free Quote",
-      "badge": "⭐⭐⭐⭐⭐ Top Rated Local Tree Service",
       "bgImage": "/images/storm-damage-1.jpg"
-    },
-    "about": {
-      "title": "About Triple Oak Services",
-      "text": "Triple Oak Services is dedicated to providing top-notch tree care to the community. With years of experience, our team specializes in tree trimming, pruning, removal, and stump grinding, ensuring the health and beauty of your trees. We use the latest techniques and prioritize safety and sustainability in every project we undertake."
-    },
-    "whyChooseUs": {
-      "title": "Why Choose Triple Oak Services",
-      "subtitle": "Setting the standard for Tree Service solutions.",
-      "items": [
-        {
-          "title": "Guaranteed Workmanship",
-          "description": "Every installation and repair is backed by our lifetime warranty package."
-        },
-        {
-          "title": "Upfront Estimates",
-          "description": "Clear, itemized pricing so you know what to expect. No hidden surprises."
-        },
-        {
-          "title": "Certified Experts",
-          "description": "Our technicians undergo constant training and safety certifications."
-        }
-      ]
     },
     "scrollShowcase": {
       "badge": "Recent Work",
@@ -121,8 +98,12 @@
       ],
       "faq": [
         {
-          "q": "Why choose us for Tree Trimming & Pruning?",
-          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+          "q": "How often should trees be trimmed?",
+          "a": "Most mature trees do well with trimming every 2-3 years. Younger or fast-growing trees may need more frequent attention. We can recommend a schedule when we take a look at your property."
+        },
+        {
+          "q": "Will trimming hurt the tree?",
+          "a": "Not when it's done right. We make cuts in the right spots so the tree heals and grows back healthy instead of getting stressed or damaged."
         }
       ]
     },
@@ -140,8 +121,12 @@
       ],
       "faq": [
         {
-          "q": "Why choose us for Tree Removal?",
-          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+          "q": "How do you remove a tree near my house or power lines?",
+          "a": "For tight spots we take the tree down in sections instead of felling it all at once, so your home, fence, and any nearby lines stay protected."
+        },
+        {
+          "q": "Do I need a permit to remove a tree?",
+          "a": "It depends on your city and whether the tree sits on a property line. We can help you sort out what's needed before we start the job."
         }
       ]
     },
@@ -159,8 +144,12 @@
       ],
       "faq": [
         {
-          "q": "Why choose us for Stump Grinding?",
-          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+          "q": "How far below the surface do you grind?",
+          "a": "We grind stumps below grade, not just flush with the ground, so you can plant, seed, or landscape right over the spot afterward."
+        },
+        {
+          "q": "What happens to the wood chips?",
+          "a": "We can leave the mulch for you to use around your yard, or haul it off, whichever you'd rather have."
         }
       ]
     },
@@ -178,8 +167,12 @@
       ],
       "faq": [
         {
-          "q": "Why choose us for Storm Damage Cleanup?",
-          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+          "q": "A tree fell on my roof or fence, what do I do?",
+          "a": "Call us right away. We treat storm calls as a priority and get downed trees and limbs off your structures safely before starting the rest of the cleanup."
+        },
+        {
+          "q": "Can you help with my insurance claim?",
+          "a": "We can document the damage with photos and notes from the job, which you can pass along to your homeowner's insurance."
         }
       ]
     },
@@ -197,8 +190,12 @@
       ],
       "faq": [
         {
-          "q": "Why choose us for Land Clearing & Maintenance?",
-          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+          "q": "What size lots can you clear?",
+          "a": "Anything from a small overgrown backyard to a larger building site. We scale the crew and equipment to fit the job."
+        },
+        {
+          "q": "Can you work around fences or structures I want to keep?",
+          "a": "Yes, we clear carefully around anything you point out ahead of time, whether it's a fence, shed, or landscaping."
         }
       ]
     }

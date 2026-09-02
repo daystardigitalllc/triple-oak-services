@@ -18,10 +18,10 @@ interface Props {
   ogImage?: string;
 }
 
-const { 
-  title = `${businessData.name} | Professional Home Services`, 
-  description = `Welcome to ${businessData.name}. We provide premium ${(contentData.services || []).map((s) => s.title).join(', ')} services locally.`,
-  ogImage = '/og-image.jpg' 
+const {
+  title = `${businessData.name} | Tree Trimming, Removal & Stump Grinding in ${businessData.locations?.[0] || 'Middle Tennessee'}`,
+  description = `${businessData.name} offers tree trimming, removal, and stump grinding for homeowners in ${businessData.locations?.[0] || 'Middle Tennessee'}. Licensed and insured, with free estimates.`,
+  ogImage = '/og-image.jpg'
 } = Astro.props;
 
 const fontName = themeConfig.fontFamily || 'Outfit';

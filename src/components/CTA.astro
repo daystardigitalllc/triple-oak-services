@@ -13,20 +13,20 @@ const isOakCity = themeConfig.style === 'oak-city';
       <div class="absolute -right-24 -bottom-24 w-96 h-96 bg-accent/20 rounded-full blur-[100px] pointer-events-none"></div>
       <div class="absolute -left-24 -top-24 w-80 h-80 bg-primary/30 rounded-full blur-[80px] pointer-events-none"></div>
 
-      <div class="max-w-3xl space-y-6 relative z-10">
-        <span class="text-xs font-bold uppercase tracking-wider text-accent bg-accent/15 px-3 py-1 rounded-full">
+      <div class="max-w-2xl mx-auto space-y-6 relative z-10 text-center">
+        <span class="text-xs font-bold uppercase tracking-wider text-white bg-white/15 px-3 py-1 rounded-full">
           Ready to Get Started?
         </span>
-        
+
         <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight uppercase">
           Get Your Free Estimate Today
         </h2>
-        
-        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl">
-          Don't wait for minor issues to turn into costly damage. Reach out to {businessData.name} and get a guaranteed quote.
+
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+          Get a free, no-obligation quote from {businessData.name} today.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 pt-4">
           <a href="#quote-funnel" class:list={[
             "inline-flex items-center justify-center px-8 py-4 text-base font-bold transition-all hover:scale-103 text-center",
             isOakCity
