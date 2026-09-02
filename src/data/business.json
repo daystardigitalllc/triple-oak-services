@@ -1,0 +1,37 @@
+{
+  "name": "Triple Oak Services",
+  "industry": "Tree Service",
+  "logo": "/logo.svg",
+  "phone": "615-561-0472",
+  "email": "info@tripleoakservices.com",
+  "bookingUrl": "",
+  "mainCta": "Get a Free Quote",
+  "yearsInBusiness": "5+",
+  "certifications": [
+    "Licensed & Insured",
+    "Free Estimates",
+    "Locally Owned"
+  ],
+  "socials": {
+    "facebook": "https://facebook.com/triple-oak-services",
+    "instagram": "https://instagram.com/triple-oak-services",
+    "google": "https://g.page/triple-oak-services"
+  },
+  "address": {
+    "street": "123 Main St",
+    "city": "Nashville",
+    "state": "TN",
+    "zip": "37203"
+  },
+  "locations": [
+    "Nashville",
+    "TN"
+  ],
+  "services": [
+    "Tree Trimming & Pruning",
+    "Tree Removal",
+    "Stump Grinding",
+    "Storm Damage Cleanup",
+    "Land Clearing & Maintenance"
+  ]
+}

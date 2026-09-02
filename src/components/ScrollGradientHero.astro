@@ -1,0 +1,173 @@
+---
+// ScrollGradientHero.astro
+// Premium opening hero section inspired by godaylight.com.
+// Features ambient glowing metrics sidebar details, interactive address qualifier search bar,
+// and a subtle parallax scroll layout with border frames.
+import businessData from '../data/business.json';
+import contentData from '../data/content.json';
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  buttonTextOverride?: string;
+  placeholderOverride?: string;
+  bgImageOverride?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  buttonTextOverride,
+  placeholderOverride,
+  bgImageOverride,
+} = Astro.props;
+
+const data = contentData.home?.scrollHero || contentData.home?.hero;
+
+const badge = badgeOverride || data?.badge || 'Power you control';
+const heading = headingOverride || data?.h1 || data?.heading || 'Power your home for less';
+const subtitle = subtitleOverride || data?.supporting || data?.subtitle || 'Battery backup and solar. $0 upfront. A lower electric bill every month.';
+const buttonText = buttonTextOverride || 'See if you qualify';
+const placeholder = placeholderOverride || 'Enter your address';
+const bgImage = bgImageOverride || '/images/hero-daylight-bg.jpg';
+---
+
+<section class="relative min-h-[92lvh] lg:min-h-screen bg-slate-950 text-white flex flex-col justify-end lg:justify-center overflow-hidden border-b border-slate-900">
+  
+  <!-- Parallax Background Image with Dark Tint -->
+  <div class="absolute inset-0 z-0 select-none pointer-events-none">
+    <img 
+      src={bgImage} 
+      alt="Modern solar-paneled home backup setup" 
+      class="w-full h-full object-cover opacity-35 scale-105 transform translate-y-0"
+      id="parallax-bg-img"
+      onerror="this.src='https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1920&q=80'"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+  </div>
+
+  <!-- Ambient metrics display panels (Daylight Touch) -->
+  <div class="absolute inset-0 z-1 pointer-events-none hidden lg:block select-none" id="ambient-overlay">
+    <!-- Top-Right Metric Panel -->
+    <div class="absolute flex flex-col gap-1.5 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl text-white shadow-xl animate-fade-in-up" style="top: 25%; right: 12%;">
+      <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400">kWh Generated</span>
+      <span class="text-sm font-bold text-emerald-400">8.2 kWh &mdash; 9.5 kWh</span>
+    </div>
+
+    <!-- Center-Right Battery Bar Panel -->
+    <div class="absolute flex flex-col gap-2.5 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl text-white shadow-xl animate-fade-in-up" style="bottom: 35%; right: 20%; animation-delay: 150ms;">
+      <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400">Backup Stored</span>
+      <div class="h-2 w-32 bg-slate-800 rounded-full overflow-hidden relative border border-white/5">
+        <div class="absolute top-0 bottom-0 left-0 bg-amber-500 rounded-full animate-charge-bar" style="width: 88%;"></div>
+      </div>
+    </div>
+
+    <!-- Bottom-Left Thermostat Panel -->
+    <div class="absolute flex flex-col gap-1.5 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl text-white shadow-xl animate-fade-in-up" style="bottom: 25%; left: 12%; animation-delay: 300ms;">
+      <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+        <i class="fa-solid fa-temperature-half text-amber-500"></i> Smart Thermostat
+      </span>
+      <span class="text-sm font-bold text-white">68&deg;F &mdash; Eco Mode</span>
+    </div>
+  </div>
+
+  <!-- Decorative Outer Screen Borders -->
+  <div class="absolute inset-0 z-10 border-[10px] border-slate-950 pointer-events-none"></div>
+
+  <!-- Hero Content Grid -->
+  <div class="container mx-auto px-6 lg:px-16 py-16 relative z-10 flex flex-col items-start w-full max-w-7xl">
+    <div class="max-w-2.5xl space-y-6 text-left" id="hero-text-block">
+      
+      {badge && (
+        <small class="inline-block font-mono text-xs uppercase tracking-widest text-amber-500 font-bold bg-amber-500/10 px-3 py-1.5 rounded-full border border-amber-500/20 shadow-sm animate-fade-in">
+          {badge}
+        </small>
+      )}
+      
+      <h1 class="text-4xl sm:text-6xl lg:text-7.5xl font-serif font-normal tracking-tight text-white leading-[1.05] animate-fade-in-up">
+        {heading}
+      </h1>
+
+      <p class="text-slate-300 text-sm sm:text-lg lg:text-xl font-normal leading-relaxed max-w-xl animate-fade-in-up" style="animation-delay: 100ms;">
+        {subtitle}
+      </p>
+
+      <!-- Qualification Address Pill Form -->
+      <div class="pt-4 max-w-md w-full animate-fade-in-up" style="animation-delay: 200ms;">
+        <form class="qualify-pill flex items-center bg-white/5 backdrop-blur-lg border border-white/15 hover:border-white/30 rounded-2xl p-1.5 transition-all shadow-2xl focus-within:ring-2 focus-within:ring-amber-500/50">
+          <input 
+            type="text" 
+            placeholder={placeholder} 
+            class="flex-grow bg-transparent border-0 outline-none text-slate-100 placeholder-slate-400 text-sm px-4 py-3 font-medium tracking-tight"
+            required
+          />
+          <button 
+            type="submit" 
+            class="bg-white hover:bg-slate-100 text-slate-950 text-xs sm:text-sm font-bold tracking-tight px-6 py-3.5 rounded-xl transition-all active:scale-97 cursor-pointer shrink-0 shadow-md"
+          >
+            {buttonText}
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<script>
+  // Parallax scroll effect
+  const bgImg = document.getElementById('parallax-bg-img');
+  const heroText = document.getElementById('hero-text-block');
+  const overlay = document.getElementById('ambient-overlay');
+
+  if (bgImg) {
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY;
+      // Scroll parallax factor
+      bgImg.style.transform = `translateY(${scrollPos * 0.12}px) scale(${1.05 + scrollPos * 0.0001})`;
+      
+      // Fade out copy and overlay slightly as we scroll away
+      if (heroText) {
+        heroText.style.opacity = String(Math.max(0, 1 - scrollPos / 600));
+        heroText.style.transform = `translateY(${scrollPos * 0.15}px)`;
+      }
+      if (overlay) {
+        overlay.style.opacity = String(Math.max(0, 1 - scrollPos / 400));
+        overlay.style.transform = `translateY(${scrollPos * 0.05}px)`;
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Local animations */
+  .animate-charge-bar {
+    animation: charge 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: left;
+  }
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  .animate-fade-in-up {
+    opacity: 0;
+    transform: translateY(1rem);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes charge {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

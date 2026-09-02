@@ -1,0 +1,82 @@
+---
+// PromoBanner.astro
+// High-visibility top notification alert bar.
+// Features a dynamic link, chevron hover anims, and a persistent dismiss close trigger
+// utilizing local storage to remember visitor preferences.
+
+interface Props {
+  text?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  id?: string;
+  class?: string;
+}
+
+const {
+  text = '💡 Check out our emergency dispatch hours and service guarantees.',
+  ctaText = 'Learn More',
+  ctaHref = '#faq',
+  id = 'global-promo-banner',
+  class: className = ''
+} = Astro.props;
+---
+
+<div 
+  id={id}
+  class:list={[
+    "promo-banner z-50 h-9 flex items-center justify-between gap-3 bg-rose-800 text-white px-4 text-xs select-none transition-all duration-300 relative",
+    className
+  ]}
+>
+  <div class="flex-grow flex items-center justify-center gap-1">
+    <span class="truncate">{text}</span>
+    <span class="hidden md:inline px-1 opacity-50">|</span>
+    <a 
+      href={ctaHref} 
+      class="group inline-flex items-center gap-1.5 font-bold hover:underline select-none"
+    >
+      {ctaText}
+      <i class="fa-solid fa-arrow-right text-[9px] transform transition-transform duration-300 group-hover:translate-x-0.5"></i>
+    </a>
+  </div>
+  
+  <!-- Close Dismiss Trigger -->
+  <button 
+    type="button" 
+    class="banner-close-btn text-white/75 hover:text-white p-1 rounded transition-colors cursor-pointer flex items-center justify-center shrink-0 focus:outline-none"
+    aria-label="Dismiss banner"
+  >
+    <i class="fa-solid fa-xmark text-sm"></i>
+  </button>
+</div>
+
+<script define:vars={{ id }}>
+  function setupPromoBanner() {
+    const banner = document.getElementById(id);
+    if (!banner) return;
+
+    // Check if dismissed in this session
+    const isDismissed = localStorage.getItem(`dismissed-banner-${id}`);
+    if (isDismissed === 'true') {
+      banner.style.display = 'none';
+      return;
+    }
+
+    const closeBtn = banner.querySelector('.banner-close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        banner.style.opacity = '0';
+        banner.style.height = '0';
+        banner.style.padding = '0';
+        localStorage.setItem(`dismissed-banner-${id}`, 'true');
+        setTimeout(() => {
+          banner.style.display = 'none';
+        }, 300);
+      });
+    }
+  }
+
+  // Support loads
+  document.addEventListener('astro:page-load', setupPromoBanner);
+  setupPromoBanner();
+</script>

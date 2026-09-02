@@ -1,0 +1,90 @@
+---
+// TabsExquisitus.astro
+// Tab switching documentation panels in the Exquisitus theme style.
+// Uses hairline borders, flat background tabs, and a simple vanilla script to handle toggles.
+
+interface Props {
+  tabs: string[];
+  id?: string;
+  class?: string;
+}
+
+const {
+  tabs = ['Tab 1', 'Tab 2'],
+  id = 'tabs-group-' + Math.random().toString(36).substr(2, 9),
+  class: className = ''
+} = Astro.props;
+---
+
+<div id={id} class:list={["w-full border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-950 shadow-md tabs-container select-none", className]}>
+  
+  <!-- Tabs Navigation Header Bar -->
+  <div class="flex border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 overflow-x-auto scrollbar-none">
+    {tabs.map((tab, idx) => (
+      <button
+        type="button"
+        class:list={[
+          "px-5 py-3 text-xs font-bold tracking-wide uppercase border-r border-slate-200 dark:border-slate-850 cursor-pointer transition-all focus:outline-none select-none",
+          idx === 0 
+            ? "bg-white dark:bg-slate-950 text-amber-600 dark:text-amber-500 font-extrabold border-t-2 border-t-amber-500" 
+            : "text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-850"
+        ]}
+        data-tab-index={idx}
+      >
+        {tab}
+      </button>
+    ))}
+  </div>
+
+  <!-- Tab Panels Slot Wrapper -->
+  <div class="p-6 relative text-slate-800 dark:text-slate-100 text-xs sm:text-sm leading-relaxed">
+    <slot />
+  </div>
+
+</div>
+
+<script define:vars={{ id }}>
+  function setupTabsExquisitus() {
+    const container = document.getElementById(id);
+    if (!container) return;
+
+    const buttons = container.querySelectorAll('[data-tab-index]');
+    const slots = container.querySelector('.p-6').children;
+
+    // Verify slots match tabs count
+    if (slots.length === 0) return;
+
+    // Helper: show only selected index
+    const selectTab = (selectedIndex) => {
+      buttons.forEach((btn, idx) => {
+        if (idx === selectedIndex) {
+          btn.classList.add('bg-white', 'dark:bg-slate-950', 'text-amber-600', 'dark:text-amber-500', 'font-extrabold', 'border-t-2', 'border-t-amber-500');
+          btn.classList.remove('text-slate-500', 'dark:text-slate-400', 'hover:bg-slate-100', 'dark:hover:bg-slate-850');
+        } else {
+          btn.classList.remove('bg-white', 'dark:bg-slate-950', 'text-amber-600', 'dark:text-amber-500', 'font-extrabold', 'border-t-2', 'border-t-amber-500');
+          btn.classList.add('text-slate-500', 'dark:text-slate-400', 'hover:bg-slate-100', 'dark:hover:bg-slate-850');
+        }
+      });
+
+      Array.from(slots).forEach((panel, idx) => {
+        if (idx === selectedIndex) {
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+      });
+    };
+
+    // Add listeners
+    buttons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => selectTab(idx));
+    });
+
+    // Initial state setup (show first tab, hide rest)
+    selectTab(0);
+  }
+
+  // Setup tabs
+  document.addEventListener('astro:page-load', setupTabsExquisitus);
+  setupTabsExquisitus();
+</script>

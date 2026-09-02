@@ -1,0 +1,79 @@
+---
+// MissionRecruit.astro
+// Corporate split-screen mission callout.
+// Features clean typography, details blocks, and a square arrow button link alongside a large image block.
+import contentData from '../data/content.json';
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  descriptionOverride?: string;
+  buttonHrefOverride?: string;
+  imageSrcOverride?: string;
+  imageAltOverride?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  descriptionOverride,
+  buttonHrefOverride,
+  imageSrcOverride,
+  imageAltOverride
+} = Astro.props;
+
+const data = contentData.home?.missionRecruit;
+
+const badge = badgeOverride || data?.badge || 'Mission';
+const heading = headingOverride || data?.title || 'We’ve managed over 2.5 million candidates';
+const description = descriptionOverride || data?.description || 'Our platform is designed to make recruiting seamless, simple, and automated. We match top tier talent with high-impact opportunities worldwide, providing a frictionless onboarding cycle.';
+const buttonHref = buttonHrefOverride || data?.buttonHref || '#services';
+const imageSrc = imageSrcOverride || data?.imageSrc || 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80';
+const imageAlt = imageAltOverride || data?.imageAlt || 'Our corporate mission values';
+---
+
+<section class="relative bg-white dark:bg-slate-950 text-slate-900 dark:text-white overflow-hidden py-16 sm:py-24 border-b border-slate-200 dark:border-slate-800">
+  <div class="container mx-auto px-6 max-w-6.5xl">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Text content (Left on desktop) -->
+      <div class="lg:col-span-6 space-y-6">
+        {badge && (
+          <h2 class="text-sm font-bold uppercase tracking-wider text-orange-500">
+            {badge}
+          </h2>
+        )}
+        <h3 class="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-tight">
+          {heading}
+        </h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          {description}
+        </p>
+
+        <!-- Square arrow icon button link -->
+        <div class="pt-2">
+          <a 
+            href={buttonHref} 
+            class="inline-flex items-center justify-center w-14 h-14 bg-orange-500 hover:bg-slate-950 dark:hover:bg-white text-slate-950 hover:text-white dark:hover:text-slate-950 transition-all duration-300 shadow-md cursor-pointer rounded-none"
+            title="Next Step"
+          >
+            <i class="fa-solid fa-arrow-right text-lg"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Image Display (Right on desktop) -->
+      <div class="lg:col-span-6">
+        <div class="aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900">
+          <img 
+            src={imageSrc} 
+            alt={imageAlt} 
+            class="w-full h-full object-cover" 
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,124 @@
+---
+// JobGrid.astro
+// Careers / Job Opening cards board.
+// Features a grid of job openings where the first card is highlighted in the brand's primary accent (orange)
+// and subsequent cards are styled in the brand's secondary dark theme.
+import contentData from '../data/content.json';
+
+interface JobItem {
+  title: string;
+  location: string;
+  salary: string;
+  description: string;
+  link: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  jobsOverride?: JobItem[];
+  allJobsHref?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  jobsOverride,
+  allJobsHref = '#contacts'
+} = Astro.props;
+
+const data = contentData.home?.jobGrid;
+
+const badge = badgeOverride || data?.badge || 'Jobs';
+const heading = headingOverride || data?.title || 'Latest Openings';
+
+const defaultJobs: JobItem[] = [
+  {
+    title: 'Frontend Engineer',
+    location: 'Nashville, TN (Hybrid)',
+    salary: '$85,000 - $110,000 / year',
+    description: 'We are seeking an Astro & Tailwind expert to architect frontend component libraries and client dashboards.',
+    link: '#contacts'
+  },
+  {
+    title: 'FullStack Developer',
+    location: 'Nashville, TN (Onsite)',
+    salary: '$110,000 - $140,000 / year',
+    description: 'Help scale our automated website provisioning pipeline and dynamic dashboard integrations.',
+    link: '#contacts'
+  },
+  {
+    title: 'Solar Layout Designer',
+    location: 'Nashville, TN (Remote)',
+    salary: '$75,000 - $95,000 / year',
+    description: 'Create technical blueprint proposals, sync with grid permissions, and model energy savings graphs.',
+    link: '#contacts'
+  }
+];
+
+const jobs = jobsOverride || data?.items || defaultJobs;
+---
+
+<section id="jobs" class="py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 select-none">
+  <div class="container mx-auto px-6 max-w-6.5xl space-y-12">
+    
+    <!-- Header row with right-aligned arrow button link -->
+    <div class="flex items-center justify-between gap-10">
+      <div class="space-y-3">
+        {badge && (
+          <span class="text-sm font-bold uppercase tracking-wider text-orange-500">
+            {badge}
+          </span>
+        )}
+        <h2 class="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-tight">
+          {heading}
+        </h2>
+      </div>
+
+      <!-- Action arrow button link -->
+      <a 
+        href={allJobsHref} 
+        class="inline-flex items-center justify-center w-14 h-14 bg-orange-500 hover:bg-slate-950 dark:hover:bg-white text-slate-950 hover:text-white dark:hover:text-slate-950 transition-all duration-300 shadow-md shrink-0 rounded-none"
+        title="View All Positions"
+      >
+        <i class="fa-solid fa-arrow-right text-lg"></i>
+      </a>
+    </div>
+
+    <!-- Jobs Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {jobs.map((job, idx) => (
+        <a 
+          href={job.link}
+          class:list={[
+            "p-10 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between space-y-6 shadow-lg",
+            idx === 0 
+              ? "bg-orange-500 text-slate-950" 
+              : "bg-slate-900 text-white dark:bg-slate-900 dark:border dark:border-slate-800"
+          ]}
+        >
+          <div class="space-y-4">
+            <h3 class="text-xl font-bold tracking-tight leading-snug">{job.title}</h3>
+            <p class:list={["text-xs font-semibold uppercase tracking-wider", idx === 0 ? "text-slate-800" : "text-slate-400"]}>
+              <i class="fa-solid fa-location-dot mr-1"></i> {job.location}
+            </p>
+            <p class="text-base font-bold">{job.salary}</p>
+            <p class:list={["text-xs sm:text-sm leading-relaxed", idx === 0 ? "text-slate-900" : "text-slate-300"]}>
+              {job.description}
+            </p>
+          </div>
+
+          <div>
+            <span class:list={[
+              "text-xs font-extrabold uppercase tracking-widest inline-flex items-center gap-1.5 hover:underline",
+              idx === 0 ? "text-slate-950" : "text-orange-400"
+            ]}>
+              Apply Now <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>

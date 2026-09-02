@@ -1,0 +1,263 @@
+---
+// PricingTable.astro
+// Fully self-contained plan comparison grid.
+// Features billing period toggles (Monthly vs. Annually), savings indicators, highlight badges, and checklists.
+// Configured completely via JSON data or inline Props with zero external dependencies.
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+interface Plan {
+  id: string;
+  name: string;
+  tagline: string;
+  priceMonthly: number;
+  priceAnnually: number; // Monthly equivalent when billed annually
+  features: { label: string; included: boolean }[];
+  highlighted?: boolean;
+  badge?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  plansOverride?: Plan[];
+  currencySymbol?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  plansOverride,
+  currencySymbol = '$'
+} = Astro.props;
+
+const data = contentData.home?.pricing;
+
+const sectionBadge = badgeOverride || data?.badge || 'Simple Pricing';
+const heading = headingOverride || data?.title || 'Plans built for every stage';
+const subtitle = subtitleOverride || data?.subtitle || 'Transparent rates with no hidden fees. Select your preferred billing cycle below.';
+
+const defaultPlans: Plan[] = [
+  {
+    id: 'starter',
+    name: 'Starter Care',
+    tagline: 'Essential maintenance for residential properties.',
+    priceMonthly: 49,
+    priceAnnually: 39,
+    features: [
+      { label: 'Basic Priority Dispatch', included: true },
+      { label: 'Annual System Audit & Checkup', included: true },
+      { label: '10% Discount on Repair Work', included: true },
+      { label: 'Lifetime System Warranty', included: false },
+      { label: '24/7 Emergency Storm Dispatch', included: false }
+    ],
+    ctaText: 'Choose Starter',
+    ctaHref: '#quote-funnel'
+  },
+  {
+    id: 'premium',
+    name: 'Premium Shield',
+    tagline: 'Complete coverage with rapid response guarantees.',
+    priceMonthly: 89,
+    priceAnnually: 69,
+    features: [
+      { label: 'Instant Priority Dispatch', included: true },
+      { label: 'Bi-Annual System Audit & Tune-up', included: true },
+      { label: '25% Discount on Repair Work', included: true },
+      { label: 'Lifetime System Warranty', included: true },
+      { label: '24/7 Emergency Storm Dispatch', included: false }
+    ],
+    highlighted: true,
+    badge: 'Most Popular',
+    ctaText: 'Choose Premium',
+    ctaHref: '#quote-funnel'
+  },
+  {
+    id: 'enterprise',
+    name: 'Elite Commercial',
+    tagline: 'Industrial-grade security for large facilities.',
+    priceMonthly: 199,
+    priceAnnually: 159,
+    features: [
+      { label: 'Dedicated Account Manager', included: true },
+      { label: 'Quarterly Audits & Complete Tune-up', included: true },
+      { label: '40% Discount on Repair Work', included: true },
+      { label: 'Lifetime System Warranty', included: true },
+      { label: '24/7 Emergency Storm Dispatch', included: true }
+    ],
+    ctaText: 'Choose Elite',
+    ctaHref: '#quote-funnel'
+  }
+];
+
+const plans = plansOverride || data?.plans || defaultPlans;
+---
+
+<section id="pricing" class="py-24 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800">
+  <div class="container mx-auto px-6 max-w-5xl">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-xl mx-auto mb-14 space-y-4">
+      {sectionBadge && (
+        <span class="text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-4 py-2 rounded-full">
+          {sectionBadge}
+        </span>
+      )}
+      <h2 class="text-3.5xl sm:text-4.5xl font-bold tracking-tight leading-tight">
+        {heading}
+      </h2>
+      {subtitle && (
+        <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <!-- Toggle Buttons -->
+    <div class="mb-14 flex flex-col items-center gap-4">
+      <div class="inline-flex justify-center gap-1 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 p-1.5" role="group" aria-label="Billing Period">
+        <button
+          type="button"
+          id="btn-billing-monthly"
+          class="flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-slate-700 dark:text-slate-300 transition-all select-none focus:outline-none bg-white dark:bg-slate-800 shadow-sm text-slate-900 dark:text-white"
+        >
+          Monthly
+        </button>
+        <button
+          type="button"
+          id="btn-billing-annually"
+          class="flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-slate-600 dark:text-slate-400 transition-all select-none focus:outline-none"
+        >
+          Annually
+          <span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Save 20%</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Pricing Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {plans.map((plan) => (
+        <div class:list={[
+          "relative flex flex-col rounded-2xl bg-white dark:bg-slate-900 p-8 shadow-md border-2 transition-all hover:-translate-y-1 duration-300",
+          plan.highlighted ? "border-primary dark:border-primary shadow-xl shadow-primary/5" : "border-slate-200 dark:border-slate-800"
+        ]}>
+          <!-- Badge -->
+          {plan.badge && (
+            <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md">
+              {plan.badge}
+            </span>
+          )}
+
+          <!-- Plan Info -->
+          <div class="border-b border-slate-100 dark:border-slate-800 pb-6 text-center space-y-2">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">{plan.name}</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed min-h-8">{plan.tagline}</p>
+            
+            <!-- Pricing Display -->
+            <div class="pt-4 flex flex-col items-center">
+              <span class="flex items-baseline justify-center">
+                <span class="text-2xl font-bold text-slate-400 mr-0.5">{currencySymbol}</span>
+                <!-- Monthly Price value -->
+                <span class="text-5xl font-black tracking-tight text-slate-900 dark:text-white price-display-value" data-monthly={plan.priceMonthly} data-annually={plan.priceAnnually}>
+                  {plan.priceMonthly}
+                </span>
+                <span class="text-sm font-bold text-slate-400 ml-1">/mo</span>
+              </span>
+              <span class="text-[10px] font-semibold text-slate-400 mt-1 flex billing-note-text">Billed monthly</span>
+            </div>
+          </div>
+
+          <!-- Features Checklist -->
+          <ul class="flex-grow space-y-4.5 py-8 text-sm text-slate-600 dark:text-slate-300">
+            {plan.features.map((feature) => (
+              <li class="flex items-start gap-3">
+                {feature.included ? (
+                  <span class="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5 border border-emerald-500/20">&check;</span>
+                ) : (
+                  <span class="w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5 border border-slate-200 dark:border-slate-700">&times;</span>
+                )}
+                <span class:list={[!feature.included && "text-slate-400 dark:text-slate-600 line-through"]}>
+                  {feature.label}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <!-- CTA Button -->
+          <div class="pt-2">
+            <a
+              href={plan.ctaHref || "#quote-funnel"}
+              class:list={[
+                "block w-full py-3 text-center text-sm font-bold rounded-xl transition-all cursor-pointer",
+                plan.highlighted 
+                  ? "bg-primary text-white hover:bg-primary-hover shadow-lg shadow-primary/20" 
+                  : "bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white"
+              ]}
+            >
+              {plan.ctaText || 'Get Started'}
+            </a>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function setupPricingTableToggle() {
+    const btnMonthly = document.getElementById('btn-billing-monthly');
+    const btnAnnually = document.getElementById('btn-billing-annually');
+    const priceElements = document.querySelectorAll('.price-display-value');
+    const noteElements = document.querySelectorAll('.billing-note-text');
+
+    if (!btnMonthly || !btnAnnually) return;
+
+    btnMonthly.addEventListener('click', () => {
+      // Toggle button styles
+      btnMonthly.classList.add('bg-white', 'dark:bg-slate-800', 'shadow-sm', 'text-slate-900', 'dark:text-white');
+      btnMonthly.classList.remove('text-slate-600', 'dark:text-slate-400');
+      
+      btnAnnually.classList.remove('bg-white', 'dark:bg-slate-800', 'shadow-sm', 'text-slate-900', 'dark:text-white');
+      btnAnnually.classList.add('text-slate-600', 'dark:text-slate-400');
+
+      // Update values
+      priceElements.forEach((el) => {
+        el.textContent = el.getAttribute('data-monthly') || '0';
+      });
+
+      // Update sub-text notes
+      noteElements.forEach((el) => {
+        el.textContent = 'Billed monthly';
+      });
+    });
+
+    btnAnnually.addEventListener('click', () => {
+      // Toggle button styles
+      btnAnnually.classList.add('bg-white', 'dark:bg-slate-800', 'shadow-sm', 'text-slate-900', 'dark:text-white');
+      btnAnnually.classList.remove('text-slate-600', 'dark:text-slate-400');
+      
+      btnMonthly.classList.remove('bg-white', 'dark:bg-slate-800', 'shadow-sm', 'text-slate-900', 'dark:text-white');
+      btnMonthly.classList.add('text-slate-600', 'dark:text-slate-400');
+
+      // Update values
+      priceElements.forEach((el) => {
+        el.textContent = el.getAttribute('data-annually') || '0';
+      });
+
+      // Update sub-text notes
+      noteElements.forEach((el) => {
+        el.textContent = 'Billed annually';
+      });
+    });
+  }
+
+  // Setup listeners for load & page-change events
+  document.addEventListener('astro:page-load', setupPricingTableToggle);
+  setupPricingTableToggle();
+</script>

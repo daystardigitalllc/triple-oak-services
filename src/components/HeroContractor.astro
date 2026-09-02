@@ -1,0 +1,167 @@
+---
+// HeroContractor.astro
+// High-fidelity contractor landing page hero.
+// Features a split layout with copy and benefit bullets on the left,
+// and a high-converting floating estimate request form card on the right.
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  bgImageOverride?: string;
+  formTitle?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  bgImageOverride,
+  formTitle = 'GET A FREE ESTIMATE'
+} = Astro.props;
+
+const data = contentData.home?.heroContractor;
+
+const badge = badgeOverride || data?.badge || "NASHVILLE'S BEST RATINGS";
+const heading = headingOverride || data?.title || 'Pest Control in Nashville, TN';
+const subtitle = subtitleOverride || data?.subtitle || 'Get professional, eco-friendly protection for your family. Safe, reliable, and guaranteed results.';
+const bgImage = bgImageOverride || data?.bgImage || 'https://images.unsplash.com/photo-1558402529-d2638a7023e9?auto=format&fit=crop&w=1920&q=80';
+
+const defaultBullets = [
+  'Family Owned & Operated',
+  'Licensed, Bonded & Insured',
+  '100% Satisfaction Guarantee'
+];
+const bullets = data?.bullets || defaultBullets;
+---
+
+<section class="relative min-h-[80vh] flex items-center justify-start text-white overflow-hidden py-24 select-none bg-slate-900 border-b-4 border-red-700">
+  
+  <!-- Backdrop Image & Overlay Layer -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src={bgImage} 
+      alt="Contractor Hero Background" 
+      class="w-full h-full object-cover opacity-35" 
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/30"></div>
+  </div>
+
+  <div class="container mx-auto px-6 max-w-6.5xl relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    
+    <!-- Left Column: Content & Checkmarks -->
+    <div class="lg:col-span-7 space-y-6 text-left">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-widest text-red-500 bg-red-500/10 px-3 py-1.5 rounded border border-red-500/20 shadow-sm w-fit">
+          {badge}
+        </span>
+      )}
+      <h1 class="text-4xl sm:text-6xl font-black leading-tight tracking-tight text-white capitalize font-sans">
+        {heading}
+      </h1>
+      <p class="text-slate-350 text-sm sm:text-base leading-relaxed max-w-lg">
+        {subtitle}
+      </p>
+
+      <!-- Checklist Bullets -->
+      <ul class="space-y-3 pt-2 text-xs sm:text-sm font-bold text-slate-200">
+        {bullets.map((bullet) => (
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center text-[10px] font-black text-white shrink-0 shadow border border-red-500/20">
+              &check;
+            </span>
+            {bullet}
+          </li>
+        ))}
+      </ul>
+
+      <!-- Primary Action Buttons -->
+      <div class="pt-4 flex flex-wrap gap-4">
+        <a 
+          href="#pricing" 
+          class="inline-flex items-center justify-center px-7 py-3.5 bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-extrabold uppercase tracking-widest transition-all cursor-pointer shadow-md rounded border border-red-500/20"
+        >
+          Schedule Now
+        </a>
+        <a 
+          href={`tel:${businessData.phone.replace(/[^0-9+]/g, '')}`} 
+          class="inline-flex items-center justify-center px-7 py-3.5 border border-white hover:bg-white/10 text-white text-xs sm:text-sm font-extrabold uppercase tracking-widest transition-all cursor-pointer rounded"
+        >
+          Call Us
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Column: Lead Form Card -->
+    <div class="lg:col-span-5 bg-white text-slate-900 p-8 rounded-xl shadow-2xl border border-slate-200/50 space-y-6 select-none">
+      <div class="text-center space-y-1">
+        <h3 class="text-lg font-black tracking-wider text-slate-900 uppercase">{formTitle}</h3>
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Takes under 60 seconds</p>
+      </div>
+
+      <form method="POST" action="/" class="space-y-4">
+        <div class="space-y-1 text-left">
+          <label for="hero-form-name" class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Full Name</label>
+          <input 
+            type="text" 
+            name="name" 
+            id="hero-form-name" 
+            required 
+            placeholder="John Doe"
+            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:outline-none focus:border-red-600 text-xs sm:text-sm font-semibold text-slate-900 rounded"
+          />
+        </div>
+
+        <div class="space-y-1 text-left">
+          <label for="hero-form-phone" class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Phone Number</label>
+          <input 
+            type="tel" 
+            name="phone" 
+            id="hero-form-phone" 
+            required 
+            placeholder="+1 (555) 000-0000"
+            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:outline-none focus:border-red-600 text-xs sm:text-sm font-semibold text-slate-900 rounded"
+          />
+        </div>
+
+        <div class="space-y-1 text-left">
+          <label for="hero-form-email" class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Email Address</label>
+          <input 
+            type="email" 
+            name="email" 
+            id="hero-form-email" 
+            required 
+            placeholder="john@example.com"
+            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:outline-none focus:border-red-600 text-xs sm:text-sm font-semibold text-slate-900 rounded"
+          />
+        </div>
+
+        <div class="space-y-1 text-left">
+          <label for="hero-form-zip" class="text-[10px] font-black uppercase text-slate-400 tracking-wider">ZIP Code</label>
+          <input 
+            type="text" 
+            name="zip" 
+            id="hero-form-zip" 
+            required 
+            placeholder="37201"
+            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:outline-none focus:border-red-600 text-xs sm:text-sm font-semibold text-slate-900 rounded"
+          />
+        </div>
+
+        <div class="pt-2">
+          <button 
+            type="submit" 
+            class="w-full py-3 bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-black uppercase tracking-widest rounded shadow-md border border-red-500/20 cursor-pointer"
+          >
+            Get My Quote
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>

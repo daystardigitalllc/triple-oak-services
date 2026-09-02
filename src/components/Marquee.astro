@@ -1,0 +1,50 @@
+---
+import themeConfig from '../data/theme.config.json';
+
+const hasCustomPhrases = themeConfig.marqueePhrases && themeConfig.marqueePhrases.length > 0;
+const customPhrases = themeConfig.marqueePhrases || [];
+
+const defaultPhrases = [
+  { icon: "fa-solid fa-tree", text: "Full Tree Care" },
+  { icon: "fa-solid fa-screwdriver-wrench", text: "Licensed & Insured" },
+  { icon: "fa-solid fa-phone-volume", text: "24 Hour Dispatch" },
+  { icon: "fa-solid fa-circle-check", text: "5-Star Customer Rating" }
+];
+---
+
+{themeConfig.style === 'oak-city' && (
+  <div class="w-full overflow-hidden bg-primary border-y border-primary-hover text-white py-4 uppercase tracking-widest text-sm font-extrabold select-none relative z-20">
+    <div class="flex whitespace-nowrap min-w-full">
+      <div class="inline-flex animate-marquee gap-16 shrink-0 items-center min-w-full">
+        {hasCustomPhrases ? (
+          customPhrases.map((phrase: string) => (
+            <span class="mx-16 flex items-center gap-3 shrink-0">
+              <i class="fa-solid fa-star text-white/90"></i> {phrase}
+            </span>
+          ))
+        ) : (
+          defaultPhrases.map((phrase) => (
+            <span class="mx-16 flex items-center gap-3 shrink-0">
+              <i class={`${phrase.icon} text-white/90`}></i> {phrase.text}
+            </span>
+          ))
+        )}
+      </div>
+      <div class="inline-flex animate-marquee gap-16 shrink-0 items-center min-w-full" aria-hidden="true">
+        {hasCustomPhrases ? (
+          customPhrases.map((phrase: string) => (
+            <span class="mx-16 flex items-center gap-3 shrink-0">
+              <i class="fa-solid fa-star text-white/90"></i> {phrase}
+            </span>
+          ))
+        ) : (
+          defaultPhrases.map((phrase) => (
+            <span class="mx-16 flex items-center gap-3 shrink-0">
+              <i class={`${phrase.icon} text-white/90`}></i> {phrase.text}
+            </span>
+          ))
+        )}
+      </div>
+    </div>
+  </div>
+)}

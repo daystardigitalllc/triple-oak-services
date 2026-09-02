@@ -1,0 +1,241 @@
+{
+  "layout": [
+    "Hero",
+    "Marquee",
+    "TrustBar",
+    "Services",
+    "CTA",
+    "Reviews",
+    "GalleryScrollChoreography",
+    "FAQ",
+    "QuoteFunnel"
+  ],
+  "navbarPill": {
+    "links": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Locations",
+        "href": "/locations"
+      },
+      {
+        "label": "Reviews",
+        "href": "/#reviews"
+      },
+      {
+        "label": "FAQ",
+        "href": "/#faq"
+      }
+    ]
+  },
+  "home": {
+    "hero": {
+      "h1": "Experts in Tree Care You Can Trust",
+      "supporting": "Triple Oak Services provides top-notch tree care for homeowners across the Nashville area, tree trimming, pruning, removal, and stump grinding, done safely and left clean. Ask about our current promotion.",
+      "ctaText": "Get a Free Quote",
+      "badge": "⭐⭐⭐⭐⭐ Top Rated Local Tree Service"
+    },
+    "about": {
+      "title": "About Triple Oak Services",
+      "text": "Triple Oak Services is dedicated to providing top-notch tree care to the community. With years of experience, our team specializes in tree trimming, pruning, removal, and stump grinding, ensuring the health and beauty of your trees. We use the latest techniques and prioritize safety and sustainability in every project we undertake."
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Triple Oak Services",
+      "subtitle": "Setting the standard for Tree Service solutions.",
+      "items": [
+        {
+          "title": "Guaranteed Workmanship",
+          "description": "Every installation and repair is backed by our lifetime warranty package."
+        },
+        {
+          "title": "Upfront Estimates",
+          "description": "Clear, itemized pricing so you know what to expect. No hidden surprises."
+        },
+        {
+          "title": "Certified Experts",
+          "description": "Our technicians undergo constant training and safety certifications."
+        }
+      ]
+    }
+  },
+  "services": [
+    {
+      "slug": "tree-trimming---pruning",
+      "title": "Tree Trimming & Pruning",
+      "shortDescription": "Precision trimming and pruning that keeps your trees healthy, shaped, and safe year-round.",
+      "longDescription": "Overgrown limbs put your roof, power lines, and family at risk. Our crew trims and prunes with the health of the tree in mind, removing dead or crossing branches, improving airflow and sunlight, and shaping trees to complement your property. Every cut is made using proper arborist technique, not just a chainsaw and a ladder.",
+      "features": [
+        "Dead & damaged limb removal",
+        "Crown thinning & shaping",
+        "View & sunlight clearing",
+        "Storm-risk reduction"
+      ],
+      "faq": [
+        {
+          "q": "Why choose us for Tree Trimming & Pruning?",
+          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+        }
+      ]
+    },
+    {
+      "slug": "tree-removal",
+      "title": "Tree Removal",
+      "shortDescription": "Safe, complete removal of dead, dying, or unwanted trees of any size.",
+      "longDescription": "When a tree is dead, diseased, leaning, or simply in the wrong spot, our team removes it safely and completely, protecting your home, fence, and landscaping in the process. We handle everything from single backyard trees to large, hazardous removals near structures and power lines, and we haul away every branch and log when we're done.",
+      "features": [
+        "Hazardous & leaning tree removal",
+        "Close-quarters & near-structure removal",
+        "Full debris haul-away",
+        "Same-day emergency removal available"
+      ],
+      "faq": [
+        {
+          "q": "Why choose us for Tree Removal?",
+          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+        }
+      ]
+    },
+    {
+      "slug": "stump-grinding",
+      "title": "Stump Grinding",
+      "shortDescription": "Fast, thorough stump grinding that clears the way for a clean, usable yard.",
+      "longDescription": "A leftover stump is a tripping hazard, a mower headache, and an eyesore. We grind stumps of any size down below grade so you can reclaim the space, replant, or landscape right over it. Fast turnaround, minimal mess, and a clean finish every time.",
+      "features": [
+        "Grinding below grade",
+        "Root flare removal",
+        "Mulch clean-up & haul-off",
+        "Yard-ready when we leave"
+      ],
+      "faq": [
+        {
+          "q": "Why choose us for Stump Grinding?",
+          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+        }
+      ]
+    },
+    {
+      "slug": "storm-damage-cleanup",
+      "title": "Storm Damage Cleanup",
+      "shortDescription": "Rapid response tree and debris cleanup after storms, straight-line winds, and fallen limbs.",
+      "longDescription": "When a storm drops a tree on your property, you need someone there fast. We provide rapid-response storm cleanup, removing downed trees and limbs from roofs, driveways, fences, and yards, and clearing debris so your property is safe again.",
+      "features": [
+        "Emergency response",
+        "Downed tree & limb removal",
+        "Roof & structure-safe extraction",
+        "Full property debris cleanup"
+      ],
+      "faq": [
+        {
+          "q": "Why choose us for Storm Damage Cleanup?",
+          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+        }
+      ]
+    },
+    {
+      "slug": "land-clearing---maintenance",
+      "title": "Land Clearing & Maintenance",
+      "shortDescription": "Lot clearing, brush removal, and general land maintenance to open up and clean up your property.",
+      "longDescription": "Whether you're clearing a lot for a new build, opening up an overgrown property line, or just need brush and undergrowth cleared out, we have the equipment and manpower to get it done efficiently and leave your land clean and usable.",
+      "features": [
+        "Brush & undergrowth clearing",
+        "Lot & building-site clearing",
+        "Property line clean-up",
+        "Driveway & access clearing"
+      ],
+      "faq": [
+        {
+          "q": "Why choose us for Land Clearing & Maintenance?",
+          "a": "We provide guaranteed workmanship, premium materials, and experienced professional technicians."
+        }
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "slug": "nashville",
+      "name": "Nashville",
+      "seoTitle": "Premium Tree Service Services in Nashville TN | Triple Oak Services",
+      "seoDescription": "Need Tree Service in Nashville, TN? Contact Triple Oak Services for premium services with warranties. Free estimates available.",
+      "intro": "Triple Oak Services proudly serves the Nashville, TN community with expert Tree Service services, reliable quality, and transparent pricing.",
+      "ctaText": "Book in Nashville"
+    },
+    {
+      "slug": "tn",
+      "name": "TN",
+      "seoTitle": "Premium Tree Service Services in TN TN | Triple Oak Services",
+      "seoDescription": "Need Tree Service in TN, TN? Contact Triple Oak Services for premium services with warranties. Free estimates available.",
+      "intro": "Triple Oak Services proudly serves the TN, TN community with expert Tree Service services, reliable quality, and transparent pricing.",
+      "ctaText": "Book in TN"
+    }
+  ],
+  "reviews": [
+    {
+      "author": "Tragicz K.",
+      "location": "TN",
+      "rating": 5,
+      "text": "Took great care of my property, cleaned up everything as if they were never there. Good employees and service, great prices, highly recommended."
+    },
+    {
+      "author": "Shelby White",
+      "location": "TN",
+      "rating": 5,
+      "text": "Great people! Very professional and got the job done in a timely manner. Thank you so much!"
+    },
+    {
+      "author": "Nicole Troutt",
+      "location": "TN",
+      "rating": 5,
+      "text": "Amazing customer service, they did a wonderful job. Would recommend them to anybody. Very friendly."
+    },
+    {
+      "author": "eni moore",
+      "location": "TN",
+      "rating": 5,
+      "text": "Wonderful to work with. Did a great job on my driveway and culvert. Very honest and great to work with."
+    },
+    {
+      "author": "David Lee",
+      "location": "TN",
+      "rating": 5,
+      "text": "We had them out to trim some trees and remove a tree and they did a great job. They removed all of what was cut, and it was a lot. Would definitely recommend, we will definitely be using them in the future."
+    },
+    {
+      "author": "Courtney Gregory",
+      "location": "TN",
+      "rating": 5,
+      "text": "Reasonable price. Highly recommend. Very professional, and was quick to get booked for service. Affordable and personable. Look forward to supporting this business in the future!"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Are you licensed and insured?",
+      "a": "Yes, Triple Oak Services is fully licensed and insured for your protection on every job, big or small."
+    },
+    {
+      "q": "Do you offer free estimates?",
+      "a": "Yes. We provide free, no-obligation estimates for every service, just give us a call at 615-561-0472."
+    },
+    {
+      "q": "How quickly can you respond to storm damage?",
+      "a": "We prioritize storm damage and emergency calls and do our best to get a crew out the same day whenever possible."
+    },
+    {
+      "q": "Will you clean up and haul away all the debris?",
+      "a": "Absolutely. Every job includes full clean-up, we haul away branches, logs, and debris so your property looks better than before we arrived."
+    },
+    {
+      "q": "Do you grind stumps below ground level?",
+      "a": "Yes, we grind stumps below grade so you can landscape, plant, or seed right over the area when we're done."
+    },
+    {
+      "q": "What areas do you serve?",
+      "a": "We proudly serve Nashville, TN and the surrounding area. Call us to confirm service in your neighborhood."
+    }
+  ]
+}

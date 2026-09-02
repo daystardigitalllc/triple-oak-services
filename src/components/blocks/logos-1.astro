@@ -1,0 +1,50 @@
+---
+import { cn } from "@/lib/utils"
+import { Logo, LogoText } from "@/components/ui/logo"
+import { Section, SectionContainer } from "@/components/ui/section"
+
+type Props = {
+  class?: string
+  title: string
+  description?: string
+  brands: {
+    name: string
+    href?: string
+  }[]
+}
+
+const { class: className, title, description, brands } = Astro.props
+---
+
+<Section class={cn("", className)}>
+  <SectionContainer class="items-center gap-10 text-center">
+    <div class="flex max-w-2xl flex-col items-center gap-4">
+      <h2
+        class="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
+      >
+        {title}
+      </h2>
+      {
+        description && (
+          <p class="text-muted-foreground text-lg leading-relaxed text-balance">
+            {description}
+          </p>
+        )
+      }
+    </div>
+    <div
+      class="text-muted-foreground flex w-full flex-wrap items-center justify-center gap-x-12 gap-y-6"
+    >
+      {
+        brands.map((brand) => (
+          <Logo
+            class="hover:text-foreground grayscale transition-all hover:grayscale-0"
+            href={brand.href}
+          >
+            <LogoText>{brand.name}</LogoText>
+          </Logo>
+        ))
+      }
+    </div>
+  </SectionContainer>
+</Section>

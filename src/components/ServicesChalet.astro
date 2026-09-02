@@ -1,0 +1,139 @@
+---
+// ServicesChalet.astro
+// Numeric index card list grid in the Chalet alpine style.
+// Features faded background numerals, simple custom SVG icon glyphs, and soft borders.
+import contentData from '../data/content.json';
+
+interface ServiceItem {
+  index: string;
+  title: string;
+  description: string;
+  iconName: 'loaf' | 'pastry' | 'cake' | 'sandwich';
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  servicesOverride?: ServiceItem[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  servicesOverride
+} = Astro.props;
+
+const data = contentData.home?.servicesChalet;
+
+const badge = badgeOverride || data?.badge || 'What we bake';
+const heading = headingOverride || data?.title || 'Our products';
+const subtitle = subtitleOverride || data?.subtitle || 'Everything is kneaded, shaped and baked on site, every single day.';
+
+const defaultServices: ServiceItem[] = [
+  {
+    index: '01',
+    title: 'Sourdough Breads',
+    description: 'Stone-milled boules, country loaves, seeded or plain: a slow 24-hour fermentation for bread that keeps all week.',
+    iconName: 'loaf'
+  },
+  {
+    index: '02',
+    title: 'All-Butter Pastries',
+    description: 'Croissants, pains au chocolat and flaky brioches made with AOP Charentes-Poitou butter, baked in batches until noon.',
+    iconName: 'pastry'
+  },
+  {
+    index: '03',
+    title: 'Homemade Cakes',
+    description: 'Seasonal fruit tarts, éclairs and our famous mont-blanc with Ardèche chestnut cream.',
+    iconName: 'cake'
+  },
+  {
+    index: '04',
+    title: 'Lunch On The Go',
+    description: 'Baguette sandwiches, fougasses and quiches — perfect to slip into your pack before riding the cable car.',
+    iconName: 'sandwich'
+  }
+];
+
+const items = servicesOverride || data?.items || defaultServices;
+---
+
+<section id="services-chalet" class="py-24 bg-[#FAF9F5] text-slate-800 border-b border-slate-200/80 select-none">
+  <div class="container mx-auto px-6 max-w-5xl space-y-16">
+    
+    <!-- Section Header -->
+    <div class="max-w-xl space-y-3">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-primary">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4xl font-serif font-normal text-slate-950 tracking-tight leading-tight">
+        {heading}
+      </h2>
+      {subtitle && (
+        <p class="text-slate-500 text-sm sm:text-base leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {items.map((item) => (
+        <div class="bg-white border border-slate-200/60 p-8 shadow-sm relative overflow-hidden rounded-xl group transition-all duration-300 hover:bg-[#FAF9F5]/40 hover:border-slate-350">
+          
+          <!-- Large faded numeric background indicator -->
+          <span class="absolute top-4 right-6 text-7xl font-serif font-extrabold text-slate-100 dark:text-slate-100 select-none pointer-events-none transition-colors group-hover:text-slate-200">
+            {item.index}
+          </span>
+
+          <div class="space-y-4 relative z-10">
+            <!-- Icon Glyph -->
+            <div class="w-12 h-12 rounded bg-[#FAF9F5] border border-slate-200/60 flex items-center justify-center text-primary">
+              {item.iconName === 'loaf' && (
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 13a8 5 0 0 1 16 0v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" />
+                  <path d="M9 11v4" />
+                  <path d="M12 10v5" />
+                  <path d="M15 11v4" />
+                </svg>
+              )}
+              {item.iconName === 'pastry' && (
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 15a8 8 0 1 1-10-10 6.5 6.5 0 0 0 10 10z" />
+                  <path d="M14.5 17.5 13 19" />
+                  <path d="M17.5 14.5 19 13" />
+                </svg>
+              )}
+              {item.iconName === 'cake' && (
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 19v-5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v5" />
+                  <path d="M3 19h18" />
+                  <path d="M5.5 15.5c1.2 1 2.3 1 3.5 0s2.3-1 3.5 0 2.3 1 3.5 0 1.7-.8 2.5-.3" />
+                  <path d="M12 13v-3" />
+                  <circle cx="12" cy="7.5" r="1" />
+                </svg>
+              )}
+              {item.iconName === 'sandwich' && (
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="6.5" width="18" height="4" rx="2" />
+                  <rect x="3" y="13.5" width="18" height="4" rx="2" />
+                </svg>
+              )}
+            </div>
+
+            <!-- Header & Body -->
+            <h3 class="text-xl font-bold text-slate-900 tracking-tight">{item.title}</h3>
+            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-md">{item.description}</p>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

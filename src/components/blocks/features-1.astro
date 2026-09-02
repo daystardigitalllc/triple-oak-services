@@ -1,0 +1,89 @@
+---
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Icon } from "@/components/ui/icon"
+import { Section, SectionContainer } from "@/components/ui/section"
+
+type Props = {
+  class?: string
+  title: string
+  description: string
+  buttons?: {
+    label: string
+    href: string
+    variant?: "default" | "outline" | "secondary" | "ghost"
+  }[]
+  features: {
+    title: string
+    description: string
+    icon: string
+    href?: string
+    linkText?: string
+  }[]
+}
+
+const { class: className, title, description, buttons, features } = Astro.props
+---
+
+<Section class={cn("", className)}>
+  <SectionContainer class="items-center gap-6 text-center">
+    <div class="flex max-w-2xl flex-col items-center gap-4">
+      <h2
+        class="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
+      >
+        {title}
+      </h2>
+      <p
+        class="text-muted-foreground max-w-2xl text-lg leading-relaxed text-balance"
+      >
+        {description}
+      </p>
+    </div>
+    {
+      buttons?.length && (
+        <div class="flex flex-wrap justify-center gap-3">
+          {buttons.map(({ href, label, ...button }, index) => (
+            <Button
+              as="a"
+              href={href}
+              variant={button.variant ?? (index === 0 ? "default" : "outline")}
+              {...button}
+            >
+              {label}
+            </Button>
+          ))}
+        </div>
+      )
+    }
+  </SectionContainer>
+  <SectionContainer>
+    <div class="grid gap-6 sm:grid-cols-2">
+      {
+        features.map((feature) => (
+          <div class="group/feature hover:bg-muted/40 flex flex-col gap-4 rounded-xl border p-6 transition-colors">
+            <div class="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-lg">
+              <Icon name={feature.icon} class="size-5" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <h3 class="text-foreground text-base font-medium">
+                {feature.title}
+              </h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+            {feature.href && feature.linkText && (
+              <a
+                href={feature.href}
+                class="text-primary mt-auto inline-flex items-center gap-1 text-sm font-medium hover:underline"
+              >
+                {feature.linkText}
+                <Icon name="arrow-right" class="size-3.5" />
+              </a>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </SectionContainer>
+</Section>

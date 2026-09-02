@@ -1,0 +1,98 @@
+---
+// NavbarSplitLogo.astro
+// Sticky header with a centered logo and navigation links split left and
+// right of it. A structural alternative to Header.astro/NavbarPill.astro —
+// built fresh in Astro + Tailwind, using Daystar's own theme tokens
+// (not any specific reference site's fonts/colors).
+import businessData from '../data/business.json';
+import contentData from '../data/content.json';
+
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  leftLinksOverride?: NavLink[];
+  rightLinksOverride?: NavLink[];
+  ctaTextOverride?: string;
+  ctaHrefOverride?: string;
+}
+
+const { leftLinksOverride, rightLinksOverride, ctaTextOverride, ctaHrefOverride } = Astro.props;
+
+const leftLinks: NavLink[] = leftLinksOverride || contentData.splitNav?.leftLinks || [];
+const rightLinks: NavLink[] = rightLinksOverride || contentData.splitNav?.rightLinks || [];
+const ctaText = ctaTextOverride || businessData.mainCta || 'Get a Free Quote';
+const ctaHref = ctaHrefOverride || '#quote-funnel';
+
+const uid = `splitnav-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<header data-splitnav-id={uid} class="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50">
+  <div class="container mx-auto px-6 h-20 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+    <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600 dark:text-slate-300">
+      {leftLinks.map((link) => (
+        <a href={link.href} class="hover:text-primary transition-colors">{link.label}</a>
+      ))}
+    </nav>
+
+    <a href="/" class="flex justify-center items-center gap-2 col-start-2" aria-label={`${businessData.name} Home`}>
+      {businessData.logo && businessData.logo !== '/logo.svg' && businessData.logo !== '' ? (
+        <img src={businessData.logo} alt={`${businessData.name} Logo`} class="h-10 w-auto object-contain" />
+      ) : (
+        <span class="font-black text-lg tracking-tight text-slate-900 dark:text-white whitespace-nowrap">
+          {businessData.name}
+        </span>
+      )}
+    </a>
+
+    <div class="hidden md:flex items-center justify-end gap-6 text-sm font-semibold text-slate-600 dark:text-slate-300">
+      {rightLinks.map((link) => (
+        <a href={link.href} class="hover:text-primary transition-colors">{link.label}</a>
+      ))}
+      <a
+        href={ctaHref}
+        class="inline-flex items-center justify-center px-5 py-2.5 rounded-custom text-sm font-bold text-white bg-primary hover:bg-primary-hover transition-colors shrink-0"
+      >
+        {ctaText}
+      </a>
+    </div>
+
+    <button
+      type="button"
+      data-splitnav-toggle
+      class="md:hidden col-start-3 justify-self-end p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <i class="fa-solid fa-bars text-lg"></i>
+    </button>
+  </div>
+
+  <div data-splitnav-menu class="hidden md:hidden border-t border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-slate-950 px-6 py-4">
+    <nav class="flex flex-col gap-1 text-sm font-semibold">
+      {[...leftLinks, ...rightLinks].map((link) => (
+        <a href={link.href} class="px-2 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+          {link.label}
+        </a>
+      ))}
+      <a href={ctaHref} class="mt-2 px-2 py-3 rounded-custom text-center font-bold text-white bg-primary">
+        {ctaText}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script define:vars={{ uid }}>
+  (() => {
+    const root = document.querySelector(`[data-splitnav-id="${uid}"]`);
+    if (!root) return;
+    const toggle = root.querySelector('[data-splitnav-toggle]');
+    const menu = root.querySelector('[data-splitnav-menu]');
+    toggle?.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('hidden') === false;
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  })();
+</script>

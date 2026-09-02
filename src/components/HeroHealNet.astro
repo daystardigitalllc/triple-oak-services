@@ -1,0 +1,135 @@
+---
+// HeroHealNet.astro
+// Digital healthcare hero section in the HealNet theme style.
+// Features split columns, gradient titles, and three overlapping interactive floating widgets
+// (Happy Customers, Easy Booking, and client quote) on top of the hero image.
+import contentData from '../data/content.json';
+
+interface Props {
+  headingOverride?: string;
+  subTitleHighlight?: string;
+  subtitleOverride?: string;
+  primaryCtaText?: string;
+  primaryCtaHref?: string;
+  imageSrcOverride?: string;
+  brandLogosOverride?: string;
+}
+
+const {
+  headingOverride,
+  subTitleHighlight = 'Empowering Your Health at Every Step.',
+  subtitleOverride,
+  primaryCtaText = 'Book an appointment',
+  primaryCtaHref = '#appointment',
+  imageSrcOverride,
+  brandLogosOverride
+} = Astro.props;
+
+const data = contentData.home?.heroHealNet;
+
+const heading = headingOverride || data?.title || 'Your trusted partner in digital healthcare.';
+const subtitle = subtitleOverride || data?.subtitle || 'Experience personalized medical care from the comfort of your home. Connect with certified doctors, manage prescriptions, and schedule appointments with ease.';
+const imageSrc = imageSrcOverride || data?.imageSrc || 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80';
+const brandLogos = brandLogosOverride || data?.brandLogos || 'https://images.unsplash.com/photo-1594818378822-77faf9452b47?auto=format&fit=crop&w=400&q=20'; // Placehold for brands
+---
+
+<section class="relative bg-[linear-gradient(125deg,#F2FAFF,#FFFFFF_50%)] dark:bg-slate-950 py-20 select-none overflow-hidden border-b border-[#0179B4]/10">
+  
+  <!-- Subtle top-left blur glow -->
+  <span class="pointer-events-none absolute -top-40 -left-40 z-0 w-[450px] h-[450px] bg-radial from-[#88D8FF]/20 to-transparent to-60%"></span>
+
+  <div class="container mx-auto px-6 max-w-6.5xl relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    
+    <!-- Left Column: Copy -->
+    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+      <h1 class="text-4.5xl sm:text-6xl font-black leading-[1.05] tracking-tight text-slate-900 dark:text-white font-sans">
+        {heading.includes('trusted partner') ? (
+          <>
+            {heading.split('trusted partner')[0]}
+            <span class="bg-gradient-to-r from-[#0179B4] to-[#88D8FF] bg-clip-text text-transparent">
+              trusted partner
+            </span>
+            {heading.split('trusted partner')[1]}
+          </>
+        ) : heading}
+      </h1>
+
+      <p class="text-slate-555 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-xl">
+        {subTitleHighlight && (
+          <span class="text-[#0179B4] font-extrabold block mb-2">{subTitleHighlight}</span>
+        )}
+        {subtitle}
+      </p>
+
+      <!-- Primary CTA button -->
+      <div class="pt-2 flex justify-center lg:justify-start">
+        <a 
+          href={primaryCtaHref} 
+          class="inline-flex items-center justify-center gap-2 px-7 py-4 bg-gradient-to-r from-[#0179B4] to-[#0095DE] text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-[0_10px_20px_rgba(1,121,180,0.2)] hover:shadow-[0_12px_25px_rgba(1,121,180,0.3)] hover:-translate-y-0.5 cursor-pointer border-0"
+        >
+          {primaryCtaText}
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Trust Stamp -->
+      <div class="pt-8 text-center lg:text-left space-y-3.5 border-t border-slate-200/50 dark:border-slate-800/40 w-fit">
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Trusted by millions across the globe</p>
+        <div class="flex items-center gap-5 justify-center lg:justify-start opacity-70">
+          <span class="text-base font-black tracking-wider text-slate-400">HEALNET</span>
+          <span class="text-base font-black tracking-wider text-[#0179B4]">CLINIC</span>
+          <span class="text-base font-black tracking-wider text-slate-400">AETNA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Badges Layout -->
+    <div class="lg:col-span-5 relative flex items-center justify-center aspect-square max-lg:h-[380px]">
+      
+      <!-- Core Doctor Profile Image Frame -->
+      <div class="w-[78%] h-[78%] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100">
+        <img 
+          src={imageSrc} 
+          alt="HealNet Medical Specialist" 
+          class="w-full h-full object-cover" 
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+
+      <!-- Widget 1: Happy Customers card (Top right overlap) -->
+      <div class="absolute top-2 right-2 bg-gradient-to-tr from-[#E9F6FF] to-white border border-[#0179B4]/20 p-4 rounded-2xl shadow-lg hidden sm:block max-w-[200px] text-left">
+        <div class="flex items-center gap-2">
+          <!-- Avatars Stack -->
+          <div class="flex -space-x-2">
+            <span class="flex w-6 h-6 items-center justify-center rounded-full bg-slate-200 border-2 border-white text-[8px] font-bold text-slate-800">U1</span>
+            <span class="flex w-6 h-6 items-center justify-center rounded-full bg-[#88D8FF] border-2 border-white text-[8px] font-bold text-white">U2</span>
+          </div>
+          <span class="text-base font-extrabold text-slate-900 leading-none">2,400+</span>
+        </div>
+        <p class="text-[10px] font-bold text-[#0179B4] uppercase tracking-wider mt-1.5">Happy Customers</p>
+        <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mt-1">
+          <span>★★★★★</span>
+          <span class="text-slate-400 font-semibold">(4.7 Stars)</span>
+        </div>
+      </div>
+
+      <!-- Widget 2: Appointment Booking label (Middle left overlay) -->
+      <div class="absolute left-0 top-[45%] bg-white border border-slate-100 p-3.5 rounded-xl shadow-md hidden sm:flex items-center gap-2.5 text-[#0179B4] text-xs font-black select-none">
+        <span class="w-5 h-5 rounded bg-[#E9F6FF] flex items-center justify-center text-[10px]">✓</span>
+        Easy Appointment Booking
+      </div>
+
+      <!-- Widget 3: Client quote testimonial (Bottom right overlap) -->
+      <div class="absolute bottom-4 right-0 bg-white border-2 border-[#0179B4]/20 p-5 pt-7 rounded-2xl shadow-lg hidden sm:block max-w-[250px] text-slate-800 text-[11px] font-semibold leading-relaxed text-left relative">
+        <!-- Giant Quote Glyph Icon -->
+        <span class="absolute -top-3 left-4 w-7 h-7 bg-[#0179B4] rounded-full flex items-center justify-center text-white text-[10px] font-bold shadow">&ldquo;</span>
+        Lorem ipsum dolor sit amet, ligula ego. consectetuer adipiscing elit doloras.
+      </div>
+
+    </div>
+
+  </div>
+</section>

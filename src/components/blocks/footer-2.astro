@@ -1,0 +1,80 @@
+---
+import { cn } from "@/lib/utils"
+import { Icon } from "@/components/ui/icon"
+import { Logo, LogoText } from "@/components/ui/logo"
+import { Section, SectionContainer } from "@/components/ui/section"
+import { Separator } from "@/components/ui/separator"
+
+type Props = {
+  class?: string
+  brandName: string
+  brandHref: string
+  description: string
+  links?: {
+    label: string
+    href: string
+  }[]
+  socials?: {
+    label: string
+    href: string
+    icon: string
+  }[]
+  copyright: string
+}
+
+const {
+  class: className,
+  brandName,
+  brandHref,
+  description,
+  links,
+  socials,
+  copyright,
+} = Astro.props
+---
+
+<footer class={cn("", className)}>
+  <Section class="py-12 lg:py-16">
+    <SectionContainer class="items-center text-center">
+      <Logo href={brandHref}>
+        <LogoText>{brandName}</LogoText>
+      </Logo>
+      <p class="text-muted-foreground max-w-md text-sm leading-relaxed">
+        {description}
+      </p>
+      {
+        links && links.length > 0 && (
+          <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            {links.map((link) => (
+              <a
+                href={link.href}
+                class="text-muted-foreground hover:text-foreground text-sm transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        )
+      }
+      {
+        socials && socials.length > 0 && (
+          <div class="flex items-center justify-center gap-3">
+            {socials.map((social) => (
+              <a
+                href={social.href}
+                class="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label={social.label}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Icon name={social.icon} class="size-4" />
+              </a>
+            ))}
+          </div>
+        )
+      }
+      <Separator />
+      <p class="text-muted-foreground text-sm">{copyright}</p>
+    </SectionContainer>
+  </Section>
+</footer>

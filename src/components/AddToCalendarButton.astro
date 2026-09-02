@@ -1,0 +1,146 @@
+---
+// AddToCalendarButton.astro
+// Pure CSS & Vanilla JS event dropdown menu for adding schedules directly to major calendars.
+// Generates links for Google, Yahoo, Outlook, and a download link for iCal / Apple calendar.
+// Zero dependencies (no npm custom element packages required) for maximum performance and build safety.
+
+interface Props {
+  name: string;
+  description?: string;
+  location?: string;
+  startDate?: string; // YYYY-MM-DDTHH:MM:SS
+  duration?: number;  // in minutes
+  class?: string;
+}
+
+const {
+  name,
+  description = '',
+  location = '',
+  startDate = new Date().toISOString().replace(/\.\d+Z$/, ''), // Default to now
+  duration = 60,
+  class: className = ''
+} = Astro.props;
+
+// Date helpers
+const start = new Date(startDate);
+const end = new Date(start.getTime() + duration * 60 * 1000);
+
+const formatISO = (date: Date) => {
+  return date.toISOString().replace(/-|:|\.\d+/g, '');
+};
+
+const dateRangeGoogle = `${formatISO(start)}/${formatISO(end)}`;
+const datesOutlook = `${start.toISOString()}/${end.toISOString()}`;
+
+// Google Calendar Template URL
+const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(name)}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&dates=${dateRangeGoogle}`;
+
+// Outlook.com / Microsoft 365 URL
+const outlookUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(name)}&body=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&startdt=${start.toISOString()}&enddt=${end.toISOString()}`;
+
+// Yahoo Calendar URL
+const yahooUrl = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodeURIComponent(name)}&st=${formatISO(start)}&et=${formatISO(end)}&desc=${encodeURIComponent(description)}&in_loc=${encodeURIComponent(location)}`;
+
+// iCal / Apple Calendar .ics File Data URI
+const icsData = [
+  'BEGIN:VCALENDAR',
+  'VERSION:2.0',
+  'BEGIN:VEVENT',
+  `DTSTART:${formatISO(start)}`,
+  `DTEND:${formatISO(end)}`,
+  `SUMMARY:${name}`,
+  `DESCRIPTION:${description}`,
+  `LOCATION:${location}`,
+  'END:VEVENT',
+  'END:VCALENDAR'
+].join('\n');
+
+const icsUrl = `data:text/calendar;charset=utf8,${encodeURIComponent(icsData)}`;
+---
+
+<div class:list={["relative inline-block text-left calendar-dropdown", className]}>
+  <!-- Trigger Button -->
+  <button 
+    type="button" 
+    class="dropdown-trigger inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold rounded-xl border border-slate-800 shadow-md cursor-pointer transition-all active:scale-97"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <i class="fa-regular fa-calendar-plus text-base"></i> Add to Calendar
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div 
+    class="dropdown-menu hidden absolute left-0 mt-2 w-48 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden z-50 text-slate-800 dark:text-slate-100"
+    role="menu"
+  >
+    <div class="py-1">
+      <a 
+        href={googleUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" 
+        role="menuitem"
+      >
+        <i class="fa-brands fa-google text-blue-500 text-sm w-4 text-center"></i> Google Calendar
+      </a>
+      <a 
+        href={icsUrl} 
+        download={`${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}.ics`} 
+        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" 
+        role="menuitem"
+      >
+        <i class="fa-brands fa-apple text-slate-900 dark:text-white text-sm w-4 text-center"></i> Apple Calendar / iCal
+      </a>
+      <a 
+        href={outlookUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" 
+        role="menuitem"
+      >
+        <i class="fa-brands fa-microsoft text-emerald-500 text-sm w-4 text-center"></i> Outlook Calendar
+      </a>
+      <a 
+        href={yahooUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" 
+        role="menuitem"
+      >
+        <i class="fa-brands fa-yahoo text-purple-600 text-sm w-4 text-center"></i> Yahoo Calendar
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupCalendarDropdown() {
+    const dropdowns = document.querySelectorAll('.calendar-dropdown');
+    
+    dropdowns.forEach((dropdown) => {
+      const trigger = dropdown.querySelector('.dropdown-trigger');
+      const menu = dropdown.querySelector('.dropdown-menu');
+
+      if (!trigger || !menu) return;
+
+      // Toggle dropdown
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', !expanded ? 'true' : 'false');
+        menu.classList.toggle('hidden');
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', () => {
+        trigger.setAttribute('aria-expanded', 'false');
+        menu.classList.add('hidden');
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupCalendarDropdown);
+  setupCalendarDropdown();
+</script>

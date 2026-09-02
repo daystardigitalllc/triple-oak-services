@@ -1,0 +1,123 @@
+---
+// HeroChalet.astro
+// Immersive cozy alpine/artisan editorial hero section.
+// Features full-width background photography, bold serif typography, trust badges,
+// and the signature mountain-ridge SVG crop divider at the bottom.
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+interface Props {
+  eyebrowOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  primaryCtaText?: string;
+  primaryCtaHref?: string;
+  secondaryCtaText?: string;
+  secondaryCtaHref?: string;
+  bgImageOverride?: string;
+  dividerColorClass?: string; // The fill color of the mountain divider to match the next section
+}
+
+const {
+  eyebrowOverride,
+  headingOverride,
+  subtitleOverride,
+  primaryCtaText = 'See our products',
+  primaryCtaHref = '#services',
+  secondaryCtaText = 'Find us',
+  secondaryCtaHref = '#info',
+  bgImageOverride,
+  dividerColorClass = 'text-[#FAF9F5] fill-current' // Default warm cozy cream
+} = Astro.props;
+
+const data = contentData.home?.heroChalet;
+
+const eyebrow = eyebrowOverride || data?.eyebrow || 'Artisan bakery at the foot of Mont Blanc';
+const heading = headingOverride || data?.title || 'Real bread, baked in Chamonix';
+const subtitle = subtitleOverride || data?.subtitle || 'Natural sourdough, stone-milled flour and homemade pastries, prepared every night in our town-centre bakehouse.';
+const bgImage = bgImageOverride || data?.bgImage || 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1920&q=80';
+
+const defaultHighlights = [
+  '★ 4.7 on Google',
+  'Family-run since 1987',
+  'Fresh from 6:30am'
+];
+const highlights = data?.highlights || defaultHighlights;
+---
+
+<section class="relative min-h-[85vh] flex items-center justify-start text-white overflow-hidden py-32 select-none bg-slate-900">
+  
+  <!-- Backdrop Image & Overlay Layer -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src={bgImage} 
+      alt="Alpine Loaf Hero" 
+      class="w-full h-full object-cover opacity-45" 
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-slate-950/20"></div>
+  </div>
+
+  <div class="container mx-auto px-6 max-w-5xl relative z-10 space-y-8">
+    <div class="max-w-2xl space-y-5">
+      <!-- Eyebrow text -->
+      {eyebrow && (
+        <p class="text-xs sm:text-sm font-semibold tracking-wider text-secondary uppercase">
+          {eyebrow}
+        </p>
+      )}
+ 
+      <!-- Editorial Title (with customized italics) -->
+      <h1 class="text-4xl sm:text-6xl font-serif font-normal leading-tight text-white tracking-tight">
+        {heading.includes('*') ? (
+          <>
+            {heading.split('*')[0]}
+            <em class="italic text-secondary">{heading.split('*')[1]}</em>
+            {heading.split('*')[2]}
+          </>
+        ) : heading}
+      </h1>
+ 
+      <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-lg">
+        {subtitle}
+      </p>
+ 
+      <!-- Buttons -->
+      <div class="pt-4 flex flex-wrap gap-4">
+        <a 
+          href={primaryCtaHref} 
+          class="inline-flex items-center justify-center px-6 py-3 bg-secondary hover:opacity-90 text-primary text-xs sm:text-sm font-bold tracking-wider rounded transition-all cursor-pointer shadow-md"
+        >
+          {primaryCtaText}
+        </a>
+        <a 
+          href={secondaryCtaHref} 
+          class="inline-flex items-center justify-center px-6 py-3 border border-white hover:bg-white/10 text-white text-xs sm:text-sm font-bold tracking-wider rounded transition-all cursor-pointer"
+        >
+          {secondaryCtaText}
+        </a>
+      </div>
+    </div>
+ 
+    <!-- Horizontal Bullet Highlights -->
+    <ul class="flex flex-wrap gap-x-8 gap-y-3 pt-6 border-t border-white/20 w-fit text-xs font-semibold text-slate-350 select-none">
+      {highlights.map((item) => (
+        <li class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          {item}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Signature Mountain-Ridge Divider SVG -->
+  <svg 
+    class:list={["absolute bottom-0 left-0 right-0 h-10 sm:h-20 w-full pointer-events-none select-none z-20", dividerColorClass]} 
+    viewBox="0 0 1440 70" 
+    preserveAspectRatio="none" 
+    aria-hidden="true"
+  >
+    <path d="M0 70V38L180 12l150 22 190-30 170 26 160-14 210 22 180-28 200 24V70z"></path>
+  </svg>
+</section>

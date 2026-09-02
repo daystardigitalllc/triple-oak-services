@@ -1,0 +1,87 @@
+---
+// AsideExquisitus.astro
+// Premium visual notice/callout bubbles matching the Exquisitus editorial design.
+// Features four semantic variants, rounded corners, subtle outline rings, and type icons.
+
+interface Props {
+  type?: 'note' | 'tip' | 'caution' | 'danger';
+  title?: string;
+  class?: string;
+}
+
+const {
+  type = 'note',
+  title,
+  class: className = ''
+} = Astro.props;
+
+// Configuration based on type
+const typeConfigs = {
+  note: {
+    bg: 'bg-slate-100/50 dark:bg-slate-900/40',
+    border: 'border-slate-300 dark:border-slate-800',
+    text: 'text-slate-800 dark:text-slate-200',
+    titleColor: 'text-slate-900 dark:text-slate-100',
+    icon: 'fa-solid fa-info-circle text-slate-500',
+    defaultTitle: 'Note'
+  },
+  tip: {
+    bg: 'bg-emerald-500/5 dark:bg-emerald-500/5',
+    border: 'border-emerald-500/20 dark:border-emerald-500/20',
+    text: 'text-slate-700 dark:text-slate-300',
+    titleColor: 'text-emerald-700 dark:text-emerald-400',
+    icon: 'fa-regular fa-lightbulb text-emerald-500',
+    defaultTitle: 'Tip'
+  },
+  caution: {
+    bg: 'bg-amber-500/5 dark:bg-amber-500/5',
+    border: 'border-amber-500/20 dark:border-amber-500/20',
+    text: 'text-slate-700 dark:text-slate-300',
+    titleColor: 'text-amber-700 dark:text-amber-500',
+    icon: 'fa-solid fa-triangle-exclamation text-amber-500',
+    defaultTitle: 'Caution'
+  },
+  danger: {
+    bg: 'bg-rose-500/5 dark:bg-rose-500/5',
+    border: 'border-rose-500/25 dark:border-rose-500/25',
+    text: 'text-slate-700 dark:text-slate-300',
+    titleColor: 'text-rose-700 dark:text-rose-500',
+    icon: 'fa-solid fa-skull-crossbones text-rose-500',
+    defaultTitle: 'Danger'
+  }
+};
+
+const config = typeConfigs[type] || typeConfigs.note;
+const displayTitle = title || config.defaultTitle;
+---
+
+<div class:list={[
+  "p-5 rounded-2xl border flex items-start gap-4 shadow-sm relative overflow-hidden",
+  config.bg,
+  config.border,
+  className
+]}>
+  <!-- Highlight bar side indicator -->
+  <div class:list={[
+    "absolute left-0 top-0 bottom-0 w-1",
+    type === 'note' && 'bg-slate-400 dark:bg-slate-700',
+    type === 'tip' && 'bg-emerald-500',
+    type === 'caution' && 'bg-amber-500',
+    type === 'danger' && 'bg-rose-500'
+  ]}></div>
+
+  <!-- Icon Column -->
+  <div class="flex-shrink-0 mt-0.5 text-base">
+    <i class={config.icon}></i>
+  </div>
+
+  <!-- Text Body Column -->
+  <div class="space-y-1 select-none">
+    <p class:list={["text-xs font-bold uppercase tracking-wider", config.titleColor]}>
+      {displayTitle}
+    </p>
+    <div class:list={["text-xs sm:text-sm leading-relaxed", config.text]}>
+      <slot />
+    </div>
+  </div>
+</div>

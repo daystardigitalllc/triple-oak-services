@@ -1,0 +1,27 @@
+{
+  "primaryColor": "#2ee66b",
+  "primaryColorHover": "#22c55e",
+  "secondaryColor": "#0a0f0a",
+  "accentColor": "#2ee66b",
+  "borderRadius": "0.5rem",
+  "fontFamily": "Outfit",
+  "style": "oak-city",
+  "darkMode": true,
+  "heroVideo": "/hero.mp4",
+  "typewriterWords": [
+    "Tree Trimming and Pruning",
+    "Tree Removal",
+    "Stump Grinding",
+    "Storm Damage Cleanup",
+    "Land Clearing"
+  ],
+  "marqueePhrases": [
+    "Tree Trimming",
+    "Tree Removal",
+    "Stump Grinding",
+    "Storm Damage Cleanup",
+    "Land Clearing",
+    "Free Estimates",
+    "Nashville TN"
+  ]
+}

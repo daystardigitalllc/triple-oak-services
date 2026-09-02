@@ -1,0 +1,67 @@
+---
+// FAQNumbered.astro
+// Single-column accordion FAQ with "Q01/Q02..." numbering and a
+// "still have questions? call us" prompt next to the header. A visual
+// alternative to FAQ.astro, built fresh in Astro + Tailwind (native
+// <details>/<summary>, no JS) using Daystar's own theme tokens.
+import businessData from '../data/business.json';
+import contentData from '../data/content.json';
+
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  itemsOverride?: FaqItem[];
+}
+
+const { badgeOverride, headingOverride, subtitleOverride, itemsOverride } = Astro.props;
+
+const data = contentData.home?.faqNumbered;
+
+const badge = badgeOverride || data?.badge || 'Got Questions?';
+const heading = headingOverride || data?.heading || "Let's Clear It Up";
+const subtitle = subtitleOverride || data?.subtitle || 'Straight answers to what homeowners ask us most often.';
+const faqs: FaqItem[] = itemsOverride || contentData.faqs || [];
+---
+
+<section id="faq" class="py-24 bg-white dark:bg-slate-950 relative border-t border-slate-100 dark:border-slate-900/60">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+      <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-32 self-start">
+        <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1.5 rounded-full">
+          {badge}
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+          {heading}
+        </h2>
+        <p class="text-base text-slate-500 dark:text-slate-400 leading-relaxed">{subtitle}</p>
+        <a href={`tel:${businessData.phone}`} class="inline-flex items-center gap-2.5 text-sm font-bold text-primary hover:text-primary-hover transition-colors">
+          <i class="fa-solid fa-phone text-xs"></i>
+          Still unsure? Just call: {businessData.phone}
+        </a>
+      </div>
+
+      <div class="lg:col-span-8 space-y-3">
+        {faqs.map((faq, index) => (
+          <details class="group rounded-custom border border-slate-200/60 dark:border-slate-800/60 bg-slate-50/60 dark:bg-slate-900/30 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex items-center gap-4 p-6 cursor-pointer select-none">
+              <span class="text-xs font-bold text-primary shrink-0">Q{String(index + 1).padStart(2, '0')}</span>
+              <span class="flex-1 font-bold text-slate-900 dark:text-white">{faq.q}</span>
+              <span class="shrink-0 rounded-full bg-primary/10 text-primary p-1.5 transition-transform duration-300 group-open:rotate-45">
+                <i class="fa-solid fa-plus text-xs"></i>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 pl-[3.75rem] border-t border-slate-200/40 dark:border-slate-800/40">
+              <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed pt-4">{faq.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

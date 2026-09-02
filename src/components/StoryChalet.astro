@@ -1,0 +1,64 @@
+---
+// StoryChalet.astro
+// Cozy, warm split-screen about block in the Chalet theme style.
+// Features elegant borders, workspace photography, and structured editorial storytelling.
+import contentData from '../data/content.json';
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  paragraph1Override?: string;
+  paragraph2Override?: string;
+  imageSrcOverride?: string;
+  imageAltOverride?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  paragraph1Override,
+  paragraph2Override,
+  imageSrcOverride,
+  imageAltOverride
+} = Astro.props;
+
+const data = contentData.home?.storyChalet;
+
+const badge = badgeOverride || data?.badge || 'Since 1987';
+const heading = headingOverride || data?.title || 'Our story';
+const paragraph1 = paragraph1Override || data?.paragraph1 || 'Settled on rue du Docteur Paccard since 1987, The Alpine Loaf has been run by the Ravanel family for three generations. We work exclusively with stone-milled Alpine flours and a sourdough starter we have kept alive for over thirty years.';
+const paragraph2 = paragraph2Override || data?.paragraph2 || 'Summer and winter alike, the ovens are lit at 3am so that mountain guides, seasonal workers and families find warm bread the minute we open.';
+const imageSrc = imageSrcOverride || data?.imageSrc || 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=800&q=80';
+const imageAlt = imageAltOverride || data?.imageAlt || "Baker's hands shaping sourdough on a wooden workbench";
+---
+
+<section id="about" class="py-24 bg-white text-slate-800 border-b border-slate-200/80 select-none">
+  <div class="container mx-auto px-6 max-w-5xl">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      
+      <!-- Workspace Photo (Left column) -->
+      <div class="md:col-span-5">
+        <div class="aspect-[4/3] rounded-xl overflow-hidden shadow-md border border-slate-200 bg-slate-100">
+          <img src={imageSrc} alt={imageAlt} class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Story Prose (Right column) -->
+      <div class="md:col-span-7 space-y-6 text-left">
+        {badge && (
+          <span class="text-xs font-bold uppercase tracking-wider text-primary">
+            {badge}
+          </span>
+        )}
+        <h2 class="text-3xl sm:text-4xl font-serif font-normal text-slate-950 tracking-tight leading-tight">
+          {heading}
+        </h2>
+        <div class="space-y-4 text-slate-500 text-xs sm:text-sm leading-relaxed">
+          <p>{paragraph1}</p>
+          {paragraph2 && <p>{paragraph2}</p>}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

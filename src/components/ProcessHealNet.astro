@@ -1,0 +1,128 @@
+---
+// ProcessHealNet.astro
+// Numbered vertical process timeline in the HealNet theme style.
+// Features numbers connected by a dashed line on the left, and a mockup image
+// overlayed with a floating label widget on the right.
+import contentData from '../data/content.json';
+
+interface Step {
+  index: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  stepsOverride?: Step[];
+  imageSrcOverride?: string;
+  floatingText?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  stepsOverride,
+  imageSrcOverride,
+  floatingText = 'Best Certified Team of Specialists'
+} = Astro.props;
+
+const data = contentData.home?.processHealNet;
+
+const badge = badgeOverride || data?.badge || 'EASY THREE STEPS';
+const heading = headingOverride || data?.title || 'How our platform works';
+const subtitle = subtitleOverride || data?.subtitle || 'Navigating your healthcare journey with HealNet is seamless. Just follow these steps mentioned below to proceed with your selected services. You can also see our FAQ section for more guidance:';
+
+const defaultSteps: Step[] = [
+  {
+    index: '1',
+    title: 'Create Your Profile',
+    description: 'Sign up and fill in your medical history securely. Setting up your profile this way would ensure that you stay up-to-date with your medical processes.'
+  },
+  {
+    index: '2',
+    title: 'Choose Your Service',
+    description: 'Select from our range of services and book a consultation. Booking a consultation with HealNet is fairly simple and straight-forward.'
+  },
+  {
+    index: '3',
+    title: 'Meet Your Doctor',
+    description: 'Have a virtual consultation with one of our certified specialists, or go for a physical visit to the doctor in case you opted for a physical check-up.'
+  }
+];
+
+const steps = stepsOverride || data?.steps || defaultSteps;
+const imageSrc = imageSrcOverride || data?.imageSrc || 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80';
+---
+
+<section id="process-healnet" class="py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white select-none border-b border-[#0179B4]/10 relative z-10 overflow-hidden">
+  <div class="container mx-auto px-6 max-w-6.5xl space-y-16">
+    
+    <!-- Header -->
+    <div class="mx-auto text-center max-w-3xl space-y-3">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-[#0179B4]">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+        {heading.includes('our platform') ? (
+          <>
+            {heading.split('our platform')[0]}
+            <span class="bg-gradient-to-r from-[#0179B4] to-[#88D8FF] bg-clip-text text-transparent">
+              our platform
+            </span>
+            {heading.split('our platform')[1]}
+          </>
+        ) : heading}
+      </h2>
+      {subtitle && (
+        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <!-- Split Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-5.5xl mx-auto">
+      
+      <!-- Left Column: Numbered Timeline (with connecting dashed line) -->
+      <div class="lg:col-span-7 space-y-10 relative pl-4 text-left">
+        <!-- Connecting Dashed Guide Line -->
+        <span class="absolute top-2.5 left-8 w-[2px] h-[75%] border-l-2 border-dashed border-[#0179B4]/45 pointer-events-none select-none z-0"></span>
+
+        {steps.map((step) => (
+          <div class="grid grid-cols-[48px_1fr] gap-6 items-start relative z-10">
+            <!-- Number Circle Badge -->
+            <span class="w-10.5 h-10.5 rounded-full bg-gradient-to-tr from-[#A7E2FF] to-[#0095DE] text-white text-base font-extrabold flex items-center justify-center shadow-md">
+              {step.index}
+            </span>
+            <div class="space-y-1.5">
+              <h3 class="text-lg font-bold tracking-tight text-slate-950 dark:text-white">{step.title}</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed max-w-md">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Right Column: Process Mockup with floating tag -->
+      <div class="lg:col-span-5 relative flex items-center justify-center max-lg:h-[350px]">
+        <div class="w-[85%] h-[85%] rounded-3xl overflow-hidden shadow-2xl border border-slate-100/60 bg-slate-100">
+          <img src={imageSrc} alt="How it works" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        
+        <!-- Floating label Widget -->
+        {floatingText && (
+          <div class="absolute bottom-6 right-2 bg-white border border-slate-150 p-4 rounded-xl shadow-lg flex items-center gap-2.5 text-[#0179B4] text-xs font-black select-none max-w-[220px] text-left">
+            <span class="w-5 h-5 rounded bg-[#E9F6FF] flex items-center justify-center text-[10px]">★</span>
+            {floatingText}
+          </div>
+        )}
+      </div>
+
+    </div>
+
+  </div>
+</section>

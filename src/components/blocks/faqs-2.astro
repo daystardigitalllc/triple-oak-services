@@ -1,0 +1,82 @@
+---
+import { cn } from "@/lib/utils"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
+import { Section, SectionContainer } from "@/components/ui/section"
+
+type Props = {
+  class?: string
+  title: string
+  description: string
+  faqs: {
+    id: string
+    question: string
+    answer: string
+  }[]
+  buttons?: {
+    label: string
+    href: string
+    variant?: "default" | "outline" | "secondary" | "ghost"
+  }[]
+}
+
+const { class: className, title, description, faqs, buttons } = Astro.props
+---
+
+<Section class={cn("", className)}>
+  <SectionContainer>
+    <div
+      class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16"
+    >
+      <div class="lg:sticky lg:top-24 lg:self-start">
+        <h2
+          class="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
+        >
+          {title}
+        </h2>
+        <p
+          class="text-muted-foreground mt-4 text-base leading-relaxed text-balance"
+        >
+          {description}
+        </p>
+        {
+          buttons?.length && (
+            <div class="mt-8 flex flex-wrap gap-3">
+              {buttons.map(({ href, label, ...button }, index) => (
+                <Button
+                  as="a"
+                  href={href}
+                  size="lg"
+                  variant={
+                    button.variant ?? (index === 0 ? "default" : "secondary")
+                  }
+                  {...button}
+                >
+                  {label}
+                </Button>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <div>
+        <Accordion collapsible>
+          {
+            faqs.map((item) => (
+              <AccordionItem value={item.id}>
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
+              </AccordionItem>
+            ))
+          }
+        </Accordion>
+      </div>
+    </div>
+  </SectionContainer>
+</Section>

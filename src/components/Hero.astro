@@ -1,0 +1,321 @@
+---
+import businessData from '../data/business.json';
+import contentData from '../data/content.json';
+import themeConfig from '../data/theme.config.json';
+
+interface Props {
+  layout?: 'split' | 'glass' | 'minimal' | 'contractor' | 'oak-city';
+  h1Override?: string;
+  supportingOverride?: string;
+}
+
+const { 
+  layout = themeConfig.style === 'oak-city' ? 'oak-city' : (themeConfig.style === 'sharp-contractor' ? 'contractor' : (themeConfig.style === 'modern-glass' ? 'glass' : 'split')),
+  h1Override,
+  supportingOverride
+} = Astro.props;
+
+const h1 = h1Override || contentData.home.hero.h1;
+const supporting = supportingOverride || contentData.home.hero.supporting;
+const badge = contentData.home.hero.badge;
+const ctaText = contentData.home.hero.ctaText;
+
+const isContractor = layout === 'contractor' || layout === 'oak-city';
+const bgImage = contentData.home.hero.bgImage || '/hero-bg.jpg';
+---
+
+<section 
+  class:list={[
+    "relative overflow-hidden py-20 lg:py-36",
+    isContractor ? "bg-slate-950 text-white bg-cover bg-center" : "bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+  ]}
+  style={isContractor ? `background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.8)), url('${bgImage}');` : ''}
+>
+  {/* Conditionally render video background for Oak City theme */}
+  {layout === 'oak-city' && themeConfig.heroVideo && (
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+      <source src={themeConfig.heroVideo} type="video/mp4" />
+    </video>
+  )}
+  {layout === 'oak-city' && themeConfig.heroVideo && (
+    <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+  )}
+
+  <!-- Glowing Background blobs (disabled for contractor theme via CSS property glow-display) -->
+  <div class="absolute inset-0 pointer-events-none glow-blob-container" style="display: var(--glow-display, block);">
+    <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[100px] animate-pulse-slow"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-accent/15 rounded-full blur-[80px]"></div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    {layout === 'split' && (
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <!-- Text Content -->
+        <div class="lg:col-span-7 space-y-6 text-left animate-fade-in-up">
+          {badge && (
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold tracking-wide uppercase text-primary bg-primary/10 rounded-full">
+              {badge}
+            </span>
+          )}
+          
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+            <span class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 dark:from-white dark:via-slate-100 dark:to-white bg-clip-text text-transparent">{h1.split(' ').slice(0, -2).join(' ')}</span>
+            <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> {h1.split(' ').slice(-2).join(' ')}</span>
+          </h1>
+
+          <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-2xl">
+            {supporting}
+          </p>
+
+          <!-- Conversion Area -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-2">
+            <a href="#quote-funnel" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-lg shadow-primary/25 transition-all hover:scale-103">
+              {ctaText}
+            </a>
+            <a href="tel:businessData.phone" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-custom transition-all">
+              Call {businessData.phone}
+            </a>
+          </div>
+
+          <!-- Trust items -->
+          <div class="flex flex-wrap gap-x-6 gap-y-3 pt-6 text-sm text-slate-500 dark:text-slate-400">
+            {businessData.certifications.slice(0, 3).map((cert) => (
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M6.267 3.455a.75.75 0 00-.708.523L4.547 7H1.75a.75.75 0 00-.75.75v3.5c0 .414.336.75.75.75h2.797l1.012 3.022a.75.75 0 00.708.523h1.75a.75.75 0 00.75-.75V3.455a.75.75 0 00-.75-.75H6.267zM14.78 6.22a.75.75 0 011.06 0l2.5 2.5a.75.75 0 010 1.06l-2.5 2.5a.75.75 0 11-1.06-1.06L16.44 10l-1.66-1.66a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                </svg>
+                {cert}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right Side Visual / Hero Card -->
+        <div class="lg:col-span-5 relative animate-fade-in-up" style="animation-delay: 0.2s">
+          <div class="relative mx-auto max-w-md lg:max-w-none">
+            <!-- Back decoration card -->
+            <div class="absolute -inset-2 bg-gradient-to-tr from-primary to-accent rounded-custom blur-xl opacity-30 animate-pulse-slow"></div>
+            
+            <!-- Lead capture form styled beautifully -->
+            <div class="relative glass-panel bg-white/90 dark:bg-slate-900/90 rounded-custom p-8 shadow-2xl border border-slate-200/50 dark:border-slate-800/50">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Get a Free Estimate</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Book your free, no-obligation estimate today.</p>
+              
+              <form action="#quote-funnel" class="mt-6 space-y-4">
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">What service do you need?</label>
+                  <select class="w-full px-4 py-3 bg-slate-100 dark:bg-slate-800 border-0 rounded-lg text-sm text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-primary">
+                    {contentData.services.map((service) => (
+                      <option>{service.title}</option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Your Name</label>
+                  <input type="text" placeholder="John Smith" class="w-full px-4 py-3 bg-slate-100 dark:bg-slate-800 border-0 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary" required />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Phone Number</label>
+                  <input type="tel" placeholder="(555) 555-5555" class="w-full px-4 py-3 bg-slate-100 dark:bg-slate-800 border-0 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary" required />
+                </div>
+
+                <button type="submit" class="w-full py-3.5 font-bold text-white bg-primary hover:bg-primary-hover rounded-lg shadow-md shadow-primary/20 transition-all">
+                  Submit Estimate Request
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {layout === 'glass' && (
+      <div class="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
+        {badge && (
+          <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold tracking-wide uppercase text-primary bg-primary/10 rounded-full">
+            {badge}
+          </span>
+        )}
+
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.05] text-slate-900 dark:text-white">
+          {h1.split(' ').slice(0, -2).join(' ')}
+          <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> {h1.split(' ').slice(-2).join(' ')}</span>
+        </h1>
+
+        <p class="text-lg md:text-2xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-3xl mx-auto">
+          {supporting}
+        </p>
+
+        <!-- Glass card inline element -->
+        <div class="glass-panel p-6 sm:p-8 rounded-custom max-w-2xl mx-auto shadow-xl border border-white/20">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="#quote-funnel" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-lg shadow-primary/25 transition-all">
+              {ctaText}
+            </a>
+            <a href={`tel:${businessData.phone}`} class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-slate-800 dark:text-white bg-white/40 dark:bg-slate-900/40 hover:bg-white/60 dark:hover:bg-slate-800/60 rounded-custom transition-all">
+              Call Now: {businessData.phone}
+            </a>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 pt-6 text-sm text-slate-500 dark:text-slate-400">
+          {businessData.certifications.map((cert) => (
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+              {cert}
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {layout === 'minimal' && (
+      <div class="max-w-3xl mx-auto text-center space-y-6 py-12 animate-fade-in-up">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          {h1}
+        </h1>
+        <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+          {supporting}
+        </p>
+        <div class="pt-6">
+          <a href="#quote-funnel" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-lg shadow-primary/25 transition-all">
+            {ctaText}
+          </a>
+        </div>
+      </div>
+    )}
+
+    {layout === 'contractor' && (
+      <div class="max-w-4xl mx-auto text-center space-y-8 py-10 md:py-16 animate-fade-in-up relative">
+        
+        <!-- Floating Info Tags (Matching Oak City top badges) -->
+        <div class="hidden lg:flex justify-between items-center w-full max-w-5xl mx-auto absolute -top-12 left-1/2 -translate-x-1/2 px-6 text-[10px] text-slate-300 font-bold uppercase tracking-widest pointer-events-none">
+          <div class="bg-black/35 px-4 py-2 border border-white/10 rounded">📍 {businessData.locations[0]} & Surrounding Areas</div>
+          <div class="bg-black/35 px-4 py-2 border border-white/10 rounded">🛡️ {businessData.certifications[0] || 'Fully Licensed & Insured'}</div>
+        </div>
+
+        <!-- Center Logo Emblem -->
+        <div class="w-20 h-20 rounded-xl bg-primary border-2 border-white/20 flex items-center justify-center text-white font-black text-3xl shadow-xl mx-auto mb-4 tracking-tighter">
+          {businessData.name.split(' ').map(w => w.charAt(0)).join('')}
+        </div>
+
+        {badge && (
+          <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold tracking-wide uppercase text-accent border border-accent/30 bg-accent/10 rounded-md">
+            {badge}
+          </span>
+        )}
+        
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.05] uppercase">
+          {h1}
+        </h1>
+        
+        <p class="text-lg md:text-xl text-slate-200 leading-relaxed max-w-2xl mx-auto font-normal">
+          {supporting}
+        </p>
+
+        <!-- Side-by-Side CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+          <a href="#quote-funnel" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-accent hover:brightness-90 rounded-custom shadow-lg transition-all hover:scale-102 uppercase tracking-wide">
+            {ctaText}
+          </a>
+          <a href={`tel:${businessData.phone}`} class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-transparent border-2 border-white/20 hover:bg-white/10 rounded-custom transition-all uppercase tracking-wide">
+            📞 Call {businessData.phone}
+          </a>
+        </div>
+      </div>
+    )}
+
+    {layout === 'oak-city' && (
+      <div class="max-w-4xl mx-auto text-center space-y-8 py-10 md:py-16 animate-fade-in-up relative">
+        
+        <!-- Floating Info Tags (Matching Oak City top badges) -->
+        <div class="hidden lg:flex justify-between items-center w-full max-w-5xl mx-auto absolute -top-12 left-1/2 -translate-x-1/2 px-6 text-[10px] text-slate-300 font-bold uppercase tracking-widest pointer-events-none gap-4">
+          <div class="bg-black/45 px-4 py-2.5 border border-white/10 rounded flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-primary"></i> {businessData.locations[0]} & Surrounding Areas</div>
+          <div class="bg-black/45 px-4 py-2.5 border border-white/10 rounded flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-primary"></i> {businessData.certifications[0] || 'Fully Licensed & Insured'}</div>
+        </div>
+
+        {/* Center Logo Emblem */}
+        {businessData.logo && businessData.logo !== '/logo.svg' && businessData.logo !== '' ? (
+          <img src={businessData.logo} alt={`${businessData.name} Logo`} class="h-20 w-auto object-contain mx-auto mb-4" />
+        ) : (
+          <div class="w-20 h-20 rounded-xl bg-transparent border-2 border-primary flex items-center justify-center text-primary font-black text-3xl shadow-xl mx-auto mb-4 tracking-tighter">
+            {businessData.name.split(' ').map(w => w.charAt(0)).join('')}
+          </div>
+        )}
+
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.05] uppercase">
+          {h1.split(' ').slice(0, -2).join(' ')} <span id="typewriter-text" class="text-primary border-r-4 border-primary/70 pr-2 animate-caret"></span>
+          <noscript>
+            <span class="text-primary">{h1.split(' ').slice(-2).join(' ')}</span>
+          </noscript>
+        </h1>
+        
+        <p class="text-lg md:text-xl text-slate-200 leading-relaxed max-w-2xl mx-auto font-normal">
+          {supporting}
+        </p>
+
+        <!-- Side-by-Side CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+          <a href="#quote-funnel" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-bold text-primary bg-transparent border-2 border-primary hover:bg-primary hover:text-white rounded-custom shadow-lg transition-all hover:scale-102 uppercase tracking-wide">
+            {ctaText}
+          </a>
+          <a href={`tel:${businessData.phone}`} class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-transparent border-2 border-white/20 hover:bg-white/10 rounded-custom transition-all uppercase tracking-wide gap-2">
+            <i class="fa-solid fa-phone text-xs"></i> Call {businessData.phone}
+          </a>
+        </div>
+
+        <div id="typewriter-config" data-words={JSON.stringify(themeConfig.typewriterWords && themeConfig.typewriterWords.length > 0 ? themeConfig.typewriterWords : ["Tree Care", "Emergency Response", "Stump Removal"])} class="hidden"></div>
+      </div>
+    )}
+  </div>
+</section>
+
+{layout === 'oak-city' && (
+  <script>
+    const configEl = document.getElementById('typewriter-config');
+    const words = configEl ? JSON.parse(configEl.getAttribute('data-words') || '[]') : [];
+    
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const txtElement = document.getElementById('typewriter-text');
+    
+    function type() {
+      if (!txtElement || words.length === 0) return;
+      
+      const currentWord = words[wordIndex];
+      if (isDeleting) {
+        txtElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        txtElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
+      
+      let typeSpeed = 120;
+      if (isDeleting) {
+        typeSpeed /= 2;
+      }
+      
+      if (!isDeleting && charIndex === currentWord.length) {
+        typeSpeed = 1800; // Pause at end of word
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typeSpeed = 400; // Pause before next word
+      }
+      
+      setTimeout(type, typeSpeed);
+    }
+    
+    // Start typewriter effect after page load
+    if (txtElement && words.length > 0) {
+      type();
+    }
+  </script>
+)}

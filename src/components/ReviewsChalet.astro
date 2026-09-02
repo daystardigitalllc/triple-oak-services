@@ -1,0 +1,144 @@
+---
+// ReviewsChalet.astro
+// Cozy testimonial quote grid matching the Chalet theme style.
+// Features a ratings summary block header and cards detailed with giant decorative quotations and star SVGs.
+import contentData from '../data/content.json';
+
+interface ReviewItem {
+  name: string;
+  avatar: string;
+  quote: string;
+  stars: number;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  ratingScore?: string;
+  ratingLabel?: string;
+  reviewsOverride?: ReviewItem[];
+  googleReviewUrl?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  ratingScore = '4.7',
+  ratingLabel = 'from Google reviews',
+  reviewsOverride,
+  googleReviewUrl = '#'
+} = Astro.props;
+
+const data = contentData.home?.reviewsChalet;
+
+const badge = badgeOverride || data?.badge || 'Reviews';
+const heading = headingOverride || data?.title || 'In their words';
+
+const defaultReviews: ReviewItem[] = [
+  {
+    name: 'Marie L.',
+    avatar: 'M',
+    quote: 'The best bread in the valley, hands down. The stone-milled boule keeps for a week and the mont-blanc is to die for.',
+    stars: 5
+  },
+  {
+    name: 'Thomas B.',
+    avatar: 'T',
+    quote: 'Open early — perfect before heading out on a route. The baguette sandwiches are generous and the coffee is good.',
+    stars: 5
+  },
+  {
+    name: 'Elena K.',
+    avatar: 'E',
+    quote: 'Wonderful bakery, authentic sourdough bread. A bit of a queue on Saturday mornings but absolutely worth it.',
+    stars: 4
+  }
+];
+
+const reviews = reviewsOverride || data?.items || defaultReviews;
+---
+
+<section id="reviews-chalet" class="py-24 bg-[#FAF9F5] text-slate-800 border-b border-slate-200/80 select-none">
+  <div class="container mx-auto px-6 max-w-5xl space-y-16">
+    
+    <!-- Double-column ratings header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-slate-200/60 pb-8">
+      <div class="space-y-3 text-left">
+        {badge && (
+          <span class="text-xs font-bold uppercase tracking-wider text-primary">
+            {badge}
+          </span>
+        )}
+        <h2 class="text-3xl sm:text-4xl font-serif font-normal text-slate-950 tracking-tight leading-tight">
+          {heading}
+        </h2>
+      </div>
+
+      <!-- Rating summary box -->
+      <div class="flex items-center gap-3.5 bg-white border border-slate-200/60 p-4 rounded-xl shadow-sm w-fit select-none">
+        <span class="text-3xl font-serif font-extrabold text-slate-950 leading-none">{ratingScore}</span>
+        <div class="flex flex-col text-left">
+          <!-- Stars list -->
+          <div class="flex text-amber-500 text-sm">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          </div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1">{ratingLabel}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {reviews.map((item) => (
+        <div class="bg-white border border-slate-200/60 p-8 shadow-sm relative rounded-xl flex flex-col justify-between min-h-[220px]">
+          
+          <!-- Decorative quotation mark -->
+          <span class="absolute top-2 left-6 text-7xl font-serif font-black text-slate-100 dark:text-slate-100 select-none pointer-events-none">
+            &ldquo;
+          </span>
+
+          <div class="space-y-4 relative z-10">
+            <!-- Stars -->
+            <div class="flex text-amber-500 text-xs gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <i class:list={[
+                  i < item.stars ? "fa-solid fa-star" : "fa-regular fa-star"
+                ]}></i>
+              ))}
+            </div>
+            <!-- Quote text -->
+            <p class="text-slate-650 text-xs sm:text-sm leading-relaxed min-h-16 italic font-medium">
+              {item.quote}
+            </p>
+          </div>
+
+          <!-- Author Box -->
+          <div class="mt-6 flex items-center gap-3 pt-4 border-t border-slate-100 relative z-10">
+            <span class="flex w-8 h-8 items-center justify-center rounded-full font-serif font-bold bg-[#FAF9F5] border border-slate-200/85 text-xs text-slate-800">
+              {item.avatar}
+            </span>
+            <span class="text-xs font-bold text-slate-900">{item.name}</span>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom direct review redirect link -->
+    {googleReviewUrl && (
+      <div class="text-center pt-4">
+        <a 
+          href={googleReviewUrl} 
+          class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+        >
+          Read all reviews on Google <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+      </div>
+    )}
+
+  </div>
+</section>

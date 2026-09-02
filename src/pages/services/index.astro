@@ -1,0 +1,39 @@
+---
+// src/pages/services/index.astro
+// Services Hub Page - lists and links to every service detail page.
+import MainLayout from '../../layouts/MainLayout.astro';
+import businessData from '../../data/business.json';
+import Services from '../../components/Services.astro';
+import CTA from '../../components/CTA.astro';
+---
+
+<MainLayout
+  title={`Our Services | ${businessData.name}`}
+  description={`Explore ${businessData.name}'s full range of ${businessData.industry} services.`}
+>
+  <!-- Hero Banner -->
+  <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-slate-950 text-white overflow-hidden text-center select-none">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-primary/20 rounded-full blur-[100px] animate-pulse-slow"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-accent/15 rounded-full blur-[80px]"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10 max-w-3xl space-y-6">
+      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1.5 rounded-full">
+        Our Expertise
+      </span>
+      <h1 class="text-4xl sm:text-6xl font-black tracking-tight uppercase leading-[1.1] text-white">
+        Services We Offer
+      </h1>
+      <p class="text-base sm:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed">
+        Everything {businessData.name} brings to your next {businessData.industry} project.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Grid (shared component) -->
+  <Services />
+
+  <!-- CTA Banner (shared component) -->
+  <CTA />
+</MainLayout>

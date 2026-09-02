@@ -1,0 +1,198 @@
+---
+import businessData from '../data/business.json';
+import contentData from '../data/content.json';
+import themeConfig from '../data/theme.config.json';
+
+const isFlatPanel = themeConfig.style === 'sharp-contractor' || themeConfig.style === 'oak-city';
+const cardClass = isFlatPanel ? 'contractor-panel' : 'glass-panel';
+const bgClass = isFlatPanel ? 'bg-white dark:bg-slate-900' : 'bg-white/95 dark:bg-slate-950/95';
+---
+
+<section id="quote-funnel" class="py-24 bg-slate-50 dark:bg-slate-900/20 relative">
+  <div class="container mx-auto px-6 max-w-3xl">
+    <!-- Header -->
+    <div class="text-center space-y-4 mb-12">
+      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">
+        Free Quote
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+        Get an Instant Estimate
+      </h2>
+      <p class="text-base text-slate-500 dark:text-slate-400">
+        Complete the form below to receive a custom quote. Our team responds within 1 hour.
+      </p>
+    </div>
+
+    <!-- Multi-step Form Card -->
+    <div class="relative p-8 sm:p-12 shadow-xl border border-slate-200/50 dark:border-slate-800/50 rounded-3xl" class:list={[cardClass, bgClass]}>
+      <!-- Web3Forms integration - Free functional form endpoint -->
+      <form action="https://api.web3forms.com/submit" method="POST" id="funnel-form" class="space-y-8">
+        <!-- Web3Forms Config Key -->
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+        <input type="hidden" name="subject" value={`New Lead from ${businessData.name}`} />
+        <input type="hidden" name="from_name" value={businessData.name} />
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+
+        <!-- Step 1: Select Service -->
+        <div id="step-1" class="space-y-6">
+          <div class="flex justify-between items-center pb-4 border-b border-slate-100 dark:border-slate-900">
+            <span class="text-sm font-bold text-primary">Step 1 of 3</span>
+            <span class="text-xs text-slate-400 font-semibold uppercase">Service Selection</span>
+          </div>
+          
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white">What service can we help you with?</h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {contentData.services.map((service) => (
+              <label class="group relative flex items-center justify-between p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 cursor-pointer hover:border-primary hover:bg-primary/5 transition-all">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="service_requested" value={service.title} class="h-4.5 w-4.5 text-primary border-slate-300 dark:border-slate-700 focus:ring-primary focus:ring-offset-0" required />
+                  <span class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">{service.title}</span>
+                </div>
+                <span class="text-xs text-slate-400 group-hover:text-primary transition-colors">Select &rarr;</span>
+              </label>
+            ))}
+          </div>
+
+          <div class="flex justify-end pt-4">
+            <button type="button" id="next-btn-1" class="px-6 py-3.5 font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-md shadow-primary/20 transition-all flex items-center gap-2">
+              Continue
+              <span>&rarr;</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Contact Details -->
+        <div id="step-2" class="space-y-6 hidden">
+          <div class="flex justify-between items-center pb-4 border-b border-slate-100 dark:border-slate-900">
+            <span class="text-sm font-bold text-primary">Step 2 of 3</span>
+            <span class="text-xs text-slate-400 font-semibold uppercase">Contact Information</span>
+          </div>
+          
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white">How can we reach you?</h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">First & Last Name</label>
+              <input type="text" name="name" placeholder="John Smith" class="w-full px-4 py-3 bg-slate-100/70 dark:bg-slate-900/70 border-0 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary" required />
+            </div>
+
+            <div class="space-y-2">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">Phone Number</label>
+              <input type="tel" name="phone" placeholder="(555) 555-5555" class="w-full px-4 py-3 bg-slate-100/70 dark:bg-slate-900/70 border-0 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary" required />
+            </div>
+            
+            <div class="space-y-2 sm:col-span-2">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">Email Address</label>
+              <input type="email" name="email" placeholder="john@example.com" class="w-full px-4 py-3 bg-slate-100/70 dark:bg-slate-900/70 border-0 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary" required />
+            </div>
+          </div>
+
+          <div class="flex justify-between pt-6">
+            <button type="button" id="prev-btn-2" class="px-6 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors">
+              &larr; Back
+            </button>
+            <button type="button" id="next-btn-2" class="px-6 py-3.5 font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-md shadow-primary/20 transition-all flex items-center gap-2">
+              Continue
+              <span>&rarr;</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Location & Details -->
+        <div id="step-3" class="space-y-6 hidden">
+          <div class="flex justify-between items-center pb-4 border-b border-slate-100 dark:border-slate-900">
+            <span class="text-sm font-bold text-primary">Step 3 of 3</span>
+            <span class="text-xs text-slate-400 font-semibold uppercase">Project Location & Notes</span>
+          </div>
+          
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white">Tell us about your project</h3>
+          
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">Street Address</label>
+                <input type="text" name="street" placeholder="123 Main St" class="w-full px-4 py-3 bg-slate-100/70 dark:bg-slate-900/70 border-0 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary" required />
+              </div>
+              <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">City / Town</label>
+                <input type="text" name="city" placeholder="Nashville" class="w-full px-4 py-3 bg-slate-100/70 dark:bg-slate-900/70 border-0 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary" required />
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">Additional Details (Optional)</label>
+              <textarea name="details" rows="4" placeholder="Briefly describe what needs to be repaired or installed..." class="w-full px-4 py-3 bg-slate-100/70 dark:bg-slate-900/70 border-0 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary"></textarea>
+            </div>
+          </div>
+
+          <div class="flex justify-between pt-6">
+            <button type="button" id="prev-btn-3" class="px-6 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors">
+              &larr; Back
+            </button>
+            <button type="submit" class="px-8 py-4 font-bold text-white bg-accent hover:brightness-90 rounded-custom shadow-lg shadow-accent/25 transition-all hover:scale-102 flex items-center gap-2">
+              Submit Request
+              <span>&check;</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const step1 = document.getElementById('step-1');
+  const step2 = document.getElementById('step-2');
+  const step3 = document.getElementById('step-3');
+
+  const next1 = document.getElementById('next-btn-1');
+  const next2 = document.getElementById('next-btn-2');
+
+  const prev2 = document.getElementById('prev-btn-2');
+  const prev3 = document.getElementById('prev-btn-3');
+
+  // Simple vanilla JS navigation for the multi-step form
+  if (next1 && step1 && step2) {
+    next1.addEventListener('click', () => {
+      // Validate radio selection
+      const checked = document.querySelector('input[name="service_requested"]:checked');
+      if (!checked) {
+        alert('Please select a service before proceeding.');
+        return;
+      }
+      step1.classList.add('hidden');
+      step2.classList.remove('hidden');
+    });
+  }
+
+  if (next2 && step2 && step3) {
+    next2.addEventListener('click', () => {
+      // Basic input validation
+      const name = document.querySelector('input[name="name"]') as HTMLInputElement;
+      const phone = document.querySelector('input[name="phone"]') as HTMLInputElement;
+      const email = document.querySelector('input[name="email"]') as HTMLInputElement;
+      
+      if (!name?.value || !phone?.value || !email?.value) {
+        alert('Please fill out all contact fields.');
+        return;
+      }
+      step2.classList.add('hidden');
+      step3.classList.remove('hidden');
+    });
+  }
+
+  if (prev2 && step1 && step2) {
+    prev2.addEventListener('click', () => {
+      step2.classList.add('hidden');
+      step1.classList.remove('hidden');
+    });
+  }
+
+  if (prev3 && step2 && step3) {
+    prev3.addEventListener('click', () => {
+      step3.classList.add('hidden');
+      step2.classList.remove('hidden');
+    });
+  }
+</script>

@@ -1,0 +1,108 @@
+---
+// AppointmentFormHealNet.astro
+// Inline 4-column scheduler form layout in the HealNet theme style.
+// Features labeled fields with custom lucide icon indicators and a gradient button.
+import contentData from '../data/content.json';
+
+interface Props {
+  headingOverride?: string;
+  submitButtonText?: string;
+}
+
+const {
+  headingOverride,
+  submitButtonText = 'Book Now'
+} = Astro.props;
+
+const data = contentData.home?.appointmentFormHealNet;
+
+const heading = headingOverride || data?.title || 'Easily book an appointment in 3 simple steps.';
+---
+
+<section id="appointment" class="py-12 bg-white dark:bg-slate-950 text-slate-800 dark:text-white select-none relative z-20">
+  <div class="container mx-auto px-6 max-w-6.5xl">
+    
+    <!-- Outer Card border container -->
+    <div class="rounded-2xl border-2 border-[#0179B4]/20 bg-gradient-to-br from-[#F8FDFF] to-white dark:from-slate-900 dark:to-slate-950 p-6 sm:p-10 shadow-lg">
+      <h2 class="text-xl sm:text-2xl font-bold text-[#0179B4] tracking-tight mb-6">
+        {heading}
+      </h2>
+
+      <!-- Form Grid -->
+      <form action="/" method="POST" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
+        
+        <!-- Field 1: Email Address -->
+        <div class="space-y-2.5 text-left">
+          <label for="appt-email" class="flex gap-2.5 items-center text-xs font-bold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+            <svg class="w-4.5 h-4.5 text-[#0179B4] shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+            </svg>
+            Email Address
+          </label>
+          <input 
+            type="email" 
+            id="appt-email" 
+            name="email" 
+            required 
+            placeholder="Enter Your Email Address"
+            class="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:border-[#0179B4] shadow-inner"
+          />
+        </div>
+
+        <!-- Field 2: Contact Number -->
+        <div class="space-y-2.5 text-left">
+          <label for="appt-phone" class="flex gap-2.5 items-center text-xs font-bold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+            <svg class="w-4.5 h-4.5 text-[#0179B4] shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+            </svg>
+            Contact Number
+          </label>
+          <input 
+            type="tel" 
+            id="appt-phone" 
+            name="phone" 
+            required 
+            placeholder="Enter Your Contact Number"
+            class="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:border-[#0179B4] shadow-inner"
+          />
+        </div>
+
+        <!-- Field 3: Date of Appointment -->
+        <div class="space-y-2.5 text-left">
+          <label for="appt-date" class="flex gap-2.5 items-center text-xs font-bold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+            <svg class="w-4.5 h-4.5 text-[#0179B4] shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M8 2v4M16 2v4" />
+              <rect width="18" height="18" x="3" y="4" rx="2" />
+              <path d="M3 10h18" />
+            </svg>
+            Date of Appointment
+          </label>
+          <input 
+            type="date" 
+            id="appt-date" 
+            name="date" 
+            required 
+            class="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:border-[#0179B4] shadow-inner"
+          />
+        </div>
+
+        <!-- Submit Action Column -->
+        <div class="pt-2">
+          <button 
+            type="submit" 
+            class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-[#0179B4] to-[#0095DE] text-white text-sm sm:text-base font-bold rounded-xl transition-all shadow-[0_8px_16px_rgba(1,121,180,0.15)] hover:shadow-[0_10px_20px_rgba(1,121,180,0.25)] hover:-translate-y-0.5 cursor-pointer border-0"
+          >
+            {submitButtonText}
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4" />
+            </svg>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</section>

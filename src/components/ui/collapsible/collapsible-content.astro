@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "@/lib/utils"
+
+type Props = HTMLAttributes<"div">
+
+const { class: className, hidden: _hidden, ...props } = Astro.props
+---
+
+<div data-slot="collapsible-content" hidden class={cn(className)} {...props}>
+  <slot />
+</div>

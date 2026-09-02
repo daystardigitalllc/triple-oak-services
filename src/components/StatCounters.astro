@@ -1,0 +1,162 @@
+---
+// StatCounters.astro
+// Trust-building stat band: large numbers ("50+ Homes Built", "15 Years Local")
+// that count up from zero once the row scrolls into view. Dependency-free Astro
+// + vanilla JS (a single shared IntersectionObserver per instance, no libraries),
+// respects prefers-reduced-motion by jumping straight to the final values.
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+interface StatItem {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+  decimals?: number;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  itemsOverride?: StatItem[];
+  variant?: 'dark' | 'light';
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  itemsOverride,
+  variant: variantOverride,
+} = Astro.props;
+
+const data = contentData.home?.statCounters;
+
+const badge = badgeOverride ?? data?.badge ?? '';
+const heading = headingOverride ?? data?.heading ?? `Why ${businessData.name}`;
+const variant = variantOverride || data?.variant || 'dark';
+
+const defaultItems: StatItem[] = [
+  { value: 50, suffix: '+', label: 'Projects Completed' },
+  { value: 15, suffix: '+', label: 'Years in Business' },
+  { value: 100, suffix: '%', label: 'Locally Owned' },
+  { value: 5, decimals: 1, suffix: '.0', label: 'Average Rating' },
+];
+
+const items: StatItem[] = itemsOverride || data?.items || defaultItems;
+
+const isDark = variant === 'dark';
+const uid = `stats-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<section
+  data-stats-id={uid}
+  class:list={[
+    'relative py-20 lg:py-24 overflow-hidden',
+    isDark ? 'bg-slate-950 text-white' : 'bg-slate-50 dark:bg-slate-900/40 text-slate-900 dark:text-white',
+  ]}
+>
+  <div class="container mx-auto px-6 relative z-10">
+    {(badge || heading) && (
+      <div class="max-w-2xl mx-auto text-center space-y-3 mb-14">
+        {badge && (
+          <span
+            class:list={[
+              'inline-block text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full',
+              isDark ? 'text-accent bg-accent/15 border border-accent/25' : 'text-primary bg-primary/10',
+            ]}
+          >
+            {badge}
+          </span>
+        )}
+        {heading && (
+          <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-[1.1]">
+            {heading}
+          </h2>
+        )}
+      </div>
+    )}
+
+    <div data-stats-grid class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 text-center">
+      {items.map((item) => (
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-center font-black tracking-tight text-4xl sm:text-5xl lg:text-6xl">
+            {item.prefix && <span class="text-primary">{item.prefix}</span>}
+            <span
+              data-stat-value
+              data-target={item.value}
+              data-decimals={item.decimals ?? 0}
+              data-suffix={item.suffix ?? ''}
+            >0</span>
+          </div>
+          <p class:list={['text-xs sm:text-sm font-semibold uppercase tracking-wider', isDark ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400']}>
+            {item.label}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ uid }}>
+  (() => {
+    const root = document.querySelector(`[data-stats-id="${uid}"]`);
+    const grid = root?.querySelector('[data-stats-grid]');
+    if (!root || !grid) return;
+
+    const counters = Array.from(grid.querySelectorAll('[data-stat-value]'));
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function formatValue(value, decimals, suffix) {
+      const fixed = decimals > 0 ? value.toFixed(decimals) : Math.round(value).toLocaleString('en-US');
+      return `${fixed}${suffix}`;
+    }
+
+    function renderFinal() {
+      for (const el of counters) {
+        const target = parseFloat(el.dataset.target || '0');
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const suffix = el.dataset.suffix || '';
+        el.textContent = formatValue(target, decimals, suffix);
+      }
+    }
+
+    if (prefersReducedMotion) {
+      renderFinal();
+      return;
+    }
+
+    // Ease-out cubic: fast start, gentle settle on the final number.
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+    function animateCounter(el) {
+      const target = parseFloat(el.dataset.target || '0');
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1600;
+      const start = performance.now();
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeOutCubic(progress);
+        el.textContent = formatValue(target * eased, decimals, suffix);
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    let hasAnimated = false;
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          counters.forEach(animateCounter);
+          observer.disconnect();
+        }
+      }
+    }, { threshold: 0.4 });
+
+    observer.observe(grid);
+  })();
+</script>

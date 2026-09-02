@@ -1,0 +1,152 @@
+---
+// TestimonialsHealNet.astro
+// Premium testimonial grid layout in the HealNet theme style.
+// Features two rows of quote cards detailed with avatar photo slots,
+// flanking a central highlighted 4-column statistic milestones board.
+import contentData from '../data/content.json';
+
+interface Testimonial {
+  name: string;
+  quote: string;
+  avatarSrc: string;
+}
+
+interface StatItem {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  topTestimonials?: Testimonial[];
+  bottomTestimonials?: Testimonial[];
+  statsOverride?: StatItem[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  topTestimonials,
+  bottomTestimonials,
+  statsOverride
+} = Astro.props;
+
+const data = contentData.home?.testimonialsHealNet;
+
+const badge = badgeOverride || data?.badge || 'PATIENT TESTIMONIALS';
+const heading = headingOverride || data?.title || 'Hear from Those We’ve Cared For';
+const subtitle = subtitleOverride || data?.subtitle || 'Discover the difference we make through the voices of those we’ve served:';
+
+const defaultTop: Testimonial[] = [
+  {
+    name: 'Linda A.',
+    quote: '“After my knee surgery, the convenience of online consultations made my recovery smoother than I could have imagined.”',
+    avatarSrc: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80'
+  },
+  {
+    name: 'Henry B.',
+    quote: '“Managing chronic conditions like diabetes requires a lot of vigilance, but the medicine refill system has simplified my life.”',
+    avatarSrc: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
+  }
+];
+
+const defaultBottom: Testimonial[] = [
+  {
+    name: 'Joshua T.',
+    quote: '“The prescription refill system is a game-changer for managing my diabetes. It’s really efficient and completely hassle-free.”',
+    avatarSrc: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80'
+  },
+  {
+    name: 'Samantha K.',
+    quote: '“Finding a doctor who really understands all of my health needs has never been easier. This platform has changed my life.”',
+    avatarSrc: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80'
+  }
+];
+
+const defaultStats: StatItem[] = [
+  { value: '10,000+', label: 'Successful Consultations' },
+  { value: '2,500+', label: 'Healthcare Professionals' },
+  { value: '98%', label: 'Patient Satisfaction Rate' },
+  { value: '200+', label: 'Top Specialists' }
+];
+
+const topList = topTestimonials || data?.topList || defaultTop;
+const bottomList = bottomTestimonials || data?.bottomList || defaultBottom;
+const stats = statsOverride || data?.stats || defaultStats;
+---
+
+<section id="testimonials-healnet" class="py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white select-none border-b border-[#0179B4]/10 relative overflow-hidden">
+  
+  <!-- Decorative background icons/elements -->
+  <span class="absolute top-10 left-[4%] text-4xl text-[#88D8FF]/15">✦</span>
+  <span class="absolute bottom-10 right-[4%] text-4xl text-[#88D8FF]/15">✦</span>
+
+  <div class="container mx-auto px-6 max-w-6.5xl space-y-16">
+    
+    <!-- Header -->
+    <div class="mx-auto text-center max-w-3xl space-y-3">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-[#0179B4]">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+        {heading}
+      </h2>
+      {subtitle && (
+        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <!-- Main Stack -->
+    <div class="space-y-12 max-w-5.5xl mx-auto">
+      
+      <!-- Top Row: Testimonials -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {topList.map((item) => (
+          <div class="border-2 border-[#0179B4]/15 rounded-2xl p-6 sm:p-8 bg-gradient-to-tr from-[#EBF8FF]/40 to-white dark:from-slate-900 dark:to-slate-950 grid grid-cols-[72px_1fr] gap-5 items-center shadow-sm">
+            <img src={item.avatarSrc} alt={item.name} class="w-18 h-18 rounded-xl object-cover border border-slate-100/60 shadow" loading="lazy" />
+            <div class="space-y-1.5 text-left text-xs sm:text-sm">
+              <p class="text-slate-700 dark:text-slate-350 italic font-medium leading-relaxed">{item.quote}</p>
+              <h4 class="font-extrabold text-slate-900 dark:text-white">- {item.name}</h4>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Center Row: Statistic counters -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 py-8 border-y border-slate-200/50 dark:border-slate-800/40">
+        {stats.map((row) => (
+          <div class="text-center space-y-1">
+            <div class="bg-gradient-to-r from-[#0179B4] to-[#88D8FF] bg-clip-text text-transparent text-3xl sm:text-5xl font-black tracking-tight leading-none">
+              {row.value}
+            </div>
+            <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
+              {row.label}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Bottom Row: Testimonials -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {bottomList.map((item) => (
+          <div class="border-2 border-[#0179B4]/15 rounded-2xl p-6 sm:p-8 bg-gradient-to-tr from-[#EBF8FF]/40 to-white dark:from-slate-900 dark:to-slate-950 grid grid-cols-[72px_1fr] gap-5 items-center shadow-sm">
+            <img src={item.avatarSrc} alt={item.name} class="w-18 h-18 rounded-xl object-cover border border-slate-100/60 shadow" loading="lazy" />
+            <div class="space-y-1.5 text-left text-xs sm:text-sm">
+              <p class="text-slate-700 dark:text-slate-350 italic font-medium leading-relaxed">{item.quote}</p>
+              <h4 class="font-extrabold text-slate-900 dark:text-white">- {item.name}</h4>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+  </div>
+</section>

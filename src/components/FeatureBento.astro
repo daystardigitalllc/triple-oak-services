@@ -1,0 +1,155 @@
+---
+// FeatureBento.astro
+// Bento-style 2x2 feature grid inspired by clean, consumer product landing pages.
+// Features customizable overlay graphics (mock notifications/alerts) over the images.
+import contentData from '../data/content.json';
+
+interface BentoItem {
+  src: string;
+  alt: string;
+  title: string;
+  description: string;
+  overlayType?: 'none' | 'notification' | 'dialogue';
+  overlayTitle?: string;
+  overlayText?: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  itemsOverride?: BentoItem[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  itemsOverride
+} = Astro.props;
+
+const data = contentData.home?.featureBento || contentData.home?.whyChooseUs;
+
+const badge = badgeOverride || data?.badge || 'Core Benefits';
+const heading = headingOverride || data?.title || 'Why Families Choose Us';
+const subtitle = subtitleOverride || data?.subtitle || 'Connecting generations through thoughtful, modern engineering.';
+
+const defaultItems: BentoItem[] = [
+  {
+    src: 'https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?auto=format&fit=crop&w=600&h=400&q=80',
+    alt: 'Hand resting on a premium smart companion speaker',
+    title: 'Always there to chat',
+    description: 'Our conversational engine is ready to talk 24/7, providing endless stories, trivia, and warm companion interaction.',
+    overlayType: 'dialogue',
+    overlayTitle: 'Ato Companion',
+    overlayText: '“Tell me a story about Nashville in 1960...”'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&h=400&q=80',
+    alt: 'iPhone showing modern clean application screen',
+    title: 'Keep loved ones connected',
+    description: 'Get daily summaries, custom alerts, and instant photo-sharing notifications straight to your family app feed.',
+    overlayType: 'notification',
+    overlayTitle: 'Ato Family Alert',
+    overlayText: 'Grandma Maria just shared a new drawing!'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&h=400&q=80',
+    alt: 'A detailed look at modern UI controls and smart system panels',
+    title: 'Technically advanced, made simple',
+    description: 'Zero setup required. Simply plug it in, connect to Wi-Fi, and let the voice assistant guide the way.',
+    overlayType: 'none'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1581579438747-1dc8d1e0ca96?auto=format&fit=crop&w=600&h=400&q=80',
+    alt: 'Grandfather and child laughing in a bright kitchen setting',
+    title: 'Never miss what matters',
+    description: 'Automatic reminders for check-ins, medical routines, and birthdays keep everyone aligned without hassle.',
+    overlayType: 'none'
+  }
+];
+
+const items = itemsOverride || data?.items || defaultItems;
+---
+
+<section id="features-bento" class="py-24 bg-[#FCFBF9] text-slate-800 border-b border-orange-100/30">
+  <div class="container mx-auto px-6 max-w-5xl">
+    
+    <!-- Header -->
+    <div class="text-center max-w-xl mx-auto mb-16 space-y-4">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-orange-600 px-3.5 py-1.5 bg-orange-50 rounded-full border border-orange-100/50">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-serif font-medium tracking-tight text-[#2B231B] leading-tight">
+        {heading}
+      </h2>
+      {subtitle && (
+        <p class="text-slate-500 text-sm sm:text-base leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <!-- Bento 2x2 Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+      {items.map((item) => (
+        <div class="flex flex-col space-y-4 group">
+          <!-- Image Wrapper with rounded corners and potential overlays -->
+          <div class="aspect-[16/10.5] w-full rounded-2.5xl overflow-hidden bg-slate-100 border border-orange-100/20 shadow-md relative">
+            <img 
+              src={item.src} 
+              alt={item.alt} 
+              class="w-full h-full object-cover group-hover:scale-101.5 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
+
+            {/* Render notification style overlay */}
+            {item.overlayType === 'notification' && (
+              <div class="absolute top-4 right-4 max-w-[280px] bg-white/95 backdrop-blur-md border border-slate-100 rounded-xl p-3.5 shadow-xl flex items-start gap-3 animate-pulse-slow">
+                <div class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
+                  <i class="fa-solid fa-message text-xs"></i>
+                </div>
+                <div class="text-left">
+                  <h4 class="text-xs font-bold text-slate-800 tracking-tight">{item.overlayTitle || 'Ato Alert'}</h4>
+                  <p class="text-[11px] text-slate-500 font-medium leading-normal mt-0.5">{item.overlayText}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Render dialogue bubble style overlay */}
+            {item.overlayType === 'dialogue' && (
+              <div class="absolute bottom-4 left-4 max-w-[280px] bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-3.5 shadow-xl flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-orange-600 flex items-center justify-center text-white shrink-0 shadow-md">
+                  <i class="fa-solid fa-microphone text-xs"></i>
+                </div>
+                <div class="text-left">
+                  <h4 class="text-xs font-bold text-orange-400 tracking-tight">{item.overlayTitle || 'Voice Input'}</h4>
+                  <p class="text-[11px] text-slate-200 font-medium leading-normal mt-0.5 italic">{item.overlayText}</p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <!-- Feature Description -->
+          <div class="space-y-1.5 px-1">
+            <h3 class="text-xl font-serif font-medium text-[#2B231B]">{item.title}</h3>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-lg">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .animate-pulse-slow {
+    animation: pulseSlow 4s infinite ease-in-out;
+  }
+  @keyframes pulseSlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.96; transform: scale(0.99); }
+  }
+</style>

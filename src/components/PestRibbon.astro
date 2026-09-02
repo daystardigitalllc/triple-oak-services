@@ -1,0 +1,94 @@
+---
+// PestRibbon.astro
+// Accent red banner showing quick categories of services/pest treatment.
+// Renders a grid of rounded white pill boxes containing custom icons and labels,
+// completed with an accent bottom callout.
+import contentData from '../data/content.json';
+
+interface PestItem {
+  name: string;
+  icon: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  pestsOverride?: PestItem[];
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  pestsOverride,
+  ctaText = 'Get Help Now',
+  ctaHref = '#contacts'
+} = Astro.props;
+
+const data = contentData.home?.pestRibbon;
+
+const badge = badgeOverride || data?.badge || 'WHAT WE TREAT';
+const heading = headingOverride || data?.title || 'Our Pest Services';
+
+const defaultPests: PestItem[] = [
+  { name: 'Roaches', icon: 'fa-solid fa-bug' },
+  { name: 'Ants', icon: 'fa-solid fa-spider' },
+  { name: 'Termites', icon: 'fa-solid fa-shield-halved' },
+  { name: 'Bedbugs', icon: 'fa-solid fa-locust' },
+  { name: 'Spiders', icon: 'fa-solid fa-spider-web' },
+  { name: 'Rodents', icon: 'fa-solid fa-cat' }
+];
+
+const pests = pestsOverride || data?.items || defaultPests;
+---
+
+<section class="py-12 bg-gradient-to-r from-red-800 via-red-700 to-red-800 text-white select-none border-b-4 border-slate-950 relative overflow-hidden">
+  
+  <!-- Subtle decorative icon background pattern -->
+  <div class="absolute inset-0 opacity-5 pointer-events-none select-none">
+    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+          <circle cx="20" cy="20" r="1.5" fill="white" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+    </svg>
+  </div>
+
+  <div class="container mx-auto px-6 max-w-4xl space-y-8 text-center relative z-10">
+    <!-- Header -->
+    <div class="space-y-1.5">
+      {badge && (
+        <span class="text-[10px] font-black uppercase tracking-widest text-red-200">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-2xl sm:text-3.5xl font-black tracking-tight text-white leading-tight">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- 6-pill Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+      {pests.map((item) => (
+        <div class="bg-white/10 hover:bg-white/20 border border-white/15 px-4 py-3 rounded-full flex items-center justify-center gap-2.5 shadow-sm transition-all hover:scale-102 select-none">
+          <i class:list={[item.icon, "text-sm text-red-300"]}></i>
+          <span class="text-xs sm:text-sm font-bold text-white tracking-wide">{item.name}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Action Button -->
+    <div class="pt-4 flex justify-center">
+      <a 
+        href={ctaHref} 
+        class="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-slate-100 text-red-700 text-xs font-black uppercase tracking-widest transition-all rounded-full shadow-md hover:scale-102 cursor-pointer"
+      >
+        {ctaText}
+      </a>
+    </div>
+
+  </div>
+</section>

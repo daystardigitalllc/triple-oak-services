@@ -1,0 +1,140 @@
+---
+// InfoChalet.astro
+// Practical info cards block in the Chalet theme style.
+// Features a structured opening hours table on the left, and phone/address direction links on the right.
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+interface OpeningHour {
+  day: string;
+  hours: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  hoursOverride?: OpeningHour[];
+  addressOverride?: string;
+  phoneOverride?: string;
+  directionsUrl?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  hoursOverride,
+  addressOverride,
+  phoneOverride,
+  directionsUrl = '#'
+} = Astro.props;
+
+const data = contentData.home?.infoChalet;
+
+const badge = badgeOverride || data?.badge || 'Practical';
+const heading = headingOverride || data?.title || 'Visit us';
+
+const defaultHours: OpeningHour[] = [
+  { day: 'Monday', hours: '06:30 – 19:00' },
+  { day: 'Tuesday', hours: '06:30 – 19:00' },
+  { day: 'Wednesday', hours: 'Closed' },
+  { day: 'Thursday', hours: '06:30 – 19:00' },
+  { day: 'Friday', hours: '06:30 – 19:00' },
+  { day: 'Saturday', hours: '06:30 – 19:30' },
+  { day: 'Sunday', hours: '07:00 – 13:00' }
+];
+
+const hours = hoursOverride || data?.hours || defaultHours;
+const address = addressOverride || businessData.address || '12 rue du Docteur Paccard, 74400 Chamonix-Mont-Blanc';
+const formattedAddress = typeof address === 'object' ? `${address.street || ''}, ${address.city || ''}, ${address.state || ''} ${address.zip || ''}` : address;
+const phone = phoneOverride || businessData.phone || '+33 4 50 00 00 00';
+---
+
+<section id="info" class="py-24 bg-white text-slate-800 border-b border-slate-200/80 select-none">
+  <div class="container mx-auto px-6 max-w-5xl space-y-16">
+    
+    <!-- Section Header -->
+    <div class="max-w-xl space-y-3 text-left">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-primary">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4xl font-serif font-normal text-slate-950 tracking-tight leading-tight">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Double Card Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+      
+      <!-- Card 1: Opening hours table -->
+      <div class="bg-white border border-slate-200/60 p-8 rounded-xl shadow-sm space-y-6 flex flex-col justify-between">
+        <h3 class="text-xl font-serif font-bold text-slate-900 border-b border-slate-100 pb-4">Opening hours</h3>
+        <table class="w-full text-xs sm:text-sm text-left border-collapse">
+          <tbody>
+            {hours.map((row) => (
+              <tr class="border-b border-slate-100/60 last:border-0">
+                <th scope="row" class="py-3 font-semibold text-slate-500">{row.day}</th>
+                <td class:list={[
+                  "py-3 text-right font-semibold",
+                  row.hours === 'Closed' ? 'text-rose-500 font-bold' : 'text-slate-900'
+                ]}>
+                  {row.hours}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Card 2: Contact/Address directions -->
+      <div class="bg-white border border-slate-200/60 p-8 rounded-xl shadow-sm flex flex-col justify-between space-y-8">
+        <div class="space-y-6">
+          <h3 class="text-xl font-serif font-bold text-slate-900 border-b border-slate-100 pb-4">Find us</h3>
+          
+          <div class="space-y-4 text-xs sm:text-sm">
+            <div class="flex items-start gap-3">
+              <i class="fa-solid fa-location-dot text-primary mt-1"></i>
+              <p class="text-slate-650 leading-relaxed font-semibold">
+                {formattedAddress.includes(',') ? (
+                  <>
+                    {formattedAddress.split(',')[0]}
+                    <br />
+                    {formattedAddress.split(',').slice(1).join(',')}
+                  </>
+                ) : formattedAddress}
+              </p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-phone text-primary"></i>
+              <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} class="font-semibold text-slate-900 hover:text-primary transition-colors">
+                {phone}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-100">
+          <a 
+            href={directionsUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="flex-1 py-3 text-center text-xs font-bold uppercase tracking-widest bg-primary hover:bg-primary-hover text-white rounded transition-all shadow-sm cursor-pointer"
+          >
+            Google Maps
+          </a>
+          <a 
+            href={`tel:${phone.replace(/[^0-9+]/g, '')}`} 
+            class="flex-1 py-3 text-center text-xs font-bold uppercase tracking-widest border border-slate-200 hover:bg-[#FAF9F5]/40 text-slate-800 rounded transition-all cursor-pointer"
+          >
+            Call Us
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

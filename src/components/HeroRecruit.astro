@@ -1,0 +1,79 @@
+---
+// HeroRecruit.astro
+// Corporate & Creative Agency styled hero section.
+// Features a full-width background photo overlay, left-aligned typography with bold highlights,
+// and an outline action button with an icon.
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  buttonTextOverride?: string;
+  buttonHrefOverride?: string;
+  bgImageOverride?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  buttonTextOverride,
+  buttonHrefOverride,
+  bgImageOverride,
+} = Astro.props;
+
+const data = contentData.home?.heroRecruit;
+
+const badge = badgeOverride || data?.badge || 'Recruitment for creative people';
+const heading = headingOverride || data?.title || 'talent? meet opportunity.';
+const buttonText = buttonTextOverride || data?.buttonText || 'Job Openings';
+const buttonHref = buttonHrefOverride || data?.buttonHref || '#jobs';
+const bgImage = bgImageOverride || data?.bgImage || 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80';
+---
+
+<section class="relative min-h-[70vh] flex items-center justify-start bg-slate-950 text-white overflow-hidden py-24 select-none">
+  <!-- Background Image Overlay -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src={bgImage} 
+      alt="Agency Hero Background" 
+      class="w-full h-full object-cover opacity-35" 
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
+  </div>
+
+  <div class="container mx-auto px-6 max-w-6.5xl relative z-10">
+    <div class="max-w-2xl space-y-6">
+      <!-- Badge / Subtitle -->
+      {badge && (
+        <p class="text-sm sm:text-base font-semibold tracking-wide text-orange-500 uppercase">
+          {badge}
+        </p>
+      )}
+
+      <!-- Dynamic Heading -->
+      <h1 class="text-4.5xl sm:text-6.5xl font-black leading-tight tracking-tight text-white capitalize font-sans">
+        {heading.includes('?') ? (
+          <>
+            <span class="text-orange-500">{heading.split('?')[0]}?</span>
+            <br />
+            {heading.split('?')[1]}
+          </>
+        ) : heading}
+      </h1>
+
+      <!-- CTA Action button -->
+      <div class="pt-4">
+        <a 
+          href={buttonHref} 
+          class="inline-flex items-center justify-center gap-3 px-7 py-3.5 border-2 border-white hover:border-orange-500 hover:bg-orange-500 text-white hover:text-slate-950 text-sm font-bold uppercase tracking-wider transition-all duration-300 rounded-none shadow-md cursor-pointer"
+        >
+          {buttonText}
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

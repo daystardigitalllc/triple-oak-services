@@ -1,0 +1,184 @@
+---
+// MasonryMediaFilter.astro
+// Filterable project gallery grid using vanilla JS + CSS transforms.
+// Features active tag filters that dynamically show/hide image items with smooth transitions.
+import contentData from '../data/content.json';
+
+interface GalleryItem {
+  src: string;
+  alt: string;
+  category: string; // e.g. 'termite', 'roach', 'commercial'
+  label: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  filters?: { label: string; value: string }[];
+  itemsOverride?: GalleryItem[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  filters = [
+    { label: 'All Projects', value: 'all' },
+    { label: 'Termites', value: 'termite' },
+    { label: 'Roaches & Ants', value: 'roach' },
+    { label: 'Commercial Space', value: 'commercial' }
+  ],
+  itemsOverride
+} = Astro.props;
+
+const data = contentData.home?.mediaFilter;
+
+const badge = badgeOverride || data?.badge || 'GALLERY SHOWCASE';
+const heading = headingOverride || data?.title || 'Our Work in Pictures';
+
+const defaultItems: GalleryItem[] = [
+  {
+    src: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80',
+    alt: 'Termite detection system',
+    category: 'termite',
+    label: 'Termite Mapping'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=400&q=80',
+    alt: 'Residential pest protection',
+    category: 'roach',
+    label: 'Kitchen perimeter barrier'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1558402529-d2638a7023e9?auto=format&fit=crop&w=400&q=80',
+    alt: 'Logistics center inspection',
+    category: 'commercial',
+    label: 'Logistics Facility Audit'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=400&q=80',
+    alt: 'Outdoor barrier spraying',
+    category: 'roach',
+    label: 'Yard treatment boundary'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=400&q=80',
+    alt: 'Commercial kitchen shield',
+    category: 'commercial',
+    label: 'Restaurant bait lines'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80',
+    alt: 'Attic termite cleanup',
+    category: 'termite',
+    label: 'Attic colony extraction'
+  }
+];
+
+const items = itemsOverride || data?.items || defaultItems;
+---
+
+<section id="media-filter-gallery" class="py-24 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white select-none border-b border-slate-200 dark:border-slate-800 relative z-10">
+  <div class="container mx-auto px-6 max-w-5xl space-y-12">
+    
+    <!-- Header -->
+    <div class="mx-auto text-center max-w-2xl space-y-2">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-red-650">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Active Filter Buttons Ribbon controls -->
+    <div class="flex flex-wrap items-center justify-center gap-3" id="gallery-filter-ribbon">
+      {filters.map((filter, idx) => (
+        <button 
+          type="button" 
+          data-filter-target={filter.value}
+          class:list={[
+            "px-5 py-2.5 text-xs font-black uppercase tracking-wider rounded-full border transition-all cursor-pointer focus:outline-none select-none",
+            idx === 0 
+              ? "bg-[#0f1e42] text-white border-[#0f1e42]" 
+              : "bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-850 hover:bg-slate-50 dark:hover:bg-slate-900"
+          ]}
+        >
+          {filter.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Gallery Grid stage -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pt-4" id="gallery-masonry-grid">
+      {items.map((item) => (
+        <div 
+          data-gallery-category={item.category}
+          class="aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 relative shadow-sm group select-none transition-all duration-300 transform scale-100 opacity-100 block"
+        >
+          <!-- image -->
+          <img src={item.src} alt={item.alt} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103" loading="lazy" />
+          
+          <!-- hover overlay caption -->
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="text-left space-y-1">
+              <span class="text-[9px] font-black uppercase tracking-widest text-red-400 bg-red-950/30 px-2 py-0.5 rounded border border-red-500/20">
+                {item.category}
+              </span>
+              <h4 class="text-sm font-bold text-white tracking-wide">{item.label}</h4>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function setupGalleryFilter() {
+    const ribbon = document.getElementById('gallery-filter-ribbon');
+    const grid = document.getElementById('gallery-masonry-grid');
+    if (!ribbon || !grid) return;
+
+    const buttons = ribbon.querySelectorAll('[data-filter-target]');
+    const cards = grid.querySelectorAll('[data-gallery-category]');
+
+    const activeClasses = ['bg-[#0f1e42]', 'text-white', 'border-[#0f1e42]'];
+    const inactiveClasses = ['bg-white', 'dark:bg-slate-950', 'text-slate-600', 'dark:text-slate-400', 'border-slate-200', 'dark:border-slate-850', 'hover:bg-slate-50', 'dark:hover:bg-slate-900'];
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter-target') || 'all';
+
+        // Toggle active button style
+        buttons.forEach((b) => {
+          b.classList.remove(...activeClasses);
+          b.classList.add(...inactiveClasses);
+        });
+        btn.classList.remove(...inactiveClasses);
+        btn.classList.add(...activeClasses);
+
+        // Filter cards
+        cards.forEach((card: any) => {
+          const category = card.getAttribute('data-gallery-category') || '';
+          const match = filter === 'all' || category === filter;
+
+          if (match) {
+            // Show item
+            card.classList.remove('scale-0', 'opacity-0', 'hidden');
+            card.classList.add('scale-100', 'opacity-100', 'block');
+          } else {
+            // Hide item
+            card.classList.remove('scale-100', 'opacity-100', 'block');
+            card.classList.add('scale-0', 'opacity-0', 'hidden');
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupGalleryFilter);
+  setupGalleryFilter();
+</script>

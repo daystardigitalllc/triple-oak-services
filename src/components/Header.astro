@@ -1,0 +1,208 @@
+---
+import businessData from '../data/business.json';
+import contentData from '../data/content.json';
+import themeConfig from '../data/theme.config.json';
+---
+
+<header id="site-header" class="fixed top-0 z-50 w-full site-header">
+  <div class="container mx-auto px-6 py-5 flex items-center justify-between transition-all duration-300">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 group">
+      {businessData.logo && businessData.logo !== '/logo.svg' && businessData.logo !== '' ? (
+        <img src={businessData.logo} alt={`${businessData.name} Logo`} class="h-10 w-auto object-contain transition-all group-hover:scale-105" />
+      ) : (
+        <div data-header-logo-badge class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-extrabold text-xl shadow-md shadow-primary/20 group-hover:scale-105 transition-all">
+          {businessData.name.charAt(0)}
+        </div>
+      )}
+      <span data-header-text class="font-bold text-xl tracking-tight text-white transition-colors duration-300">
+        {businessData.name}
+      </span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav data-header-text class="hidden md:flex items-center gap-8 font-medium text-sm text-white/90 transition-colors duration-300">
+      <a href="/" class="hover:text-primary transition-colors">Home</a>
+
+      <!-- Services Dropdown -->
+      <div class="relative group py-2">
+        <button class="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer">
+          Services
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-1 hidden group-hover:block w-56 rounded-xl glass-panel p-2 shadow-xl border border-slate-200/50 dark:border-slate-800/50 bg-white/95 dark:bg-slate-950/95 animate-fade-in-up">
+          {contentData.services.map((service) => (
+            <a href={`/services/${service.slug}`} class="block px-4 py-2 text-sm rounded-lg text-slate-700 dark:text-slate-200 hover:bg-primary hover:text-white transition-all">
+              {service.title}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Locations Dropdown -->
+      <div class="relative group py-2">
+        <button class="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer">
+          Locations
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-1 hidden group-hover:block w-56 rounded-xl glass-panel p-2 shadow-xl border border-slate-200/50 dark:border-slate-800/50 bg-white/95 dark:bg-slate-950/95 animate-fade-in-up">
+          {businessData.locations.map((loc) => (
+            <a href={`/locations/${loc.toLowerCase().replace(/ /g, '-')}`} class="block px-4 py-2 text-sm rounded-lg text-slate-700 dark:text-slate-200 hover:bg-primary hover:text-white transition-all">
+              {loc}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <a href="#reviews" class="hover:text-primary transition-colors">Reviews</a>
+      <a href="#faq" class="hover:text-primary transition-colors">FAQ</a>
+    </nav>
+
+    <!-- Desktop CTA & Mobile Toggle -->
+    <div class="flex items-center gap-4">
+      <a href={`tel:${businessData.phone}`} data-header-text class="hidden lg:flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-primary transition-colors duration-300">
+        <i class="fa-solid fa-phone text-primary text-xs"></i>
+        {businessData.phone}
+      </a>
+
+      <a
+        href="#quote-funnel"
+        data-header-cta
+        class="hidden md:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold transition-all hover:scale-102 rounded-custom"
+      >
+        {businessData.mainCta}
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" data-header-text class="md:hidden p-2 rounded-lg text-white/90 hover:bg-white/10" aria-label="Toggle Menu">
+        <svg id="menu-icon-open" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-icon-close" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobile-menu" class="hidden md:hidden w-full border-t border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-slate-950 px-6 py-4 space-y-4">
+    <nav class="flex flex-col gap-4 font-semibold text-sm text-slate-700 dark:text-slate-200">
+      <a href="/" class="hover:text-primary py-1">Home</a>
+
+      <!-- Mobile Services list -->
+      <div class="space-y-1">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Services</span>
+        {contentData.services.map((service) => (
+          <a href={`/services/${service.slug}`} class="block pl-4 py-1 text-slate-600 dark:text-slate-300 hover:text-primary">
+            {service.title}
+          </a>
+        ))}
+      </div>
+
+      <!-- Mobile Locations list -->
+      <div class="space-y-1">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Locations</span>
+        {businessData.locations.map((loc) => (
+          <a href={`/locations/${loc.toLowerCase().replace(/ /g, '-')}`} class="block pl-4 py-1 text-slate-600 dark:text-slate-300 hover:text-primary">
+            {loc}
+          </a>
+        ))}
+      </div>
+
+      <a href="#reviews" class="hover:text-primary py-1">Reviews</a>
+      <a href="#faq" class="hover:text-primary py-1">FAQ</a>
+
+      <div class="pt-4 border-t border-slate-100 dark:border-slate-900 flex flex-col gap-3">
+        <a href={`tel:${businessData.phone}`} class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-custom border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+          <i class="fa-solid fa-phone text-xs"></i> Call: {businessData.phone}
+        </a>
+        <a href="#quote-funnel" class="flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-primary rounded-custom shadow-md shadow-primary/10">
+          {businessData.mainCta}
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+  }
+
+  .site-header [data-header-text],
+  .site-header [data-header-text] a {
+    color: #fff;
+    transition: color 300ms ease;
+  }
+
+  .site-header [data-header-cta] {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+  .site-header [data-header-cta]:hover {
+    background: #fff;
+    color: var(--color-slate-900, #0f172a);
+  }
+
+  .site-header[data-scrolled="true"] {
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .site-header[data-scrolled="true"] [data-header-text],
+  .site-header[data-scrolled="true"] [data-header-text] a {
+    color: #f8fafc;
+  }
+
+  .site-header[data-scrolled="true"] [data-header-cta] {
+    background: transparent;
+    color: var(--color-primary, #16a34a);
+    border-color: var(--color-primary, #16a34a);
+  }
+  .site-header[data-scrolled="true"] [data-header-cta]:hover {
+    background: var(--color-primary, #16a34a);
+    color: #fff;
+  }
+</style>
+
+<script>
+  const header = document.getElementById('site-header');
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const openIcon = document.getElementById('menu-icon-open');
+  const closeIcon = document.getElementById('menu-icon-close');
+
+  if (btn && menu && openIcon && closeIcon) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      openIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+  }
+
+  if (header) {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        header.dataset.scrolled = window.scrollY > 40 ? 'true' : 'false';
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

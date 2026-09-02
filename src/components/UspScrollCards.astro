@@ -1,0 +1,200 @@
+---
+// UspScrollCards.astro
+// Recreates the godaylight.com "USP Split Scroll Grid".
+// On desktop, the viewport locks section cards in a sticky frame: as the user scrolls,
+// text sections lock on the left, while their corresponding high-quality photos slide/stack on the right.
+import contentData from '../data/content.json';
+
+interface UspItem {
+  surtitle: string;
+  title: string;
+  description: string;
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  itemsOverride?: UspItem[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  itemsOverride,
+} = Astro.props;
+
+const data = contentData.home?.whyChooseUs;
+
+const badge = badgeOverride || data?.badge || 'Why Daylight';
+const heading = headingOverride || data?.title || 'A new standard for home power';
+
+const defaultItems: UspItem[] = [
+  {
+    surtitle: 'Save',
+    title: 'Cut your electric bill by 20% or more',
+    description: 'Daylight provides lower monthly utility rates than standard providers, backed by efficient, automated power routing.',
+    src: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600&h=800&q=80',
+    alt: 'Clean solar panel arrays on a roof'
+  },
+  {
+    surtitle: 'Protect',
+    title: 'Keep the lights on with battery backup',
+    description: 'During grid failure or storm damage, your house automatically flips to stored power in a fraction of a second.',
+    src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&h=800&q=80',
+    alt: 'Sleek battery backups installed in a garage'
+  },
+  {
+    surtitle: 'Control',
+    title: 'Track it all in the Daylight app',
+    description: 'Monitor your solar generation, charge metrics, grid offsets, and backup capacity in real-time from anywhere.',
+    src: 'https://images.unsplash.com/photo-1555538995-7ccc762c4707?auto=format&fit=crop&w=600&h=800&q=80',
+    alt: 'Mobile application interface showing solar data analytics'
+  }
+];
+
+const items = itemsOverride || data?.items || defaultItems;
+---
+
+<section id="usp-scroll" class="relative py-20 lg:py-0 bg-[#FAF9F5] text-slate-900 overflow-visible border-b border-slate-200">
+  <div class="container mx-auto px-6 max-w-6.5xl">
+    
+    <!-- Mobile Stacking Layout -->
+    <div class="block lg:hidden space-y-12">
+      <div class="text-left space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-600">{badge}</span>
+        <h2 class="text-3xl font-serif font-medium tracking-tight text-[#2B231B]">{heading}</h2>
+      </div>
+
+      <div class="space-y-16">
+        {items.map((item) => (
+          <div class="space-y-6">
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-100">
+              <img src={item.src} alt={item.alt} class="w-full h-full object-cover" />
+            </div>
+            <div class="space-y-3">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">{item.surtitle}</span>
+              <h3 class="text-2xl font-bold tracking-tight text-slate-900 leading-tight">{item.title}</h3>
+              <p class="text-slate-500 text-sm leading-relaxed">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Desktop Sticky Scroll Choreographed Layout -->
+    <div class="hidden lg:grid grid-cols-12 gap-8 min-h-[300vh] relative overflow-visible" id="sticky-scroll-container">
+      
+      <!-- Left side: Sticky text content panel -->
+      <div class="col-span-6 h-screen sticky top-0 flex flex-col justify-center pr-12 select-none">
+        <div class="space-y-2 mb-8">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-600">{badge}</span>
+          <h2 class="text-4xl font-serif font-medium tracking-tight text-[#2B231B]">{heading}</h2>
+        </div>
+
+        <div class="relative h-[280px]">
+          {items.map((item, idx) => (
+            <div 
+              class:list={[
+                "absolute inset-0 flex flex-col justify-center space-y-4 transition-all duration-700 transform pointer-events-none",
+                idx === 0 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              ]}
+              data-text-index={idx}
+            >
+              <span class="text-xs font-mono uppercase tracking-widest text-amber-600 font-bold">{item.surtitle}</span>
+              <h3 class="text-3.5xl font-bold tracking-tight text-slate-900 leading-none">{item.title}</h3>
+              <p class="text-slate-600 text-base leading-relaxed max-w-md">{item.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Scroll progress indicator dot track -->
+        <div class="flex items-center gap-3 mt-10">
+          {items.map((_, idx) => (
+            <div 
+              class:list={[
+                "w-2.5 h-2.5 rounded-full transition-all duration-300",
+                idx === 0 ? "bg-amber-600 scale-120" : "bg-slate-300"
+              ]}
+              data-dot-index={idx}
+            ></div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right side: Scrolling image cards stack (snaps into place via coordinates) -->
+      <div class="col-span-6 flex flex-col justify-start py-[30vh] space-y-[40vh]" id="image-scroll-track">
+        {items.map((item, idx) => (
+          <div 
+            class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-slate-200/50 bg-slate-100 transform transition-all duration-700 opacity-90 scale-98"
+            data-image-index={idx}
+          >
+            <img src={item.src} alt={item.alt} class="w-full h-full object-cover" />
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Desktop scroll mapping logic
+  const container = document.getElementById('sticky-scroll-container');
+  const imageCards = document.querySelectorAll('[data-image-index]');
+  const textCards = document.querySelectorAll('[data-text-index]');
+  const dotIndicators = document.querySelectorAll('[data-dot-index]');
+
+  if (container && imageCards.length > 0) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-35% 0px -40% 0px', // Target mid-viewport scroll hits
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.getAttribute('data-image-index') || '0');
+          
+          // 1. Highlight active text description
+          textCards.forEach((text, i) => {
+            if (i === index) {
+              text.classList.remove('opacity-0', 'translate-y-8');
+              text.classList.add('opacity-100', 'translate-y-0');
+            } else {
+              text.classList.remove('opacity-100', 'translate-y-0');
+              text.classList.add('opacity-0', 'translate-y-8');
+            }
+          });
+
+          // 2. Scale and highlight active image
+          imageCards.forEach((img, i) => {
+            if (i === index) {
+              img.classList.remove('scale-98', 'opacity-90');
+              img.classList.add('scale-100', 'opacity-100', 'ring-2', 'ring-amber-500/20');
+            } else {
+              img.classList.remove('scale-100', 'opacity-100', 'ring-2', 'ring-amber-500/20');
+              img.classList.add('scale-98', 'opacity-90');
+            }
+          });
+
+          // 3. Highlight pagination dot
+          dotIndicators.forEach((dot, i) => {
+            if (i === index) {
+              dot.classList.remove('bg-slate-300');
+              dot.classList.add('bg-amber-600', 'scale-120');
+            } else {
+              dot.classList.remove('bg-amber-600', 'scale-120');
+              dot.classList.add('bg-slate-300');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    imageCards.forEach((card) => observer.observe(card));
+  }
+</script>

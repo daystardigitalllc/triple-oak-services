@@ -1,0 +1,264 @@
+---
+// ProductShowcaseChoreography.astro
+// Interactive product card layout for showcase/e-commerce.
+// Features active image swapping via thumbnail click, dynamic variant selections,
+// and a sliding cart success notification toast.
+import contentData from '../data/content.json';
+
+interface ProductImage {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  titleOverride?: string;
+  priceOverride?: string;
+  descriptionOverride?: string;
+  imagesOverride?: ProductImage[];
+  sizes?: string[];
+  colors?: { name: string; hex: string }[];
+}
+
+const {
+  badgeOverride,
+  titleOverride,
+  priceOverride,
+  descriptionOverride,
+  imagesOverride,
+  sizes = ['S', 'M', 'L', 'XL'],
+  colors = [
+    { name: 'Warm Orange', hex: '#f97316' },
+    { name: 'Deep Navy', hex: '#0f1e42' },
+    { name: 'Slate Grey', hex: '#64748b' }
+  ]
+} = Astro.props;
+
+const data = contentData.home?.productShowcase;
+
+const badge = badgeOverride || data?.badge || 'BEST SELLER';
+const title = titleOverride || data?.title || 'DOA Premium Pest Shield Spray';
+const price = priceOverride || data?.price || '24.99';
+const description = descriptionOverride || data?.description || 'Commercial-grade, organic pest repellent designed for immediate home protection. Safe for pets and children, highly effective against crawling insects.';
+
+const defaultImages: ProductImage[] = [
+  { src: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=600&q=80', alt: 'Product View 1' },
+  { src: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=600&q=80', alt: 'Product View 2' },
+  { src: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80', alt: 'Product View 3' }
+];
+
+const images = imagesOverride || data?.images || defaultImages;
+---
+
+<section id="product-showcase" class="py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white select-none border-b border-slate-200 dark:border-slate-800 relative">
+  <div class="container mx-auto px-6 max-w-5xl">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start" id="product-showcase-container">
+      
+      <!-- Left Column: Interactive Image Carousel Frame -->
+      <div class="md:col-span-6 space-y-4">
+        <!-- Main Image Stage -->
+        <div class="aspect-square rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 shadow-md relative">
+          <img 
+            id="active-product-img" 
+            src={images[0].src} 
+            alt={images[0].alt} 
+            class="w-full h-full object-cover transition-opacity duration-300"
+          />
+        </div>
+
+        <!-- Horizontal Thumbnail Triggers -->
+        <div class="flex gap-4">
+          {images.map((img, idx) => (
+            <button 
+              type="button" 
+              data-thumbnail-src={img.src} 
+              data-thumbnail-alt={img.alt} 
+              class:list={[
+                "w-20 h-20 rounded-xl overflow-hidden border-2 bg-slate-50 dark:bg-slate-900 shadow-sm transition-all focus:outline-none cursor-pointer",
+                idx === 0 ? "border-red-600 scale-98" : "border-transparent opacity-80 hover:opacity-100"
+              ]}
+            >
+              <img src={img.src} alt={img.alt} class="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right Column: Product specs, selections, and checkout triggers -->
+      <div class="md:col-span-6 space-y-6 text-left">
+        <div class="space-y-2">
+          {badge && (
+            <span class="text-[10px] font-black uppercase tracking-widest text-red-650 bg-red-100 dark:bg-red-950/40 px-2.5 py-1 rounded">
+              {badge}
+            </span>
+          )}
+          <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+            {title}
+          </h2>
+        </div>
+
+        <!-- Rating stars summary -->
+        <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
+          <span class="text-amber-500 text-sm">★★★★★</span>
+          <span>4.8 (142 reviews)</span>
+        </div>
+
+        <!-- Price -->
+        <div class="flex items-baseline gap-1 text-slate-950 dark:text-white">
+          <span class="text-xl font-bold text-slate-400 mr-0.5">$</span>
+          <span class="text-4xl font-black tracking-tight">{price}</span>
+        </div>
+
+        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed border-b border-slate-100 dark:border-slate-900 pb-6">
+          {description}
+        </p>
+
+        <!-- Dynamic Color Variant Selection -->
+        <div class="space-y-3">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-400">Select Bottle Accent</span>
+          <div class="flex gap-3">
+            {colors.map((color, idx) => (
+              <button 
+                type="button" 
+                data-color-picker 
+                title={color.name}
+                class:list={[
+                  "w-7 h-7 rounded-full border-2 focus:outline-none transition-all flex items-center justify-center cursor-pointer",
+                  idx === 0 ? "border-slate-900 dark:border-white scale-105" : "border-transparent"
+                ]}
+              >
+                <span class="w-5 h-5 rounded-full block shadow-inner" style={`background-color: ${color.hex}`}></span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Dynamic Size Selection -->
+        <div class="space-y-3">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-400">Select Volume (Oz)</span>
+          <div class="flex gap-2">
+            {sizes.map((sz, idx) => (
+              <button 
+                type="button" 
+                data-size-picker 
+                class:list={[
+                  "w-12 h-10 border-2 text-xs font-black tracking-wide rounded-lg flex items-center justify-center transition-all focus:outline-none cursor-pointer",
+                  idx === 1 ? "border-red-650 bg-red-50/10 text-red-650" : "border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400"
+                ]}
+              >
+                {sz}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Purchase triggers -->
+        <div class="pt-4">
+          <button 
+            type="button" 
+            id="add-to-cart-trigger"
+            class="w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-black uppercase tracking-widest transition-all rounded-xl shadow-lg border border-red-500/20 cursor-pointer"
+          >
+            Add to Cart
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart success sliding Toast flyout -->
+  <div 
+    id="cart-success-toast" 
+    class="fixed bottom-6 right-6 z-50 bg-[#0f1e42] border border-slate-700 p-5 rounded-2xl shadow-2xl flex items-center gap-4 text-white translate-y-24 opacity-0 transition-all duration-300 pointer-events-none"
+  >
+    <span class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-white text-sm select-none">✓</span>
+    <div class="text-left">
+      <h5 class="text-xs font-black uppercase tracking-wider text-white">Item Added</h5>
+      <p class="text-[10px] text-slate-400">DOA Pest Shield added to cart successfully.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupProductShowcase() {
+    const container = document.getElementById('product-showcase-container');
+    if (!container) return;
+
+    // Image Swap
+    const mainImg = container.querySelector('#active-product-img') as HTMLImageElement;
+    const thumbnails = container.querySelectorAll('[data-thumbnail-src]');
+
+    thumbnails.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const src = btn.getAttribute('data-thumbnail-src') || '';
+        const alt = btn.getAttribute('data-thumbnail-alt') || '';
+        
+        // Remove border classes from all thumbnails
+        thumbnails.forEach((b) => {
+          b.classList.remove('border-red-600', 'scale-98');
+          b.classList.add('border-transparent', 'opacity-80');
+        });
+
+        // Add border classes to active
+        btn.classList.remove('border-transparent', 'opacity-80');
+        btn.classList.add('border-red-600', 'scale-98');
+
+        // Swap main image
+        if (mainImg) {
+          mainImg.style.opacity = '0';
+          setTimeout(() => {
+            mainImg.src = src;
+            mainImg.alt = alt;
+            mainImg.style.opacity = '1';
+          }, 150);
+        }
+      });
+    });
+
+    // Color Pickers
+    const colors = container.querySelectorAll('[data-color-picker]');
+    colors.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        colors.forEach((b) => b.classList.remove('border-slate-900', 'dark:border-white', 'scale-105'));
+        btn.classList.add('border-slate-900', 'dark:border-white', 'scale-105');
+      });
+    });
+
+    // Size Pickers
+    const sizes = container.querySelectorAll('[data-size-picker]');
+    sizes.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        sizes.forEach((b) => {
+          b.classList.remove('border-red-650', 'bg-red-50/10', 'text-red-650');
+          b.classList.add('border-slate-200', 'dark:border-slate-800', 'text-slate-600', 'dark:text-slate-400');
+        });
+        btn.classList.remove('border-slate-200', 'dark:border-slate-800', 'text-slate-600', 'dark:text-slate-400');
+        btn.classList.add('border-red-650', 'bg-red-50/10', 'text-red-650');
+      });
+    });
+
+    // Toast Success popup
+    const addBtn = document.getElementById('add-to-cart-trigger');
+    const toast = document.getElementById('cart-success-toast');
+
+    if (addBtn && toast) {
+      addBtn.addEventListener('click', () => {
+        toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        // Hide after 3 seconds
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+        }, 3000);
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', setupProductShowcase);
+  setupProductShowcase();
+</script>

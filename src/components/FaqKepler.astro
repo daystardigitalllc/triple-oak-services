@@ -1,0 +1,139 @@
+---
+// FaqKepler.astro
+// Neo-brutalist FAQ accordions in the Kepler theme style.
+// Features solid borders, heavy shadows, and interactive expand/collapse states
+// where the plus (+) indicator rotates 45 degrees into an exit symbol.
+import contentData from '../data/content.json';
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  faqsOverride?: FaqItem[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  faqsOverride
+} = Astro.props;
+
+const data = contentData.home?.faqKepler;
+
+const badge = badgeOverride || data?.badge || 'FAQ';
+const heading = headingOverride || data?.title || 'Questions, answered';
+
+const defaultFaqs: FaqItem[] = [
+  {
+    question: 'Do I need to know Astro to use Kepler?',
+    answer: 'Not really. If you can edit HTML and Markdown, you can ship with Kepler. The docs walk you through everything, and most edits happen in plain content files.'
+  },
+  {
+    question: 'Can I use it for client projects?',
+    answer: 'Yes. The Pro and Team licenses cover unlimited commercial and client projects. Solo covers one personal site.'
+  },
+  {
+    question: 'What\'s included in updates?',
+    answer: 'New sections, bug fixes, Astro version bumps, and fresh presets. Pro and Team get these for life; Solo for one year.'
+  },
+  {
+    question: 'Is there a refund policy?',
+    answer: 'Absolutely — 14 days, no questions asked. If Kepler isn\'t the right fit, email us and we\'ll refund in full.'
+  }
+];
+
+const faqs = faqsOverride || data?.items || defaultFaqs;
+---
+
+<section id="faq-kepler" class="border-y-4 border-slate-950 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-slate-950 py-24 select-none">
+  <div class="container mx-auto px-6 max-w-[820px] space-y-12">
+    
+    <!-- Header -->
+    <div class="mx-auto text-center max-w-[620px] mb-8 space-y-3">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-[0.12em] text-white bg-slate-950 px-4 py-1.5 rounded-full shadow-sm">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-4xl sm:text-5.5xl font-black leading-tight tracking-tight text-slate-950">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Accordion Group -->
+    <div id="kepler-faq-list" class="flex flex-col gap-5">
+      {faqs.map((faq, idx) => (
+        <div class="overflow-hidden rounded-2xl border-2 border-slate-950 bg-white shadow-[5px_5px_0_#0f1e42]">
+          <button 
+            type="button" 
+            data-kepler-faq-toggle 
+            aria-expanded={idx === 0 ? "true" : "false"}
+            class="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-[22px] text-left font-bold text-slate-950 text-base sm:text-lg focus:outline-none select-none transition-colors"
+          >
+            <span>{faq.question}</span>
+            <span 
+              data-kepler-faq-icon 
+              class:list={[
+                "text-2xl font-bold text-orange-500 transition-transform duration-200 block shrink-0 select-none",
+                idx === 0 ? "rotate-45" : "rotate-0"
+              ]}
+            >
+              +
+            </span>
+          </button>
+          
+          <div 
+            data-kepler-faq-answer 
+            class:list={[
+              "px-6 pb-6 text-xs sm:text-sm leading-relaxed text-slate-650 transition-all duration-300",
+              idx === 0 ? "block" : "hidden"
+            ]}
+          >
+            {faq.answer}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function setupKeplerFaq() {
+    const list = document.getElementById('kepler-faq-list');
+    if (!list) return;
+
+    const toggles = list.querySelectorAll('[data-kepler-faq-toggle]');
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        
+        // Collapse all others
+        toggles.forEach((other) => {
+          other.setAttribute('aria-expanded', 'false');
+          const icon = other.querySelector('[data-kepler-faq-icon]');
+          if (icon) icon.classList.remove('rotate-45');
+          const answer = other.parentElement?.querySelector('[data-kepler-faq-answer]');
+          if (answer) answer.classList.add('hidden');
+        });
+
+        // Toggle clicked one
+        if (!expanded) {
+          toggle.setAttribute('aria-expanded', 'true');
+          const icon = toggle.querySelector('[data-kepler-faq-icon]');
+          if (icon) icon.classList.add('rotate-45');
+          const answer = toggle.parentElement?.querySelector('[data-kepler-faq-answer]');
+          if (answer) answer.classList.remove('hidden');
+        }
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupKeplerFaq);
+  setupKeplerFaq();
+</script>

@@ -1,0 +1,103 @@
+---
+import type { ImageMetadata } from "astro"
+
+import { cn } from "@/lib/utils"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Rating } from "@/components/ui/rating"
+import { Section, SectionContainer } from "@/components/ui/section"
+
+type Props = {
+  class?: string
+  title: string
+  description: string
+  buttons?: {
+    label: string
+    href: string
+    variant?: "default" | "outline" | "secondary" | "ghost"
+  }[]
+  socialProof?: {
+    avatars: {
+      image?: ImageMetadata
+      initials: string
+      name?: string
+    }[]
+    rating: number
+    text: string
+  }
+}
+
+const {
+  class: className,
+  title,
+  description,
+  buttons,
+  socialProof,
+} = Astro.props
+---
+
+<Section variant="floating" class={cn("bg-accent/50 shadow-none", className)}>
+  <SectionContainer
+    class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center"
+  >
+    <div class="flex flex-col gap-5">
+      <h2
+        class="text-foreground text-3xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-4xl"
+      >
+        {title}
+      </h2>
+      <p class="text-muted-foreground max-w-2xl text-lg leading-relaxed">
+        {description}
+      </p>
+    </div>
+    <div class="flex flex-col gap-6 lg:items-end">
+      {
+        buttons?.length && (
+          <div class="flex flex-wrap gap-3">
+            {buttons.map(({ href, label, ...button }, index) => (
+              <Button
+                as="a"
+                href={href}
+                size="lg"
+                variant={
+                  button.variant ?? (index === 0 ? "default" : "secondary")
+                }
+                {...button}
+              >
+                {label}
+              </Button>
+            ))}
+          </div>
+        )
+      }
+      {
+        socialProof && (
+          <div class="flex items-center gap-3">
+            <AvatarGroup>
+              {socialProof.avatars.map((avatar) => (
+                <Avatar class="ring-background size-11 ring">
+                  <AvatarImage
+                    src={avatar.image}
+                    alt={avatar.name ?? avatar.initials}
+                  />
+                  <AvatarFallback>{avatar.initials}</AvatarFallback>
+                </Avatar>
+              ))}
+            </AvatarGroup>
+            <div class="flex flex-col gap-0.5">
+              <Rating value={socialProof.rating} />
+              <span class="text-muted-foreground text-xs">
+                {socialProof.text}
+              </span>
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </SectionContainer>
+</Section>

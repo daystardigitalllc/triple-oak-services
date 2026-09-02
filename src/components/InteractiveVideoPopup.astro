@@ -1,0 +1,168 @@
+---
+// InteractiveVideoPopup.astro
+// Video thumbnail card that spawns a full-screen iframe video lightbox modal on click.
+// Features a pulsing CSS play button ripple and escape key capture to close.
+import contentData from '../data/content.json';
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  thumbnailSrc?: string;
+  videoEmbedUrl?: string; // YouTube or Vimeo embed url
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  thumbnailSrc = 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1200&q=80',
+  videoEmbedUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ' // Default video placeholder
+} = Astro.props;
+
+const data = contentData.home?.videoPopup;
+
+const badge = badgeOverride || data?.badge || 'WATCH NOW';
+const heading = headingOverride || data?.title || 'See Our Certified Squads in Action';
+---
+
+<section id="video-showcase" class="py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white select-none border-b border-slate-200 dark:border-slate-800 relative z-10">
+  <div class="container mx-auto px-6 max-w-4xl space-y-12 text-center">
+    
+    <!-- Header -->
+    <div class="space-y-2">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-red-650">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Video Stage Card with Pulsing Play Trigger -->
+    <div 
+      id="video-trigger-container"
+      class="aspect-video w-full rounded-2xl overflow-hidden relative shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 group cursor-pointer"
+    >
+      <!-- Media Cover Thumbnail -->
+      <img 
+        src={thumbnailSrc} 
+        alt="Video Cover Thumbnail" 
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-101"
+      />
+      
+      <!-- Overlay Backdrop Gradient -->
+      <div class="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/30 transition-colors"></div>
+
+      <!-- Play Button Icon with Pulsing Ripple Effect -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+        <div class="w-20 h-20 rounded-full bg-red-600 border border-red-500/30 flex items-center justify-center shadow-lg relative group-hover:scale-105 transition-transform">
+          <!-- Pulse rings -->
+          <span class="absolute inset-0 rounded-full bg-red-600/35 animate-ping-slow"></span>
+          <span class="absolute inset-0 rounded-full bg-red-600/20 animate-ping-fast"></span>
+
+          <!-- Inline play SVG shape -->
+          <svg class="w-8 h-8 text-white ml-1.5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal Lightbox (hidden by default) -->
+  <div 
+    id="video-lightbox-modal"
+    class="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300"
+  >
+    <!-- Modal Backdrop Closer -->
+    <div id="video-lightbox-overlay" class="absolute inset-0 cursor-pointer"></div>
+
+    <div class="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden bg-slate-900 shadow-2xl z-10 border border-slate-800">
+      
+      <!-- Close trigger button -->
+      <button 
+        type="button" 
+        id="video-lightbox-close"
+        class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition-all border-0 cursor-pointer text-xl z-20 focus:outline-none"
+        aria-label="Close video player"
+      >
+        &times;
+      </button>
+
+      <!-- Video iframe container -->
+      <iframe 
+        id="video-lightbox-iframe"
+        data-src={videoEmbedUrl}
+        src="" 
+        class="w-full h-full border-0" 
+        allow="autoplay; encrypted-media; picture-in-picture" 
+        allowfullscreen
+      ></iframe>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .animate-ping-slow {
+    animation: pingPulse 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  .animate-ping-fast {
+    animation: pingPulse 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes pingPulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  function setupVideoPopup() {
+    const trigger = document.getElementById('video-trigger-container');
+    const modal = document.getElementById('video-lightbox-modal');
+    const overlay = document.getElementById('video-lightbox-overlay');
+    const closeBtn = document.getElementById('video-lightbox-close');
+    const iframe = document.getElementById('video-lightbox-iframe') as HTMLIFrameElement;
+
+    if (!trigger || !modal || !iframe) return;
+
+    const embedUrl = iframe.getAttribute('data-src') || '';
+
+    function openModal() {
+      modal?.classList.remove('opacity-0', 'pointer-events-none');
+      modal?.classList.add('opacity-100');
+      // Append src to start autoplay
+      if (iframe) iframe.src = embedUrl.includes('?') ? `${embedUrl}&autoplay=1` : `${embedUrl}?autoplay=1`;
+      document.body.style.overflow = 'hidden'; // Lock scrolling
+    }
+
+    function closeModal() {
+      modal?.classList.remove('opacity-100');
+      modal?.classList.add('opacity-0', 'pointer-events-none');
+      // Clear src to stop video audio playing in background
+      if (iframe) iframe.src = '';
+      document.body.style.overflow = ''; // Unlock scrolling
+    }
+
+    trigger.addEventListener('click', openModal);
+    overlay?.addEventListener('click', closeModal);
+    closeBtn?.addEventListener('click', closeModal);
+
+    // Escape Key capture
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupVideoPopup);
+  setupVideoPopup();
+</script>

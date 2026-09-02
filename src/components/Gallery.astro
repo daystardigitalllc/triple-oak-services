@@ -1,0 +1,79 @@
+---
+import themeConfig from '../data/theme.config.json';
+import businessData from '../data/business.json';
+
+const portfolioItems = [
+  {
+    image: "/gallery-1.jpg",
+    title: "Precision Tree Removal",
+    location: businessData.locations[0] || "Nashville",
+    description: "Safely removed a massive decaying oak tree leaning directly over a residential roof structure."
+  },
+  {
+    image: "/gallery-2.jpg",
+    title: "Emergency Storm Cleanup",
+    location: businessData.locations[1] || "Murfreesboro",
+    description: "Cleared storm-damaged debris, downed limbs, and blocked driveways within 2 hours of emergency call."
+  },
+  {
+    image: "/gallery-3.jpg",
+    title: "Canopy Pruning & Thinning",
+    location: businessData.locations[2] || "Goodlettsville",
+    description: "Meticulous trimming to reduce wind resistance, eliminate dead weight, and restore lawn sunlight."
+  },
+  {
+    image: "/gallery-4.jpg",
+    title: "Full Stump Grinding",
+    location: businessData.locations[3] || "Madison",
+    description: "Deep grinding of primary root systems down to 8 inches below topsoil grade for new grass sowing."
+  }
+];
+---
+
+<section id="portfolio" class="py-24 bg-slate-950 text-white relative border-t border-slate-900/60">
+  {/* Top background glow blobs */}
+  <div class="absolute inset-0 pointer-events-none glow-blob-container" style={themeConfig.style === 'oak-city' ? "display: none;" : ""}>
+    <div class="absolute top-1/4 left-1/3 w-[300px] h-[300px] bg-primary/10 rounded-full blur-[80px]"></div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+      <div class="space-y-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-accent bg-accent/15 px-3.5 py-1.5 rounded-md border border-accent/25">
+          Proven Excellence
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight uppercase leading-[1.1] max-w-xl">
+          Jobs we have taken on
+        </h2>
+      </div>
+      <a href="#quote-funnel" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white/20 hover:bg-white/10 rounded-custom text-xs font-bold uppercase tracking-widest transition-all hover:scale-102 shrink-0">
+        Get an Estimate
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {portfolioItems.map((item) => (
+        <div class="group relative rounded-xl overflow-hidden border border-slate-800 bg-slate-900/25 flex flex-col justify-end min-h-[360px] transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
+          {/* Background Image */}
+          <div class="absolute inset-0 z-0">
+            <img src={item.image} alt={item.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-transparent z-10"></div>
+          </div>
+
+          {/* Overlay Content */}
+          <div class="p-6 relative z-20 space-y-3">
+            <span class="inline-block text-[9px] font-extrabold uppercase tracking-widest bg-primary/90 text-white px-2.5 py-1 rounded border border-white/15">
+              <i class="fa-solid fa-location-dot text-[8px] mr-1"></i> {item.location}
+            </span>
+            <h3 class="text-xl font-bold leading-tight group-hover:text-primary transition-colors uppercase">
+              {item.title}
+            </h3>
+            <p class="text-xs text-slate-300 font-normal leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

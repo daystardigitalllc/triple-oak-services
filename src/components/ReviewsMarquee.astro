@@ -1,0 +1,72 @@
+---
+// ReviewsMarquee.astro
+// Auto-scrolling, infinite horizontal ticker of review cards — a
+// structural alternative to Reviews.astro's grid/snap-slider layouts.
+// Built fresh in Astro + Tailwind, reusing the existing .animate-marquee
+// CSS keyframe already defined in global.css (no JS needed; pauses on
+// hover via pure CSS).
+import contentData from '../data/content.json';
+
+interface ReviewItem {
+  author: string;
+  location: string;
+  rating: number;
+  text: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  itemsOverride?: ReviewItem[];
+}
+
+const { badgeOverride, headingOverride, itemsOverride } = Astro.props;
+
+const badge = badgeOverride || 'What Clients Say';
+const heading = headingOverride || 'Real Reviews From Real Homeowners';
+const reviews: ReviewItem[] = itemsOverride || contentData.reviews || [];
+const track = [...reviews, ...reviews];
+---
+
+<style>
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+</style>
+
+<section id="reviews" class="py-24 bg-slate-50 dark:bg-slate-900/40 relative border-t border-slate-100 dark:border-slate-900/60 overflow-hidden">
+  <div class="container mx-auto px-6 mb-14">
+    <div class="max-w-3xl mx-auto text-center space-y-4">
+      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
+        {badge}
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+        {heading}
+      </h2>
+    </div>
+  </div>
+
+  <div class="relative">
+    <div class="marquee-track flex w-max gap-6 animate-marquee">
+      {track.map((review) => (
+        <div class="w-80 shrink-0 bg-white dark:bg-slate-900 rounded-custom border border-slate-200/60 dark:border-slate-800/60 shadow-sm p-6 space-y-4">
+          <div class="flex text-accent text-sm">
+            {Array.from({ length: review.rating }).map(() => (
+              <span>★</span>
+            ))}
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">"{review.text}"</p>
+          <div class="flex items-center gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <div class="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center font-extrabold text-xs shrink-0">
+              {review.author.charAt(0)}
+            </div>
+            <div>
+              <h4 class="font-bold text-xs text-slate-950 dark:text-white">{review.author}</h4>
+              <p class="text-[11px] text-slate-400">{review.location}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,76 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "@/lib/utils"
+
+type Props = HTMLAttributes<"div"> & {
+  label?: string
+  defaultValue?: string
+  defaultSearch?: string
+  shouldFilter?: boolean
+  loop?: boolean
+  disablePointerSelection?: boolean
+  vimBindings?: boolean
+}
+
+const {
+  class: className,
+  label,
+  defaultValue,
+  defaultSearch,
+  shouldFilter,
+  loop,
+  disablePointerSelection,
+  vimBindings,
+  ...props
+} = Astro.props
+---
+
+<div
+  data-slot="command"
+  data-label={label}
+  data-default-value={defaultValue}
+  data-default-search={defaultSearch}
+  data-should-filter={shouldFilter}
+  data-loop={loop}
+  data-disable-pointer-selection={disablePointerSelection}
+  data-vim-bindings={vimBindings}
+  class={cn(
+    "bg-popover text-popover-foreground flex size-full flex-col overflow-hidden rounded-xl! p-1",
+    className
+  )}
+  {...props}
+>
+  <slot />
+</div>
+
+<script>
+  import { create } from "@data-slot/command"
+
+  const initCommand = () => {
+    create()
+
+    document.querySelectorAll("[data-slot=command]").forEach((command) => {
+      if (!(command instanceof HTMLElement)) return
+      if (command.dataset.linkNavigation === "true") return
+
+      command.dataset.linkNavigation = "true"
+      command.addEventListener("command:select", (event) => {
+        const { detail } = event as CustomEvent<{ value?: unknown }>
+        const value = detail?.value
+        if (typeof value !== "string") return
+
+        const item = Array.from(
+          command.querySelectorAll("[data-slot=command-item][href]")
+        ).find((item) => item.getAttribute("data-value") === value)
+        const href = item?.getAttribute("href")
+
+        if (href) window.location.href = href
+      })
+    })
+  }
+
+  initCommand()
+
+  document.addEventListener("astro:page-load", initCommand)
+</script>

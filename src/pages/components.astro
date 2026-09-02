@@ -1,0 +1,1380 @@
+---
+// src/pages/components.astro
+// Component Catalog - A visual playground to see and test all stored UI components.
+import MainLayout from '../layouts/MainLayout.astro';
+
+// Import Navigation showcase components
+import Header from '../components/Header.astro';
+import NavbarPill from '../components/NavbarPill.astro';
+import NavbarSplitLogo from '../components/NavbarSplitLogo.astro';
+
+// Import target showcase components
+import Hero from '../components/Hero.astro';
+import HeroAnimatedEntry from '../components/HeroAnimatedEntry.astro';
+import HeroCozy from '../components/HeroCozy.astro';
+import HeroChalet from '../components/HeroChalet.astro';
+import HeroKepler from '../components/HeroKepler.astro';
+import HeroContractor from '../components/HeroContractor.astro';
+import HeroHealNet from '../components/HeroHealNet.astro';
+
+import Services from '../components/Services.astro';
+import ServicesBento from '../components/ServicesBento.astro';
+import ServicesChalet from '../components/ServicesChalet.astro';
+import PricingTable from '../components/PricingTable.astro';
+import PlansThreeTier from '../components/PlansThreeTier.astro';
+
+import CompareSlider from '../components/CompareSlider.astro';
+import CardsCarousel from '../components/CardsCarousel.astro';
+import InteractiveVideoPopup from '../components/InteractiveVideoPopup.astro';
+
+import ReviewsChalet from '../components/ReviewsChalet.astro';
+import ReviewsMarquee from '../components/ReviewsMarquee.astro';
+import FAQ from '../components/FAQ.astro';
+import FAQNumbered from '../components/FAQNumbered.astro';
+
+// Import Fulldev UI components for showcase
+import LogosOne from '../components/LogosOne.astro';
+import LogosTwo from '../components/LogosTwo.astro';
+import Hero1 from '../components/blocks/hero-1.astro';
+import Hero5 from '../components/blocks/hero-5.astro';
+import Pricing1 from '../components/blocks/pricing-1.astro';
+import Faqs1 from '../components/blocks/faqs-1.astro';
+import Header1 from '../components/blocks/header-1.astro';
+import Header5 from '../components/blocks/header-5.astro';
+import Footer1 from '../components/blocks/footer-1.astro';
+import Footer2 from '../components/blocks/footer-2.astro';
+
+// Setup Mock Data
+const mockFooterColumns = [
+  {
+    title: "Company",
+    links: [
+      { label: "About Us", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Contact", href: "#" }
+    ]
+  },
+  {
+    title: "Services",
+    links: [
+      { label: "Residential", href: "#" },
+      { label: "Commercial", href: "#" },
+      { label: "Custom Layouts", href: "#" }
+    ]
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "#" },
+      { label: "Terms of Service", href: "#" }
+    ]
+  }
+];
+
+const mockFooterLinks = [
+  { label: "Privacy Policy", href: "#" },
+  { label: "Terms of Service", href: "#" },
+  { label: "Cookies Settings", href: "#" }
+];
+
+const mockSocials = [
+  { label: "Twitter", href: "#", icon: "twitter" },
+  { label: "GitHub", href: "#", icon: "git-branch" }
+];
+
+const mockLogo = {
+  label: "Daystar",
+  href: "#"
+};
+
+const mockHeaderNav = [
+  { label: "Home", href: "#", active: true },
+  { label: "Services", href: "#" },
+  { label: "Pricing", href: "#" },
+  { label: "Contact", href: "#" }
+];
+
+const mockHeaderNavDetailed = [
+  { label: "Home", href: "#", active: true },
+  {
+    label: "Services",
+    href: "#",
+    description: "Our professional services listing.",
+    links: [
+      { label: "Pet Sitting", href: "#", description: "In-home sitting for pets." },
+      { label: "Dog Walking", href: "#", description: "Daily walks and play sessions." }
+    ]
+  },
+  { label: "Pricing", href: "#" }
+];
+
+const mockHeaderButtons = [
+  { label: "Book Now", href: "#", variant: "default" }
+];
+
+const mockBrands = [
+  { name: "Google", href: "#" },
+  { name: "Microsoft", href: "#" },
+  { name: "Apple", href: "#" },
+  { name: "Amazon", href: "#" },
+  { name: "Meta", href: "#" }
+];
+
+const mockImage = {
+  src: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
+  alt: "Mock Image representation"
+};
+
+const mockButtons = [
+  { label: "Primary Action", href: "#", variant: "default" },
+  { label: "Secondary Action", href: "#", variant: "outline" }
+];
+
+const mockFeatures = [
+  "Premium materials and custom builds",
+  "Lifetime service guarantee",
+  "24/7 dedicated local support"
+];
+
+const mockSocialProof = {
+  avatars: [
+    { initials: "JD", name: "John Doe" },
+    { initials: "AS", name: "Alice Smith" },
+    { initials: "MB", name: "Michael Brown" }
+  ],
+  rating: 5,
+  text: "Trusted by 10,000+ local customers"
+};
+
+const mockFaqs = [
+  { id: "faq-1", question: "What is your turnaround time?", answer: "Usually 24-48 hours for standard projects." },
+  { id: "faq-2", question: "Do you offer licensing support?", answer: "Yes, our team holds full licensing and active commercial liability coverage." }
+];
+
+const mockPlans = [
+  {
+    name: "Starter",
+    description: "Ideal for individuals and side-projects.",
+    price: 19,
+    currency: "USD",
+    unit: "/month",
+    features: ["Astro Integration", "Vite Configured", "Clean layouts"],
+    button: { label: "Get Started", href: "#" }
+  },
+  {
+    name: "Growth",
+    description: "Best for scaling agencies and businesses.",
+    price: 49,
+    currency: "USD",
+    unit: "/month",
+    featured: true,
+    features: ["All templates", "Priority updates", "Unlimited websites"],
+    button: { label: "Go Pro", href: "#" }
+  }
+];
+
+const mockServices = [
+  {
+    title: "Premium Care Service",
+    description: "Detailed description of a primary service offered to clients.",
+    src: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=600&q=80",
+    alt: "Service photo representation",
+    href: "#"
+  },
+  {
+    title: "Secondary Care Session",
+    description: "Detailed description of a secondary service offered to clients.",
+    src: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=600&q=80",
+    alt: "Service photo representation",
+    href: "#"
+  }
+];
+
+const mockCompareItems = [
+  {
+    before: { src: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=600&q=80", alt: "Before work" },
+    after: { src: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80", alt: "After work" },
+    label: "Living Space Makeover"
+  }
+];
+---
+
+<MainLayout title="Component Library Catalog" description="Visual preview catalog of all stored UI components.">
+  <div class="bg-slate-950 text-white min-h-screen font-sans">
+    
+    <!-- Top Nav Banner -->
+    <header class="border-b border-slate-900 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center font-extrabold text-xs">DS</div>
+        <div>
+          <h1 class="text-sm font-bold tracking-tight">Daystar Site Factory</h1>
+          <p class="text-[10px] text-slate-500">Component Catalog & Visual Playground</p>
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center gap-3 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800 text-xs text-slate-400">
+        <span>Dev Mode Status:</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="font-semibold text-emerald-400">Active</span>
+      </div>
+    </header>
+
+    <!-- Hero Introduction -->
+    <section class="py-16 text-center max-w-3xl mx-auto px-6 space-y-4">
+      <span class="text-[10px] font-extrabold uppercase tracking-widest bg-primary/20 text-accent px-3.5 py-1 rounded-full border border-primary/20">Design System Systematics</span>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Visual component *showcase*</h2>
+      <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-xl mx-auto">
+        Click the filters below to browse our library of layout blocks. Each section showcases live previews with direct usage keys so you can copy and reference them in your prompts.
+      </p>
+    </section>
+
+    <!-- CATEGORY FILTER MENU -->
+    <section class="max-w-5xl mx-auto px-6 mb-12">
+      <div class="flex flex-wrap gap-2 justify-center bg-slate-900/60 p-1.5 rounded-2xl border border-slate-900 backdrop-blur">
+        <button
+          data-filter="all"
+          class="px-4 py-2 text-xs font-bold rounded-xl bg-primary text-white transition-all shadow cursor-pointer"
+        >
+          All Blocks
+        </button>
+        <button
+          data-filter="navigation"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+        >
+          Navigation
+        </button>
+        <button
+          data-filter="heroes"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+        >
+          Heroes & Banners
+        </button>
+        <button
+          data-filter="services"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+        >
+          Services & Pricing
+        </button>
+        <button
+          data-filter="showcase"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+        >
+          Showcases & Galleries
+        </button>
+        <button
+          data-filter="social"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+        >
+          Reviews & FAQs
+        </button>
+        <button
+          data-filter="footers"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+        >
+          Footers
+        </button>
+      </div>
+    </section>
+
+    <!-- CONTENT SECTIONS CONTAINER -->
+    <main class="space-y-24 pb-32">
+
+      <!-- ================= NAVIGATION SECTION ================= -->
+      <section data-category="navigation" class="space-y-16">
+        <div class="px-8 py-5 bg-[#6B1A1A] border-y border-[#8B2A2A] shadow-lg shadow-black/40">
+          <h3 class="text-xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-200 shadow-[0_0_6px_rgba(255,200,200,0.6)]"></span>
+            00. Navigation Bars
+          </h3>
+          <p class="text-xs text-red-200/70 mt-1.5 font-medium">Frosted headers, floating pills, and editorial split configurations. Note: to prevent overlap in this playground, headers are shown within sandboxed bounds.</p>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 01: NavbarPill ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">01</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">NavbarPill</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: NavbarPill -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  NavbarPill.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Floating pill-shaped glass navigation. Best for modern minimal designs.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"NavbarPill"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-8 relative h-32 flex items-center justify-center overflow-hidden">
+            <div class="w-full max-w-xl scale-90 sm:scale-100">
+              <NavbarPill />
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 02: Header ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">02</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Header</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: Header -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  Header.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Standard full-width sticky header with dropdown support for Services and Locations.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Header"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-4 relative h-28 flex items-center justify-center overflow-hidden">
+            <div class="w-full max-w-3xl scale-90 sm:scale-100">
+              <Header />
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 03: NavbarSplitLogo ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">03</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">NavbarSplitLogo</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: NavbarSplitLogo -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  NavbarSplitLogo.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Editorial navigation with the business logo centered and links split left/right.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"NavbarSplitLogo"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-4 relative h-28 flex items-center justify-center overflow-hidden">
+            <div class="w-full max-w-3xl scale-90 sm:scale-100">
+              <NavbarSplitLogo />
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 04: Header1 (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">04</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Header1 (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: Header1 (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  Header1 (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Standard clean navigation bar with logo on the left, centered navigation, and action buttons on the right.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Header1"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-4 relative h-28 flex items-center justify-center overflow-hidden">
+            <div class="w-full max-w-4xl scale-90 sm:scale-100">
+              <Header1 logo={mockLogo} navigation={mockHeaderNav} buttons={mockHeaderButtons} />
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 05: Header5 (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">05</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Header5 (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: Header5 (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  Header5 (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Two-tier advanced navigation bar supporting sub-link dropdown menus and secondary top actions ribbon.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Header5"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-4 relative h-36 flex items-center justify-center overflow-hidden">
+            <div class="w-full max-w-4xl scale-90 sm:scale-100">
+              <Header5 logo={mockLogo} navigation={mockHeaderNavDetailed} buttons={mockHeaderButtons} />
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= HEROES SECTION ================= -->
+      <section data-category="heroes" class="space-y-16">
+        <div class="px-8 py-5 bg-[#6B1A1A] border-y border-[#8B2A2A] shadow-lg shadow-black/40">
+          <h3 class="text-xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-200 shadow-[0_0_6px_rgba(255,200,200,0.6)]"></span>
+            01. Heroes & Entrance Blocks
+          </h3>
+          <p class="text-xs text-red-200/70 mt-1.5 font-medium">Stunning primary banners used at the top of landing pages to capture initial leads.</p>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 06: HeroChalet ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">06</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">HeroChalet</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: HeroChalet -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  HeroChalet.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Cozy, rustic alpine style with a customized mountain-ridge bottom SVG clip edge.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"HeroChalet"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+            <HeroChalet 
+              eyebrowOverride="Specialized Alpine Living" 
+              headingOverride="A sanctuary in the *mountains*" 
+              subtitleOverride="Experience high-end design elements, premium wood structures, and custom architecture."
+            />
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 07: Hero1 (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">07</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Hero1 (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: Hero1 (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  Hero1 (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Centered minimalistic layout with a large typography heading and secondary action anchor.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Hero1"</code>
+              </div>
+            </div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+            <Hero1 
+              title="Modern design systems, simplified."
+              description="A library of content-driven Astro components styled dynamically using your custom Tailwind CSS configuration variables."
+              buttons={mockButtons}
+              image={mockImage}
+            />
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 08: Hero5 (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">08</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Hero5 (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: Hero5 (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  Hero5 (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Two-column split hero showing text content side-by-side with secondary actions list.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Hero5"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+            <Hero5 
+              title="Built for the modern web."
+              description="Deploy high-performance, responsive pages backed by standard components and custom preset styling tokens."
+              features={mockFeatures}
+              buttons={mockButtons}
+              socialProof={mockSocialProof}
+              image={mockImage}
+            />
+          </div>
+        </div>
+
+
+
+
+        <!-- ╌╌╌ SEPARATOR 09: HeroAnimatedEntry ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">09</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">HeroAnimatedEntry</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+        <!-- Block item: HeroAnimatedEntry -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  HeroAnimatedEntry.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Centered clean layout with staggered word entrance animation on load.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"HeroAnimatedEntry"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-8">
+            <HeroAnimatedEntry 
+              badgeOverride="NEW ENTRANCE ANIMATION"
+              headingOverride="Clean words staggered *animation*"
+              subtitleOverride="Minimal, fast-loading, and interactive entrance animations built with pure stylesheets."
+            />
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 10: HeroCozy ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">10</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">HeroCozy</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: HeroCozy -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  HeroCozy.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Warm product layout with elevated mockups and clean details.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"HeroCozy"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+            <HeroCozy 
+              badgeOverride="PRODUCT SHOWCASE"
+              headingOverride="Elegant hardware design for *studios*"
+              subtitleOverride="Curated templates featuring elevated card surfaces, clean headers, and soft glow parameters."
+            />
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 11: HeroKepler ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">11</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">HeroKepler</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: HeroKepler -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  HeroKepler.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Saturn orbit space theme, orbiters system, retro sci-fi typography.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"HeroKepler"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+            <HeroKepler 
+              badgeOverride="KEPLER ORBITS"
+              headingOverride="Revolving planet *orbits*"
+              subtitleOverride="Staggered retro-sci-fi blocks with active floating geometric components."
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SERVICES SECTION ================= -->
+      <section data-category="services" class="space-y-16">
+        <div class="px-8 py-5 bg-[#6B1A1A] border-y border-[#8B2A2A] shadow-lg shadow-black/40">
+          <h3 class="text-xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-200 shadow-[0_0_6px_rgba(255,200,200,0.6)]"></span>
+            02. Services & Pricing Modules
+          </h3>
+          <p class="text-xs text-red-200/70 mt-1.5 font-medium">Grids, bento tiles, and tables showing services, rates, and features comparison.</p>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 12: LogosOne (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">12</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">LogosOne (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: LogosOne (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  LogosOne (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Responsive grid of grayscale partner logos highlighting local authority and client trust.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"LogosOne"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-6">
+            <LogosOne 
+              title="Trusted by industry leaders worldwide" 
+              brands={mockBrands}
+            />
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 13: LogosTwo (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">13</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">LogosTwo (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: LogosTwo (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  LogosTwo (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Infinite auto-scrolling partner logo marquee supporting hover pause triggers.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"LogosTwo"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-6">
+            <LogosTwo 
+              title="Authorized Partnerships" 
+              brands={mockBrands}
+            />
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 14: Pricing1 (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">14</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Pricing1 (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: Pricing1 (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  Pricing1 (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Three-tiered pricing tables displaying service rates and benefits checkmarks.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Pricing1"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-6">
+            <Pricing1 
+              title="Simple pricing plans" 
+              description="Choose the tier that fits your business goals and service scopes."
+              plans={mockPlans}
+            />
+          </div>
+        </div>
+
+
+
+        <!-- ╌╌╌ SEPARATOR 15: ServicesBento ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">15</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">ServicesBento</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+        <!-- Block item: ServicesBento -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  ServicesBento.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Asymmetric bento block with full-bleed image overlays and hover reveals.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"ServicesBento"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+            <ServicesBento 
+              badgeOverride="BENTO MATRIX"
+              headingOverride="What we *specialize* in"
+              itemsOverride={mockServices}
+            />
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 16: ServicesChalet ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">16</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">ServicesChalet</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: ServicesChalet -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  ServicesChalet.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Warm alpine-inspired service row cards with large numeric counts backdrop.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"ServicesChalet"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+            <ServicesChalet 
+              badgeOverride="COZY SOLUTIONS"
+              headingOverride="Our core *offerings*"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PORTFOLIOS & SHOWCASES ================= -->
+      <section data-category="showcase" class="space-y-16">
+        <div class="px-8 py-5 bg-[#6B1A1A] border-y border-[#8B2A2A] shadow-lg shadow-black/40">
+          <h3 class="text-xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-200 shadow-[0_0_6px_rgba(255,200,200,0.6)]"></span>
+            03. Portfolios & Showcase Blocks
+          </h3>
+          <p class="text-xs text-red-200/70 mt-1.5 font-medium">Interactive media items, swipe comparisons, and modal sliders.</p>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 17: CompareSlider ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">17</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">CompareSlider</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: CompareSlider -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  CompareSlider.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Before & After slider to swipe over changes in home/automotive care.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"CompareSlider"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-white text-slate-950 py-12">
+            <div class="max-w-4xl mx-auto px-6">
+              <CompareSlider 
+                badgeOverride="SWEEP TRANSFORMATION"
+                headingOverride="See changes *live*"
+                itemsOverride={mockCompareItems}
+              />
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 18: InteractiveVideoPopup ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">18</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">InteractiveVideoPopup</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: InteractiveVideoPopup -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  InteractiveVideoPopup.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Video thumbnail banner that triggers an overlay lightbox iframe modal.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"InteractiveVideoPopup"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-12">
+            <div class="max-w-4xl mx-auto px-6">
+              <InteractiveVideoPopup 
+                badgeOverride="VIDEO TOUR"
+                headingOverride="Watch our process *unfold*"
+                thumbnailSrc="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80"
+                videoEmbedUrl="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= REVIEWS & FAQS ================= -->
+      <section data-category="social" class="space-y-16">
+        <div class="px-8 py-5 bg-[#6B1A1A] border-y border-[#8B2A2A] shadow-lg shadow-black/40">
+          <h3 class="text-xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-200 shadow-[0_0_6px_rgba(255,200,200,0.6)]"></span>
+            04. Reviews, Social Proof & FAQs
+          </h3>
+          <p class="text-xs text-red-200/70 mt-1.5 font-medium">Review ribbons, quote bubbles, and multi-column FAQs lists.</p>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 19: Faqs1 (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">19</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Faqs1 (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: Faqs1 (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  Faqs1 (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Interactive FAQ accordion list using client-side data-slot details toggle controls.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Faqs1"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-6">
+            <Faqs1 
+              title="Frequently Asked Questions" 
+              description="Everything you need to know about our services and scheduling procedures."
+              faqs={mockFaqs}
+            />
+          </div>
+        </div>
+
+
+
+        <!-- ╌╌╌ SEPARATOR 20: ReviewsMarquee ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">20</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">ReviewsMarquee</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+        <!-- Block item: ReviewsMarquee -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  ReviewsMarquee.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Horizontal infinite-scrolling marquee containing ratings and testimonials.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"ReviewsMarquee"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-slate-950/20 py-6">
+            <ReviewsMarquee />
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 21: ReviewsChalet ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">21</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">ReviewsChalet</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: ReviewsChalet -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  ReviewsChalet.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Testimonials grid cards featuring bold stars, initials badges, and clean quotes.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"ReviewsChalet"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+            <ReviewsChalet 
+              badgeOverride="RECOMMENDATIONS"
+              headingOverride="What clients *say about us*"
+            />
+          </div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 22: FAQNumbered ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">22</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">FAQNumbered</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                        <!-- Block item: FAQNumbered -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  FAQNumbered.astro
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Double-column numbered accordions with sticky lead capture details.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"FAQNumbered"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+            <FAQNumbered />
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FOOTERS SECTION ================= -->
+      <section data-category="footers" class="space-y-16">
+        <div class="px-8 py-5 bg-[#6B1A1A] border-y border-[#8B2A2A] shadow-lg shadow-black/40">
+          <h3 class="text-xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-200 shadow-[0_0_6px_rgba(255,200,200,0.6)]"></span>
+            05. Page Footers
+          </h3>
+          <p class="text-xs text-red-200/70 mt-1.5 font-medium">Multi-column layouts and simplified centered legal footnotes.</p>
+        </div>
+
+          <div class="mx-4 flex items-center gap-2.5 bg-slate-900 border border-slate-700 px-4 py-2 rounded-full shadow-lg shadow-slate-950/50">
+            <span class="text-[9px] font-mono text-slate-600 select-none">#01</span>
+            <span class="w-px h-3 bg-slate-700"></span>
+            <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Footer1 (Fulldev)</span>
+            <span class="w-px h-3 bg-slate-700"></span>
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 animate-pulse"></span>
+          </div>
+          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 23: Footer1 (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">23</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Footer1 (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                <!-- Block item: Footer1 (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  Footer1 (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Robust multi-column footer displaying descriptive taglines, socials, and directory links.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Footer1"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+            <Footer1 
+              brandName="Daystar Site Factory" 
+              brandHref="#" 
+              description="Custom luxury websites generated automatically from structured templates." 
+              socials={mockSocials} 
+              columns={mockFooterColumns} 
+              copyright="© 2026 Daystar Digital LLC. All rights reserved." 
+            />
+          </div>
+        </div>
+
+          <div class="mx-4 flex items-center gap-2.5 bg-slate-900 border border-slate-700 px-4 py-2 rounded-full shadow-lg shadow-slate-950/50">
+            <span class="text-[9px] font-mono text-slate-600 select-none">#02</span>
+            <span class="w-px h-3 bg-slate-700"></span>
+            <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Footer2 (Fulldev)</span>
+            <span class="w-px h-3 bg-slate-700"></span>
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 animate-pulse"></span>
+          </div>
+          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+        </div>
+
+
+        <!-- ╌╌╌ SEPARATOR 24: Footer2 (Fulldev) ╌╌╌ -->
+        <div class="relative my-6 flex items-center px-6" aria-hidden="true">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-slate-500">24</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Footer2 (Fulldev)</span>
+            <span class="h-3 w-px bg-slate-700/70"></span>
+            <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+          </div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+        </div>
+
+                <!-- Block item: Footer2 (Fulldev) -->
+        <div class="space-y-4">
+          <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  Footer2 (Fulldev UI)
+                  <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
+                </h4>
+                <p class="text-xs text-slate-400">Minimalistic centered brand footer with horizontal page anchors and copyright footnote.</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
+                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Footer2"</code>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
+          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+            <Footer2 
+              brandName="Daystar Site Factory" 
+              brandHref="#" 
+              description="Deploying high-quality contractor and medical SEO marketing systems globally." 
+              links={mockFooterLinks} 
+              socials={mockSocials} 
+              copyright="© 2026 Daystar Digital LLC. All rights reserved." 
+            />
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+</MainLayout>
+
+<!-- JAVASCRIPT FILTERING ROUTINES -->
+<script>
+  const filterButtons = document.querySelectorAll('[data-filter]');
+  const categorySections = document.querySelectorAll('[data-category]');
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const selectedFilter = btn.getAttribute('data-filter') || 'all';
+
+      // 1. Update button styling classes
+      filterButtons.forEach((b) => {
+        b.classList.remove('bg-primary', 'text-white', 'shadow');
+        b.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+      });
+      btn.classList.add('bg-primary', 'text-white', 'shadow');
+      btn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+
+      // 2. Filter rendering sections
+      categorySections.forEach((section) => {
+        const category = section.getAttribute('data-category');
+        if (selectedFilter === 'all' || category === selectedFilter) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

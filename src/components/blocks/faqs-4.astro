@@ -1,0 +1,46 @@
+---
+import { cn } from "@/lib/utils"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { Section, SectionContainer } from "@/components/ui/section"
+
+type Props = {
+  class?: string
+  title: string
+  faqs: {
+    id: string
+    question: string
+    answer: string
+  }[]
+}
+
+const { class: className, title, faqs } = Astro.props
+---
+
+<Section class={cn("", className)}>
+  <SectionContainer class="items-center">
+    <div class="mx-auto w-full max-w-3xl">
+      <h2
+        class="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
+      >
+        {title}
+      </h2>
+      <div class="mt-10">
+        <Accordion collapsible>
+          {
+            faqs.map((item) => (
+              <AccordionItem value={item.id}>
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
+              </AccordionItem>
+            ))
+          }
+        </Accordion>
+      </div>
+    </div>
+  </SectionContainer>
+</Section>

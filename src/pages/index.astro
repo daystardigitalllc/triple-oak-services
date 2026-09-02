@@ -1,0 +1,292 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import contentData from '../data/content.json';
+
+// Import all layout components
+import Hero from '../components/Hero.astro';
+import HeroAnimatedEntry from '../components/HeroAnimatedEntry.astro';
+import Marquee from '../components/Marquee.astro';
+import TrustBar from '../components/TrustBar.astro';
+import Services from '../components/Services.astro';
+import Reviews from '../components/Reviews.astro';
+import Gallery from '../components/Gallery.astro';
+import GalleryScrollChoreography from '../components/GalleryScrollChoreography.astro';
+import CompareSlider from '../components/CompareSlider.astro';
+import FeatureOverlayCards from '../components/FeatureOverlayCards.astro';
+import CardsCarousel from '../components/CardsCarousel.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import QuoteFunnel from '../components/QuoteFunnel.astro';
+import HeroCozy from '../components/HeroCozy.astro';
+import StoryGrid from '../components/StoryGrid.astro';
+import FeatureBento from '../components/FeatureBento.astro';
+import TeamSpotlight from '../components/TeamSpotlight.astro';
+import CtaAccentCard from '../components/CtaAccentCard.astro';
+import ScrollGradientHero from '../components/ScrollGradientHero.astro';
+import UspScrollCards from '../components/UspScrollCards.astro';
+import StepScroller from '../components/StepScroller.astro';
+import Reveal from '../components/Reveal.astro';
+import PricingTable from '../components/PricingTable.astro';
+import AddToCalendarButton from '../components/AddToCalendarButton.astro';
+import HeroChip from '../components/HeroChip.astro';
+import PromoBanner from '../components/PromoBanner.astro';
+import HeroRecruit from '../components/HeroRecruit.astro';
+import MissionRecruit from '../components/MissionRecruit.astro';
+import ServicesRecruit from '../components/ServicesRecruit.astro';
+import JobGrid from '../components/JobGrid.astro';
+import FormRecruit from '../components/FormRecruit.astro';
+import FileTree from '../components/FileTree.astro';
+import AsideExquisitus from '../components/AsideExquisitus.astro';
+import TabsExquisitus from '../components/TabsExquisitus.astro';
+import StepsExquisitus from '../components/StepsExquisitus.astro';
+import BadgeExquisitus from '../components/BadgeExquisitus.astro';
+import HeroKepler from '../components/HeroKepler.astro';
+import FeaturesKepler from '../components/FeaturesKepler.astro';
+import PricingKepler from '../components/PricingKepler.astro';
+import ReviewsKepler from '../components/ReviewsKepler.astro';
+import FaqKepler from '../components/FaqKepler.astro';
+import HeroChalet from '../components/HeroChalet.astro';
+import ServicesChalet from '../components/ServicesChalet.astro';
+import StoryChalet from '../components/StoryChalet.astro';
+import ReviewsChalet from '../components/ReviewsChalet.astro';
+import InfoChalet from '../components/InfoChalet.astro';
+import HeroContractor from '../components/HeroContractor.astro';
+import PestRibbon from '../components/PestRibbon.astro';
+import FeatureCardsDoa from '../components/FeatureCardsDoa.astro';
+import PlansThreeTier from '../components/PlansThreeTier.astro';
+import FaqAccordionDoa from '../components/FaqAccordionDoa.astro';
+import HeroHealNet from '../components/HeroHealNet.astro';
+import AppointmentFormHealNet from '../components/AppointmentFormHealNet.astro';
+import ServicesHealNet from '../components/ServicesHealNet.astro';
+import ProcessHealNet from '../components/ProcessHealNet.astro';
+import TestimonialsHealNet from '../components/TestimonialsHealNet.astro';
+import ProductShowcaseChoreography from '../components/ProductShowcaseChoreography.astro';
+import PricingMatrix from '../components/PricingMatrix.astro';
+import InteractiveVideoPopup from '../components/InteractiveVideoPopup.astro';
+import MasonryMediaFilter from '../components/MasonryMediaFilter.astro';
+import NavbarBarracks from '../components/NavbarBarracks.astro';
+import HeroBarracks from '../components/HeroBarracks.astro';
+import LogosOne from '../components/LogosOne.astro';
+import LogosTwo from '../components/LogosTwo.astro';
+import StatCounters from '../components/StatCounters.astro';
+import VideoTestimonialWall from '../components/VideoTestimonialWall.astro';
+// --- AUTO-GENERATED BLOCK IMPORTS START ---
+import Article1 from '../components/blocks/article-1.astro';
+import Article2 from '../components/blocks/article-2.astro';
+import Articles1 from '../components/blocks/articles-1.astro';
+import Articles2 from '../components/blocks/articles-2.astro';
+import Articles3 from '../components/blocks/articles-3.astro';
+import Articles4 from '../components/blocks/articles-4.astro';
+import Banner1 from '../components/blocks/banner-1.astro';
+import Banner2 from '../components/blocks/banner-2.astro';
+import Contact1 from '../components/blocks/contact-1.astro';
+import Contact2 from '../components/blocks/contact-2.astro';
+import Contact3 from '../components/blocks/contact-3.astro';
+import Content1 from '../components/blocks/content-1.astro';
+import Content2 from '../components/blocks/content-2.astro';
+import Content3 from '../components/blocks/content-3.astro';
+import Content4 from '../components/blocks/content-4.astro';
+import Content5 from '../components/blocks/content-5.astro';
+import Content6 from '../components/blocks/content-6.astro';
+import Cta1 from '../components/blocks/cta-1.astro';
+import Cta2 from '../components/blocks/cta-2.astro';
+import Cta3 from '../components/blocks/cta-3.astro';
+import Cta4 from '../components/blocks/cta-4.astro';
+import Cta5 from '../components/blocks/cta-5.astro';
+import Cta6 from '../components/blocks/cta-6.astro';
+import Cta7 from '../components/blocks/cta-7.astro';
+import Cta8 from '../components/blocks/cta-8.astro';
+import Doc1 from '../components/blocks/doc-1.astro';
+import Faqs1 from '../components/blocks/faqs-1.astro';
+import Faqs2 from '../components/blocks/faqs-2.astro';
+import Faqs3 from '../components/blocks/faqs-3.astro';
+import Faqs4 from '../components/blocks/faqs-4.astro';
+import Features1 from '../components/blocks/features-1.astro';
+import Features2 from '../components/blocks/features-2.astro';
+import Features3 from '../components/blocks/features-3.astro';
+import Features4 from '../components/blocks/features-4.astro';
+import Features5 from '../components/blocks/features-5.astro';
+import Features6 from '../components/blocks/features-6.astro';
+import Footer1 from '../components/blocks/footer-1.astro';
+import Footer2 from '../components/blocks/footer-2.astro';
+import Footer3 from '../components/blocks/footer-3.astro';
+import Header1 from '../components/blocks/header-1.astro';
+import Header2 from '../components/blocks/header-2.astro';
+import Header3 from '../components/blocks/header-3.astro';
+import Header4 from '../components/blocks/header-4.astro';
+import Header5 from '../components/blocks/header-5.astro';
+import Hero1 from '../components/blocks/hero-1.astro';
+import Hero10 from '../components/blocks/hero-10.astro';
+import Hero2 from '../components/blocks/hero-2.astro';
+import Hero3 from '../components/blocks/hero-3.astro';
+import Hero4 from '../components/blocks/hero-4.astro';
+import Hero5 from '../components/blocks/hero-5.astro';
+import Hero6 from '../components/blocks/hero-6.astro';
+import Hero7 from '../components/blocks/hero-7.astro';
+import Hero8 from '../components/blocks/hero-8.astro';
+import Hero9 from '../components/blocks/hero-9.astro';
+import Logos1 from '../components/blocks/logos-1.astro';
+import Logos2 from '../components/blocks/logos-2.astro';
+import Logos3 from '../components/blocks/logos-3.astro';
+import Pricing1 from '../components/blocks/pricing-1.astro';
+import Pricing2 from '../components/blocks/pricing-2.astro';
+import Pricing3 from '../components/blocks/pricing-3.astro';
+// --- AUTO-GENERATED BLOCK IMPORTS END ---
+
+// Map component names to actual Astro exports
+const ComponentMap: Record<string, any> = {
+  Hero,
+  HeroAnimatedEntry,
+  HeroCozy,
+  ScrollGradientHero,
+  Marquee,
+  TrustBar,
+  Services,
+  Reviews,
+  Gallery,
+  GalleryScrollChoreography,
+  CompareSlider,
+  FeatureOverlayCards,
+  CardsCarousel,
+  FAQ,
+  CTA,
+  QuoteFunnel,
+  StoryGrid,
+  FeatureBento,
+  TeamSpotlight,
+  CtaAccentCard,
+  UspScrollCards,
+  StepScroller,
+  Reveal,
+  PricingTable,
+  AddToCalendarButton,
+  HeroChip,
+  PromoBanner,
+  HeroRecruit,
+  MissionRecruit,
+  ServicesRecruit,
+  JobGrid,
+  FormRecruit,
+  FileTree,
+  AsideExquisitus,
+  TabsExquisitus,
+  StepsExquisitus,
+  BadgeExquisitus,
+  HeroKepler,
+  FeaturesKepler,
+  PricingKepler,
+  ReviewsKepler,
+  FaqKepler,
+  HeroChalet,
+  ServicesChalet,
+  StoryChalet,
+  ReviewsChalet,
+  InfoChalet,
+  HeroContractor,
+  PestRibbon,
+  FeatureCardsDoa,
+  PlansThreeTier,
+  FaqAccordionDoa,
+  HeroHealNet,
+  AppointmentFormHealNet,
+  ServicesHealNet,
+  ProcessHealNet,
+  TestimonialsHealNet,
+  ProductShowcaseChoreography,
+  PricingMatrix,
+  InteractiveVideoPopup,
+  MasonryMediaFilter,
+  NavbarBarracks,
+  HeroBarracks,
+  // --- AUTO-GENERATED BLOCK REGISTRY START ---
+  Article1,
+  Article2,
+  Articles1,
+  Articles2,
+  Articles3,
+  Articles4,
+  Banner1,
+  Banner2,
+  Contact1,
+  Contact2,
+  Contact3,
+  Content1,
+  Content2,
+  Content3,
+  Content4,
+  Content5,
+  Content6,
+  Cta1,
+  Cta2,
+  Cta3,
+  Cta4,
+  Cta5,
+  Cta6,
+  Cta7,
+  Cta8,
+  Doc1,
+  Faqs1,
+  Faqs2,
+  Faqs3,
+  Faqs4,
+  Features1,
+  Features2,
+  Features3,
+  Features4,
+  Features5,
+  Features6,
+  Footer1,
+  Footer2,
+  Footer3,
+  Header1,
+  Header2,
+  Header3,
+  Header4,
+  Header5,
+  Hero1,
+  Hero10,
+  Hero2,
+  Hero3,
+  Hero4,
+  Hero5,
+  Hero6,
+  Hero7,
+  Hero8,
+  Hero9,
+  Logos1,
+  Logos2,
+  Logos3,
+  Pricing1,
+  Pricing2,
+  Pricing3,
+  // --- AUTO-GENERATED BLOCK REGISTRY END ---
+  LogosOne,
+  LogosTwo,
+  StatCounters,
+  VideoTestimonialWall
+};
+
+// Retrieve array of section names from contentData
+const layout: string[] = contentData.layout || [
+  'Hero',
+  'Marquee',
+  'TrustBar',
+  'Services',
+  'CTA',
+  'Reviews',
+  'Gallery',
+  'FAQ',
+  'QuoteFunnel'
+];
+---
+
+<MainLayout>
+  {layout.map((componentName) => {
+    const Component = ComponentMap[componentName];
+    if (!Component) {
+      console.warn(`Component "${componentName}" was listed in layout but not found in ComponentMap.`);
+      return null;
+    }
+    return <Component />;
+  })}
+</MainLayout>

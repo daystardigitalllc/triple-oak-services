@@ -1,0 +1,95 @@
+---
+// TeamSpotlight.astro
+// Showcase section highlighting the company team, philosophy, or story.
+// Features a large landscape portrait, custom editorial copywriting, and a clean action button.
+import businessData from '../data/business.json';
+import contentData from '../data/content.json';
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  descriptionOverride1?: string;
+  descriptionOverride2?: string;
+  imageSrcOverride?: string;
+  imageAltOverride?: string;
+  ctaTextOverride?: string;
+  ctaHrefOverride?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  descriptionOverride1,
+  descriptionOverride2,
+  imageSrcOverride,
+  imageAltOverride,
+  ctaTextOverride,
+  ctaHrefOverride,
+} = Astro.props;
+
+const data = contentData.home?.about;
+
+const badge = badgeOverride || 'Our Philosophy';
+const heading = headingOverride || data?.title || 'Who we are';
+const desc1 = descriptionOverride1 || data?.text || `We're a dedicated team of engineers, developers, and designers on a mission to build lasting digital solutions. We combine modern technology with clean typography and dynamic performance.`;
+const desc2 = descriptionOverride2 || `Every website we generate undergoes strict speed checks and SEO audits. We pride ourselves on transparent, upfront support and lifetime reliability. Let's create something together.`;
+
+const imageSrc = imageSrcOverride || '/images/team-spotlight.jpg';
+const imageAlt = imageAltOverride || 'The team working together on design blueprints';
+const ctaText = ctaTextOverride || 'Meet the Team';
+const ctaHref = ctaHrefOverride || '#about';
+---
+
+<section id="team-spotlight" class="py-24 bg-white text-slate-800 border-b border-orange-100/30">
+  <div class="container mx-auto px-6 max-w-4xl flex flex-col items-center">
+    
+    <!-- Header -->
+    <div class="text-center max-w-xl mx-auto mb-10 space-y-4">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-orange-600 px-3.5 py-1.5 bg-orange-50 rounded-full border border-orange-100/50">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-serif font-medium tracking-tight text-[#2B231B] leading-tight">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Landscape Image Block -->
+    <div class="w-full rounded-3xl overflow-hidden bg-slate-100 border border-orange-100/20 shadow-xl mb-12 aspect-[16/8.5]">
+      <img 
+        src={imageSrc} 
+        alt={imageAlt} 
+        class="w-full h-full object-cover hover:scale-101 transition-transform duration-700"
+        onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&h=600&q=80'"
+      />
+    </div>
+
+    <!-- Content Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start w-full">
+      <!-- Paragraph 1 -->
+      <div class="md:col-span-6">
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+          {desc1}
+        </p>
+      </div>
+
+      <!-- Paragraph 2 + Action -->
+      <div class="md:col-span-6 space-y-6">
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+          {desc2}
+        </p>
+        
+        <div class="pt-2">
+          <a 
+            href={ctaHref}
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-full text-sm font-bold text-white bg-[#2B231B] hover:bg-[#3F3429] active:bg-[#1E1813] transition-all hover:scale-102 shadow-md shadow-slate-950/10 cursor-pointer"
+          >
+            {ctaText}
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,96 @@
+---
+// FeatureVideoSplit.astro
+// Dark, full-bleed split section: media (video or image) on one side,
+// a kicker/heading/copy/checklist/CTA on the other. Built fresh in
+// Astro + Tailwind using Daystar's own theme tokens.
+import businessData from '../data/business.json';
+import contentData from '../data/content.json';
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  headingAccentOverride?: string;
+  paragraphsOverride?: string[];
+  checklistOverride?: string[];
+  ctaTextOverride?: string;
+  ctaHrefOverride?: string;
+  mediaSrcOverride?: string;
+  mediaAltOverride?: string;
+  isVideoOverride?: boolean;
+  captionOverride?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  headingAccentOverride,
+  paragraphsOverride,
+  checklistOverride,
+  ctaTextOverride,
+  ctaHrefOverride,
+  mediaSrcOverride,
+  mediaAltOverride,
+  isVideoOverride,
+  captionOverride,
+} = Astro.props;
+
+const data = contentData.home?.featureVideoSplit;
+
+const badge = badgeOverride || data?.badge || 'See The Difference';
+const heading = headingOverride || data?.heading || 'We Walk It First.';
+const headingAccent = headingAccentOverride || data?.headingAccent || 'Then We Build.';
+const paragraphs: string[] = paragraphsOverride || data?.paragraphs || [];
+const checklist: string[] = checklistOverride || data?.checklist || [];
+const ctaText = ctaTextOverride || data?.ctaText || `Meet ${businessData.name}`;
+const ctaHref = ctaHrefOverride || data?.ctaHref || '#quote-funnel';
+const mediaSrc = mediaSrcOverride || data?.mediaSrc || '/feature-split.jpg';
+const mediaAlt = mediaAltOverride || data?.mediaAlt || heading;
+const isVideo = isVideoOverride ?? data?.isVideo ?? false;
+const caption = captionOverride || data?.caption || '';
+---
+
+<section class="py-24 bg-slate-950 text-white relative border-t border-slate-900/60">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="space-y-3">
+        <div class="rounded-custom overflow-hidden aspect-[4/3] shadow-2xl">
+          {isVideo ? (
+            <video class="w-full h-full object-cover" src={mediaSrc} autoplay muted loop playsinline preload="auto" />
+          ) : (
+            <img src={mediaSrc} alt={mediaAlt} class="w-full h-full object-cover" loading="lazy" />
+          )}
+        </div>
+        {caption && <span class="text-xs font-semibold text-slate-400">{caption}</span>}
+      </div>
+
+      <div class="space-y-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-accent bg-accent/15 px-3.5 py-1.5 rounded-md border border-accent/25">
+          {badge}
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-[1.1]">
+          {heading}<br />
+          <span class="text-primary">{headingAccent}</span>
+        </h2>
+        {paragraphs.map((p) => (
+          <p class="text-slate-300 leading-relaxed">{p}</p>
+        ))}
+        {checklist.length > 0 && (
+          <ul class="space-y-2.5">
+            {checklist.map((item) => (
+              <li class="flex items-start gap-2.5 text-sm text-slate-200">
+                <i class="fa-solid fa-check text-primary mt-1 shrink-0"></i>
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
+        <a
+          href={ctaHref}
+          class="inline-flex items-center justify-center px-6 py-3.5 rounded-custom text-sm font-bold border-2 border-white/25 hover:bg-white/10 transition-all hover:scale-102"
+        >
+          {ctaText}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

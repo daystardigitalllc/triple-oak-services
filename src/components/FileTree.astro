@@ -1,0 +1,155 @@
+---
+// FileTree.astro
+// Monospace file directory structure tree.
+// Recursively renders nested directory structures with folder/file icons, highlighted config items,
+// and clean connection guidelines.
+
+interface FileNode {
+  name: string;
+  isDirectory?: boolean;
+  children?: FileNode[];
+  highlighted?: boolean;
+}
+
+interface Props {
+  title?: string;
+  structure?: FileNode[];
+  class?: string;
+}
+
+const {
+  title = 'Project Structure',
+  structure,
+  class: className = ''
+} = Astro.props;
+
+const defaultStructure: FileNode[] = [
+  { name: 'astro.config.mjs' },
+  { name: 'package.json', highlighted: true },
+  {
+    name: 'src',
+    isDirectory: true,
+    children: [
+      {
+        name: 'content',
+        isDirectory: true,
+        children: [
+          {
+            name: 'docs',
+            isDirectory: true,
+            children: [
+              { name: 'getting-started.mdx' },
+              { name: 'index.mdx' }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'styles',
+        isDirectory: true,
+        children: [
+          { name: 'custom.css' }
+        ]
+      }
+    ]
+  }
+];
+
+const nodes = structure || defaultStructure;
+---
+
+<div class:list={["bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg font-mono text-xs max-w-md select-none", className]}>
+  {title && (
+    <div class="text-slate-400 font-bold border-b border-slate-800 pb-3 mb-4 flex items-center justify-between">
+      <span>{title}</span>
+      <i class="fa-solid fa-folder-tree text-slate-500"></i>
+    </div>
+  )}
+
+  <ul class="space-y-1.5 pl-1 file-tree-root">
+    <!-- Recursive Node Renderer Function (inline representation helper) -->
+    {nodes.map((node) => (
+      <li class="relative">
+        <div class:list={[
+          "flex items-center gap-2 px-2 py-1 rounded transition-colors w-fit",
+          node.highlighted 
+            ? "bg-amber-500/10 text-amber-500 font-bold border border-amber-500/20" 
+            : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
+        ]}>
+          {node.isDirectory ? (
+            <i class="fa-regular fa-folder-open text-teal-400"></i>
+          ) : (
+            <i class="fa-regular fa-file-code text-slate-500"></i>
+          )}
+          <span>{node.name}</span>
+        </div>
+
+        {node.isDirectory && node.children && (
+          <ul class="pl-4 mt-1.5 space-y-1.5 border-l border-slate-800/80 ml-3.5">
+            {node.children.map((child1) => (
+              <li class="relative">
+                <div class:list={[
+                  "flex items-center gap-2 px-2 py-1 rounded transition-colors w-fit",
+                  child1.highlighted 
+                    ? "bg-amber-500/10 text-amber-500 font-bold border border-amber-500/20" 
+                    : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
+                ]}>
+                  {child1.isDirectory ? (
+                    <i class="fa-regular fa-folder-open text-teal-400"></i>
+                  ) : (
+                    <i class="fa-regular fa-file-code text-slate-500"></i>
+                  )}
+                  <span>{child1.name}</span>
+                </div>
+
+                {child1.isDirectory && child1.children && (
+                  <ul class="pl-4 mt-1.5 space-y-1.5 border-l border-slate-800/80 ml-3.5">
+                    {child1.children.map((child2) => (
+                      <li class="relative">
+                        <div class:list={[
+                          "flex items-center gap-2 px-2 py-1 rounded transition-colors w-fit",
+                          child2.highlighted 
+                            ? "bg-amber-500/10 text-amber-500 font-bold border border-amber-500/20" 
+                            : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
+                        ]}>
+                          {child2.isDirectory ? (
+                            <i class="fa-regular fa-folder-open text-teal-400"></i>
+                          ) : (
+                            <i class="fa-regular fa-file-code text-slate-500"></i>
+                          )}
+                          <span>{child2.name}</span>
+                        </div>
+
+                        {child2.isDirectory && child2.children && (
+                          <ul class="pl-4 mt-1.5 space-y-1.5 border-l border-slate-800/80 ml-3.5">
+                            {child2.children.map((child3) => (
+                              <li class="relative">
+                                <div class:list={[
+                                  "flex items-center gap-2 px-2 py-1 rounded transition-colors w-fit",
+                                  child3.highlighted 
+                                    ? "bg-amber-500/10 text-amber-500 font-bold border border-amber-500/20" 
+                                    : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
+                                ]}>
+                                  {child3.isDirectory ? (
+                                    <i class="fa-regular fa-folder-open text-teal-400"></i>
+                                  ) : (
+                                    <i class="fa-regular fa-file-code text-slate-500"></i>
+                                  )}
+                                  <span>{child3.name}</span>
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ul>
+</div>

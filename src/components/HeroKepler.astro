@@ -1,0 +1,166 @@
+---
+// HeroKepler.astro
+// Neo-brutalist landing page hero section.
+// Features background glows, floating sticker badges, a hand-drawn SVG title underline,
+// and a pure CSS rotating planetary orbit system on the right.
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  primaryCtaText?: string;
+  primaryCtaHref?: string;
+  secondaryCtaText?: string;
+  secondaryCtaHref?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  primaryCtaText = 'Start building →',
+  primaryCtaHref = '#pricing',
+  secondaryCtaText = 'See it live',
+  secondaryCtaHref = '#features'
+} = Astro.props;
+
+const data = contentData.home?.heroKepler;
+
+const badge = badgeOverride || data?.badge || '✦ Astro 4 · 100 Lighthouse';
+const heading = headingOverride || data?.title || 'One template. Every idea in orbit.';
+const subtitle = subtitleOverride || data?.subtitle || 'The versatile Astro starter for blogs, portfolios, and landing pages. Ship a fast, beautiful site in an afternoon.';
+---
+
+<section class="relative bg-gradient-to-b from-[#0f1e42] to-[#0a142c] text-slate-100 overflow-hidden py-24 select-none border-b-4 border-slate-950">
+  
+  <!-- Glowing Background Orbs -->
+  <span class="pointer-events-none absolute -top-[90px] -right-[70px] z-0 w-[660px] h-[660px] bg-radial from-orange-500/35 to-transparent to-60%"></span>
+  <span class="pointer-events-none absolute -bottom-40 -left-[100px] z-0 w-[560px] h-[560px] bg-radial from-blue-500/25 to-transparent to-60%"></span>
+
+  <!-- Floating Stickers -->
+  <span class="absolute top-14 left-[44%] z-10 w-[22px] h-[22px] rounded-md bg-orange-500 transform rotate-[18deg] animate-drift"></span>
+  <span class="absolute top-48 left-6 z-10 w-4 h-4 rounded-full bg-slate-100 animate-drift-alt"></span>
+
+  <div class="container mx-auto px-6 max-w-6.5xl relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    
+    <!-- Left Column: Copy & CTAs -->
+    <div class="lg:col-span-7 space-y-6 text-left">
+      <!-- Badge / Banner Chip -->
+      {badge && (
+        <span class="inline-flex items-center gap-2 rounded-full bg-orange-500 px-4 py-1.5 text-xs font-black tracking-wider text-white shadow-md">
+          {badge}
+        </span>
+      )}
+
+      <!-- Title with Custom Highlight SVG Underline -->
+      <h1 class="text-4.5xl sm:text-6.5xl font-black leading-[0.98] tracking-tight text-white capitalize font-sans">
+        {heading.includes('orbit') ? (
+          <>
+            {heading.split('orbit')[0]}
+            <span class="relative whitespace-nowrap text-orange-400">
+              orbit
+              <svg viewBox="0 0 220 20" width="100%" height="16" class="absolute -bottom-2.5 left-0" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M4 13 C60 4 160 4 216 11" stroke="#f97316" stroke-width="5" fill="none" stroke-linecap="round"></path>
+              </svg>
+            </span>
+            {heading.split('orbit')[1]}
+          </>
+        ) : heading}
+      </h1>
+
+      <p class="max-w-lg text-slate-350 text-sm sm:text-base leading-relaxed">
+        {subtitle}
+      </p>
+
+      <!-- CTAs (With shadow pop translations) -->
+      <div class="pt-4 flex flex-wrap gap-4">
+        <a 
+          href={primaryCtaHref} 
+          class="rounded-full bg-orange-500 px-7 py-4 text-sm font-bold text-white shadow-[4px_4px_0_#f8fafc] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0_#f8fafc] transition-all cursor-pointer border-2 border-transparent"
+        >
+          {primaryCtaText}
+        </a>
+        <a 
+          href={secondaryCtaHref} 
+          class="rounded-full border-2 border-slate-100 bg-slate-100 px-7 py-4 text-sm font-bold text-slate-950 hover:bg-slate-200 transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 cursor-pointer shadow-sm"
+        >
+          {secondaryCtaText}
+        </a>
+      </div>
+
+      <!-- Social Trust Badge -->
+      <div class="pt-6 flex items-center gap-3 text-xs font-semibold text-slate-400 border-t border-slate-800/80 w-fit">
+        <div class="flex -space-x-2">
+          <span class="flex w-8 h-8 items-center justify-center rounded-full border-2 border-[#0a142c] text-[10px] font-bold bg-orange-500 text-white">JK</span>
+          <span class="flex w-8 h-8 items-center justify-center rounded-full border-2 border-[#0a142c] text-[10px] font-bold bg-slate-100 text-slate-950">MA</span>
+          <span class="flex w-8 h-8 items-center justify-center rounded-full border-2 border-[#0a142c] text-[10px] font-bold bg-orange-400 text-white">RS</span>
+        </div>
+        <span>Loved by <strong class="text-white">12,000+</strong> builders</span>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive CSS Orbit Graphic -->
+    <div class="lg:col-span-5 flex items-center justify-center relative aspect-square max-lg:h-[350px]">
+      
+      <!-- Outer dashed orbit (Revolving planet) -->
+      <div class="absolute w-[88%] h-[88%] rounded-full border-2 border-dashed border-white/20 animate-orbit-spin">
+        <span class="absolute -top-[9px] left-1/2 -ml-[9px] w-4.5 h-4.5 rounded-full bg-orange-500 shadow-[0_0_0_4px_rgba(249,115,22,0.25)]"></span>
+      </div>
+
+      <!-- Inner dashed orbit (Revolving sat) -->
+      <div class="absolute w-[62%] h-[62%] rounded-full border-2 border-white/10 animate-orbit-spin-rev">
+        <span class="absolute -bottom-[7px] left-1/2 -ml-[7px] w-3.5 h-3.5 rounded bg-slate-100"></span>
+      </div>
+
+      <!-- Center Planet Body (Neobrutalist Saturn) -->
+      <div class="relative flex w-[40%] h-[40%] items-center justify-center rounded-3xl bg-orange-500 shadow-[6px_6px_0_#f8fafc] border-2 border-slate-950">
+        <span class="absolute w-20 h-5 -rotate-[28deg] rounded-full border-[3px] border-slate-100"></span>
+        <span class="w-4 h-4 rounded-full bg-slate-100"></span>
+      </div>
+
+      <!-- Decorative stars -->
+      <span class="absolute top-[8%] right-[10%] text-2xl text-orange-400 animate-pulse">✦</span>
+      <span class="absolute bottom-[10%] left-[6%] text-xl text-slate-100 animate-pulse">✦</span>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Orbit Rotations */
+  .animate-orbit-spin {
+    animation: orbitSpin 20s linear infinite;
+  }
+  .animate-orbit-spin-rev {
+    animation: orbitSpinRev 15s linear infinite;
+  }
+
+  @keyframes orbitSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes orbitSpinRev {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+
+  /* Sticker Drifting */
+  .animate-drift {
+    animation: drift 6s ease-in-out infinite alternate;
+  }
+  .animate-drift-alt {
+    animation: driftAlt 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    from { transform: translateY(0) rotate(18deg); }
+    to { transform: translateY(-10px) rotate(24deg); }
+  }
+  @keyframes driftAlt {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(8px) scale(0.9); }
+  }
+</style>

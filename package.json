@@ -1,0 +1,39 @@
+{
+  "name": "Starter",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@data-slot/accordion": "^0.2.166",
+    "@data-slot/alert-dialog": "^0.2.166",
+    "@data-slot/collapsible": "^0.2.166",
+    "@data-slot/combobox": "^0.2.166",
+    "@data-slot/command": "^0.2.166",
+    "@data-slot/dialog": "^0.2.166",
+    "@data-slot/dropdown-menu": "^0.2.166",
+    "@data-slot/hover-card": "^0.2.166",
+    "@data-slot/navigation-menu": "^0.2.166",
+    "@data-slot/popover": "^0.2.166",
+    "@data-slot/radio-group": "^0.2.166",
+    "@data-slot/select": "^0.2.166",
+    "@data-slot/slider": "^0.2.166",
+    "@data-slot/switch": "^0.2.166",
+    "@data-slot/tabs": "^0.2.166",
+    "@data-slot/toggle": "^0.2.166",
+    "@data-slot/tooltip": "^0.2.166",
+    "@tailwindcss/vite": "^4.1.11",
+    "astro": "^5.12.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "embla-carousel": "^8.6.0",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "daisyui": "^5.7.19"
+  }
+}

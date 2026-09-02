@@ -1,0 +1,75 @@
+---
+// FeatureOverlayCards.astro
+// Grid of image cards where hovering (or tapping on touch) reveals an
+// extended description over a gradient overlay. Concept inspired by the
+// "Background Overlay Card" style in Aceternity UI's card collection,
+// rebuilt from scratch in Astro + Tailwind using pure CSS group-hover
+// (no React, no framer-motion, no JS needed).
+import contentData from '../data/content.json';
+
+interface FeatureItem {
+  src: string;
+  alt?: string;
+  icon?: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  itemsOverride?: FeatureItem[];
+}
+
+const { badgeOverride, headingOverride, subtitleOverride, itemsOverride } = Astro.props;
+
+const data = contentData.home?.featureCards;
+
+const badge = badgeOverride || data?.badge || 'Why Choose Us';
+const heading = headingOverride || data?.heading || 'Built On Trust, Backed By Results';
+const subtitle = subtitleOverride || data?.subtitle || 'Hover a card to learn more.';
+const items: FeatureItem[] = itemsOverride || data?.items || [];
+---
+
+<section id="highlights-overlay" class="py-24 bg-white dark:bg-slate-950 relative border-t border-slate-100 dark:border-slate-900/60">
+  <div class="container mx-auto px-6">
+    <div class="max-w-3xl mx-auto text-center space-y-4 mb-14">
+      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
+        {badge}
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-[1.1]">
+        {heading}
+      </h2>
+      <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 font-normal">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.map((item) => (
+        <div class="group relative h-72 rounded-custom overflow-hidden shadow-md">
+          <img
+            src={item.src}
+            alt={item.alt || item.title}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-slate-950/10 transition-opacity duration-300"></div>
+
+          <div class="absolute inset-0 flex flex-col justify-end p-6">
+            {item.icon && (
+              <div class="w-10 h-10 rounded-lg bg-primary/90 flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-110 shrink-0">
+                <i class={`${item.icon} text-white text-sm`}></i>
+              </div>
+            )}
+            <h3 class="text-lg font-bold text-white leading-snug">{item.title}</h3>
+            <p class="text-sm text-white/80 mt-1.5 grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
+              <span class="overflow-hidden">{item.description}</span>
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

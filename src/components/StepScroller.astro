@@ -1,0 +1,279 @@
+---
+// StepScroller.astro
+// Recreates the godaylight.com "How It Works Sticky Stacking Cards" scroll experience.
+// On scroll, each step container slides up and stacks directly on top of the previous step
+// using CSS sticky positioning, accompanied by interactive mock graphic panels (including an animating SVG line graph).
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+interface Step {
+  label: string;
+  title: string;
+  subTitle: string;
+  description: string;
+  ctaText?: string;
+  ctaHref?: string;
+  graphicType: 'phone' | 'install' | 'graph';
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  stepsOverride?: Step[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  stepsOverride,
+} = Astro.props;
+
+const data = contentData.home?.stepScroller;
+
+const badge = badgeOverride || data?.badge || 'How It Works';
+const heading = headingOverride || data?.title || 'A new way to power your home';
+const subtitle = subtitleOverride || data?.subtitle || 'We cover installation and upfront costs. You get 24/7 outage protection and below-market energy rates.';
+
+const defaultSteps: Step[] = [
+  {
+    label: 'Step 1',
+    title: 'Subscribe in 2 Minutes',
+    subTitle: 'A lower bill every month',
+    description: 'Provide your basic address info to get a custom solar & battery proposal at $0 upfront costs. Lower rates than your standard utility provider guaranteed.',
+    ctaText: 'Get Your Estimate',
+    ctaHref: '#quote-funnel',
+    graphicType: 'phone'
+  },
+  {
+    label: 'Step 2',
+    title: 'We Handle Everything',
+    subTitle: 'Permits, Design, & Install',
+    description: 'Our certified engineering team manages the entire process from custom layout blueprints and local utility permits to professional system assembly.',
+    graphicType: 'install'
+  },
+  {
+    label: 'Step 3',
+    title: 'Activate & Power On',
+    subTitle: 'Grid independence & savings',
+    description: 'Your battery system connects. Your electricity rates drop immediately. During storms or grid blackouts, your backup triggers automatically to keep appliances running.',
+    graphicType: 'graph'
+  }
+];
+
+const steps = stepsOverride || data?.steps || defaultSteps;
+---
+
+<section id="step-scroller-section" class="relative bg-slate-900 text-white overflow-visible">
+  
+  <!-- Section Title Intro (Scrolls naturally) -->
+  <div class="container mx-auto px-6 py-20 max-w-4xl text-center space-y-6">
+    {badge && (
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-500 bg-amber-500/10 px-4 py-2 rounded-full border border-amber-500/20 shadow-sm">
+        {badge}
+      </span>
+    )}
+    <h2 class="text-4xl sm:text-5.5xl font-serif font-normal tracking-tight text-white leading-tight">
+      {heading}
+    </h2>
+    {subtitle && (
+      <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+        {subtitle}
+      </p>
+    )}
+  </div>
+
+  <!-- Stacking Cards Container -->
+  <div class="w-full relative overflow-visible flex flex-col items-center">
+    {steps.map((step, idx) => (
+      <div 
+        class="w-full min-h-[90lvh] lg:min-h-screen sticky top-0 px-6 py-10 flex flex-col justify-center items-center origin-top hiw-card-sticky"
+        style={`z-index: ${10 + idx}; top: ${idx * 24}px;`}
+      >
+        <!-- Inner Card Box (Soft warm card styling just like Go Daylight beige-30 panels) -->
+        <div class="w-full max-w-5xl bg-slate-800/90 backdrop-blur-md border border-slate-700/50 rounded-3.5xl p-8 sm:p-14 shadow-2xl relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-center overflow-hidden">
+          
+          <!-- Decorative subtle card graphic -->
+          <div class="absolute inset-0 opacity-5 pointer-events-none select-none">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="90%" cy="10%" r="250" fill="none" stroke="white" stroke-width="2" />
+            </svg>
+          </div>
+
+          <!-- Left Column: Copy & Details -->
+          <div class="lg:col-span-6 space-y-6 relative z-10 text-left">
+            <div class="flex items-center justify-between lg:flex-col lg:items-start lg:gap-4 border-b border-slate-700/50 pb-4">
+              <span class="text-xs font-mono uppercase tracking-widest text-amber-500 font-bold">{step.label}</span>
+              <h3 class="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-none">{step.title}</h3>
+            </div>
+            
+            <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold">{step.subTitle}</h4>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">{step.description}</p>
+            
+            {step.ctaText && (
+              <div class="pt-4">
+                <a 
+                  href={step.ctaHref} 
+                  class="inline-flex items-center justify-center px-6 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-950 bg-white hover:bg-slate-100 transition-all hover:scale-102 cursor-pointer shadow-md"
+                >
+                  {step.ctaText}
+                </a>
+              </div>
+            )}
+          </div>
+
+          <!-- Right Column: Context Graphic Box -->
+          <div class="lg:col-span-6 flex items-center justify-center relative z-10 max-lg:h-[280px]">
+            
+            {/* Step 1 Graphic: Smartphone dashboard mockup */}
+            {step.graphicType === 'phone' && (
+              <div class="w-48 aspect-[9/18.5] rounded-3xl bg-slate-950 border-[3.5px] border-slate-700 p-2 shadow-2xl relative overflow-hidden flex flex-col justify-between text-center select-none">
+                <!-- Status Bar -->
+                <div class="flex items-center justify-between text-[8px] text-slate-400 font-medium px-2 pt-0.5">
+                  <span>9:41</span>
+                  <div class="flex items-center gap-1">
+                    <i class="fa-solid fa-signal text-[6px]"></i>
+                    <i class="fa-solid fa-wifi text-[6px]"></i>
+                    <i class="fa-solid fa-battery-three-quarters text-[7px]"></i>
+                  </div>
+                </div>
+                <!-- App logo -->
+                <div class="flex flex-col items-center gap-2 py-4">
+                  <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-500 border border-amber-500/30 flex items-center justify-center shadow-lg shadow-amber-500/5">
+                    <i class="fa-solid fa-sun text-xs animate-spin-slow"></i>
+                  </div>
+                  <span class="text-[9px] font-mono uppercase tracking-widest text-slate-400">Power Center</span>
+                </div>
+                <!-- Savings pill -->
+                <div class="mx-auto bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1 text-[8px] font-bold text-emerald-400 shadow-sm mb-4">
+                  💰 + $28 Saved This Week
+                </div>
+              </div>
+            )}
+
+            {/* Step 2 Graphic: Technical Install Blueprint schema */}
+            {step.graphicType === 'install' && (
+              <div class="w-full max-w-sm aspect-[4/3] rounded-2xl bg-slate-950 border border-slate-700/50 p-6 flex flex-col justify-between shadow-2xl relative select-none">
+                <div class="flex items-center justify-between text-[9px] font-mono text-slate-500">
+                  <span>Permit ID: #8092-B</span>
+                  <span>Grid Sync Ready</span>
+                </div>
+                <!-- Blueprint Schematic Visual -->
+                <div class="my-auto flex flex-col items-center justify-center gap-4 relative py-2">
+                  <div class="flex items-center gap-8 relative z-10">
+                    <div class="w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 text-xs shadow-md"><i class="fa-solid fa-solar-panel"></i></div>
+                    <div class="w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 text-xs shadow-md"><i class="fa-solid fa-car-battery"></i></div>
+                    <div class="w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 text-xs shadow-md"><i class="fa-solid fa-house"></i></div>
+                  </div>
+                  <!-- Connector line SVG -->
+                  <svg class="absolute w-44 h-1 px-1.5 text-slate-700 z-0" viewBox="0 0 100 10" preserveAspectRatio="none">
+                    <line x1="0" y1="5" x2="100" y2="5" stroke="currentColor" stroke-width="2" stroke-dasharray="4" class="animate-flow-dash" />
+                  </svg>
+                </div>
+                <div class="flex items-center justify-between text-[9px] font-mono text-slate-500">
+                  <span>Nashville, TN</span>
+                  <span class="text-emerald-500 font-bold flex items-center gap-1">&bull; Safe Load Active</span>
+                </div>
+              </div>
+            )}
+
+            {/* Step 3 Graphic: Animated Energy Curve Line Graph */}
+            {step.graphicType === 'graph' && (
+              <div class="w-full max-w-sm aspect-[4/3] rounded-2xl bg-slate-950 border border-slate-700/50 p-5 flex flex-col justify-between shadow-2xl relative select-none">
+                <div class="flex items-center justify-between text-[9px] font-mono text-slate-500">
+                  <span>Live Generation</span>
+                  <span class="text-amber-500 font-bold">14.6 kWh Peak</span>
+                </div>
+                
+                <!-- Animated SVG Graph -->
+                <div class="flex-grow flex items-center justify-center relative py-4">
+                  <svg class="w-full h-28 overflow-visible" viewBox="0 0 300 100" id="svg-draw-curve">
+                    <!-- Grid Lines -->
+                    <line x1="0" y1="50" x2="300" y2="50" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+                    <!-- Curve path (will draw on scroll) -->
+                    <path 
+                      d="M 10 90 Q 50 10, 100 80 T 180 30 T 250 85" 
+                      fill="none" 
+                      stroke="#f59e0b" 
+                      stroke-width="3" 
+                      stroke-linecap="round"
+                      id="svg-path-indicator"
+                      class="svg-dash-anim"
+                    />
+                  </svg>
+                </div>
+
+                <div class="grid grid-cols-5 text-center text-[8px] font-mono text-slate-500 border-t border-slate-800/80 pt-2.5">
+                  <span>Mon</span>
+                  <span>Tue</span>
+                  <span>Wed</span>
+                  <span>Thu</span>
+                  <span>Fri</span>
+                </div>
+              </div>
+            )}
+
+          </div>
+
+        </div>
+      </div>
+    ))}
+  </div>
+
+</section>
+
+<script>
+  // Intersection observer to animate SVG lines when step 3 enters view
+  const path = document.getElementById('svg-path-indicator');
+  const section = document.getElementById('step-scroller-section');
+
+  if (path && section) {
+    // Get total length of path for dash offset animation
+    const pathLength = (path as any).getTotalLength();
+    (path as any).style.strokeDasharray = pathLength;
+    (path as any).style.strokeDashoffset = pathLength;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Draw curve
+          (path as any).style.transition = 'stroke-dashoffset 2.5s cubic-bezier(0.16, 1, 0.3, 1)';
+          (path as any).style.strokeDashoffset = '0';
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(section);
+  }
+</script>
+
+<style>
+  /* Local animations */
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* SVG path drawing animation properties */
+  .svg-dash-anim {
+    will-change: stroke-dashoffset;
+  }
+
+  /* Connector line flow dash animation */
+  .animate-flow-dash {
+    animation: flowDash 3s linear infinite;
+  }
+  @keyframes flowDash {
+    to { stroke-dashoffset: -20; }
+  }
+
+  /* Sticky card adjustments to scale slightly down as scroll overlay happens */
+  @media (min-width: 1024px) {
+    .hiw-card-sticky {
+      transition: transform 0.2s ease-out;
+    }
+  }
+</style>

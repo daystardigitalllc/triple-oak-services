@@ -1,0 +1,69 @@
+---
+// ServicesBento.astro
+// Numbered grid of service tiles, each with a background image, a
+// "01/02/03..." index badge, and a hover zoom + reveal link. A visual
+// alternative to Services.astro, built fresh in Astro + Tailwind using
+// Daystar's own theme tokens.
+import contentData from '../data/content.json';
+
+interface BentoItem {
+  src: string;
+  alt?: string;
+  title: string;
+  description: string;
+  href?: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  headingAccentOverride?: string;
+  itemsOverride?: BentoItem[];
+}
+
+const { badgeOverride, headingOverride, headingAccentOverride, itemsOverride } = Astro.props;
+
+const data = contentData.home?.servicesBento;
+
+const badge = badgeOverride || data?.badge || 'What We Do';
+const heading = headingOverride || data?.heading || 'Services Built for';
+const headingAccent = headingAccentOverride || data?.headingAccent || 'Your Home';
+const items: BentoItem[] = itemsOverride || data?.items || [];
+---
+
+<section id="services" class="py-24 bg-white dark:bg-slate-950 relative border-t border-slate-100 dark:border-slate-900/60">
+  <div class="container mx-auto px-6">
+    <div class="max-w-3xl mb-14 space-y-4">
+      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
+        {badge}
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+        {heading}<br />
+        <span class="text-primary">{headingAccent}</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.map((item, index) => (
+        <a href={item.href || '#quote-funnel'} class="group relative h-80 rounded-custom overflow-hidden block shadow-md">
+          <img
+            src={item.src}
+            alt={item.alt || item.title}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent"></div>
+
+          <div class="relative h-full flex flex-col justify-end p-6">
+            <span class="text-xs font-bold text-white/60 mb-2">{String(index + 1).padStart(2, '0')}</span>
+            <h3 class="text-lg font-bold text-white leading-snug">{item.title}</h3>
+            <p class="text-sm text-white/75 mt-1.5 leading-relaxed">{item.description}</p>
+            <span class="mt-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white/90 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              Explore <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

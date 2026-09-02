@@ -1,0 +1,144 @@
+---
+// ServicesHealNet.astro
+// Integrated digital services grid in the HealNet theme style.
+// Features a 3-column layout where the primary featured service card spans two columns,
+// all detailed with clean outline SVGs, thin blue borders, and soft background gradients.
+import contentData from '../data/content.json';
+
+interface ServiceItem {
+  title: string;
+  description: string;
+  iconName: 'consultation' | 'booking' | 'prescription' | 'note' | 'refill';
+  featured?: boolean;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  servicesOverride?: ServiceItem[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  servicesOverride
+} = Astro.props;
+
+const data = contentData.home?.servicesHealNet;
+
+const badge = badgeOverride || data?.badge || 'OUR INTEGRATED OFFERINGS';
+const heading = headingOverride || data?.title || 'Top services we offer';
+const subtitle = subtitleOverride || data?.subtitle || 'In today’s fast-paced world, your health deserves the utmost attention and convenience. That’s why HealNet offers a suite of integrated services designed to cater to your healthcare needs digitally:';
+
+const defaultServices: ServiceItem[] = [
+  {
+    title: 'Online Consultations',
+    description: 'Consult with top doctors across various specialties via video or chat communication. It’s totally secure, private, and convenient. Choose the best time for an in-person visit with our easy-to-use scheduling system, or proceed with our online consultation.',
+    iconName: 'consultation',
+    featured: true
+  },
+  {
+    title: 'Booking Appointments',
+    description: 'Choose the best time for an in-person visit with our easy-to-use scheduling system, or proceed with our online consultation features.',
+    iconName: 'booking'
+  },
+  {
+    title: 'Prescriptions',
+    description: 'Receive and renew prescriptions digitally after your consultation with our specialists.',
+    iconName: 'prescription'
+  },
+  {
+    title: 'Medical Notes',
+    description: 'Obtain necessary medical notes for work or school with only a few clicks of hassle.',
+    iconName: 'note'
+  },
+  {
+    title: 'Medicine Refills',
+    description: 'Skip the pharmacy queues and save time + energy by ordering medicine refills online.',
+    iconName: 'refill'
+  }
+];
+
+const services = servicesOverride || data?.items || defaultServices;
+---
+
+<section id="services-healnet" class="py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white select-none border-b border-[#0179B4]/10">
+  <div class="container mx-auto px-6 max-w-6.5xl space-y-16">
+    
+    <!-- Section Header -->
+    <div class="mx-auto text-center max-w-3xl space-y-3">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-[#0179B4]">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+        {heading.includes('services') ? (
+          <>
+            {heading.split('services')[0]}
+            <span class="bg-gradient-to-r from-[#0179B4] to-[#88D8FF] bg-clip-text text-transparent">
+              services
+            </span>
+            {heading.split('services')[1]}
+          </>
+        ) : heading}
+      </h2>
+      {subtitle && (
+        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <!-- 3-column layout where Card 1 is featured double size -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-5.5xl mx-auto">
+      {services.map((item) => (
+        <div class:list={[
+          "rounded-2xl border-2 border-[#0179B4]/15 bg-gradient-to-tr from-[#F8FDFF] to-white dark:from-slate-900 dark:to-slate-950 p-8 sm:p-10 shadow-sm relative flex flex-col justify-start transition-all hover:border-[#0179B4]/40 hover:-translate-y-0.5 select-none text-slate-900 dark:text-white",
+          item.featured ? "lg:col-span-2" : "lg:col-span-1"
+        ]}>
+          
+          <!-- Custom Medical Icon glyph outline -->
+          <div class="w-12 h-12 rounded-xl bg-[#EFF9FF] dark:bg-slate-800 flex items-center justify-center text-[#0179B4] mb-6 shadow-inner">
+            {item.iconName === 'consultation' && (
+              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            )}
+            {item.iconName === 'booking' && (
+              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <rect width="18" height="18" x="3" y="4" rx="2" />
+                <path d="M16 2v4M8 2v4M3 10h18" />
+              </svg>
+            )}
+            {item.iconName === 'prescription' && (
+              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+              </svg>
+            )}
+            {item.iconName === 'note' && (
+              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+              </svg>
+            )}
+            {item.iconName === 'refill' && (
+              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" />
+                <path d="m8.5 8.5 7 7" />
+              </svg>
+            )}
+          </div>
+
+          <!-- Description and titles -->
+          <h3 class="text-xl font-bold text-[#0179B4] tracking-tight mb-3">{item.title}</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed max-w-2xl">{item.description}</p>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

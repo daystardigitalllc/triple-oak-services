@@ -1,0 +1,195 @@
+---
+// VideoTestimonialWall.astro
+// Masonry wall of short client video testimonials. Desktop pointers get a
+// muted, looping autoplay preview on hover; any device can tap/click a card
+// to open a full lightbox with sound and native controls. Dependency-free
+// Astro + vanilla JS (real <video> elements, no embed provider required).
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+interface VideoItem {
+  videoSrc: string;
+  poster: string;
+  name: string;
+  location?: string;
+  quote?: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  itemsOverride?: VideoItem[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  itemsOverride,
+} = Astro.props;
+
+const data = contentData.home?.videoTestimonialWall;
+
+const badge = badgeOverride ?? data?.badge ?? 'In Their Words';
+const heading = headingOverride ?? data?.heading ?? `What ${businessData.name} Clients Say`;
+const subtitle = subtitleOverride ?? data?.subtitle ?? 'Hover to preview, tap to watch with sound.';
+
+const defaultItems: VideoItem[] = [
+  { videoSrc: '/testimonials/client-1.mp4', poster: '/testimonials/client-1-poster.jpg', name: 'Client Name', location: 'Your City, ST', quote: 'Short pull-quote from the video.' },
+  { videoSrc: '/testimonials/client-2.mp4', poster: '/testimonials/client-2-poster.jpg', name: 'Client Name', location: 'Your City, ST', quote: 'Short pull-quote from the video.' },
+  { videoSrc: '/testimonials/client-3.mp4', poster: '/testimonials/client-3-poster.jpg', name: 'Client Name', location: 'Your City, ST', quote: 'Short pull-quote from the video.' },
+  { videoSrc: '/testimonials/client-4.mp4', poster: '/testimonials/client-4-poster.jpg', name: 'Client Name', location: 'Your City, ST', quote: 'Short pull-quote from the video.' },
+];
+
+const items: VideoItem[] = itemsOverride || data?.items || defaultItems;
+
+// Cycle a few aspect ratios by index so the wall reads as a masonry grid even
+// when every source clip happens to share the same intrinsic dimensions.
+const aspectClasses = ['aspect-[3/4]', 'aspect-video', 'aspect-[4/5]'];
+
+const uid = `video-wall-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<section id="video-testimonials" data-video-wall-id={uid} class="py-24 bg-white dark:bg-slate-950 relative border-t border-slate-100 dark:border-slate-900/60">
+  <div class="container mx-auto px-6">
+    <div class="max-w-2xl mb-14 space-y-4">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+        {heading}
+      </h2>
+      {subtitle && (
+        <p class="text-base text-slate-500 dark:text-slate-400 leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <!-- Masonry wall (CSS columns, not grid, so cards of varying height stack naturally) -->
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:balance]">
+      {items.map((item, index) => (
+        <div
+          data-video-card
+          data-video-src={item.videoSrc}
+          class:list={[
+            'group relative mb-5 break-inside-avoid rounded-2xl overflow-hidden bg-slate-900 shadow-md border border-slate-200/60 dark:border-slate-800/60 cursor-pointer',
+            aspectClasses[index % aspectClasses.length],
+          ]}
+        >
+          <video
+            data-video-preview
+            src={item.videoSrc}
+            poster={item.poster}
+            class="absolute inset-0 w-full h-full object-cover"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+
+          <!-- Play indicator, fades out while the hover preview is running -->
+          <div data-video-play-indicator class="absolute inset-0 flex items-center justify-center transition-opacity duration-300 pointer-events-none">
+            <div class="w-14 h-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+              <i class="fa-solid fa-play text-base translate-x-0.5"></i>
+            </div>
+          </div>
+
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <p class="font-bold text-sm text-white leading-snug">{item.name}</p>
+            {item.location && <p class="text-xs text-white/70">{item.location}</p>}
+            {item.quote && <p class="text-xs text-white/85 italic mt-1.5 line-clamp-2">&ldquo;{item.quote}&rdquo;</p>}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Lightbox: real <video> with controls + sound, opened by any card -->
+  <div
+    data-video-lightbox
+    class="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300"
+  >
+    <div data-video-lightbox-overlay class="absolute inset-0 cursor-pointer"></div>
+
+    <div class="relative w-full max-w-2xl aspect-[9/16] sm:aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl z-10 border border-slate-800">
+      <button
+        type="button"
+        data-video-lightbox-close
+        class="absolute top-3 right-3 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black transition-all border-0 cursor-pointer text-xl z-20 focus:outline-none"
+        aria-label="Close video"
+      >
+        &times;
+      </button>
+      <video data-video-lightbox-player class="w-full h-full" controls playsinline></video>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ uid }}>
+  (() => {
+    const root = document.querySelector(`[data-video-wall-id="${uid}"]`);
+    if (!root) return;
+
+    const cards = Array.from(root.querySelectorAll('[data-video-card]'));
+    const lightbox = root.querySelector('[data-video-lightbox]');
+    const lightboxOverlay = root.querySelector('[data-video-lightbox-overlay]');
+    const lightboxClose = root.querySelector('[data-video-lightbox-close]');
+    const lightboxPlayer = root.querySelector('[data-video-lightbox-player]');
+
+    const supportsHoverPreview =
+      window.matchMedia('(hover: hover)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function openLightbox(src) {
+      if (!lightbox || !lightboxPlayer) return;
+      lightboxPlayer.src = src;
+      lightbox.classList.remove('opacity-0', 'pointer-events-none');
+      lightbox.classList.add('opacity-100');
+      lightboxPlayer.play().catch(() => {});
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      if (!lightbox || !lightboxPlayer) return;
+      lightbox.classList.remove('opacity-100');
+      lightbox.classList.add('opacity-0', 'pointer-events-none');
+      lightboxPlayer.pause();
+      lightboxPlayer.removeAttribute('src');
+      lightboxPlayer.load();
+      document.body.style.overflow = '';
+    }
+
+    lightboxOverlay?.addEventListener('click', closeLightbox);
+    lightboxClose?.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    for (const card of cards) {
+      const preview = card.querySelector('[data-video-preview]');
+      const indicator = card.querySelector('[data-video-play-indicator]');
+      const src = card.dataset.videoSrc || '';
+
+      if (supportsHoverPreview && preview) {
+        card.addEventListener('mouseenter', () => {
+          preview.currentTime = 0;
+          preview.play().catch(() => {});
+          indicator?.classList.add('opacity-0');
+        });
+        card.addEventListener('mouseleave', () => {
+          preview.pause();
+          preview.currentTime = 0;
+          indicator?.classList.remove('opacity-0');
+        });
+      }
+
+      card.addEventListener('click', () => openLightbox(src));
+    }
+  })();
+</script>

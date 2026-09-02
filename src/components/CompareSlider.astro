@@ -1,0 +1,206 @@
+---
+// CompareSlider.astro
+// Before/after image comparison slider — drag (or hover) to reveal the
+// "before" image over the "after" image. Inspired by the concept behind
+// Aceternity UI's Compare component, rebuilt from scratch as a
+// dependency-free Astro component (no React, no framer-motion — a
+// clip-path reveal driven by pointer events).
+import contentData from '../data/content.json';
+
+interface CompareImage {
+  src: string;
+  alt?: string;
+}
+
+interface CompareItem {
+  before: CompareImage;
+  after: CompareImage;
+  label?: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  subtitleOverride?: string;
+  itemsOverride?: CompareItem[];
+  modeOverride?: 'drag' | 'hover';
+  initialPercentageOverride?: number;
+  showHandleOverride?: boolean;
+  autoplayOverride?: boolean;
+  autoplayDurationOverride?: number;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  subtitleOverride,
+  itemsOverride,
+  modeOverride,
+  initialPercentageOverride,
+  showHandleOverride,
+  autoplayOverride,
+  autoplayDurationOverride,
+} = Astro.props;
+
+const showcase = contentData.home?.compareShowcase;
+
+const badge = badgeOverride || showcase?.badge || 'Real Results';
+const heading = headingOverride || showcase?.heading || 'See the Transformation';
+const subtitle =
+  subtitleOverride || showcase?.subtitle || 'Drag the slider to compare before and after.';
+const items: CompareItem[] = itemsOverride || showcase?.items || [];
+const mode = modeOverride || showcase?.mode || 'drag';
+const initialPercentage = initialPercentageOverride ?? showcase?.initialPercentage ?? 50;
+const showHandle = showHandleOverride ?? showcase?.showHandle ?? true;
+const autoplay = autoplayOverride ?? showcase?.autoplay ?? false;
+const autoplayDuration = autoplayDurationOverride ?? showcase?.autoplayDuration ?? 4000;
+
+const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<section id="transformations" data-compare-root={uid} class="py-24 bg-slate-50 dark:bg-slate-900/40 relative border-t border-slate-100 dark:border-slate-900/60">
+  <div class="container mx-auto px-6">
+    <div class="max-w-3xl mx-auto text-center space-y-4 mb-14">
+      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
+        {badge}
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-[1.1]">
+        {heading}
+      </h2>
+      <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 font-normal">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {items.map((item, index) => (
+        <div class="space-y-3">
+          <div
+            data-compare-card
+            data-mode={mode}
+            data-initial={initialPercentage}
+            data-autoplay={autoplay ? 'true' : 'false'}
+            data-autoplay-duration={autoplayDuration}
+            class="relative w-full aspect-[4/3] overflow-hidden rounded-custom shadow-lg select-none cursor-ew-resize bg-slate-200 dark:bg-slate-800"
+          >
+            {/* After image (full, underneath) */}
+            <img
+              src={item.after.src}
+              alt={item.after.alt || `${item.label || 'Project'} after`}
+              class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+              draggable="false"
+            />
+
+            {/* Before image (clipped to reveal on top) */}
+            <div data-compare-before-wrap class="absolute inset-0 overflow-hidden pointer-events-none">
+              <img
+                src={item.before.src}
+                alt={item.before.alt || `${item.label || 'Project'} before`}
+                class="absolute inset-0 w-full h-full object-cover"
+                draggable="false"
+              />
+            </div>
+
+            {/* Labels */}
+            <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase tracking-widest bg-slate-950/70 text-white px-2.5 py-1 rounded pointer-events-none">
+              Before
+            </span>
+            <span class="absolute top-3 right-3 text-[10px] font-extrabold uppercase tracking-widest bg-primary/90 text-white px-2.5 py-1 rounded pointer-events-none">
+              After
+            </span>
+
+            {/* Handle */}
+            {showHandle && (
+              <div data-compare-handle class="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.15)] pointer-events-none">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-lg flex items-center justify-center">
+                  <i class="fa-solid fa-arrows-left-right text-slate-600 text-xs"></i>
+                </div>
+              </div>
+            )}
+          </div>
+          {item.label && (
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-300 text-center">{item.label}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ uid }}>
+  (() => {
+    const root = document.querySelector(`[data-compare-root="${uid}"]`);
+    if (!root) return;
+
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+    root.querySelectorAll('[data-compare-card]').forEach((card) => {
+      const beforeWrap = card.querySelector('[data-compare-before-wrap]');
+      const handle = card.querySelector('[data-compare-handle]');
+      const mode = card.dataset.mode || 'drag';
+      const autoplay = card.dataset.autoplay === 'true';
+      const autoplayDuration = Number(card.dataset.autoplayDuration) || 4000;
+
+      let percentage = Number(card.dataset.initial) || 50;
+      let dragging = false;
+      let autoplayRaf = null;
+
+      function setPercentage(p) {
+        percentage = clamp(p, 0, 100);
+        beforeWrap.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+        if (handle) handle.style.left = `${percentage}%`;
+      }
+
+      function percentageFromEvent(event) {
+        const rect = card.getBoundingClientRect();
+        const x = (event.touches ? event.touches[0].clientX : event.clientX) - rect.left;
+        return (x / rect.width) * 100;
+      }
+
+      function stopAutoplay() {
+        if (autoplayRaf) cancelAnimationFrame(autoplayRaf);
+        autoplayRaf = null;
+      }
+
+      function startAutoplay() {
+        if (!autoplay) return;
+        const start = performance.now();
+        const loop = (now) => {
+          const t = ((now - start) % (autoplayDuration * 2)) / autoplayDuration;
+          const p = t <= 1 ? t * 100 : (2 - t) * 100;
+          setPercentage(p);
+          autoplayRaf = requestAnimationFrame(loop);
+        };
+        autoplayRaf = requestAnimationFrame(loop);
+      }
+
+      if (mode === 'hover') {
+        card.addEventListener('mouseenter', stopAutoplay);
+        card.addEventListener('mousemove', (event) => setPercentage(percentageFromEvent(event)));
+        card.addEventListener('mouseleave', startAutoplay);
+        card.addEventListener('touchmove', (event) => setPercentage(percentageFromEvent(event)), { passive: true });
+      } else {
+        const onMove = (event) => {
+          if (!dragging) return;
+          setPercentage(percentageFromEvent(event));
+        };
+        const onUp = () => {
+          dragging = false;
+          window.removeEventListener('pointermove', onMove);
+          window.removeEventListener('pointerup', onUp);
+          startAutoplay();
+        };
+        card.addEventListener('pointerdown', (event) => {
+          dragging = true;
+          stopAutoplay();
+          setPercentage(percentageFromEvent(event));
+          window.addEventListener('pointermove', onMove);
+          window.addEventListener('pointerup', onUp);
+        });
+      }
+
+      setPercentage(percentage);
+      startAutoplay();
+    });
+  })();
+</script>

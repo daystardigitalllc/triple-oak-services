@@ -1,0 +1,245 @@
+---
+// PricingKepler.astro
+// Neo-brutalist pricing tier grids in the Kepler theme style.
+// Features a Monthly/Yearly sliding toggle, checklist tags, and a featured center card scaled up
+// with a prominent "MOST POPULAR" pill banner on top.
+import contentData from '../data/content.json';
+
+interface Plan {
+  id: string;
+  name: string;
+  tagline: string;
+  priceMonthly: number;
+  priceYearly: number; // Yearly monthly equivalent
+  features: string[];
+  highlighted?: boolean;
+  badge?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  plansOverride?: Plan[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  plansOverride
+} = Astro.props;
+
+const data = contentData.home?.pricingKepler;
+
+const badge = badgeOverride || data?.badge || 'Pricing';
+const heading = headingOverride || data?.title || 'One purchase, yours forever';
+
+const defaultPlans: Plan[] = [
+  {
+    id: 'solo',
+    name: 'Solo',
+    tagline: 'For one personal site.',
+    priceMonthly: 4,
+    priceYearly: 39,
+    features: [
+      '1 project license',
+      'All three presets',
+      '1 year of updates',
+      'Community support'
+    ],
+    ctaText: 'Choose Solo',
+    ctaHref: '#contacts'
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    tagline: 'For freelancers & makers.',
+    priceMonthly: 8,
+    priceYearly: 79,
+    features: [
+      'Unlimited projects',
+      'Lifetime updates',
+      'Premium blocks library',
+      'Priority email support'
+    ],
+    highlighted: true,
+    badge: 'MOST POPULAR',
+    ctaText: 'Choose Pro',
+    ctaHref: '#contacts'
+  },
+  {
+    id: 'team',
+    name: 'Team',
+    tagline: 'For studios & agencies.',
+    priceMonthly: 20,
+    priceYearly: 199,
+    features: [
+      'Everything in Pro',
+      '5 seats included',
+      'Shared component library',
+      'Onboarding call'
+    ],
+    ctaText: 'Choose Team',
+    ctaHref: '#contacts'
+  }
+];
+
+const plans = plansOverride || data?.plans || defaultPlans;
+---
+
+<section id="pricing-kepler" class="border-y-4 border-slate-950 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-slate-950 py-24 select-none">
+  <div class="container mx-auto px-6 max-w-6.5xl">
+    
+    <!-- Header -->
+    <div class="mx-auto text-center max-w-[620px] mb-8 space-y-3">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-[0.12em] text-white bg-slate-950 px-4 py-1.5 rounded-full shadow-sm">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-4xl sm:text-5.5xl font-black leading-tight tracking-tight text-slate-950">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Billing Toggle (Neo-brutalist border) -->
+    <div class="mb-14 flex justify-center">
+      <div id="kepler-billing-toggle" class="inline-flex gap-1 rounded-full border-2 border-slate-950 bg-white p-1">
+        <button 
+          type="button" 
+          data-period="monthly" 
+          aria-pressed="true" 
+          class="cursor-pointer rounded-full bg-[#0f1e42] px-5 py-2 text-sm font-bold text-white transition-colors duration-150"
+        >
+          Monthly
+        </button>
+        <button 
+          type="button" 
+          data-period="yearly" 
+          aria-pressed="false" 
+          class="cursor-pointer rounded-full bg-transparent px-5 py-2 text-sm font-bold text-slate-600 transition-colors duration-150"
+        >
+          Yearly <span class="text-orange-500 font-extrabold">-20%</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Plans Comparison Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start pt-6">
+      {plans.map((plan) => (
+        <div class:list={[
+          "rounded-[22px] border-2 border-slate-950 p-8 shadow-[5px_5px_0_#0f1e42] relative transition-all duration-200",
+          plan.highlighted 
+            ? "scale-[1.03] bg-[#0f1e42] text-white shadow-[6px_6px_0_#f8fafc] md:-translate-y-2" 
+            : "bg-white text-slate-950 shadow-[5px_5px_0_#0f1e42]"
+        ]}>
+          <!-- Floating Highlight Badge Banner -->
+          {plan.highlighted && plan.badge && (
+            <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-orange-500 px-4 py-1 text-xs font-black tracking-wider text-white shadow-md">
+              {plan.badge}
+            </span>
+          )}
+
+          <!-- Card Header Info -->
+          <div class="space-y-1 pb-4 border-b border-slate-200/50 dark:border-slate-800/40">
+            <h3 class="text-xl font-bold tracking-tight">{plan.name}</h3>
+            <p class:list={["text-xs", plan.highlighted ? "text-slate-400" : "text-slate-500"]}>{plan.tagline}</p>
+          </div>
+
+          <!-- Price section -->
+          <div class="py-6 flex items-baseline gap-1">
+            <span class="text-2xl font-bold text-slate-400">$</span>
+            <span 
+              class="text-5xl font-black tracking-tight price-value"
+              data-price-monthly={plan.priceMonthly}
+              data-price-yearly={plan.priceYearly}
+            >
+              {plan.priceMonthly}
+            </span>
+            <span class:list={["text-sm font-semibold ml-0.5 price-period-label", plan.highlighted ? "text-slate-400" : "text-slate-500"]}>
+              /mo
+            </span>
+          </div>
+
+          <!-- Action CTA Link button -->
+          <div class="pb-6">
+            <a 
+              href={plan.ctaHref || "#contacts"} 
+              class:list={[
+                "block w-full py-3 text-center text-sm font-bold rounded-full transition-all border-2 border-slate-950 cursor-pointer duration-150",
+                plan.highlighted 
+                  ? "bg-orange-500 text-white hover:-translate-y-0.5 shadow-sm" 
+                  : "bg-white text-slate-950 hover:bg-slate-100"
+              ]}
+            >
+              {plan.ctaText || 'Get Started'}
+            </a>
+          </div>
+
+          <!-- Feature check list details -->
+          <ul class="space-y-3.5 text-xs sm:text-sm font-semibold">
+            {plan.features.map((feature) => (
+              <li class="flex items-center gap-2.5">
+                <span class:list={["font-black text-base", plan.highlighted ? "text-orange-400" : "text-orange-500"]}>✓</span>
+                <span class:list={[plan.highlighted ? "text-slate-300" : "text-slate-700"]}>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function setupKeplerPricingToggle() {
+    const container = document.getElementById('kepler-billing-toggle');
+    if (!container) return;
+
+    const buttons = container.querySelectorAll('button[data-period]');
+    const priceElements = document.querySelectorAll('#pricing-kepler .price-value');
+    const periodLabels = document.querySelectorAll('#pricing-kepler .price-period-label');
+
+    const activeClasses = ['bg-[#0f1e42]', 'text-white'];
+    const inactiveClasses = ['bg-transparent', 'text-slate-600'];
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selectedPeriod = btn.getAttribute('data-period');
+        const isYearly = selectedPeriod === 'yearly';
+
+        // Toggle button states
+        buttons.forEach((b) => {
+          const isCurrent = b === btn;
+          b.setAttribute('aria-pressed', String(isCurrent));
+          
+          if (isCurrent) {
+            b.classList.remove(...inactiveClasses);
+            b.classList.add(...activeClasses);
+          } else {
+            b.classList.remove(...activeClasses);
+            b.classList.add(...inactiveClasses);
+          }
+        });
+
+        // Swap Prices
+        priceElements.forEach((el) => {
+          const monthly = el.getAttribute('data-price-monthly') || '0';
+          const yearly = el.getAttribute('data-price-yearly') || '0';
+          el.textContent = isYearly ? yearly : monthly;
+        });
+
+        // Swap Period Labels
+        periodLabels.forEach((el) => {
+          el.textContent = isYearly ? '/yr' : '/mo';
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupKeplerPricingToggle);
+  setupKeplerPricingToggle();
+</script>

@@ -1,0 +1,158 @@
+---
+// FaqAccordionDoa.astro
+// WordPress-styled accordion query list for contractors.
+// Features border notice tabs, toggle chevron animations, and a red bottom CTA link.
+import contentData from '../data/content.json';
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  faqsOverride?: FaqItem[];
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  faqsOverride,
+  ctaText = 'Contact Support',
+  ctaHref = '#contacts'
+} = Astro.props;
+
+const data = contentData.home?.faqAccordionDoa;
+
+const badge = badgeOverride || data?.badge || 'COMMON QUESTIONS';
+const heading = headingOverride || data?.title || 'Recently Covered Queries';
+
+const defaultFaqs: FaqItem[] = [
+  {
+    question: 'How fast do your treatments take effect?',
+    answer: 'Most crawling insects show significant decline in 24 to 48 hours. Rodents or larger infestations may take several days of systematic baiting to completely eliminate.'
+  },
+  {
+    question: 'Are your treatment products safe for pets and toddlers?',
+    answer: 'Absolutely. We utilize organic, target-specific baiting products. Technicians place treatments out of reach, ensuring full safety for children and pets.'
+  },
+  {
+    question: 'Do you offer commercial service plans for large facilities?',
+    answer: 'Yes, our Elite commercial plans cover offices, kitchens, logistics hubs, and apartment blocks, backed by quarterly audits.'
+  },
+  {
+    question: 'What happens if the pests return after treatment?',
+    answer: 'All quarterly and Shield plans are backed by our 100% Satisfaction Guarantee. If pests emerge between checkups, we re-treat for free.'
+  }
+];
+
+const faqs = faqsOverride || data?.items || defaultFaqs;
+---
+
+<section id="faq-accordions" class="py-24 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 select-none">
+  <div class="container mx-auto px-6 max-w-3xl space-y-12">
+    
+    <!-- Header -->
+    <div class="text-center space-y-2">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-red-650">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Accordion listings -->
+    <div id="doa-faq-wrapper" class="space-y-4">
+      {faqs.map((faq, idx) => (
+        <div class="bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/80 rounded shadow-sm overflow-hidden">
+          <button 
+            type="button" 
+            data-doa-faq-toggle 
+            aria-expanded={idx === 0 ? "true" : "false"}
+            class="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-4.5 text-left font-bold text-slate-950 dark:text-white text-sm sm:text-base focus:outline-none select-none transition-colors hover:text-red-600"
+          >
+            <span>{faq.question}</span>
+            <span 
+              data-doa-faq-icon 
+              class:list={[
+                "text-slate-400 text-xs transition-transform duration-200 block shrink-0 select-none",
+                idx === 0 ? "rotate-180 text-red-650" : "rotate-0"
+              ]}
+            >
+              <i class="fa-solid fa-chevron-down"></i>
+            </span>
+          </button>
+
+          <div 
+            data-doa-faq-answer 
+            class:list={[
+              "px-6 pb-5 text-xs sm:text-sm leading-relaxed text-slate-500 dark:text-slate-400 border-t border-slate-50/50 dark:border-slate-900/60 pt-4",
+              idx === 0 ? "block" : "hidden"
+            ]}
+          >
+            {faq.answer}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Action Button -->
+    <div class="pt-6 text-center">
+      <a 
+        href={ctaHref} 
+        class="inline-flex items-center justify-center px-8 py-3.5 bg-red-650 hover:bg-red-700 text-white text-xs font-black uppercase tracking-widest transition-all rounded shadow-md border border-red-500/20 cursor-pointer"
+      >
+        {ctaText}
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function setupDoaFaq() {
+    const wrapper = document.getElementById('doa-faq-wrapper');
+    if (!wrapper) return;
+
+    const toggles = wrapper.querySelectorAll('[data-doa-faq-toggle]');
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+
+        // Collapse all others
+        toggles.forEach((other) => {
+          other.setAttribute('aria-expanded', 'false');
+          const icon = other.querySelector('[data-doa-faq-icon]');
+          if (icon) {
+            icon.classList.remove('rotate-180', 'text-red-650');
+            icon.classList.add('rotate-0', 'text-slate-400');
+          }
+          const answer = other.parentElement?.querySelector('[data-doa-faq-answer]');
+          if (answer) answer.classList.add('hidden');
+        });
+
+        // Toggle clicked one
+        if (!expanded) {
+          toggle.setAttribute('aria-expanded', 'true');
+          const icon = toggle.querySelector('[data-doa-faq-icon]');
+          if (icon) {
+            icon.classList.add('rotate-180', 'text-red-650');
+            icon.classList.remove('rotate-0', 'text-slate-400');
+          }
+          const answer = toggle.parentElement?.querySelector('[data-doa-faq-answer]');
+          if (answer) answer.classList.remove('hidden');
+        }
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupDoaFaq);
+  setupDoaFaq();
+</script>

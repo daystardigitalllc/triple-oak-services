@@ -1,0 +1,55 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import contentData from '../../data/content.json';
+import businessData from '../../data/business.json';
+import Services from '../../components/Services.astro';
+import Reviews from '../../components/Reviews.astro';
+
+export async function getStaticPaths() {
+  return contentData.locations.map((loc) => ({
+    params: { slug: loc.slug || loc.name.toLowerCase().replace(/ /g, '-') },
+    props: { loc },
+  }));
+}
+
+const { loc } = Astro.props;
+---
+
+<MainLayout 
+  title={loc.seoTitle || `${businessData.name} in ${loc.name} TN`}
+  description={loc.seoDescription || `Top rated professional home services in ${loc.name}, TN. Roofing, HVAC, and plumbing with free quotes.`}
+>
+  <!-- Location Hero Section -->
+  <section class="relative py-20 lg:py-28 bg-slate-50 dark:bg-slate-950 overflow-hidden">
+    <!-- Glowing background blobs -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-primary/10 rounded-full blur-[90px] animate-pulse-slow"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10 text-center max-w-4xl space-y-6">
+      <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold tracking-wide uppercase text-primary bg-primary/10 rounded-full">
+        Local Service Area: {loc.name}, TN
+      </span>
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight text-slate-900 dark:text-white">
+        Premium Home Services in <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{loc.name}</span>
+      </h1>
+      <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto">
+        {loc.intro}
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <a href={`tel:${businessData.phone}`} class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-lg transition-all hover:scale-103">
+          {loc.ctaText || 'Call Us Now'}
+        </a>
+        <a href={`tel:${businessData.phone}`} class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-custom transition-all">
+          Call Local Office
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Service List Grid -->
+  <Services />
+
+  <!-- Local Reviews -->
+  <Reviews />
+</MainLayout>

@@ -1,0 +1,97 @@
+---
+// FeatureCardsDoa.astro
+// "The DOA Difference" 3-column feature grid.
+// Each card details a value proposition and features a red circular number badge
+// overlapping the bottom border.
+import contentData from '../data/content.json';
+
+interface FeatureCard {
+  title: string;
+  description: string;
+  index: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  featuresOverride?: FeatureCard[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  featuresOverride
+} = Astro.props;
+
+const data = contentData.home?.featureCardsDoa;
+
+const badge = badgeOverride || data?.badge || 'THE DIFFERENCE';
+const heading = headingOverride || data?.title || 'The DOA Difference';
+
+const defaultFeatures: FeatureCard[] = [
+  {
+    index: '01',
+    title: 'Eco-Friendly Protocols',
+    description: 'We prioritize children and pet safety, utilizing target-specific organic baits and treatments that destroy pests without leaving chemical traces.'
+  },
+  {
+    index: '02',
+    title: 'Certified Termite Squads',
+    description: 'Termite damage accounts for billions in structures. Our specialists deploy advanced sensors to map, disrupt, and fully eliminate colonies.'
+  },
+  {
+    index: '03',
+    title: '24/7 Rapid Response dispatch',
+    description: 'When infestations spike, waiting isn\'t an option. Our regional dispatch lines ensure a technician is at your property in hours.'
+  }
+];
+
+const features = featuresOverride || data?.items || defaultFeatures;
+---
+
+<section id="doa-difference" class="py-24 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 select-none">
+  <div class="container mx-auto px-6 max-w-6.5xl space-y-16 text-center">
+    
+    <!-- Header -->
+    <div class="max-w-xl mx-auto space-y-2">
+      {badge && (
+        <span class="text-xs font-bold uppercase tracking-wider text-red-600">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- 3-column Staggered cards with bottom overlapping circular numbering -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
+      {features.map((item) => (
+        <div class="bg-white dark:bg-slate-950 border-2 border-slate-200/60 dark:border-slate-800/80 p-8 sm:p-10 shadow-lg relative flex flex-col justify-between rounded-xl pb-14 transition-all duration-300 hover:border-red-500/40">
+          
+          <div class="space-y-4 text-center">
+            <h3 class="text-xl font-bold tracking-tight text-slate-950 dark:text-white border-b border-slate-100 dark:border-slate-900 pb-4">{item.title}</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">{item.description}</p>
+          </div>
+
+          <!-- Red circular number badge overlapping bottom edge -->
+          <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-red-600 border-2 border-white dark:border-slate-950 flex items-center justify-center font-bold text-white text-sm shadow-md">
+            {item.index}
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom contact link -->
+    <div class="pt-8">
+      <a 
+        href="#contacts" 
+        class="inline-flex items-center justify-center px-8 py-3.5 bg-red-600 hover:bg-red-700 text-white text-xs font-black uppercase tracking-widest transition-all rounded shadow-md border border-red-500/20 cursor-pointer"
+      >
+        Contact Us
+      </a>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import businessData from '../data/business.json';
+import themeConfig from '../data/theme.config.json';
+
+const isOakCity = themeConfig.style === 'oak-city';
+---
+
+<section class="py-20 bg-white dark:bg-slate-950 relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary via-slate-900 to-secondary text-white p-8 md:p-16">
+      
+      <!-- Ambient light decorative blobs -->
+      <div class="absolute -right-24 -bottom-24 w-96 h-96 bg-accent/20 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="absolute -left-24 -top-24 w-80 h-80 bg-primary/30 rounded-full blur-[80px] pointer-events-none"></div>
+
+      <div class="max-w-3xl space-y-6 relative z-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-accent bg-accent/15 px-3 py-1 rounded-full">
+          Ready to Get Started?
+        </span>
+        
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight uppercase">
+          Get Your Free Estimate Today
+        </h2>
+        
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl">
+          Don't wait for minor issues to turn into costly damage. Reach out to {businessData.name} and get a guaranteed quote.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+          <a href="#quote-funnel" class:list={[
+            "inline-flex items-center justify-center px-8 py-4 text-base font-bold transition-all hover:scale-103 text-center",
+            isOakCity
+              ? "text-white bg-transparent border-2 border-white hover:bg-white hover:text-slate-950 rounded-custom"
+              : "text-slate-950 bg-white hover:bg-slate-100 rounded-custom shadow-lg"
+          ]}>
+            {businessData.mainCta}
+          </a>
+          <a href={`tel:${businessData.phone}`} class="inline-flex items-center justify-center px-8 py-4 text-base font-bold border-2 border-white/20 hover:bg-white/10 rounded-custom transition-all text-center gap-2">
+            <i class="fa-solid fa-phone text-xs"></i> Call: {businessData.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

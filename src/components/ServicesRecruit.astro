@@ -1,0 +1,87 @@
+---
+// ServicesRecruit.astro
+// Shadow-lifting service grids (corporate/agency vibe).
+// Features clean typography headings and a 4-column grid of cards that lift and remove shadows on hover.
+import contentData from '../data/content.json';
+
+interface ServiceItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  badgeOverride?: string;
+  headingOverride?: string;
+  servicesOverride?: ServiceItem[];
+}
+
+const {
+  badgeOverride,
+  headingOverride,
+  servicesOverride
+} = Astro.props;
+
+const data = contentData.home?.servicesRecruit;
+
+const badge = badgeOverride || data?.badge || 'Services';
+const heading = headingOverride || data?.title || 'Assist you to find a job that matches with your goal';
+
+const defaultServices: ServiceItem[] = [
+  {
+    icon: 'fa-solid fa-magnifying-glass',
+    title: 'Smart Searching',
+    description: 'We audit your experience and filter candidates to locate positions with highest strategic fit.'
+  },
+  {
+    icon: 'fa-solid fa-comments',
+    title: 'Mock Interview Prep',
+    description: 'We run live, simulated screening loops to hone your delivery and remove key friction points.'
+  },
+  {
+    icon: 'fa-solid fa-file-shield',
+    title: 'Reference Verification',
+    description: 'We automate credential checks to pre-verify backgrounds and expedite job offers.'
+  },
+  {
+    icon: 'fa-solid fa-briefcase',
+    title: 'Onboarding & Sync',
+    description: 'We guide you through the contracts, equipment logistics, and first-week checkpoints.'
+  }
+];
+
+const services = servicesOverride || data?.items || defaultServices;
+---
+
+<section id="services-recruit" class="py-24 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 select-none">
+  <div class="container mx-auto px-6 max-w-6.5xl">
+    
+    <!-- Header -->
+    <div class="max-w-2xl mx-auto text-center mb-16 space-y-3">
+      {badge && (
+        <span class="text-sm font-bold uppercase tracking-wider text-orange-500">
+          {badge}
+        </span>
+      )}
+      <h2 class="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-tight">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {services.map((item) => (
+        <div class="bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/80 p-8 shadow-xl hover:shadow-none transition-all duration-300 flex flex-col space-y-4">
+          <!-- Icon -->
+          <div class="w-12 h-12 bg-slate-100 dark:bg-slate-800 text-orange-500 rounded-none flex items-center justify-center text-xl">
+            <i class={item.icon}></i>
+          </div>
+          <!-- Info -->
+          <h3 class="text-lg font-bold text-slate-950 dark:text-white">{item.title}</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">{item.description}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
