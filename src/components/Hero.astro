@@ -259,12 +259,6 @@ const bgImage = contentData.home.hero.bgImage || '/hero-bg.jpg';
 
     {layout === 'oak-city' && (
       <div class="max-w-4xl mx-auto text-center space-y-8 py-10 md:py-16 animate-fade-in-up relative">
-        
-        <!-- Floating Info Tags (Matching Oak City top badges) -->
-        <div class="hidden lg:flex justify-between items-center w-full max-w-5xl mx-auto absolute -top-12 left-1/2 -translate-x-1/2 px-6 text-[10px] text-slate-300 font-bold uppercase tracking-widest pointer-events-none gap-4">
-          <div class="bg-black/45 px-4 py-2.5 border border-white/10 rounded flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-primary"></i> {businessData.locations[0]} & Surrounding Areas</div>
-          <div class="bg-black/45 px-4 py-2.5 border border-white/10 rounded flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-primary"></i> {businessData.certifications[0] || 'Fully Licensed & Insured'}</div>
-        </div>
 
         {/* Center Logo Emblem */}
         {businessData.logo && businessData.logo !== '/logo.svg' && businessData.logo !== '' ? (
