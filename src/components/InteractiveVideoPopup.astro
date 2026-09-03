@@ -24,7 +24,7 @@ const badge = badgeOverride || data?.badge || 'WATCH NOW';
 const heading = headingOverride || data?.title || 'See Our Certified Squads in Action';
 ---
 
-<section id="video-showcase" class="py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white select-none border-b border-slate-200 dark:border-slate-800 relative z-10">
+<section id="video-showcase" class="py-24 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white select-none border-b border-neutral-200 dark:border-neutral-800 relative z-10">
   <div class="container mx-auto px-6 max-w-4xl space-y-12 text-center">
     
     <!-- Header -->
@@ -34,7 +34,7 @@ const heading = headingOverride || data?.title || 'See Our Certified Squads in A
           {badge}
         </span>
       )}
-      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+      <h2 class="text-3xl sm:text-4.5xl font-black text-neutral-950 dark:text-white tracking-tight leading-tight">
         {heading}
       </h2>
     </div>
@@ -42,7 +42,7 @@ const heading = headingOverride || data?.title || 'See Our Certified Squads in A
     <!-- Video Stage Card with Pulsing Play Trigger -->
     <div 
       id="video-trigger-container"
-      class="aspect-video w-full rounded-2xl overflow-hidden relative shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 group cursor-pointer"
+      class="aspect-video w-full rounded-2xl overflow-hidden relative shadow-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-900 group cursor-pointer"
     >
       <!-- Media Cover Thumbnail -->
       <img 
@@ -52,7 +52,7 @@ const heading = headingOverride || data?.title || 'See Our Certified Squads in A
       />
       
       <!-- Overlay Backdrop Gradient -->
-      <div class="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/30 transition-colors"></div>
+      <div class="absolute inset-0 bg-neutral-950/40 group-hover:bg-neutral-950/30 transition-colors"></div>
 
       <!-- Play Button Icon with Pulsing Ripple Effect -->
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
@@ -74,12 +74,12 @@ const heading = headingOverride || data?.title || 'See Our Certified Squads in A
   <!-- Modal Lightbox (hidden by default) -->
   <div 
     id="video-lightbox-modal"
-    class="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300"
+    class="fixed inset-0 z-50 bg-neutral-950/95 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300"
   >
     <!-- Modal Backdrop Closer -->
     <div id="video-lightbox-overlay" class="absolute inset-0 cursor-pointer"></div>
 
-    <div class="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden bg-slate-900 shadow-2xl z-10 border border-slate-800">
+    <div class="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden bg-neutral-900 shadow-2xl z-10 border border-neutral-800">
       
       <!-- Close trigger button -->
       <button 

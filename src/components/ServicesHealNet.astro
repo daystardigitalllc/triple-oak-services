@@ -64,7 +64,7 @@ const defaultServices: ServiceItem[] = [
 const services = servicesOverride || data?.items || defaultServices;
 ---
 
-<section id="services-healnet" class="py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white select-none border-b border-[#0179B4]/10">
+<section id="services-healnet" class="py-24 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white select-none border-b border-[#0179B4]/10">
   <div class="container mx-auto px-6 max-w-6.5xl space-y-16">
     
     <!-- Section Header -->
@@ -74,7 +74,7 @@ const services = servicesOverride || data?.items || defaultServices;
           {badge}
         </span>
       )}
-      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+      <h2 class="text-3xl sm:text-4.5xl font-black text-neutral-950 dark:text-white tracking-tight leading-tight">
         {heading.includes('services') ? (
           <>
             {heading.split('services')[0]}
@@ -86,7 +86,7 @@ const services = servicesOverride || data?.items || defaultServices;
         ) : heading}
       </h2>
       {subtitle && (
-        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+        <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed">
           {subtitle}
         </p>
       )}
@@ -96,12 +96,12 @@ const services = servicesOverride || data?.items || defaultServices;
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-5.5xl mx-auto">
       {services.map((item) => (
         <div class:list={[
-          "rounded-2xl border-2 border-[#0179B4]/15 bg-gradient-to-tr from-[#F8FDFF] to-white dark:from-slate-900 dark:to-slate-950 p-8 sm:p-10 shadow-sm relative flex flex-col justify-start transition-all hover:border-[#0179B4]/40 hover:-translate-y-0.5 select-none text-slate-900 dark:text-white",
+          "rounded-2xl border-2 border-[#0179B4]/15 bg-gradient-to-tr from-[#F8FDFF] to-white dark:from-neutral-900 dark:to-neutral-950 p-8 sm:p-10 shadow-sm relative flex flex-col justify-start transition-all hover:border-[#0179B4]/40 hover:-translate-y-0.5 select-none text-neutral-900 dark:text-white",
           item.featured ? "lg:col-span-2" : "lg:col-span-1"
         ]}>
           
           <!-- Custom Medical Icon glyph outline -->
-          <div class="w-12 h-12 rounded-xl bg-[#EFF9FF] dark:bg-slate-800 flex items-center justify-center text-[#0179B4] mb-6 shadow-inner">
+          <div class="w-12 h-12 rounded-xl bg-[#EFF9FF] dark:bg-neutral-800 flex items-center justify-center text-[#0179B4] mb-6 shadow-inner">
             {item.iconName === 'consultation' && (
               <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -134,7 +134,7 @@ const services = servicesOverride || data?.items || defaultServices;
 
           <!-- Description and titles -->
           <h3 class="text-xl font-bold text-[#0179B4] tracking-tight mb-3">{item.title}</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed max-w-2xl">{item.description}</p>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed max-w-2xl">{item.description}</p>
 
         </div>
       ))}

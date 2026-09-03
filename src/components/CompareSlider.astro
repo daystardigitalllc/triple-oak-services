@@ -58,16 +58,16 @@ const autoplayDuration = autoplayDurationOverride ?? showcase?.autoplayDuration 
 const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
-<section id="transformations" data-compare-root={uid} class="py-24 bg-slate-50 dark:bg-slate-900/40 relative border-t border-slate-100 dark:border-slate-900/60">
+<section id="transformations" data-compare-root={uid} class="py-24 bg-neutral-50 dark:bg-neutral-900/40 relative border-t border-neutral-100 dark:border-neutral-900/60">
   <div class="container mx-auto px-6">
     <div class="max-w-3xl mx-auto text-center space-y-4 mb-14">
       <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
         {badge}
       </span>
-      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-[1.1]">
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white uppercase leading-[1.1]">
         {heading}
       </h2>
-      <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 font-normal">
+      <p class="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 font-normal">
         {subtitle}
       </p>
     </div>
@@ -81,7 +81,7 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
             data-initial={initialPercentage}
             data-autoplay={autoplay ? 'true' : 'false'}
             data-autoplay-duration={autoplayDuration}
-            class="relative w-full aspect-[4/3] overflow-hidden rounded-custom shadow-lg select-none cursor-ew-resize bg-slate-200 dark:bg-slate-800"
+            class="relative w-full aspect-[4/3] overflow-hidden rounded-custom shadow-lg select-none cursor-ew-resize bg-neutral-200 dark:bg-neutral-800"
             style="touch-action: none;"
           >
             {/* After image (full, underneath) */}
@@ -103,7 +103,7 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
             </div>
 
             {/* Labels */}
-            <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase tracking-widest bg-slate-950/70 text-white px-2.5 py-1 rounded pointer-events-none">
+            <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase tracking-widest bg-neutral-950/70 text-white px-2.5 py-1 rounded pointer-events-none">
               Before
             </span>
             <span class="absolute top-3 right-3 text-[10px] font-extrabold uppercase tracking-widest bg-primary/90 text-white px-2.5 py-1 rounded pointer-events-none">
@@ -114,13 +114,13 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
             {showHandle && (
               <div data-compare-handle class="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.15)] pointer-events-none">
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-lg flex items-center justify-center">
-                  <i class="fa-solid fa-arrows-left-right text-slate-600 text-xs"></i>
+                  <i class="fa-solid fa-arrows-left-right text-neutral-600 text-xs"></i>
                 </div>
               </div>
             )}
           </div>
           {item.label && (
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-300 text-center">{item.label}</p>
+            <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 text-center">{item.label}</p>
           )}
         </div>
       ))}

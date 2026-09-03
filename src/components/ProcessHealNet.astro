@@ -57,7 +57,7 @@ const steps = stepsOverride || data?.steps || defaultSteps;
 const imageSrc = imageSrcOverride || data?.imageSrc || 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80';
 ---
 
-<section id="process-healnet" class="py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white select-none border-b border-[#0179B4]/10 relative z-10 overflow-hidden">
+<section id="process-healnet" class="py-24 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white select-none border-b border-[#0179B4]/10 relative z-10 overflow-hidden">
   <div class="container mx-auto px-6 max-w-6.5xl space-y-16">
     
     <!-- Header -->
@@ -67,7 +67,7 @@ const imageSrc = imageSrcOverride || data?.imageSrc || 'https://images.unsplash.
           {badge}
         </span>
       )}
-      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+      <h2 class="text-3xl sm:text-4.5xl font-black text-neutral-950 dark:text-white tracking-tight leading-tight">
         {heading.includes('our platform') ? (
           <>
             {heading.split('our platform')[0]}
@@ -79,7 +79,7 @@ const imageSrc = imageSrcOverride || data?.imageSrc || 'https://images.unsplash.
         ) : heading}
       </h2>
       {subtitle && (
-        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+        <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed">
           {subtitle}
         </p>
       )}
@@ -100,8 +100,8 @@ const imageSrc = imageSrcOverride || data?.imageSrc || 'https://images.unsplash.
               {step.index}
             </span>
             <div class="space-y-1.5">
-              <h3 class="text-lg font-bold tracking-tight text-slate-950 dark:text-white">{step.title}</h3>
-              <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed max-w-md">{step.description}</p>
+              <h3 class="text-lg font-bold tracking-tight text-neutral-950 dark:text-white">{step.title}</h3>
+              <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed max-w-md">{step.description}</p>
             </div>
           </div>
         ))}
@@ -109,13 +109,13 @@ const imageSrc = imageSrcOverride || data?.imageSrc || 'https://images.unsplash.
 
       <!-- Right Column: Process Mockup with floating tag -->
       <div class="lg:col-span-5 relative flex items-center justify-center max-lg:h-[350px]">
-        <div class="w-[85%] h-[85%] rounded-3xl overflow-hidden shadow-2xl border border-slate-100/60 bg-slate-100">
+        <div class="w-[85%] h-[85%] rounded-3xl overflow-hidden shadow-2xl border border-neutral-100/60 bg-neutral-100">
           <img src={imageSrc} alt="How it works" class="w-full h-full object-cover" loading="lazy" />
         </div>
         
         <!-- Floating label Widget -->
         {floatingText && (
-          <div class="absolute bottom-6 right-2 bg-white border border-slate-150 p-4 rounded-xl shadow-lg flex items-center gap-2.5 text-[#0179B4] text-xs font-black select-none max-w-[220px] text-left">
+          <div class="absolute bottom-6 right-2 bg-white border border-neutral-150 p-4 rounded-xl shadow-lg flex items-center gap-2.5 text-[#0179B4] text-xs font-black select-none max-w-[220px] text-left">
             <span class="w-5 h-5 rounded bg-[#E9F6FF] flex items-center justify-center text-[10px]">★</span>
             {floatingText}
           </div>

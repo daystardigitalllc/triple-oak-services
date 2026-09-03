@@ -31,13 +31,13 @@ const headingAccent = headingAccentOverride || data?.headingAccent || 'Your Home
 const items: BentoItem[] = itemsOverride || data?.items || [];
 ---
 
-<section id="services" class="py-24 bg-white dark:bg-slate-950 relative border-t border-slate-100 dark:border-slate-900/60">
+<section id="services" class="py-24 bg-white dark:bg-neutral-950 relative border-t border-neutral-100 dark:border-neutral-900/60">
   <div class="container mx-auto px-6">
     <div class="max-w-3xl mb-14 space-y-4">
       <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
         {badge}
       </span>
-      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white leading-[1.1]">
         {heading}<br />
         <span class="text-primary">{headingAccent}</span>
       </h2>
@@ -52,7 +52,7 @@ const items: BentoItem[] = itemsOverride || data?.items || [];
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/40 to-transparent"></div>
 
           <div class="relative h-full flex flex-col justify-end p-6">
             <span class="text-xs font-bold text-white/60 mb-2">{String(index + 1).padStart(2, '0')}</span>

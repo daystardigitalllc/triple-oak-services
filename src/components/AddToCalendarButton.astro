@@ -63,7 +63,7 @@ const icsUrl = `data:text/calendar;charset=utf8,${encodeURIComponent(icsData)}`;
   <!-- Trigger Button -->
   <button 
     type="button" 
-    class="dropdown-trigger inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold rounded-xl border border-slate-800 shadow-md cursor-pointer transition-all active:scale-97"
+    class="dropdown-trigger inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-semibold rounded-xl border border-neutral-800 shadow-md cursor-pointer transition-all active:scale-97"
     aria-haspopup="true"
     aria-expanded="false"
   >
@@ -72,7 +72,7 @@ const icsUrl = `data:text/calendar;charset=utf8,${encodeURIComponent(icsData)}`;
 
   <!-- Dropdown Menu -->
   <div 
-    class="dropdown-menu hidden absolute left-0 mt-2 w-48 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden z-50 text-slate-800 dark:text-slate-100"
+    class="dropdown-menu hidden absolute left-0 mt-2 w-48 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl overflow-hidden z-50 text-neutral-800 dark:text-neutral-100"
     role="menu"
   >
     <div class="py-1">
@@ -80,7 +80,7 @@ const icsUrl = `data:text/calendar;charset=utf8,${encodeURIComponent(icsData)}`;
         href={googleUrl} 
         target="_blank" 
         rel="noopener noreferrer" 
-        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" 
+        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors" 
         role="menuitem"
       >
         <i class="fa-brands fa-google text-blue-500 text-sm w-4 text-center"></i> Google Calendar
@@ -88,16 +88,16 @@ const icsUrl = `data:text/calendar;charset=utf8,${encodeURIComponent(icsData)}`;
       <a 
         href={icsUrl} 
         download={`${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}.ics`} 
-        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" 
+        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors" 
         role="menuitem"
       >
-        <i class="fa-brands fa-apple text-slate-900 dark:text-white text-sm w-4 text-center"></i> Apple Calendar / iCal
+        <i class="fa-brands fa-apple text-neutral-900 dark:text-white text-sm w-4 text-center"></i> Apple Calendar / iCal
       </a>
       <a 
         href={outlookUrl} 
         target="_blank" 
         rel="noopener noreferrer" 
-        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" 
+        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors" 
         role="menuitem"
       >
         <i class="fa-brands fa-microsoft text-emerald-500 text-sm w-4 text-center"></i> Outlook Calendar
@@ -106,7 +106,7 @@ const icsUrl = `data:text/calendar;charset=utf8,${encodeURIComponent(icsData)}`;
         href={yahooUrl} 
         target="_blank" 
         rel="noopener noreferrer" 
-        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" 
+        class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors" 
         role="menuitem"
       >
         <i class="fa-brands fa-yahoo text-purple-600 text-sm w-4 text-center"></i> Yahoo Calendar

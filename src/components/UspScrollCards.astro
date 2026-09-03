@@ -57,7 +57,7 @@ const defaultItems: UspItem[] = [
 const items = itemsOverride || data?.items || defaultItems;
 ---
 
-<section id="usp-scroll" class="relative py-20 lg:py-0 bg-[#FAF9F5] text-slate-900 overflow-visible border-b border-slate-200">
+<section id="usp-scroll" class="relative py-20 lg:py-0 bg-[#FAF9F5] text-neutral-900 overflow-visible border-b border-neutral-200">
   <div class="container mx-auto px-6 max-w-6.5xl">
     
     <!-- Mobile Stacking Layout -->
@@ -70,13 +70,13 @@ const items = itemsOverride || data?.items || defaultItems;
       <div class="space-y-16">
         {items.map((item) => (
           <div class="space-y-6">
-            <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-100">
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-neutral-200 bg-neutral-100">
               <img src={item.src} alt={item.alt} class="w-full h-full object-cover" />
             </div>
             <div class="space-y-3">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">{item.surtitle}</span>
-              <h3 class="text-2xl font-bold tracking-tight text-slate-900 leading-tight">{item.title}</h3>
-              <p class="text-slate-500 text-sm leading-relaxed">{item.description}</p>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">{item.surtitle}</span>
+              <h3 class="text-2xl font-bold tracking-tight text-neutral-900 leading-tight">{item.title}</h3>
+              <p class="text-neutral-500 text-sm leading-relaxed">{item.description}</p>
             </div>
           </div>
         ))}
@@ -103,8 +103,8 @@ const items = itemsOverride || data?.items || defaultItems;
               data-text-index={idx}
             >
               <span class="text-xs font-mono uppercase tracking-widest text-amber-600 font-bold">{item.surtitle}</span>
-              <h3 class="text-3.5xl font-bold tracking-tight text-slate-900 leading-none">{item.title}</h3>
-              <p class="text-slate-600 text-base leading-relaxed max-w-md">{item.description}</p>
+              <h3 class="text-3.5xl font-bold tracking-tight text-neutral-900 leading-none">{item.title}</h3>
+              <p class="text-neutral-600 text-base leading-relaxed max-w-md">{item.description}</p>
             </div>
           ))}
         </div>
@@ -115,7 +115,7 @@ const items = itemsOverride || data?.items || defaultItems;
             <div 
               class:list={[
                 "w-2.5 h-2.5 rounded-full transition-all duration-300",
-                idx === 0 ? "bg-amber-600 scale-120" : "bg-slate-300"
+                idx === 0 ? "bg-amber-600 scale-120" : "bg-neutral-300"
               ]}
               data-dot-index={idx}
             ></div>
@@ -127,7 +127,7 @@ const items = itemsOverride || data?.items || defaultItems;
       <div class="col-span-6 flex flex-col justify-start py-[30vh] space-y-[40vh]" id="image-scroll-track">
         {items.map((item, idx) => (
           <div 
-            class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-slate-200/50 bg-slate-100 transform transition-all duration-700 opacity-90 scale-98"
+            class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-neutral-200/50 bg-neutral-100 transform transition-all duration-700 opacity-90 scale-98"
             data-image-index={idx}
           >
             <img src={item.src} alt={item.alt} class="w-full h-full object-cover" />
@@ -184,11 +184,11 @@ const items = itemsOverride || data?.items || defaultItems;
           // 3. Highlight pagination dot
           dotIndicators.forEach((dot, i) => {
             if (i === index) {
-              dot.classList.remove('bg-slate-300');
+              dot.classList.remove('bg-neutral-300');
               dot.classList.add('bg-amber-600', 'scale-120');
             } else {
               dot.classList.remove('bg-amber-600', 'scale-120');
-              dot.classList.add('bg-slate-300');
+              dot.classList.add('bg-neutral-300');
             }
           });
         }

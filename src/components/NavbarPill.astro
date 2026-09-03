@@ -33,17 +33,17 @@ const uid = `navpill-${Math.random().toString(36).slice(2, 9)}`;
   <div class="mx-auto max-w-3xl">
     <nav
       data-navpill-bar
-      class="flex items-center gap-1 rounded-full border border-slate-200/70 dark:border-slate-800/70 bg-white/85 dark:bg-slate-950/85 backdrop-blur-md shadow-md shadow-slate-900/5 pl-3 pr-2 py-2 transition-shadow duration-300"
+      class="flex items-center gap-1 rounded-full border border-neutral-200/70 dark:border-neutral-800/70 bg-white/85 dark:bg-neutral-950/85 backdrop-blur-md shadow-md shadow-neutral-900/5 pl-3 pr-2 py-2 transition-shadow duration-300"
     >
       <a href="/" class="flex items-center gap-2 shrink-0 pr-2">
         {businessData.logo && businessData.logo !== '/logo.svg' && businessData.logo !== '' ? (
-          <img src={businessData.logo} alt={`${businessData.name} Logo`} class="h-8 w-8 rounded-full object-cover border border-slate-200/50 bg-white shadow-sm shrink-0" />
+          <img src={businessData.logo} alt={`${businessData.name} Logo`} class="h-8 w-8 rounded-full object-cover border border-neutral-200/50 bg-white shadow-sm shrink-0" />
         ) : (
           <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-extrabold text-xs shrink-0">
             {businessData.name.charAt(0)}
           </div>
         )}
-        <span class="hidden sm:inline font-bold text-sm text-slate-900 dark:text-white tracking-tight">
+        <span class="hidden sm:inline font-bold text-sm text-neutral-900 dark:text-white tracking-tight">
           {businessData.name}
         </span>
       </a>
@@ -52,7 +52,7 @@ const uid = `navpill-${Math.random().toString(36).slice(2, 9)}`;
         {links.map((link) => (
           <a
             href={link.href}
-            class="px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-colors"
+            class="px-3 py-1.5 rounded-full text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors"
           >
             {link.label}
           </a>
@@ -69,7 +69,7 @@ const uid = `navpill-${Math.random().toString(36).slice(2, 9)}`;
       <button
         type="button"
         data-navpill-toggle
-        class="md:hidden ml-auto p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+        class="md:hidden ml-auto p-2 rounded-full text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800"
         aria-label="Toggle menu"
       >
         <i class="fa-solid fa-bars text-sm"></i>
@@ -78,10 +78,10 @@ const uid = `navpill-${Math.random().toString(36).slice(2, 9)}`;
 
     <div
       data-navpill-menu
-      class="hidden mt-2 rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md shadow-lg p-3 flex flex-col gap-1"
+      class="hidden mt-2 rounded-2xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md shadow-lg p-3 flex flex-col gap-1"
     >
       {links.map((link) => (
-        <a href={link.href} class="px-4 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <a href={link.href} class="px-4 py-2 rounded-xl text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">
           {link.label}
         </a>
       ))}

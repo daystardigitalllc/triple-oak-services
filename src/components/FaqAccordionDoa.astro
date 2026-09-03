@@ -52,7 +52,7 @@ const defaultFaqs: FaqItem[] = [
 const faqs = faqsOverride || data?.items || defaultFaqs;
 ---
 
-<section id="faq-accordions" class="py-24 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 select-none">
+<section id="faq-accordions" class="py-24 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 select-none">
   <div class="container mx-auto px-6 max-w-3xl space-y-12">
     
     <!-- Header -->
@@ -62,7 +62,7 @@ const faqs = faqsOverride || data?.items || defaultFaqs;
           {badge}
         </span>
       )}
-      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+      <h2 class="text-3xl sm:text-4.5xl font-black text-neutral-950 dark:text-white tracking-tight leading-tight">
         {heading}
       </h2>
     </div>
@@ -70,18 +70,18 @@ const faqs = faqsOverride || data?.items || defaultFaqs;
     <!-- Accordion listings -->
     <div id="doa-faq-wrapper" class="space-y-4">
       {faqs.map((faq, idx) => (
-        <div class="bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/80 rounded shadow-sm overflow-hidden">
+        <div class="bg-white dark:bg-neutral-950 border border-neutral-200/60 dark:border-neutral-800/80 rounded shadow-sm overflow-hidden">
           <button 
             type="button" 
             data-doa-faq-toggle 
             aria-expanded={idx === 0 ? "true" : "false"}
-            class="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-4.5 text-left font-bold text-slate-950 dark:text-white text-sm sm:text-base focus:outline-none select-none transition-colors hover:text-red-600"
+            class="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-4.5 text-left font-bold text-neutral-950 dark:text-white text-sm sm:text-base focus:outline-none select-none transition-colors hover:text-red-600"
           >
             <span>{faq.question}</span>
             <span 
               data-doa-faq-icon 
               class:list={[
-                "text-slate-400 text-xs transition-transform duration-200 block shrink-0 select-none",
+                "text-neutral-400 text-xs transition-transform duration-200 block shrink-0 select-none",
                 idx === 0 ? "rotate-180 text-red-650" : "rotate-0"
               ]}
             >
@@ -92,7 +92,7 @@ const faqs = faqsOverride || data?.items || defaultFaqs;
           <div 
             data-doa-faq-answer 
             class:list={[
-              "px-6 pb-5 text-xs sm:text-sm leading-relaxed text-slate-500 dark:text-slate-400 border-t border-slate-50/50 dark:border-slate-900/60 pt-4",
+              "px-6 pb-5 text-xs sm:text-sm leading-relaxed text-neutral-500 dark:text-neutral-400 border-t border-neutral-50/50 dark:border-neutral-900/60 pt-4",
               idx === 0 ? "block" : "hidden"
             ]}
           >
@@ -132,7 +132,7 @@ const faqs = faqsOverride || data?.items || defaultFaqs;
           const icon = other.querySelector('[data-doa-faq-icon]');
           if (icon) {
             icon.classList.remove('rotate-180', 'text-red-650');
-            icon.classList.add('rotate-0', 'text-slate-400');
+            icon.classList.add('rotate-0', 'text-neutral-400');
           }
           const answer = other.parentElement?.querySelector('[data-doa-faq-answer]');
           if (answer) answer.classList.add('hidden');
@@ -144,7 +144,7 @@ const faqs = faqsOverride || data?.items || defaultFaqs;
           const icon = toggle.querySelector('[data-doa-faq-icon]');
           if (icon) {
             icon.classList.add('rotate-180', 'text-red-650');
-            icon.classList.remove('rotate-0', 'text-slate-400');
+            icon.classList.remove('rotate-0', 'text-neutral-400');
           }
           const answer = toggle.parentElement?.querySelector('[data-doa-faq-answer]');
           if (answer) answer.classList.remove('hidden');

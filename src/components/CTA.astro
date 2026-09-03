@@ -5,9 +5,9 @@ import themeConfig from '../data/theme.config.json';
 const isOakCity = themeConfig.style === 'oak-city';
 ---
 
-<section class="py-20 bg-white dark:bg-slate-950 relative overflow-hidden">
+<section class="py-20 bg-white dark:bg-neutral-950 relative overflow-hidden">
   <div class="container mx-auto px-6 relative z-10">
-    <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary via-slate-900 to-secondary text-white p-8 md:p-16">
+    <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary via-neutral-900 to-secondary text-white p-8 md:p-16">
       
       <!-- Ambient light decorative blobs -->
       <div class="absolute -right-24 -bottom-24 w-96 h-96 bg-accent/20 rounded-full blur-[100px] pointer-events-none"></div>
@@ -22,7 +22,7 @@ const isOakCity = themeConfig.style === 'oak-city';
           Get Your Free Estimate Today
         </h2>
 
-        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+        <p class="text-neutral-300 text-base sm:text-lg leading-relaxed">
           Get a free, no-obligation quote from {businessData.name} today.
         </p>
 
@@ -30,8 +30,8 @@ const isOakCity = themeConfig.style === 'oak-city';
           <a href="#quote-funnel" class:list={[
             "inline-flex items-center justify-center px-8 py-4 text-base font-bold transition-all hover:scale-103 text-center",
             isOakCity
-              ? "text-white bg-transparent border-2 border-white hover:bg-white hover:text-slate-950 rounded-custom"
-              : "text-slate-950 bg-white hover:bg-slate-100 rounded-custom shadow-lg"
+              ? "text-white bg-transparent border-2 border-white hover:bg-white hover:text-neutral-950 rounded-custom"
+              : "text-neutral-950 bg-white hover:bg-neutral-100 rounded-custom shadow-lg"
           ]}>
             {businessData.mainCta}
           </a>

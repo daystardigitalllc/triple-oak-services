@@ -31,7 +31,7 @@ const buttonHref = buttonHrefOverride || data?.buttonHref || '#jobs';
 const bgImage = bgImageOverride || data?.bgImage || 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80';
 ---
 
-<section class="relative min-h-[70vh] flex items-center justify-start bg-slate-950 text-white overflow-hidden py-24 select-none">
+<section class="relative min-h-[70vh] flex items-center justify-start bg-neutral-950 text-white overflow-hidden py-24 select-none">
   <!-- Background Image Overlay -->
   <div class="absolute inset-0 z-0">
     <img 
@@ -41,7 +41,7 @@ const bgImage = bgImageOverride || data?.bgImage || 'https://images.unsplash.com
       loading="eager"
       fetchpriority="high"
     />
-    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/80 to-transparent"></div>
   </div>
 
   <div class="container mx-auto px-6 max-w-6.5xl relative z-10">
@@ -68,7 +68,7 @@ const bgImage = bgImageOverride || data?.bgImage || 'https://images.unsplash.com
       <div class="pt-4">
         <a 
           href={buttonHref} 
-          class="inline-flex items-center justify-center gap-3 px-7 py-3.5 border-2 border-white hover:border-orange-500 hover:bg-orange-500 text-white hover:text-slate-950 text-sm font-bold uppercase tracking-wider transition-all duration-300 rounded-none shadow-md cursor-pointer"
+          class="inline-flex items-center justify-center gap-3 px-7 py-3.5 border-2 border-white hover:border-orange-500 hover:bg-orange-500 text-white hover:text-neutral-950 text-sm font-bold uppercase tracking-wider transition-all duration-300 rounded-none shadow-md cursor-pointer"
         >
           {buttonText}
           <i class="fa-solid fa-arrow-right text-xs"></i>

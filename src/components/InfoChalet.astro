@@ -49,7 +49,7 @@ const formattedAddress = typeof address === 'object' ? `${address.street || ''},
 const phone = phoneOverride || businessData.phone || '+33 4 50 00 00 00';
 ---
 
-<section id="info" class="py-24 bg-white text-slate-800 border-b border-slate-200/80 select-none">
+<section id="info" class="py-24 bg-white text-neutral-800 border-b border-neutral-200/80 select-none">
   <div class="container mx-auto px-6 max-w-5xl space-y-16">
     
     <!-- Section Header -->
@@ -59,7 +59,7 @@ const phone = phoneOverride || businessData.phone || '+33 4 50 00 00 00';
           {badge}
         </span>
       )}
-      <h2 class="text-3xl sm:text-4xl font-serif font-normal text-slate-950 tracking-tight leading-tight">
+      <h2 class="text-3xl sm:text-4xl font-serif font-normal text-neutral-950 tracking-tight leading-tight">
         {heading}
       </h2>
     </div>
@@ -68,16 +68,16 @@ const phone = phoneOverride || businessData.phone || '+33 4 50 00 00 00';
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
       
       <!-- Card 1: Opening hours table -->
-      <div class="bg-white border border-slate-200/60 p-8 rounded-xl shadow-sm space-y-6 flex flex-col justify-between">
-        <h3 class="text-xl font-serif font-bold text-slate-900 border-b border-slate-100 pb-4">Opening hours</h3>
+      <div class="bg-white border border-neutral-200/60 p-8 rounded-xl shadow-sm space-y-6 flex flex-col justify-between">
+        <h3 class="text-xl font-serif font-bold text-neutral-900 border-b border-neutral-100 pb-4">Opening hours</h3>
         <table class="w-full text-xs sm:text-sm text-left border-collapse">
           <tbody>
             {hours.map((row) => (
-              <tr class="border-b border-slate-100/60 last:border-0">
-                <th scope="row" class="py-3 font-semibold text-slate-500">{row.day}</th>
+              <tr class="border-b border-neutral-100/60 last:border-0">
+                <th scope="row" class="py-3 font-semibold text-neutral-500">{row.day}</th>
                 <td class:list={[
                   "py-3 text-right font-semibold",
-                  row.hours === 'Closed' ? 'text-rose-500 font-bold' : 'text-slate-900'
+                  row.hours === 'Closed' ? 'text-rose-500 font-bold' : 'text-neutral-900'
                 ]}>
                   {row.hours}
                 </td>
@@ -88,14 +88,14 @@ const phone = phoneOverride || businessData.phone || '+33 4 50 00 00 00';
       </div>
 
       <!-- Card 2: Contact/Address directions -->
-      <div class="bg-white border border-slate-200/60 p-8 rounded-xl shadow-sm flex flex-col justify-between space-y-8">
+      <div class="bg-white border border-neutral-200/60 p-8 rounded-xl shadow-sm flex flex-col justify-between space-y-8">
         <div class="space-y-6">
-          <h3 class="text-xl font-serif font-bold text-slate-900 border-b border-slate-100 pb-4">Find us</h3>
+          <h3 class="text-xl font-serif font-bold text-neutral-900 border-b border-neutral-100 pb-4">Find us</h3>
           
           <div class="space-y-4 text-xs sm:text-sm">
             <div class="flex items-start gap-3">
               <i class="fa-solid fa-location-dot text-primary mt-1"></i>
-              <p class="text-slate-650 leading-relaxed font-semibold">
+              <p class="text-neutral-650 leading-relaxed font-semibold">
                 {formattedAddress.includes(',') ? (
                   <>
                     {formattedAddress.split(',')[0]}
@@ -108,7 +108,7 @@ const phone = phoneOverride || businessData.phone || '+33 4 50 00 00 00';
             
             <div class="flex items-center gap-3">
               <i class="fa-solid fa-phone text-primary"></i>
-              <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} class="font-semibold text-slate-900 hover:text-primary transition-colors">
+              <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} class="font-semibold text-neutral-900 hover:text-primary transition-colors">
                 {phone}
               </a>
             </div>
@@ -116,7 +116,7 @@ const phone = phoneOverride || businessData.phone || '+33 4 50 00 00 00';
         </div>
 
         <!-- Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-100">
+        <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-neutral-100">
           <a 
             href={directionsUrl} 
             target="_blank" 
@@ -127,7 +127,7 @@ const phone = phoneOverride || businessData.phone || '+33 4 50 00 00 00';
           </a>
           <a 
             href={`tel:${phone.replace(/[^0-9+]/g, '')}`} 
-            class="flex-1 py-3 text-center text-xs font-bold uppercase tracking-widest border border-slate-200 hover:bg-[#FAF9F5]/40 text-slate-800 rounded transition-all cursor-pointer"
+            class="flex-1 py-3 text-center text-xs font-bold uppercase tracking-widest border border-neutral-200 hover:bg-[#FAF9F5]/40 text-neutral-800 rounded transition-all cursor-pointer"
           >
             Call Us
           </a>

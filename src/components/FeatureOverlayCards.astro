@@ -32,16 +32,16 @@ const subtitle = subtitleOverride || data?.subtitle || 'Hover a card to learn mo
 const items: FeatureItem[] = itemsOverride || data?.items || [];
 ---
 
-<section id="highlights-overlay" class="py-24 bg-white dark:bg-slate-950 relative border-t border-slate-100 dark:border-slate-900/60">
+<section id="highlights-overlay" class="py-24 bg-white dark:bg-neutral-950 relative border-t border-neutral-100 dark:border-neutral-900/60">
   <div class="container mx-auto px-6">
     <div class="max-w-3xl mx-auto text-center space-y-4 mb-14">
       <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
         {badge}
       </span>
-      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-[1.1]">
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white uppercase leading-[1.1]">
         {heading}
       </h2>
-      <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 font-normal">
+      <p class="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 font-normal">
         {subtitle}
       </p>
     </div>
@@ -55,7 +55,7 @@ const items: FeatureItem[] = itemsOverride || data?.items || [];
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-slate-950/10 transition-opacity duration-300"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/95 via-neutral-950/50 to-neutral-950/10 transition-opacity duration-300"></div>
 
           <div class="absolute inset-0 flex flex-col justify-end p-6">
             {item.icon && (

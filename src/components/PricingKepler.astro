@@ -88,24 +88,24 @@ const defaultPlans: Plan[] = [
 const plans = plansOverride || data?.plans || defaultPlans;
 ---
 
-<section id="pricing-kepler" class="border-y-4 border-slate-950 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-slate-950 py-24 select-none">
+<section id="pricing-kepler" class="border-y-4 border-neutral-950 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-neutral-950 py-24 select-none">
   <div class="container mx-auto px-6 max-w-6.5xl">
     
     <!-- Header -->
     <div class="mx-auto text-center max-w-[620px] mb-8 space-y-3">
       {badge && (
-        <span class="text-xs font-bold uppercase tracking-[0.12em] text-white bg-slate-950 px-4 py-1.5 rounded-full shadow-sm">
+        <span class="text-xs font-bold uppercase tracking-[0.12em] text-white bg-neutral-950 px-4 py-1.5 rounded-full shadow-sm">
           {badge}
         </span>
       )}
-      <h2 class="text-4xl sm:text-5.5xl font-black leading-tight tracking-tight text-slate-950">
+      <h2 class="text-4xl sm:text-5.5xl font-black leading-tight tracking-tight text-neutral-950">
         {heading}
       </h2>
     </div>
 
     <!-- Billing Toggle (Neo-brutalist border) -->
     <div class="mb-14 flex justify-center">
-      <div id="kepler-billing-toggle" class="inline-flex gap-1 rounded-full border-2 border-slate-950 bg-white p-1">
+      <div id="kepler-billing-toggle" class="inline-flex gap-1 rounded-full border-2 border-neutral-950 bg-white p-1">
         <button 
           type="button" 
           data-period="monthly" 
@@ -118,7 +118,7 @@ const plans = plansOverride || data?.plans || defaultPlans;
           type="button" 
           data-period="yearly" 
           aria-pressed="false" 
-          class="cursor-pointer rounded-full bg-transparent px-5 py-2 text-sm font-bold text-slate-600 transition-colors duration-150"
+          class="cursor-pointer rounded-full bg-transparent px-5 py-2 text-sm font-bold text-neutral-600 transition-colors duration-150"
         >
           Yearly <span class="text-orange-500 font-extrabold">-20%</span>
         </button>
@@ -129,10 +129,10 @@ const plans = plansOverride || data?.plans || defaultPlans;
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start pt-6">
       {plans.map((plan) => (
         <div class:list={[
-          "rounded-[22px] border-2 border-slate-950 p-8 shadow-[5px_5px_0_#0f1e42] relative transition-all duration-200",
+          "rounded-[22px] border-2 border-neutral-950 p-8 shadow-[5px_5px_0_#0f1e42] relative transition-all duration-200",
           plan.highlighted 
             ? "scale-[1.03] bg-[#0f1e42] text-white shadow-[6px_6px_0_#f8fafc] md:-translate-y-2" 
-            : "bg-white text-slate-950 shadow-[5px_5px_0_#0f1e42]"
+            : "bg-white text-neutral-950 shadow-[5px_5px_0_#0f1e42]"
         ]}>
           <!-- Floating Highlight Badge Banner -->
           {plan.highlighted && plan.badge && (
@@ -142,14 +142,14 @@ const plans = plansOverride || data?.plans || defaultPlans;
           )}
 
           <!-- Card Header Info -->
-          <div class="space-y-1 pb-4 border-b border-slate-200/50 dark:border-slate-800/40">
+          <div class="space-y-1 pb-4 border-b border-neutral-200/50 dark:border-neutral-800/40">
             <h3 class="text-xl font-bold tracking-tight">{plan.name}</h3>
-            <p class:list={["text-xs", plan.highlighted ? "text-slate-400" : "text-slate-500"]}>{plan.tagline}</p>
+            <p class:list={["text-xs", plan.highlighted ? "text-neutral-400" : "text-neutral-500"]}>{plan.tagline}</p>
           </div>
 
           <!-- Price section -->
           <div class="py-6 flex items-baseline gap-1">
-            <span class="text-2xl font-bold text-slate-400">$</span>
+            <span class="text-2xl font-bold text-neutral-400">$</span>
             <span 
               class="text-5xl font-black tracking-tight price-value"
               data-price-monthly={plan.priceMonthly}
@@ -157,7 +157,7 @@ const plans = plansOverride || data?.plans || defaultPlans;
             >
               {plan.priceMonthly}
             </span>
-            <span class:list={["text-sm font-semibold ml-0.5 price-period-label", plan.highlighted ? "text-slate-400" : "text-slate-500"]}>
+            <span class:list={["text-sm font-semibold ml-0.5 price-period-label", plan.highlighted ? "text-neutral-400" : "text-neutral-500"]}>
               /mo
             </span>
           </div>
@@ -167,10 +167,10 @@ const plans = plansOverride || data?.plans || defaultPlans;
             <a 
               href={plan.ctaHref || "#contacts"} 
               class:list={[
-                "block w-full py-3 text-center text-sm font-bold rounded-full transition-all border-2 border-slate-950 cursor-pointer duration-150",
+                "block w-full py-3 text-center text-sm font-bold rounded-full transition-all border-2 border-neutral-950 cursor-pointer duration-150",
                 plan.highlighted 
                   ? "bg-orange-500 text-white hover:-translate-y-0.5 shadow-sm" 
-                  : "bg-white text-slate-950 hover:bg-slate-100"
+                  : "bg-white text-neutral-950 hover:bg-neutral-100"
               ]}
             >
               {plan.ctaText || 'Get Started'}
@@ -182,7 +182,7 @@ const plans = plansOverride || data?.plans || defaultPlans;
             {plan.features.map((feature) => (
               <li class="flex items-center gap-2.5">
                 <span class:list={["font-black text-base", plan.highlighted ? "text-orange-400" : "text-orange-500"]}>✓</span>
-                <span class:list={[plan.highlighted ? "text-slate-300" : "text-slate-700"]}>{feature}</span>
+                <span class:list={[plan.highlighted ? "text-neutral-300" : "text-neutral-700"]}>{feature}</span>
               </li>
             ))}
           </ul>
@@ -204,7 +204,7 @@ const plans = plansOverride || data?.plans || defaultPlans;
     const periodLabels = document.querySelectorAll('#pricing-kepler .price-period-label');
 
     const activeClasses = ['bg-[#0f1e42]', 'text-white'];
-    const inactiveClasses = ['bg-transparent', 'text-slate-600'];
+    const inactiveClasses = ['bg-transparent', 'text-neutral-600'];
 
     buttons.forEach((btn) => {
       btn.addEventListener('click', () => {

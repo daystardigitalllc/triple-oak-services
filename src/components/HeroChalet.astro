@@ -45,7 +45,7 @@ const defaultHighlights = [
 const highlights = data?.highlights || defaultHighlights;
 ---
 
-<section class="relative min-h-[85vh] flex items-center justify-start text-white overflow-hidden py-32 select-none bg-slate-900">
+<section class="relative min-h-[85vh] flex items-center justify-start text-white overflow-hidden py-32 select-none bg-neutral-900">
   
   <!-- Backdrop Image & Overlay Layer -->
   <div class="absolute inset-0 z-0">
@@ -56,7 +56,7 @@ const highlights = data?.highlights || defaultHighlights;
       loading="eager"
       fetchpriority="high"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-slate-950/20"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/40 to-neutral-950/20"></div>
   </div>
 
   <div class="container mx-auto px-6 max-w-5xl relative z-10 space-y-8">
@@ -79,7 +79,7 @@ const highlights = data?.highlights || defaultHighlights;
         ) : heading}
       </h1>
  
-      <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-lg">
+      <p class="text-neutral-300 text-sm sm:text-base leading-relaxed max-w-lg">
         {subtitle}
       </p>
  
@@ -101,7 +101,7 @@ const highlights = data?.highlights || defaultHighlights;
     </div>
  
     <!-- Horizontal Bullet Highlights -->
-    <ul class="flex flex-wrap gap-x-8 gap-y-3 pt-6 border-t border-white/20 w-fit text-xs font-semibold text-slate-350 select-none">
+    <ul class="flex flex-wrap gap-x-8 gap-y-3 pt-6 border-t border-white/20 w-fit text-xs font-semibold text-neutral-350 select-none">
       {highlights.map((item) => (
         <li class="flex items-center gap-2">
           <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>

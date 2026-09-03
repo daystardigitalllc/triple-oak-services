@@ -11,10 +11,10 @@ const faqs = faqsOverride || contentData.faqs;
 
 const isOakCity = themeConfig.style === 'oak-city';
 const cardClass = themeConfig.style === 'sharp-contractor' || isOakCity ? 'contractor-panel' : 'glass-panel';
-const bgClass = themeConfig.style === 'sharp-contractor' || isOakCity ? 'bg-slate-50 dark:bg-slate-900/50' : 'bg-slate-50/50 dark:bg-slate-900/10';
+const bgClass = themeConfig.style === 'sharp-contractor' || isOakCity ? 'bg-neutral-50 dark:bg-neutral-900/50' : 'bg-neutral-50/50 dark:bg-neutral-900/10';
 ---
 
-<section id="faq" class="py-24 bg-white dark:bg-slate-950 relative border-t border-slate-100 dark:border-slate-900/60">
+<section id="faq" class="py-24 bg-white dark:bg-neutral-950 relative border-t border-neutral-100 dark:border-neutral-900/60">
   <div class="container mx-auto px-6">
     {isOakCity ? (
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
@@ -24,10 +24,10 @@ const bgClass = themeConfig.style === 'sharp-contractor' || isOakCity ? 'bg-slat
           <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1.5 rounded-md border border-primary/20">
             Got Questions?
           </span>
-          <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-[1.1]">
+          <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white uppercase leading-[1.1]">
             Questions,<br>Answered
           </h2>
-          <p class="text-base text-slate-500 dark:text-slate-400 font-normal leading-relaxed">
+          <p class="text-base text-neutral-500 dark:text-neutral-400 font-normal leading-relaxed">
             Don't see your question here? Give us a call and we'll walk you through it.
           </p>
           <div class="pt-2">
@@ -45,8 +45,8 @@ const bgClass = themeConfig.style === 'sharp-contractor' || isOakCity ? 'bg-slat
         {/* Right Column Accordions */}
         <div class="lg:col-span-8 space-y-4">
           {faqs.map((faq) => (
-            <details class:list={[cardClass, bgClass, "group rounded-custom border border-slate-200/50 dark:border-slate-800/50 [&_summary::-webkit-details-marker]:hidden"]}>
-              <summary class="flex justify-between items-center p-6 font-bold text-slate-900 dark:text-white cursor-pointer select-none">
+            <details class:list={[cardClass, bgClass, "group rounded-custom border border-neutral-200/50 dark:border-neutral-800/50 [&_summary::-webkit-details-marker]:hidden"]}>
+              <summary class="flex justify-between items-center p-6 font-bold text-neutral-900 dark:text-white cursor-pointer select-none">
                 <span class="text-base sm:text-lg uppercase tracking-tight">{faq.q}</span>
                 <span class="ml-4 shrink-0 rounded-full bg-primary/10 text-primary p-1.5 transition-transform duration-300 group-open:-rotate-180">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -54,8 +54,8 @@ const bgClass = themeConfig.style === 'sharp-contractor' || isOakCity ? 'bg-slat
                   </svg>
                 </span>
               </summary>
-              <div class="px-6 pb-6 pt-0 border-t border-slate-200/30 dark:border-slate-800/30">
-                <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed pt-4 font-normal">
+              <div class="px-6 pb-6 pt-0 border-t border-neutral-200/30 dark:border-neutral-800/30">
+                <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed pt-4 font-normal">
                   {faq.a}
                 </p>
               </div>
@@ -71,10 +71,10 @@ const bgClass = themeConfig.style === 'sharp-contractor' || isOakCity ? 'bg-slat
           <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">
             Got Questions?
           </span>
-          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white uppercase leading-[1.1]">
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white uppercase leading-[1.1]">
             Frequently Asked Questions
           </h2>
-          <p class="text-base text-slate-500 dark:text-slate-400 font-normal">
+          <p class="text-base text-neutral-500 dark:text-neutral-400 font-normal">
             Find quick answers to common questions about our services, pricing, and warranties.
           </p>
         </div>
@@ -82,8 +82,8 @@ const bgClass = themeConfig.style === 'sharp-contractor' || isOakCity ? 'bg-slat
         {/* Accordion List */}
         <div class="space-y-4">
           {faqs.map((faq) => (
-            <details class:list={[cardClass, bgClass, "group rounded-custom border border-slate-200/50 dark:border-slate-800/50 [&_summary::-webkit-details-marker]:hidden"]}>
-              <summary class="flex justify-between items-center p-6 font-bold text-slate-900 dark:text-white cursor-pointer select-none">
+            <details class:list={[cardClass, bgClass, "group rounded-custom border border-neutral-200/50 dark:border-neutral-800/50 [&_summary::-webkit-details-marker]:hidden"]}>
+              <summary class="flex justify-between items-center p-6 font-bold text-neutral-900 dark:text-white cursor-pointer select-none">
                 <span class="text-base sm:text-lg">{faq.q}</span>
                 <span class="ml-4 shrink-0 rounded-full bg-primary/10 text-primary p-1.5 transition-transform duration-300 group-open:-rotate-180">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,8 +91,8 @@ const bgClass = themeConfig.style === 'sharp-contractor' || isOakCity ? 'bg-slat
                   </svg>
                 </span>
               </summary>
-              <div class="px-6 pb-6 pt-0 border-t border-slate-200/30 dark:border-slate-800/30">
-                <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed pt-4 font-normal">
+              <div class="px-6 pb-6 pt-0 border-t border-neutral-200/30 dark:border-neutral-800/30">
+                <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed pt-4 font-normal">
                   {faq.a}
                 </p>
               </div>

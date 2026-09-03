@@ -6,23 +6,23 @@
 @theme {
   --color-primary: var(--primary-color, #16a34a);
   --color-primary-hover: var(--primary-color-hover, #15803d);
-  --color-secondary: var(--secondary-color, #0f172a);
+  --color-secondary: var(--secondary-color, #171717);
   --color-accent: var(--accent-color, #f97316);
   --radius-custom: var(--border-radius, 0.375rem);
   --font-custom: var(--font-family, 'Outfit', sans-serif);
 
   --color-background: var(--background, #ffffff);
-  --color-foreground: var(--foreground, #0f172a);
+  --color-foreground: var(--foreground, #171717);
   --color-card: var(--card, #ffffff);
-  --color-card-foreground: var(--card-foreground, #0f172a);
+  --color-card-foreground: var(--card-foreground, #171717);
   --color-popover: var(--popover, #ffffff);
-  --color-popover-foreground: var(--popover-foreground, #0f172a);
-  --color-muted: var(--muted, #f1f5f9);
-  --color-muted-foreground: var(--muted-foreground, #64748b);
-  --color-border: var(--border, #e2e8f0);
-  --color-input: var(--input, #e2e8f0);
-  --color-ring: var(--ring, #94a3b8);
-  --color-accent-foreground: var(--accent-foreground, #0f172a);
+  --color-popover-foreground: var(--popover-foreground, #171717);
+  --color-muted: var(--muted, #f5f5f5);
+  --color-muted-foreground: var(--muted-foreground, #737373);
+  --color-border: var(--border, #e5e5e5);
+  --color-input: var(--input, #e5e5e5);
+  --color-ring: var(--ring, #a3a3a3);
+  --color-accent-foreground: var(--accent-foreground, #171717);
   --color-primary-foreground: var(--primary-foreground, #ffffff);
   --color-secondary-foreground: var(--secondary-foreground, #ffffff);
   --color-destructive: var(--destructive, #ef4444);
@@ -59,7 +59,7 @@
 }
 
 .dark .glass-panel {
-  background: var(--glass-bg-dark, color-mix(in srgb, var(--color-secondary, #0f172a) 70%, transparent));
+  background: var(--glass-bg-dark, color-mix(in srgb, var(--color-secondary, #171717) 70%, transparent));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border-dark, rgba(255, 255, 255, 0.08));
@@ -68,12 +68,12 @@
 /* Sharp Contractor Flat Panels */
 .contractor-panel {
   background: var(--card-bg, #ffffff);
-  border: 1px solid var(--card-border, #e2e8f0);
+  border: 1px solid var(--card-border, #e5e5e5);
 }
 
 .dark .contractor-panel {
-  background: var(--card-bg-dark, var(--color-secondary, #0f172a));
-  border: 1px solid var(--card-border-dark, #1e293b);
+  background: var(--card-bg-dark, var(--color-secondary, #171717));
+  border: 1px solid var(--card-border-dark, #262626);
 }
 
 /* Decorative Glow Blobs */

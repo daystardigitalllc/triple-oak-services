@@ -97,7 +97,7 @@ const defaultPlans: Plan[] = [
 const plans = plansOverride || data?.plans || defaultPlans;
 ---
 
-<section id="pricing" class="py-24 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800">
+<section id="pricing" class="py-24 bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800">
   <div class="container mx-auto px-6 max-w-5xl">
     
     <!-- Section Header -->
@@ -111,7 +111,7 @@ const plans = plansOverride || data?.plans || defaultPlans;
         {heading}
       </h2>
       {subtitle && (
-        <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base leading-relaxed">
           {subtitle}
         </p>
       )}
@@ -119,18 +119,18 @@ const plans = plansOverride || data?.plans || defaultPlans;
 
     <!-- Toggle Buttons -->
     <div class="mb-14 flex flex-col items-center gap-4">
-      <div class="inline-flex justify-center gap-1 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 p-1.5" role="group" aria-label="Billing Period">
+      <div class="inline-flex justify-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 p-1.5" role="group" aria-label="Billing Period">
         <button
           type="button"
           id="btn-billing-monthly"
-          class="flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-slate-700 dark:text-slate-300 transition-all select-none focus:outline-none bg-white dark:bg-slate-800 shadow-sm text-slate-900 dark:text-white"
+          class="flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-neutral-700 dark:text-neutral-300 transition-all select-none focus:outline-none bg-white dark:bg-neutral-800 shadow-sm text-neutral-900 dark:text-white"
         >
           Monthly
         </button>
         <button
           type="button"
           id="btn-billing-annually"
-          class="flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-slate-600 dark:text-slate-400 transition-all select-none focus:outline-none"
+          class="flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-neutral-600 dark:text-neutral-400 transition-all select-none focus:outline-none"
         >
           Annually
           <span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Save 20%</span>
@@ -142,8 +142,8 @@ const plans = plansOverride || data?.plans || defaultPlans;
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {plans.map((plan) => (
         <div class:list={[
-          "relative flex flex-col rounded-2xl bg-white dark:bg-slate-900 p-8 shadow-md border-2 transition-all hover:-translate-y-1 duration-300",
-          plan.highlighted ? "border-primary dark:border-primary shadow-xl shadow-primary/5" : "border-slate-200 dark:border-slate-800"
+          "relative flex flex-col rounded-2xl bg-white dark:bg-neutral-900 p-8 shadow-md border-2 transition-all hover:-translate-y-1 duration-300",
+          plan.highlighted ? "border-primary dark:border-primary shadow-xl shadow-primary/5" : "border-neutral-200 dark:border-neutral-800"
         ]}>
           <!-- Badge -->
           {plan.badge && (
@@ -153,34 +153,34 @@ const plans = plansOverride || data?.plans || defaultPlans;
           )}
 
           <!-- Plan Info -->
-          <div class="border-b border-slate-100 dark:border-slate-800 pb-6 text-center space-y-2">
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white">{plan.name}</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed min-h-8">{plan.tagline}</p>
+          <div class="border-b border-neutral-100 dark:border-neutral-800 pb-6 text-center space-y-2">
+            <h3 class="text-xl font-bold text-neutral-900 dark:text-white">{plan.name}</h3>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed min-h-8">{plan.tagline}</p>
             
             <!-- Pricing Display -->
             <div class="pt-4 flex flex-col items-center">
               <span class="flex items-baseline justify-center">
-                <span class="text-2xl font-bold text-slate-400 mr-0.5">{currencySymbol}</span>
+                <span class="text-2xl font-bold text-neutral-400 mr-0.5">{currencySymbol}</span>
                 <!-- Monthly Price value -->
-                <span class="text-5xl font-black tracking-tight text-slate-900 dark:text-white price-display-value" data-monthly={plan.priceMonthly} data-annually={plan.priceAnnually}>
+                <span class="text-5xl font-black tracking-tight text-neutral-900 dark:text-white price-display-value" data-monthly={plan.priceMonthly} data-annually={plan.priceAnnually}>
                   {plan.priceMonthly}
                 </span>
-                <span class="text-sm font-bold text-slate-400 ml-1">/mo</span>
+                <span class="text-sm font-bold text-neutral-400 ml-1">/mo</span>
               </span>
-              <span class="text-[10px] font-semibold text-slate-400 mt-1 flex billing-note-text">Billed monthly</span>
+              <span class="text-[10px] font-semibold text-neutral-400 mt-1 flex billing-note-text">Billed monthly</span>
             </div>
           </div>
 
           <!-- Features Checklist -->
-          <ul class="flex-grow space-y-4.5 py-8 text-sm text-slate-600 dark:text-slate-300">
+          <ul class="flex-grow space-y-4.5 py-8 text-sm text-neutral-600 dark:text-neutral-300">
             {plan.features.map((feature) => (
               <li class="flex items-start gap-3">
                 {feature.included ? (
                   <span class="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5 border border-emerald-500/20">&check;</span>
                 ) : (
-                  <span class="w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5 border border-slate-200 dark:border-slate-700">&times;</span>
+                  <span class="w-5 h-5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5 border border-neutral-200 dark:border-neutral-700">&times;</span>
                 )}
-                <span class:list={[!feature.included && "text-slate-400 dark:text-slate-600 line-through"]}>
+                <span class:list={[!feature.included && "text-neutral-400 dark:text-neutral-600 line-through"]}>
                   {feature.label}
                 </span>
               </li>
@@ -195,7 +195,7 @@ const plans = plansOverride || data?.plans || defaultPlans;
                 "block w-full py-3 text-center text-sm font-bold rounded-xl transition-all cursor-pointer",
                 plan.highlighted 
                   ? "bg-primary text-white hover:bg-primary-hover shadow-lg shadow-primary/20" 
-                  : "bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white"
+                  : "bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-white"
               ]}
             >
               {plan.ctaText || 'Get Started'}
@@ -220,11 +220,11 @@ const plans = plansOverride || data?.plans || defaultPlans;
 
     btnMonthly.addEventListener('click', () => {
       // Toggle button styles
-      btnMonthly.classList.add('bg-white', 'dark:bg-slate-800', 'shadow-sm', 'text-slate-900', 'dark:text-white');
-      btnMonthly.classList.remove('text-slate-600', 'dark:text-slate-400');
+      btnMonthly.classList.add('bg-white', 'dark:bg-neutral-800', 'shadow-sm', 'text-neutral-900', 'dark:text-white');
+      btnMonthly.classList.remove('text-neutral-600', 'dark:text-neutral-400');
       
-      btnAnnually.classList.remove('bg-white', 'dark:bg-slate-800', 'shadow-sm', 'text-slate-900', 'dark:text-white');
-      btnAnnually.classList.add('text-slate-600', 'dark:text-slate-400');
+      btnAnnually.classList.remove('bg-white', 'dark:bg-neutral-800', 'shadow-sm', 'text-neutral-900', 'dark:text-white');
+      btnAnnually.classList.add('text-neutral-600', 'dark:text-neutral-400');
 
       // Update values
       priceElements.forEach((el) => {
@@ -239,11 +239,11 @@ const plans = plansOverride || data?.plans || defaultPlans;
 
     btnAnnually.addEventListener('click', () => {
       // Toggle button styles
-      btnAnnually.classList.add('bg-white', 'dark:bg-slate-800', 'shadow-sm', 'text-slate-900', 'dark:text-white');
-      btnAnnually.classList.remove('text-slate-600', 'dark:text-slate-400');
+      btnAnnually.classList.add('bg-white', 'dark:bg-neutral-800', 'shadow-sm', 'text-neutral-900', 'dark:text-white');
+      btnAnnually.classList.remove('text-neutral-600', 'dark:text-neutral-400');
       
-      btnMonthly.classList.remove('bg-white', 'dark:bg-slate-800', 'shadow-sm', 'text-slate-900', 'dark:text-white');
-      btnMonthly.classList.add('text-slate-600', 'dark:text-slate-400');
+      btnMonthly.classList.remove('bg-white', 'dark:bg-neutral-800', 'shadow-sm', 'text-neutral-900', 'dark:text-white');
+      btnMonthly.classList.add('text-neutral-600', 'dark:text-neutral-400');
 
       // Update values
       priceElements.forEach((el) => {

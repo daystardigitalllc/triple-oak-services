@@ -58,7 +58,7 @@ const defaultGroups: CompareGroup[] = [
 const groups = matrixGroupsOverride || data?.groups || defaultGroups;
 ---
 
-<section id="pricing-matrix" class="py-24 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white select-none border-b border-slate-200 dark:border-slate-800">
+<section id="pricing-matrix" class="py-24 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white select-none border-b border-neutral-200 dark:border-neutral-800">
   <div class="container mx-auto px-6 max-w-5xl space-y-16">
     
     <!-- Header -->
@@ -68,22 +68,22 @@ const groups = matrixGroupsOverride || data?.groups || defaultGroups;
           {badge}
         </span>
       )}
-      <h2 class="text-3xl sm:text-4.5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+      <h2 class="text-3xl sm:text-4.5xl font-black text-neutral-950 dark:text-white tracking-tight leading-tight">
         {heading}
       </h2>
     </div>
 
     <!-- Responsive Comparison Table -->
-    <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 shadow-lg bg-white dark:bg-slate-950">
+    <div class="overflow-x-auto rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-lg bg-white dark:bg-neutral-950">
       <table class="w-full text-left border-collapse min-w-[700px]">
         
         <!-- Table Header Banners -->
         <thead>
-          <tr class="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900">
-            <th scope="col" class="p-6 text-xs font-black uppercase text-slate-400 tracking-wider w-[40%]">Service Features</th>
-            <th scope="col" class="p-6 text-center text-xs font-black uppercase text-slate-900 dark:text-white tracking-wider w-[20%]">DOA Basic</th>
+          <tr class="border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
+            <th scope="col" class="p-6 text-xs font-black uppercase text-neutral-400 tracking-wider w-[40%]">Service Features</th>
+            <th scope="col" class="p-6 text-center text-xs font-black uppercase text-neutral-900 dark:text-white tracking-wider w-[20%]">DOA Basic</th>
             <th scope="col" class="p-6 text-center text-xs font-black uppercase text-red-650 tracking-wider w-[20%]">DOA Shield Plus</th>
-            <th scope="col" class="p-6 text-center text-xs font-black uppercase text-slate-900 dark:text-white tracking-wider w-[20%]">DOA Elite</th>
+            <th scope="col" class="p-6 text-center text-xs font-black uppercase text-neutral-900 dark:text-white tracking-wider w-[20%]">DOA Elite</th>
           </tr>
         </thead>
 
@@ -91,21 +91,21 @@ const groups = matrixGroupsOverride || data?.groups || defaultGroups;
         {groups.map((group) => (
           <tbody>
             <!-- Group Divider Title row -->
-            <tr class="bg-slate-50/50 dark:bg-slate-900/40 border-b border-slate-200/60 dark:border-slate-800/60">
-              <th colspan="4" class="px-6 py-4 text-xs font-black text-slate-400 uppercase tracking-widest bg-slate-100/30 dark:bg-slate-900/20">
+            <tr class="bg-neutral-50/50 dark:bg-neutral-900/40 border-b border-neutral-200/60 dark:border-neutral-800/60">
+              <th colspan="4" class="px-6 py-4 text-xs font-black text-neutral-400 uppercase tracking-widest bg-neutral-100/30 dark:bg-neutral-900/20">
                 {group.groupName}
               </th>
             </tr>
 
             <!-- Features Rows -->
             {group.features.map((row) => (
-              <tr class="border-b border-slate-100 dark:border-slate-900/60 hover:bg-slate-50/20 dark:hover:bg-slate-850/20">
-                <td class="p-6 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">{row.name}</td>
+              <tr class="border-b border-neutral-100 dark:border-neutral-900/60 hover:bg-neutral-50/20 dark:hover:bg-neutral-850/20">
+                <td class="p-6 text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300">{row.name}</td>
                 
                 <!-- Basic spec column -->
-                <td class="p-6 text-center text-xs sm:text-sm font-bold text-slate-500">
+                <td class="p-6 text-center text-xs sm:text-sm font-bold text-neutral-500">
                   {typeof row.basic === 'boolean' ? (
-                    row.basic ? <span class="text-emerald-500 text-base font-black">✓</span> : <span class="text-slate-300">&mdash;</span>
+                    row.basic ? <span class="text-emerald-500 text-base font-black">✓</span> : <span class="text-neutral-300">&mdash;</span>
                   ) : (
                     row.basic
                   )}
@@ -114,16 +114,16 @@ const groups = matrixGroupsOverride || data?.groups || defaultGroups;
                 <!-- Premium spec column -->
                 <td class="p-6 text-center text-xs sm:text-sm font-bold text-red-650 bg-red-50/5 dark:bg-red-950/5">
                   {typeof row.premium === 'boolean' ? (
-                    row.premium ? <span class="text-emerald-500 text-base font-black">✓</span> : <span class="text-slate-350 dark:text-slate-600">&mdash;</span>
+                    row.premium ? <span class="text-emerald-500 text-base font-black">✓</span> : <span class="text-neutral-350 dark:text-neutral-600">&mdash;</span>
                   ) : (
                     row.premium
                   )}
                 </td>
 
                 <!-- Elite spec column -->
-                <td class="p-6 text-center text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
+                <td class="p-6 text-center text-xs sm:text-sm font-bold text-neutral-900 dark:text-white">
                   {typeof row.elite === 'boolean' ? (
-                    row.elite ? <span class="text-emerald-500 text-base font-black">✓</span> : <span class="text-slate-300 dark:text-slate-600">&mdash;</span>
+                    row.elite ? <span class="text-emerald-500 text-base font-black">✓</span> : <span class="text-neutral-300 dark:text-neutral-600">&mdash;</span>
                   ) : (
                     row.elite
                   )}

@@ -36,7 +36,7 @@ const imageSrc = imageSrcOverride || data?.imageSrc || '/images/hero-cozy-device
 const imageAlt = imageAltOverride || data?.imageAlt || 'Interactive companion device on a table';
 ---
 
-<section class="relative pt-20 pb-16 md:pt-32 md:pb-24 bg-[#FAF7F2] text-slate-800 overflow-hidden border-b border-orange-100/50">
+<section class="relative pt-20 pb-16 md:pt-32 md:pb-24 bg-[#FAF7F2] text-neutral-800 overflow-hidden border-b border-orange-100/50">
   <!-- Soft Radial Background Glow -->
   <div class="absolute inset-0 pointer-events-none opacity-40">
     <div class="absolute top-[-20%] left-[-20%] w-[60%] aspect-square rounded-full bg-orange-200/30 blur-[120px]"></div>
@@ -70,7 +70,7 @@ const imageAlt = imageAltOverride || data?.imageAlt || 'Interactive companion de
 
     <!-- Supporting Text -->
     {subtitle && (
-      <p class="mt-6 max-w-xl text-base sm:text-lg text-slate-600 font-normal leading-relaxed animate-fade-in-up" style="animation-delay: 0.1s;">
+      <p class="mt-6 max-w-xl text-base sm:text-lg text-neutral-600 font-normal leading-relaxed animate-fade-in-up" style="animation-delay: 0.1s;">
         {subtitle}
       </p>
     )}
@@ -87,7 +87,7 @@ const imageAlt = imageAltOverride || data?.imageAlt || 'Interactive companion de
 
     <!-- Product Image Mockup Card (With soft shadow & wooden frame styling) -->
     <div class="mt-14 w-full max-w-3.5xl rounded-3xl overflow-hidden bg-white p-4 border border-orange-100/30 shadow-2xl shadow-orange-950/5 relative animate-fade-in-up" style="animation-delay: 0.3s;">
-      <div class="aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-100 border border-slate-100 relative group">
+      <div class="aspect-[16/9] w-full rounded-2xl overflow-hidden bg-neutral-100 border border-neutral-100 relative group">
         <!-- Main Product Photo -->
         <img 
           src={imageSrc} 
@@ -100,7 +100,7 @@ const imageAlt = imageAltOverride || data?.imageAlt || 'Interactive companion de
       </div>
       
       <!-- Scroll indicator notch -->
-      <a href="#story-grid" class="absolute bottom-6 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white/90 border border-orange-100/50 flex items-center justify-center text-slate-500 hover:text-orange-600 hover:bg-white shadow-sm transition-all focus:outline-none">
+      <a href="#story-grid" class="absolute bottom-6 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white/90 border border-orange-100/50 flex items-center justify-center text-neutral-500 hover:text-orange-600 hover:bg-white shadow-sm transition-all focus:outline-none">
         <i class="fa-solid fa-chevron-down text-[10px] animate-bounce"></i>
       </a>
     </div>

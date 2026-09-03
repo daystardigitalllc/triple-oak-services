@@ -61,7 +61,7 @@ const defaultServices: ServiceItem[] = [
 const items = servicesOverride || data?.items || defaultServices;
 ---
 
-<section id="services-chalet" class="py-24 bg-[#FAF9F5] text-slate-800 border-b border-slate-200/80 select-none">
+<section id="services-chalet" class="py-24 bg-[#FAF9F5] text-neutral-800 border-b border-neutral-200/80 select-none">
   <div class="container mx-auto px-6 max-w-5xl space-y-16">
     
     <!-- Section Header -->
@@ -71,11 +71,11 @@ const items = servicesOverride || data?.items || defaultServices;
           {badge}
         </span>
       )}
-      <h2 class="text-3xl sm:text-4xl font-serif font-normal text-slate-950 tracking-tight leading-tight">
+      <h2 class="text-3xl sm:text-4xl font-serif font-normal text-neutral-950 tracking-tight leading-tight">
         {heading}
       </h2>
       {subtitle && (
-        <p class="text-slate-500 text-sm sm:text-base leading-relaxed">
+        <p class="text-neutral-500 text-sm sm:text-base leading-relaxed">
           {subtitle}
         </p>
       )}
@@ -84,16 +84,16 @@ const items = servicesOverride || data?.items || defaultServices;
     <!-- Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {items.map((item) => (
-        <div class="bg-white border border-slate-200/60 p-8 shadow-sm relative overflow-hidden rounded-xl group transition-all duration-300 hover:bg-[#FAF9F5]/40 hover:border-slate-350">
+        <div class="bg-white border border-neutral-200/60 p-8 shadow-sm relative overflow-hidden rounded-xl group transition-all duration-300 hover:bg-[#FAF9F5]/40 hover:border-neutral-350">
           
           <!-- Large faded numeric background indicator -->
-          <span class="absolute top-4 right-6 text-7xl font-serif font-extrabold text-slate-100 dark:text-slate-100 select-none pointer-events-none transition-colors group-hover:text-slate-200">
+          <span class="absolute top-4 right-6 text-7xl font-serif font-extrabold text-neutral-100 dark:text-neutral-100 select-none pointer-events-none transition-colors group-hover:text-neutral-200">
             {item.index}
           </span>
 
           <div class="space-y-4 relative z-10">
             <!-- Icon Glyph -->
-            <div class="w-12 h-12 rounded bg-[#FAF9F5] border border-slate-200/60 flex items-center justify-center text-primary">
+            <div class="w-12 h-12 rounded bg-[#FAF9F5] border border-neutral-200/60 flex items-center justify-center text-primary">
               {item.iconName === 'loaf' && (
                 <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M4 13a8 5 0 0 1 16 0v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" />
@@ -127,8 +127,8 @@ const items = servicesOverride || data?.items || defaultServices;
             </div>
 
             <!-- Header & Body -->
-            <h3 class="text-xl font-bold text-slate-900 tracking-tight">{item.title}</h3>
-            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-md">{item.description}</p>
+            <h3 class="text-xl font-bold text-neutral-900 tracking-tight">{item.title}</h3>
+            <p class="text-neutral-500 text-xs sm:text-sm leading-relaxed max-w-md">{item.description}</p>
           </div>
 
         </div>

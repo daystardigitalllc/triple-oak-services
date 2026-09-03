@@ -200,18 +200,18 @@ const mockCompareItems = [
 ---
 
 <MainLayout title="Component Library Catalog" description="Visual preview catalog of all stored UI components.">
-  <div class="bg-slate-950 text-white min-h-screen font-sans">
+  <div class="bg-neutral-950 text-white min-h-screen font-sans">
     
     <!-- Top Nav Banner -->
-    <header class="border-b border-slate-900 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md px-6 py-4 flex items-center justify-between">
+    <header class="border-b border-neutral-900 bg-neutral-950/80 sticky top-0 z-50 backdrop-blur-md px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center font-extrabold text-xs">DS</div>
         <div>
           <h1 class="text-sm font-bold tracking-tight">Daystar Site Factory</h1>
-          <p class="text-[10px] text-slate-500">Component Catalog & Visual Playground</p>
+          <p class="text-[10px] text-neutral-500">Component Catalog & Visual Playground</p>
         </div>
       </div>
-      <div class="hidden sm:flex items-center gap-3 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800 text-xs text-slate-400">
+      <div class="hidden sm:flex items-center gap-3 bg-neutral-900 px-3 py-1 rounded-lg border border-neutral-800 text-xs text-neutral-400">
         <span>Dev Mode Status:</span>
         <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
         <span class="font-semibold text-emerald-400">Active</span>
@@ -222,14 +222,14 @@ const mockCompareItems = [
     <section class="py-16 text-center max-w-3xl mx-auto px-6 space-y-4">
       <span class="text-[10px] font-extrabold uppercase tracking-widest bg-primary/20 text-accent px-3.5 py-1 rounded-full border border-primary/20">Design System Systematics</span>
       <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Visual component *showcase*</h2>
-      <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-xl mx-auto">
+      <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-xl mx-auto">
         Click the filters below to browse our library of layout blocks. Each section showcases live previews with direct usage keys so you can copy and reference them in your prompts.
       </p>
     </section>
 
     <!-- CATEGORY FILTER MENU -->
     <section class="max-w-5xl mx-auto px-6 mb-12">
-      <div class="flex flex-wrap gap-2 justify-center bg-slate-900/60 p-1.5 rounded-2xl border border-slate-900 backdrop-blur">
+      <div class="flex flex-wrap gap-2 justify-center bg-neutral-900/60 p-1.5 rounded-2xl border border-neutral-900 backdrop-blur">
         <button
           data-filter="all"
           class="px-4 py-2 text-xs font-bold rounded-xl bg-primary text-white transition-all shadow cursor-pointer"
@@ -238,37 +238,37 @@ const mockCompareItems = [
         </button>
         <button
           data-filter="navigation"
-          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-800 transition-all cursor-pointer"
         >
           Navigation
         </button>
         <button
           data-filter="heroes"
-          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-800 transition-all cursor-pointer"
         >
           Heroes & Banners
         </button>
         <button
           data-filter="services"
-          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-800 transition-all cursor-pointer"
         >
           Services & Pricing
         </button>
         <button
           data-filter="showcase"
-          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-800 transition-all cursor-pointer"
         >
           Showcases & Galleries
         </button>
         <button
           data-filter="social"
-          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-800 transition-all cursor-pointer"
         >
           Reviews & FAQs
         </button>
         <button
           data-filter="footers"
-          class="px-4 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+          class="px-4 py-2 text-xs font-bold rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-800 transition-all cursor-pointer"
         >
           Footers
         </button>
@@ -291,36 +291,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 01: NavbarPill ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">01</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">NavbarPill</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">01</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">NavbarPill</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: NavbarPill -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   NavbarPill.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Floating pill-shaped glass navigation. Best for modern minimal designs.</p>
+                <p class="text-xs text-neutral-400">Floating pill-shaped glass navigation. Best for modern minimal designs.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"NavbarPill"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"NavbarPill"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-8 relative h-32 flex items-center justify-center overflow-hidden">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-8 relative h-32 flex items-center justify-center overflow-hidden">
             <div class="w-full max-w-xl scale-90 sm:scale-100">
               <NavbarPill />
             </div>
@@ -330,36 +330,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 02: Header ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">02</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Header</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">02</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">Header</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: Header -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   Header.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Standard full-width sticky header with dropdown support for Services and Locations.</p>
+                <p class="text-xs text-neutral-400">Standard full-width sticky header with dropdown support for Services and Locations.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Header"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"Header"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-4 relative h-28 flex items-center justify-center overflow-hidden">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-4 relative h-28 flex items-center justify-center overflow-hidden">
             <div class="w-full max-w-3xl scale-90 sm:scale-100">
               <Header />
             </div>
@@ -369,36 +369,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 03: NavbarSplitLogo ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">03</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">NavbarSplitLogo</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">03</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">NavbarSplitLogo</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: NavbarSplitLogo -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   NavbarSplitLogo.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Editorial navigation with the business logo centered and links split left/right.</p>
+                <p class="text-xs text-neutral-400">Editorial navigation with the business logo centered and links split left/right.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"NavbarSplitLogo"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"NavbarSplitLogo"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-4 relative h-28 flex items-center justify-center overflow-hidden">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-4 relative h-28 flex items-center justify-center overflow-hidden">
             <div class="w-full max-w-3xl scale-90 sm:scale-100">
               <NavbarSplitLogo />
             </div>
@@ -408,36 +408,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 04: Header1 (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">04</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Header1 (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">04</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">Header1 (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: Header1 (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   Header1 (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Standard clean navigation bar with logo on the left, centered navigation, and action buttons on the right.</p>
+                <p class="text-xs text-neutral-400">Standard clean navigation bar with logo on the left, centered navigation, and action buttons on the right.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Header1"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"Header1"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-4 relative h-28 flex items-center justify-center overflow-hidden">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-4 relative h-28 flex items-center justify-center overflow-hidden">
             <div class="w-full max-w-4xl scale-90 sm:scale-100">
               <Header1 logo={mockLogo} navigation={mockHeaderNav} buttons={mockHeaderButtons} />
             </div>
@@ -447,36 +447,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 05: Header5 (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">05</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Header5 (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">05</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">Header5 (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: Header5 (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   Header5 (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Two-tier advanced navigation bar supporting sub-link dropdown menus and secondary top actions ribbon.</p>
+                <p class="text-xs text-neutral-400">Two-tier advanced navigation bar supporting sub-link dropdown menus and secondary top actions ribbon.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Header5"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"Header5"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-4 relative h-36 flex items-center justify-center overflow-hidden">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-4 relative h-36 flex items-center justify-center overflow-hidden">
             <div class="w-full max-w-4xl scale-90 sm:scale-100">
               <Header5 logo={mockLogo} navigation={mockHeaderNavDetailed} buttons={mockHeaderButtons} />
             </div>
@@ -498,36 +498,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 06: HeroChalet ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">06</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">HeroChalet</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">06</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">HeroChalet</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: HeroChalet -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   HeroChalet.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Cozy, rustic alpine style with a customized mountain-ridge bottom SVG clip edge.</p>
+                <p class="text-xs text-neutral-400">Cozy, rustic alpine style with a customized mountain-ridge bottom SVG clip edge.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"HeroChalet"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"HeroChalet"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-2">
             <HeroChalet 
               eyebrowOverride="Specialized Alpine Living" 
               headingOverride="A sanctuary in the *mountains*" 
@@ -539,34 +539,34 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 07: Hero1 (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">07</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Hero1 (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">07</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">Hero1 (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: Hero1 (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   Hero1 (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Centered minimalistic layout with a large typography heading and secondary action anchor.</p>
+                <p class="text-xs text-neutral-400">Centered minimalistic layout with a large typography heading and secondary action anchor.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Hero1"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"Hero1"</code>
               </div>
             </div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-2">
             <Hero1 
               title="Modern design systems, simplified."
               description="A library of content-driven Astro components styled dynamically using your custom Tailwind CSS configuration variables."
@@ -579,36 +579,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 08: Hero5 (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">08</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Hero5 (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">08</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">Hero5 (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: Hero5 (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   Hero5 (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Two-column split hero showing text content side-by-side with secondary actions list.</p>
+                <p class="text-xs text-neutral-400">Two-column split hero showing text content side-by-side with secondary actions list.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Hero5"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"Hero5"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-2">
             <Hero5 
               title="Built for the modern web."
               description="Deploy high-performance, responsive pages backed by standard components and custom preset styling tokens."
@@ -625,36 +625,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 09: HeroAnimatedEntry ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">09</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">HeroAnimatedEntry</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">09</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">HeroAnimatedEntry</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
         <!-- Block item: HeroAnimatedEntry -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   HeroAnimatedEntry.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Centered clean layout with staggered word entrance animation on load.</p>
+                <p class="text-xs text-neutral-400">Centered clean layout with staggered word entrance animation on load.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"HeroAnimatedEntry"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"HeroAnimatedEntry"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-8">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-8">
             <HeroAnimatedEntry 
               badgeOverride="NEW ENTRANCE ANIMATION"
               headingOverride="Clean words staggered *animation*"
@@ -666,36 +666,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 10: HeroCozy ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">10</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">HeroCozy</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">10</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">HeroCozy</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: HeroCozy -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   HeroCozy.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Warm product layout with elevated mockups and clean details.</p>
+                <p class="text-xs text-neutral-400">Warm product layout with elevated mockups and clean details.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"HeroCozy"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"HeroCozy"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-2">
             <HeroCozy 
               badgeOverride="PRODUCT SHOWCASE"
               headingOverride="Elegant hardware design for *studios*"
@@ -707,36 +707,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 11: HeroKepler ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">11</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">HeroKepler</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">11</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">HeroKepler</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: HeroKepler -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   HeroKepler.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Saturn orbit space theme, orbiters system, retro sci-fi typography.</p>
+                <p class="text-xs text-neutral-400">Saturn orbit space theme, orbiters system, retro sci-fi typography.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"HeroKepler"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"HeroKepler"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-2">
             <HeroKepler 
               badgeOverride="KEPLER ORBITS"
               headingOverride="Revolving planet *orbits*"
@@ -759,36 +759,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 12: LogosOne (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">12</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">LogosOne (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">12</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">LogosOne (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: LogosOne (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   LogosOne (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Responsive grid of grayscale partner logos highlighting local authority and client trust.</p>
+                <p class="text-xs text-neutral-400">Responsive grid of grayscale partner logos highlighting local authority and client trust.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"LogosOne"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"LogosOne"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-6">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-6">
             <LogosOne 
               title="Trusted by industry leaders worldwide" 
               brands={mockBrands}
@@ -799,36 +799,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 13: LogosTwo (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">13</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">LogosTwo (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">13</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">LogosTwo (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: LogosTwo (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   LogosTwo (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Infinite auto-scrolling partner logo marquee supporting hover pause triggers.</p>
+                <p class="text-xs text-neutral-400">Infinite auto-scrolling partner logo marquee supporting hover pause triggers.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"LogosTwo"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"LogosTwo"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-6">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-6">
             <LogosTwo 
               title="Authorized Partnerships" 
               brands={mockBrands}
@@ -839,36 +839,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 14: Pricing1 (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">14</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Pricing1 (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">14</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">Pricing1 (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: Pricing1 (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   Pricing1 (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Three-tiered pricing tables displaying service rates and benefits checkmarks.</p>
+                <p class="text-xs text-neutral-400">Three-tiered pricing tables displaying service rates and benefits checkmarks.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Pricing1"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"Pricing1"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-6">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-6">
             <Pricing1 
               title="Simple pricing plans" 
               description="Choose the tier that fits your business goals and service scopes."
@@ -881,36 +881,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 15: ServicesBento ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">15</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">ServicesBento</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">15</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">ServicesBento</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
         <!-- Block item: ServicesBento -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   ServicesBento.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Asymmetric bento block with full-bleed image overlays and hover reveals.</p>
+                <p class="text-xs text-neutral-400">Asymmetric bento block with full-bleed image overlays and hover reveals.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"ServicesBento"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"ServicesBento"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-2">
             <ServicesBento 
               badgeOverride="BENTO MATRIX"
               headingOverride="What we *specialize* in"
@@ -922,36 +922,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 16: ServicesChalet ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">16</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">ServicesChalet</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">16</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">ServicesChalet</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: ServicesChalet -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   ServicesChalet.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Warm alpine-inspired service row cards with large numeric counts backdrop.</p>
+                <p class="text-xs text-neutral-400">Warm alpine-inspired service row cards with large numeric counts backdrop.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"ServicesChalet"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"ServicesChalet"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-2">
             <ServicesChalet 
               badgeOverride="COZY SOLUTIONS"
               headingOverride="Our core *offerings*"
@@ -973,36 +973,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 17: CompareSlider ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">17</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">CompareSlider</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">17</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">CompareSlider</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: CompareSlider -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   CompareSlider.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Before & After slider to swipe over changes in home/automotive care.</p>
+                <p class="text-xs text-neutral-400">Before & After slider to swipe over changes in home/automotive care.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"CompareSlider"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"CompareSlider"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-white text-slate-950 py-12">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-white text-neutral-950 py-12">
             <div class="max-w-4xl mx-auto px-6">
               <CompareSlider 
                 badgeOverride="SWEEP TRANSFORMATION"
@@ -1016,36 +1016,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 18: InteractiveVideoPopup ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">18</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">InteractiveVideoPopup</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">18</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">InteractiveVideoPopup</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: InteractiveVideoPopup -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   InteractiveVideoPopup.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Video thumbnail banner that triggers an overlay lightbox iframe modal.</p>
+                <p class="text-xs text-neutral-400">Video thumbnail banner that triggers an overlay lightbox iframe modal.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"InteractiveVideoPopup"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"InteractiveVideoPopup"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-12">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-12">
             <div class="max-w-4xl mx-auto px-6">
               <InteractiveVideoPopup 
                 badgeOverride="VIDEO TOUR"
@@ -1071,36 +1071,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 19: Faqs1 (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">19</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Faqs1 (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">19</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">Faqs1 (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: Faqs1 (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   Faqs1 (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Interactive FAQ accordion list using client-side data-slot details toggle controls.</p>
+                <p class="text-xs text-neutral-400">Interactive FAQ accordion list using client-side data-slot details toggle controls.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Faqs1"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"Faqs1"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-6">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-6">
             <Faqs1 
               title="Frequently Asked Questions" 
               description="Everything you need to know about our services and scheduling procedures."
@@ -1113,36 +1113,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 20: ReviewsMarquee ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">20</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">ReviewsMarquee</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">20</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">ReviewsMarquee</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
         <!-- Block item: ReviewsMarquee -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   ReviewsMarquee.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Horizontal infinite-scrolling marquee containing ratings and testimonials.</p>
+                <p class="text-xs text-neutral-400">Horizontal infinite-scrolling marquee containing ratings and testimonials.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"ReviewsMarquee"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"ReviewsMarquee"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-slate-950/20 py-6">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-neutral-950/20 py-6">
             <ReviewsMarquee />
           </div>
         </div>
@@ -1150,36 +1150,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 21: ReviewsChalet ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">21</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">ReviewsChalet</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">21</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">ReviewsChalet</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: ReviewsChalet -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   ReviewsChalet.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Testimonials grid cards featuring bold stars, initials badges, and clean quotes.</p>
+                <p class="text-xs text-neutral-400">Testimonials grid cards featuring bold stars, initials badges, and clean quotes.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"ReviewsChalet"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"ReviewsChalet"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-2">
             <ReviewsChalet 
               badgeOverride="RECOMMENDATIONS"
               headingOverride="What clients *say about us*"
@@ -1190,36 +1190,36 @@ const mockCompareItems = [
 
         <!-- ╌╌╌ SEPARATOR 22: FAQNumbered ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">22</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">FAQNumbered</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">22</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">FAQNumbered</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                         <!-- Block item: FAQNumbered -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   FAQNumbered.astro
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Double-column numbered accordions with sticky lead capture details.</p>
+                <p class="text-xs text-neutral-400">Double-column numbered accordions with sticky lead capture details.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"FAQNumbered"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"FAQNumbered"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-2">
             <FAQNumbered />
           </div>
         </div>
@@ -1235,49 +1235,49 @@ const mockCompareItems = [
           <p class="text-xs text-red-200/70 mt-1.5 font-medium">Multi-column layouts and simplified centered legal footnotes.</p>
         </div>
 
-          <div class="mx-4 flex items-center gap-2.5 bg-slate-900 border border-slate-700 px-4 py-2 rounded-full shadow-lg shadow-slate-950/50">
-            <span class="text-[9px] font-mono text-slate-600 select-none">#01</span>
-            <span class="w-px h-3 bg-slate-700"></span>
-            <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Footer1 (Fulldev)</span>
-            <span class="w-px h-3 bg-slate-700"></span>
+          <div class="mx-4 flex items-center gap-2.5 bg-neutral-900 border border-neutral-700 px-4 py-2 rounded-full shadow-lg shadow-neutral-950/50">
+            <span class="text-[9px] font-mono text-neutral-600 select-none">#01</span>
+            <span class="w-px h-3 bg-neutral-700"></span>
+            <span class="text-[10px] font-bold tracking-widest uppercase text-neutral-400">Footer1 (Fulldev)</span>
+            <span class="w-px h-3 bg-neutral-700"></span>
             <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 animate-pulse"></span>
           </div>
-          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-neutral-700 to-transparent"></div>
         </div>
 
 
         <!-- ╌╌╌ SEPARATOR 23: Footer1 (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">23</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Footer1 (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">23</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">Footer1 (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                 <!-- Block item: Footer1 (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   Footer1 (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Robust multi-column footer displaying descriptive taglines, socials, and directory links.</p>
+                <p class="text-xs text-neutral-400">Robust multi-column footer displaying descriptive taglines, socials, and directory links.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Footer1"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"Footer1"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-2">
             <Footer1 
               brandName="Daystar Site Factory" 
               brandHref="#" 
@@ -1289,49 +1289,49 @@ const mockCompareItems = [
           </div>
         </div>
 
-          <div class="mx-4 flex items-center gap-2.5 bg-slate-900 border border-slate-700 px-4 py-2 rounded-full shadow-lg shadow-slate-950/50">
-            <span class="text-[9px] font-mono text-slate-600 select-none">#02</span>
-            <span class="w-px h-3 bg-slate-700"></span>
-            <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Footer2 (Fulldev)</span>
-            <span class="w-px h-3 bg-slate-700"></span>
+          <div class="mx-4 flex items-center gap-2.5 bg-neutral-900 border border-neutral-700 px-4 py-2 rounded-full shadow-lg shadow-neutral-950/50">
+            <span class="text-[9px] font-mono text-neutral-600 select-none">#02</span>
+            <span class="w-px h-3 bg-neutral-700"></span>
+            <span class="text-[10px] font-bold tracking-widest uppercase text-neutral-400">Footer2 (Fulldev)</span>
+            <span class="w-px h-3 bg-neutral-700"></span>
             <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary/60 animate-pulse"></span>
           </div>
-          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-neutral-700 to-transparent"></div>
         </div>
 
 
         <!-- ╌╌╌ SEPARATOR 24: Footer2 (Fulldev) ╌╌╌ -->
         <div class="relative my-6 flex items-center px-6" aria-hidden="true">
-          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700/60 to-slate-700/60"></div>
-          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
-            <span class="font-mono text-[9px] font-semibold text-slate-500">24</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">Footer2 (Fulldev)</span>
-            <span class="h-3 w-px bg-slate-700/70"></span>
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-700/60 to-neutral-700/60"></div>
+          <div class="mx-4 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-700/50 bg-neutral-900/90 px-4 py-2 shadow-lg shadow-black/50 backdrop-blur">
+            <span class="font-mono text-[9px] font-semibold text-neutral-500">24</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-300">Footer2 (Fulldev)</span>
+            <span class="h-3 w-px bg-neutral-700/70"></span>
             <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
           </div>
-          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-700/60 to-slate-700/60"></div>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent via-neutral-700/60 to-neutral-700/60"></div>
         </div>
 
                 <!-- Block item: Footer2 (Fulldev) -->
         <div class="space-y-4">
           <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
                 <h4 class="text-sm font-bold text-white flex items-center gap-2">
                   Footer2 (Fulldev UI)
                   <span class="text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/10">Active Block</span>
                 </h4>
-                <p class="text-xs text-slate-400">Minimalistic centered brand footer with horizontal page anchors and copyright footnote.</p>
+                <p class="text-xs text-neutral-400">Minimalistic centered brand footer with horizontal page anchors and copyright footnote.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="text-[10px] text-slate-500 font-mono">Use key:</span>
-                <code class="bg-slate-950 px-2.5 py-1 rounded border border-slate-800 text-xs font-mono text-accent select-all">"Footer2"</code>
+                <span class="text-[10px] text-neutral-500 font-mono">Use key:</span>
+                <code class="bg-neutral-950 px-2.5 py-1 rounded border border-neutral-800 text-xs font-mono text-accent select-all">"Footer2"</code>
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-600">Live Preview</span><div class="flex-1 h-px bg-slate-800"></div><span class="text-[9px] font-mono text-slate-700">?</span></div>
-          <div class="border-y border-slate-900 bg-[#FAF9F5] text-slate-950 py-2">
+          <div class="flex items-center gap-3 px-4 pt-6 pb-2"><span class="text-[9px] font-mono font-bold uppercase tracking-widest text-neutral-600">Live Preview</span><div class="flex-1 h-px bg-neutral-800"></div><span class="text-[9px] font-mono text-neutral-700">?</span></div>
+          <div class="border-y border-neutral-900 bg-[#FAF9F5] text-neutral-950 py-2">
             <Footer2 
               brandName="Daystar Site Factory" 
               brandHref="#" 
@@ -1361,10 +1361,10 @@ const mockCompareItems = [
       // 1. Update button styling classes
       filterButtons.forEach((b) => {
         b.classList.remove('bg-primary', 'text-white', 'shadow');
-        b.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+        b.classList.add('text-neutral-400', 'hover:text-white', 'hover:bg-neutral-800');
       });
       btn.classList.add('bg-primary', 'text-white', 'shadow');
-      btn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+      btn.classList.remove('text-neutral-400', 'hover:text-white', 'hover:bg-neutral-800');
 
       // 2. Filter rendering sections
       categorySections.forEach((section) => {

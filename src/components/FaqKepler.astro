@@ -49,17 +49,17 @@ const defaultFaqs: FaqItem[] = [
 const faqs = faqsOverride || data?.items || defaultFaqs;
 ---
 
-<section id="faq-kepler" class="border-y-4 border-slate-950 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-slate-950 py-24 select-none">
+<section id="faq-kepler" class="border-y-4 border-neutral-950 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-neutral-950 py-24 select-none">
   <div class="container mx-auto px-6 max-w-[820px] space-y-12">
     
     <!-- Header -->
     <div class="mx-auto text-center max-w-[620px] mb-8 space-y-3">
       {badge && (
-        <span class="text-xs font-bold uppercase tracking-[0.12em] text-white bg-slate-950 px-4 py-1.5 rounded-full shadow-sm">
+        <span class="text-xs font-bold uppercase tracking-[0.12em] text-white bg-neutral-950 px-4 py-1.5 rounded-full shadow-sm">
           {badge}
         </span>
       )}
-      <h2 class="text-4xl sm:text-5.5xl font-black leading-tight tracking-tight text-slate-950">
+      <h2 class="text-4xl sm:text-5.5xl font-black leading-tight tracking-tight text-neutral-950">
         {heading}
       </h2>
     </div>
@@ -67,12 +67,12 @@ const faqs = faqsOverride || data?.items || defaultFaqs;
     <!-- Accordion Group -->
     <div id="kepler-faq-list" class="flex flex-col gap-5">
       {faqs.map((faq, idx) => (
-        <div class="overflow-hidden rounded-2xl border-2 border-slate-950 bg-white shadow-[5px_5px_0_#0f1e42]">
+        <div class="overflow-hidden rounded-2xl border-2 border-neutral-950 bg-white shadow-[5px_5px_0_#0f1e42]">
           <button 
             type="button" 
             data-kepler-faq-toggle 
             aria-expanded={idx === 0 ? "true" : "false"}
-            class="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-[22px] text-left font-bold text-slate-950 text-base sm:text-lg focus:outline-none select-none transition-colors"
+            class="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-[22px] text-left font-bold text-neutral-950 text-base sm:text-lg focus:outline-none select-none transition-colors"
           >
             <span>{faq.question}</span>
             <span 
@@ -89,7 +89,7 @@ const faqs = faqsOverride || data?.items || defaultFaqs;
           <div 
             data-kepler-faq-answer 
             class:list={[
-              "px-6 pb-6 text-xs sm:text-sm leading-relaxed text-slate-650 transition-all duration-300",
+              "px-6 pb-6 text-xs sm:text-sm leading-relaxed text-neutral-650 transition-all duration-300",
               idx === 0 ? "block" : "hidden"
             ]}
           >

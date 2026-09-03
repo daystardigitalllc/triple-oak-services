@@ -72,7 +72,7 @@ const defaultItems: BentoItem[] = [
 const items = itemsOverride || data?.items || defaultItems;
 ---
 
-<section id="features-bento" class="py-24 bg-[#FCFBF9] text-slate-800 border-b border-orange-100/30">
+<section id="features-bento" class="py-24 bg-[#FCFBF9] text-neutral-800 border-b border-orange-100/30">
   <div class="container mx-auto px-6 max-w-5xl">
     
     <!-- Header -->
@@ -86,7 +86,7 @@ const items = itemsOverride || data?.items || defaultItems;
         {heading}
       </h2>
       {subtitle && (
-        <p class="text-slate-500 text-sm sm:text-base leading-relaxed">
+        <p class="text-neutral-500 text-sm sm:text-base leading-relaxed">
           {subtitle}
         </p>
       )}
@@ -97,7 +97,7 @@ const items = itemsOverride || data?.items || defaultItems;
       {items.map((item) => (
         <div class="flex flex-col space-y-4 group">
           <!-- Image Wrapper with rounded corners and potential overlays -->
-          <div class="aspect-[16/10.5] w-full rounded-2.5xl overflow-hidden bg-slate-100 border border-orange-100/20 shadow-md relative">
+          <div class="aspect-[16/10.5] w-full rounded-2.5xl overflow-hidden bg-neutral-100 border border-orange-100/20 shadow-md relative">
             <img 
               src={item.src} 
               alt={item.alt} 
@@ -107,26 +107,26 @@ const items = itemsOverride || data?.items || defaultItems;
 
             {/* Render notification style overlay */}
             {item.overlayType === 'notification' && (
-              <div class="absolute top-4 right-4 max-w-[280px] bg-white/95 backdrop-blur-md border border-slate-100 rounded-xl p-3.5 shadow-xl flex items-start gap-3 animate-pulse-slow">
+              <div class="absolute top-4 right-4 max-w-[280px] bg-white/95 backdrop-blur-md border border-neutral-100 rounded-xl p-3.5 shadow-xl flex items-start gap-3 animate-pulse-slow">
                 <div class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
                   <i class="fa-solid fa-message text-xs"></i>
                 </div>
                 <div class="text-left">
-                  <h4 class="text-xs font-bold text-slate-800 tracking-tight">{item.overlayTitle || 'Ato Alert'}</h4>
-                  <p class="text-[11px] text-slate-500 font-medium leading-normal mt-0.5">{item.overlayText}</p>
+                  <h4 class="text-xs font-bold text-neutral-800 tracking-tight">{item.overlayTitle || 'Ato Alert'}</h4>
+                  <p class="text-[11px] text-neutral-500 font-medium leading-normal mt-0.5">{item.overlayText}</p>
                 </div>
               </div>
             )}
 
             {/* Render dialogue bubble style overlay */}
             {item.overlayType === 'dialogue' && (
-              <div class="absolute bottom-4 left-4 max-w-[280px] bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-3.5 shadow-xl flex items-start gap-3">
+              <div class="absolute bottom-4 left-4 max-w-[280px] bg-neutral-900/90 backdrop-blur-md border border-neutral-800 rounded-xl p-3.5 shadow-xl flex items-start gap-3">
                 <div class="w-8 h-8 rounded-full bg-orange-600 flex items-center justify-center text-white shrink-0 shadow-md">
                   <i class="fa-solid fa-microphone text-xs"></i>
                 </div>
                 <div class="text-left">
                   <h4 class="text-xs font-bold text-orange-400 tracking-tight">{item.overlayTitle || 'Voice Input'}</h4>
-                  <p class="text-[11px] text-slate-200 font-medium leading-normal mt-0.5 italic">{item.overlayText}</p>
+                  <p class="text-[11px] text-neutral-200 font-medium leading-normal mt-0.5 italic">{item.overlayText}</p>
                 </div>
               </div>
             )}
@@ -135,7 +135,7 @@ const items = itemsOverride || data?.items || defaultItems;
           <!-- Feature Description -->
           <div class="space-y-1.5 px-1">
             <h3 class="text-xl font-serif font-medium text-[#2B231B]">{item.title}</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg">{item.description}</p>
+            <p class="text-neutral-500 text-sm leading-relaxed max-w-lg">{item.description}</p>
           </div>
         </div>
       ))}

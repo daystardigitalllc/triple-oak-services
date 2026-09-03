@@ -55,21 +55,21 @@ const {
         <div class="relative group">
           <a
             href={link.href}
-            class="text-xs font-black uppercase tracking-widest text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 py-2 cursor-pointer"
+            class="text-xs font-black uppercase tracking-widest text-neutral-300 hover:text-white transition-colors flex items-center gap-1.5 py-2 cursor-pointer"
           >
             {link.label}
             {link.hasDropdown && (
-              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-slate-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="3">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-neutral-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="3">
                 <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             )}
           </a>
           
           {link.hasDropdown && (
-            <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-slate-950 border border-slate-800/80 rounded-lg p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200">
-              <a href="#" class="block px-4 py-2 text-[10px] font-bold text-slate-400 hover:text-white hover:bg-slate-900 rounded-md uppercase tracking-wider">Computers & Systems</a>
-              <a href="#" class="block px-4 py-2 text-[10px] font-bold text-slate-400 hover:text-white hover:bg-slate-900 rounded-md uppercase tracking-wider">Apparel & Merch</a>
-              <a href="#" class="block px-4 py-2 text-[10px] font-bold text-slate-400 hover:text-white hover:bg-slate-900 rounded-md uppercase tracking-wider">TCG & Cards</a>
+            <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-neutral-950 border border-neutral-800/80 rounded-lg p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200">
+              <a href="#" class="block px-4 py-2 text-[10px] font-bold text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md uppercase tracking-wider">Computers & Systems</a>
+              <a href="#" class="block px-4 py-2 text-[10px] font-bold text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md uppercase tracking-wider">Apparel & Merch</a>
+              <a href="#" class="block px-4 py-2 text-[10px] font-bold text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md uppercase tracking-wider">TCG & Cards</a>
             </div>
           )}
         </div>
@@ -79,7 +79,7 @@ const {
     <!-- Actions Right -->
     <div class="flex items-center gap-4 text-white">
       <!-- Profile Button -->
-      <a href="#" aria-label="Profile Account" class="p-2 rounded-lg hover:bg-white/5 transition-colors text-slate-350 hover:text-white shrink-0">
+      <a href="#" aria-label="Profile Account" class="p-2 rounded-lg hover:bg-white/5 transition-colors text-neutral-350 hover:text-white shrink-0">
         <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
@@ -93,7 +93,7 @@ const {
           <circle cx="20" cy="21" r="1" />
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
         </svg>
-        <span class="absolute top-1 right-0.5 bg-red-650 text-white text-[8px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center ring-2 ring-slate-950">
+        <span class="absolute top-1 right-0.5 bg-red-650 text-white text-[8px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center ring-2 ring-neutral-950">
           {cartCount}
         </span>
       </a>
@@ -102,7 +102,7 @@ const {
       <button
         id="barracks-burger"
         aria-label="Toggle Mobile Menu"
-        class="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+        class="md:hidden p-2 rounded-lg text-neutral-300 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
       >
         <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <path d="M4 6h16M4 12h16M4 18h16" />
@@ -115,11 +115,11 @@ const {
   <!-- Mobile Dropdown -->
   <div
     id="barracks-mobile-drawer"
-    class="hidden absolute top-full inset-x-0 bg-slate-950 border-b border-slate-900 shadow-2xl px-6 py-6 space-y-4"
+    class="hidden absolute top-full inset-x-0 bg-neutral-950 border-b border-neutral-900 shadow-2xl px-6 py-6 space-y-4"
   >
     {links.map((link) => (
       <div>
-        <a href={link.href} class="block text-xs font-black uppercase tracking-widest text-slate-300 hover:text-white transition-colors">
+        <a href={link.href} class="block text-xs font-black uppercase tracking-widest text-neutral-300 hover:text-white transition-colors">
           {link.label}
         </a>
       </div>
@@ -136,10 +136,10 @@ const {
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {
       nav.classList.remove('bg-gradient-to-b', 'from-black/80', 'to-transparent', 'py-4');
-      nav.classList.add('bg-slate-950/95', 'backdrop-blur-md', 'py-3', 'shadow-lg');
+      nav.classList.add('bg-neutral-950/95', 'backdrop-blur-md', 'py-3', 'shadow-lg');
     } else {
       nav.classList.add('bg-gradient-to-b', 'from-black/80', 'to-transparent', 'py-4');
-      nav.classList.remove('bg-slate-950/95', 'backdrop-blur-md', 'py-3', 'shadow-lg');
+      nav.classList.remove('bg-neutral-950/95', 'backdrop-blur-md', 'py-3', 'shadow-lg');
     }
   });
 

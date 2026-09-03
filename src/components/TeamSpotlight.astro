@@ -40,7 +40,7 @@ const ctaText = ctaTextOverride || 'Meet the Team';
 const ctaHref = ctaHrefOverride || '#about';
 ---
 
-<section id="team-spotlight" class="py-24 bg-white text-slate-800 border-b border-orange-100/30">
+<section id="team-spotlight" class="py-24 bg-white text-neutral-800 border-b border-orange-100/30">
   <div class="container mx-auto px-6 max-w-4xl flex flex-col items-center">
     
     <!-- Header -->
@@ -56,7 +56,7 @@ const ctaHref = ctaHrefOverride || '#about';
     </div>
 
     <!-- Landscape Image Block -->
-    <div class="w-full rounded-3xl overflow-hidden bg-slate-100 border border-orange-100/20 shadow-xl mb-12 aspect-[16/8.5]">
+    <div class="w-full rounded-3xl overflow-hidden bg-neutral-100 border border-orange-100/20 shadow-xl mb-12 aspect-[16/8.5]">
       <img 
         src={imageSrc} 
         alt={imageAlt} 
@@ -69,21 +69,21 @@ const ctaHref = ctaHrefOverride || '#about';
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start w-full">
       <!-- Paragraph 1 -->
       <div class="md:col-span-6">
-        <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+        <p class="text-neutral-600 text-sm sm:text-base leading-relaxed font-normal">
           {desc1}
         </p>
       </div>
 
       <!-- Paragraph 2 + Action -->
       <div class="md:col-span-6 space-y-6">
-        <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+        <p class="text-neutral-600 text-sm sm:text-base leading-relaxed font-normal">
           {desc2}
         </p>
         
         <div class="pt-2">
           <a 
             href={ctaHref}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-full text-sm font-bold text-white bg-[#2B231B] hover:bg-[#3F3429] active:bg-[#1E1813] transition-all hover:scale-102 shadow-md shadow-slate-950/10 cursor-pointer"
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-full text-sm font-bold text-white bg-[#2B231B] hover:bg-[#3F3429] active:bg-[#1E1813] transition-all hover:scale-102 shadow-md shadow-neutral-950/10 cursor-pointer"
           >
             {ctaText}
           </a>

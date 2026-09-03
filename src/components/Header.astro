@@ -32,9 +32,9 @@ import themeConfig from '../data/theme.config.json';
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-        <div data-nav-dropdown-panel class="absolute left-0 top-full mt-1 hidden w-56 rounded-xl glass-panel p-2 shadow-xl border border-slate-200/50 dark:border-slate-800/50 bg-white/95 dark:bg-slate-950/95 animate-fade-in-up">
+        <div data-nav-dropdown-panel class="absolute left-0 top-full mt-1 hidden w-56 rounded-xl glass-panel p-2 shadow-xl border border-neutral-200/50 dark:border-neutral-800/50 bg-white/95 dark:bg-neutral-950/95 animate-fade-in-up">
           {contentData.services.map((service) => (
-            <a href={`/services/${service.slug}`} class="block px-4 py-2 text-sm rounded-lg text-slate-700 dark:text-slate-200 hover:bg-primary hover:text-white transition-all">
+            <a href={`/services/${service.slug}`} class="block px-4 py-2 text-sm rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-primary hover:text-white transition-all">
               {service.title}
             </a>
           ))}
@@ -49,9 +49,9 @@ import themeConfig from '../data/theme.config.json';
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-        <div data-nav-dropdown-panel class="absolute left-0 top-full mt-1 hidden w-56 rounded-xl glass-panel p-2 shadow-xl border border-slate-200/50 dark:border-slate-800/50 bg-white/95 dark:bg-slate-950/95 animate-fade-in-up">
+        <div data-nav-dropdown-panel class="absolute left-0 top-full mt-1 hidden w-56 rounded-xl glass-panel p-2 shadow-xl border border-neutral-200/50 dark:border-neutral-800/50 bg-white/95 dark:bg-neutral-950/95 animate-fade-in-up">
           {businessData.locations.map((loc) => (
-            <a href={`/locations/${loc.toLowerCase().replace(/ /g, '-')}`} class="block px-4 py-2 text-sm rounded-lg text-slate-700 dark:text-slate-200 hover:bg-primary hover:text-white transition-all">
+            <a href={`/locations/${loc.toLowerCase().replace(/ /g, '-')}`} class="block px-4 py-2 text-sm rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-primary hover:text-white transition-all">
               {loc}
             </a>
           ))}
@@ -90,15 +90,15 @@ import themeConfig from '../data/theme.config.json';
   </div>
 
   <!-- Mobile Dropdown Menu -->
-  <div id="mobile-menu" class="hidden md:hidden w-full border-t border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-slate-950 px-6 py-4 space-y-4">
-    <nav class="flex flex-col gap-4 font-semibold text-sm text-slate-700 dark:text-slate-200">
+  <div id="mobile-menu" class="hidden md:hidden w-full border-t border-neutral-200/50 dark:border-neutral-800/50 bg-white dark:bg-neutral-950 px-6 py-4 space-y-4">
+    <nav class="flex flex-col gap-4 font-semibold text-sm text-neutral-700 dark:text-neutral-200">
       <a href="/" class="hover:text-primary py-1">Home</a>
 
       <!-- Mobile Services list -->
       <div class="space-y-1">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Services</span>
+        <span class="text-xs font-bold uppercase tracking-wider text-neutral-400">Services</span>
         {contentData.services.map((service) => (
-          <a href={`/services/${service.slug}`} class="block pl-4 py-1 text-slate-600 dark:text-slate-300 hover:text-primary">
+          <a href={`/services/${service.slug}`} class="block pl-4 py-1 text-neutral-600 dark:text-neutral-300 hover:text-primary">
             {service.title}
           </a>
         ))}
@@ -106,9 +106,9 @@ import themeConfig from '../data/theme.config.json';
 
       <!-- Mobile Locations list -->
       <div class="space-y-1">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Locations</span>
+        <span class="text-xs font-bold uppercase tracking-wider text-neutral-400">Locations</span>
         {businessData.locations.map((loc) => (
-          <a href={`/locations/${loc.toLowerCase().replace(/ /g, '-')}`} class="block pl-4 py-1 text-slate-600 dark:text-slate-300 hover:text-primary">
+          <a href={`/locations/${loc.toLowerCase().replace(/ /g, '-')}`} class="block pl-4 py-1 text-neutral-600 dark:text-neutral-300 hover:text-primary">
             {loc}
           </a>
         ))}
@@ -117,8 +117,8 @@ import themeConfig from '../data/theme.config.json';
       <a href="#reviews" class="hover:text-primary py-1">Reviews</a>
       <a href="#faq" class="hover:text-primary py-1">FAQ</a>
 
-      <div class="pt-4 border-t border-slate-100 dark:border-slate-900 flex flex-col gap-3">
-        <a href={`tel:${businessData.phone}`} class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-custom border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+      <div class="pt-4 border-t border-neutral-100 dark:border-neutral-900 flex flex-col gap-3">
+        <a href={`tel:${businessData.phone}`} class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-custom border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">
           <i class="fa-solid fa-phone text-xs"></i> Call: {businessData.phone}
         </a>
         <a href="#quote-funnel" class="flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-primary rounded-custom shadow-md shadow-primary/10">
@@ -149,11 +149,11 @@ import themeConfig from '../data/theme.config.json';
   }
   .site-header [data-header-cta]:hover {
     background: #fff;
-    color: var(--color-slate-900, #0f172a);
+    color: var(--color-neutral-900, #171717);
   }
 
   .site-header[data-scrolled="true"] {
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(23, 23, 23, 0.9);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom-color: rgba(255, 255, 255, 0.08);
@@ -162,7 +162,7 @@ import themeConfig from '../data/theme.config.json';
 
   .site-header[data-scrolled="true"] [data-header-text],
   .site-header[data-scrolled="true"] [data-header-text] a {
-    color: #f8fafc;
+    color: #fafafa;
   }
 
   .site-header[data-scrolled="true"] [data-header-cta] {

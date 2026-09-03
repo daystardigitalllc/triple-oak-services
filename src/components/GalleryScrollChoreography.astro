@@ -69,7 +69,7 @@ const uid = `choreo-${Math.random().toString(36).slice(2, 9)}`;
   id="showcase"
   data-choreo-root
   data-choreo-id={uid}
-  class="relative bg-slate-950"
+  class="relative bg-neutral-950"
   style="height: 400vh;"
 >
   <div class="sticky top-0 h-screen w-full overflow-hidden">
@@ -82,7 +82,7 @@ const uid = `choreo-${Math.random().toString(36).slice(2, 9)}`;
       <h2 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight uppercase leading-[1.1] max-w-3xl text-white">
         {heading}
       </h2>
-      <p class="mt-4 max-w-xl text-sm sm:text-base text-slate-300">
+      <p class="mt-4 max-w-xl text-sm sm:text-base text-neutral-300">
         {subtitle}
       </p>
     </div>
@@ -107,7 +107,7 @@ const uid = `choreo-${Math.random().toString(36).slice(2, 9)}`;
     <div data-choreo-hero class="absolute inset-0 z-10 flex items-center justify-center opacity-0">
       <div data-choreo-hero-inner class="relative w-full h-full overflow-hidden rounded-custom">
         <img src={images.hero.src} alt={images.hero.alt} class="w-full h-full object-cover object-center md:object-[50%_25%]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent"></div>
         <div data-choreo-hero-caption class="absolute bottom-10 left-0 right-0 flex flex-col items-center text-center px-6 opacity-0">
           <span class="text-[10px] font-extrabold uppercase tracking-widest text-white/80 mb-3">
             {heroCaption}
