@@ -16,9 +16,19 @@ interface Props {
 
 const { idPrefix = 'quickquote', compact = false } = Astro.props;
 const id = (name: string) => `${idPrefix}-${name}`;
+
+// The horizontal bar sits on a charcoal background (dark theme); the
+// compact variant is dropped into the white mobile popup dialog, so its
+// fields stay on the light styling used everywhere else in that dialog.
+const labelClass = compact
+  ? 'text-neutral-500'
+  : 'text-neutral-400';
+const fieldClass = compact
+  ? 'bg-neutral-50 border-neutral-200 text-neutral-900 placeholder-neutral-400'
+  : 'bg-neutral-900 border-neutral-800 text-white placeholder-neutral-500';
 ---
 
-<div id={id('root')} class:list={['w-full', compact ? '' : 'bg-white border-y border-neutral-200 shadow-xl']}>
+<div id={id('root')} class:list={['w-full', compact ? '' : 'bg-neutral-950 border-y border-neutral-800 shadow-xl']}>
   <form
     id={id('form')}
     action="https://api.web3forms.com/submit"
@@ -34,23 +44,23 @@ const id = (name: string) => `${idPrefix}-${name}`;
     </label>
 
     <div class="flex-1 min-w-0 space-y-1">
-      <label for={id('name')} class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500">Name</label>
-      <input id={id('name')} type="text" name="name" placeholder="Your name" required class="w-full px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder-neutral-400 focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+      <label for={id('name')} class:list={['block text-[11px] font-bold uppercase tracking-wider', labelClass]}>Name</label>
+      <input id={id('name')} type="text" name="name" placeholder="Your name" required class:list={['w-full px-3.5 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none', fieldClass]} />
     </div>
 
     <div class="flex-1 min-w-0 space-y-1">
-      <label for={id('phone')} class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500">Phone</label>
-      <input id={id('phone')} type="tel" name="phone" placeholder="(615) 555-5555" required class="w-full px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder-neutral-400 focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+      <label for={id('phone')} class:list={['block text-[11px] font-bold uppercase tracking-wider', labelClass]}>Phone</label>
+      <input id={id('phone')} type="tel" name="phone" placeholder="(615) 555-5555" required class:list={['w-full px-3.5 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none', fieldClass]} />
     </div>
 
     <div class="flex-1 min-w-0 space-y-1">
-      <label for={id('email')} class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500">Email</label>
-      <input id={id('email')} type="email" name="email" placeholder="you@email.com" required class="w-full px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder-neutral-400 focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+      <label for={id('email')} class:list={['block text-[11px] font-bold uppercase tracking-wider', labelClass]}>Email</label>
+      <input id={id('email')} type="email" name="email" placeholder="you@email.com" required class:list={['w-full px-3.5 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none', fieldClass]} />
     </div>
 
     <div class="flex-1 min-w-0 space-y-1">
-      <label for={id('service')} class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500">Service</label>
-      <select id={id('service')} name="service_requested" required class="w-full px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm text-neutral-900 focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+      <label for={id('service')} class:list={['block text-[11px] font-bold uppercase tracking-wider', labelClass]}>Service</label>
+      <select id={id('service')} name="service_requested" required class:list={['w-full px-3.5 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none', fieldClass]}>
         <option value="" selected disabled>Select a service</option>
         {contentData.services.map((service) => (
           <option value={service.title}>{service.title}</option>
