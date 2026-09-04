@@ -47,6 +47,37 @@ const outlinePath = outlinePoints
 const hub = locationsData.find((l) => l.slug === 'nashville')!;
 const hubPos = project([hub.lat, hub.lng]);
 const spokes = locationsData.filter((l) => l.slug !== 'nashville');
+
+// Zoom the visible viewBox in on just the Middle TN cluster of cities
+// instead of showing the whole state (where the cluster would be a tiny
+// dot in the middle) - same coordinate space as the outline above, just
+// a cropped window into it.
+const allPositions = locationsData.map((l) => project([l.lat, l.lng]));
+const padX = 90;
+const padY = 90;
+const rawMinX = Math.min(...allPositions.map((p) => p.x)) - padX;
+const rawMaxX = Math.max(...allPositions.map((p) => p.x)) + padX;
+const rawMinY = Math.min(...allPositions.map((p) => p.y)) - padY;
+const rawMaxY = Math.max(...allPositions.map((p) => p.y)) + padY;
+
+// Force a consistent widescreen aspect ratio so the map doesn't look
+// squashed, by growing the shorter axis outward from its own center
+// rather than stretching either axis.
+const TARGET_RATIO = 2.15;
+let vbW = rawMaxX - rawMinX;
+let vbH = rawMaxY - rawMinY;
+let vbX = rawMinX;
+let vbY = rawMinY;
+if (vbW / vbH > TARGET_RATIO) {
+  const neededH = vbW / TARGET_RATIO;
+  vbY -= (neededH - vbH) / 2;
+  vbH = neededH;
+} else {
+  const neededW = vbH * TARGET_RATIO;
+  vbX -= (neededW - vbW) / 2;
+  vbW = neededW;
+}
+const zoomedViewBox = `${vbX.toFixed(1)} ${vbY.toFixed(1)} ${vbW.toFixed(1)} ${vbH.toFixed(1)}`;
 ---
 
 <section id="service-areas" class="py-20 bg-neutral-950 border-t border-neutral-900 relative overflow-hidden text-white">
@@ -66,7 +97,7 @@ const spokes = locationsData.filter((l) => l.slug !== 'nashville');
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-6 items-center">
       {/* Map */}
       <div class="lg:col-span-3">
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} class="w-full h-auto" role="img" aria-label={`Map of Tennessee showing our ${locationsData.length} service area communities in Middle Tennessee`}>
+        <svg viewBox={zoomedViewBox} class="w-full h-auto" role="img" aria-label={`Map of Middle Tennessee showing our ${locationsData.length} service area communities`}>
           <path d={outlinePath} class="fill-neutral-900 stroke-neutral-700" stroke-width="2" stroke-linejoin="round" />
 
           {/* Hub-and-spoke connecting lines from Nashville */}
@@ -85,9 +116,9 @@ const spokes = locationsData.filter((l) => l.slug !== 'nashville');
             const p = project([loc.lat, loc.lng]);
             return (
               <a href={`/locations/${loc.slug}`} aria-label={`${loc.name}, TN - view our ${loc.name} service page`}>
-                <circle cx={p.x} cy={p.y} r="8" fill="transparent" />
-                <circle cx={p.x} cy={p.y} r="4.5" class="fill-white stroke-primary transition-transform" stroke-width="2" />
-                <text x={p.x} y={p.y - 10} text-anchor="middle" class="fill-neutral-300 font-semibold" style="font-size: 11px;">
+                <circle cx={p.x} cy={p.y} r="7" fill="transparent" />
+                <circle cx={p.x} cy={p.y} r="3.5" class="fill-white stroke-primary transition-transform" stroke-width="1.5" />
+                <text x={p.x} y={p.y - 8} text-anchor="middle" class="fill-neutral-300 font-semibold" style="font-size: 8px;">
                   {loc.name}
                 </text>
               </a>
@@ -96,12 +127,12 @@ const spokes = locationsData.filter((l) => l.slug !== 'nashville');
 
           {/* Nashville hub, drawn last so it sits above the spoke lines/dots */}
           <a href={`/locations/${hub.slug}`} aria-label="Nashville, TN - view our Nashville service page">
-            <circle cx={hubPos.x} cy={hubPos.y} r="12" fill="var(--color-primary)" fill-opacity="0.18">
-              <animate attributeName="r" values="10;16;10" dur="2.5s" repeatCount="indefinite" />
+            <circle cx={hubPos.x} cy={hubPos.y} r="9" fill="var(--color-primary)" fill-opacity="0.18">
+              <animate attributeName="r" values="7;12;7" dur="2.5s" repeatCount="indefinite" />
               <animate attributeName="fill-opacity" values="0.25;0.05;0.25" dur="2.5s" repeatCount="indefinite" />
             </circle>
-            <circle cx={hubPos.x} cy={hubPos.y} r="7" class="fill-primary stroke-white" stroke-width="2" />
-            <text x={hubPos.x} y={hubPos.y - 15} text-anchor="middle" class="fill-white font-extrabold" style="font-size: 13px;">
+            <circle cx={hubPos.x} cy={hubPos.y} r="5.5" class="fill-primary stroke-white" stroke-width="1.5" />
+            <text x={hubPos.x} y={hubPos.y - 11} text-anchor="middle" class="fill-white font-extrabold" style="font-size: 10px;">
               Nashville
             </text>
           </a>
