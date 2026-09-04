@@ -81,7 +81,7 @@ import locationsData from '../data/locations.json';
       </a>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" data-header-text class="md:hidden p-2 rounded-lg text-white/90 hover:bg-white/10" aria-label="Toggle Menu">
+      <button type="button" id="mobile-menu-btn" data-header-text class="md:hidden p-2 rounded-lg text-white/90 hover:bg-white/10" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg id="menu-icon-open" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -188,9 +188,10 @@ import locationsData from '../data/locations.json';
 
   if (btn && menu && openIcon && closeIcon) {
     btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
+      const isOpen = menu.classList.toggle('hidden') === false;
       openIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(isOpen));
     });
   }
 

@@ -24,14 +24,27 @@ const bgClass = isFlatPanel ? 'bg-white dark:bg-neutral-900' : 'bg-white/95 dark
     </div>
 
     <!-- Multi-step Form Card -->
-    <div class="relative p-8 sm:p-12 shadow-xl border border-neutral-200/50 dark:border-neutral-800/50 rounded-3xl" class:list={[cardClass, bgClass]}>
+    <div class="relative p-8 sm:p-12 shadow-xl border border-neutral-200/50 dark:border-neutral-800/50 rounded-custom" class:list={[cardClass, bgClass]}>
+      <!-- Progress bar -->
+      <div id="funnel-progress" class="flex gap-2 mb-8" role="presentation">
+        <div data-progress-bar class="h-1 flex-1 rounded-full bg-primary transition-colors"></div>
+        <div data-progress-bar class="h-1 flex-1 rounded-full bg-neutral-200 dark:bg-neutral-800 transition-colors"></div>
+        <div data-progress-bar class="h-1 flex-1 rounded-full bg-neutral-200 dark:bg-neutral-800 transition-colors"></div>
+      </div>
+
+      <!-- Announces step changes and validation errors to screen readers -->
+      <p id="funnel-live-region" class="sr-only" role="status" aria-live="polite"></p>
+
       <!-- Web3Forms integration - Free functional form endpoint -->
       <form action="https://api.web3forms.com/submit" method="POST" id="funnel-form" class="space-y-8">
         <!-- Web3Forms Config Key -->
         <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
         <input type="hidden" name="subject" value={`New Lead from ${businessData.name}`} />
         <input type="hidden" name="from_name" value={businessData.name} />
-        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+        <label class="hidden" aria-hidden="true">
+          Leave this field blank
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+        </label>
 
         <!-- Step 1: Select Service -->
         <div id="step-1" class="space-y-6">
@@ -39,25 +52,29 @@ const bgClass = isFlatPanel ? 'bg-white dark:bg-neutral-900' : 'bg-white/95 dark
             <span class="text-sm font-bold text-primary">Step 1 of 3</span>
             <span class="text-xs text-neutral-400 font-semibold uppercase">Service Selection</span>
           </div>
-          
-          <h3 class="text-xl sm:text-2xl font-bold text-neutral-950 dark:text-white">What service can we help you with?</h3>
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {contentData.services.map((service) => (
-              <label class="group relative flex items-center justify-between p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/40 cursor-pointer hover:border-primary hover:bg-primary/5 transition-all">
-                <div class="flex items-center gap-3">
-                  <input type="radio" name="service_requested" value={service.title} class="h-4.5 w-4.5 text-primary border-neutral-300 dark:border-neutral-700 focus:ring-primary focus:ring-offset-0" required />
-                  <span class="font-bold text-neutral-900 dark:text-white text-sm sm:text-base">{service.title}</span>
-                </div>
-                <span class="text-xs text-neutral-400 group-hover:text-primary transition-colors">Select &rarr;</span>
-              </label>
-            ))}
-          </div>
+
+          <h3 tabindex="-1" class="text-xl sm:text-2xl font-bold text-neutral-950 dark:text-white outline-none">What service can we help you with?</h3>
+
+          <fieldset>
+            <legend class="sr-only">Select a service</legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {contentData.services.map((service) => (
+                <label class="group relative flex items-center justify-between p-5 rounded-custom border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/40 cursor-pointer hover:border-primary hover:bg-primary/5 transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                  <div class="flex items-center gap-3">
+                    <input type="radio" name="service_requested" value={service.title} class="h-4 w-4 text-primary border-neutral-300 dark:border-neutral-700 focus:ring-primary focus:ring-offset-0" required />
+                    <span class="font-bold text-neutral-900 dark:text-white text-sm sm:text-base">{service.title}</span>
+                  </div>
+                  <span class="text-xs text-neutral-400 group-hover:text-primary transition-colors">Select &rarr;</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <p data-error-for="step-1" class="hidden text-sm font-semibold text-red-600 dark:text-red-400" role="alert"></p>
 
           <div class="flex justify-end pt-4">
             <button type="button" id="next-btn-1" class="px-6 py-3.5 font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-md shadow-primary/20 transition-all flex items-center gap-2">
               Continue
-              <span>&rarr;</span>
+              <span aria-hidden="true">&rarr;</span>
             </button>
           </div>
         </div>
@@ -68,25 +85,26 @@ const bgClass = isFlatPanel ? 'bg-white dark:bg-neutral-900' : 'bg-white/95 dark
             <span class="text-sm font-bold text-primary">Step 2 of 3</span>
             <span class="text-xs text-neutral-400 font-semibold uppercase">Contact Information</span>
           </div>
-          
-          <h3 class="text-xl sm:text-2xl font-bold text-neutral-950 dark:text-white">How can we reach you?</h3>
-          
+
+          <h3 tabindex="-1" class="text-xl sm:text-2xl font-bold text-neutral-950 dark:text-white outline-none">How can we reach you?</h3>
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
-              <label class="block text-xs font-bold uppercase tracking-wider text-neutral-500">First & Last Name</label>
-              <input type="text" name="name" placeholder="John Smith" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
+              <label for="funnel-name" class="block text-xs font-bold uppercase tracking-wider text-neutral-500">First &amp; Last Name</label>
+              <input id="funnel-name" type="text" name="name" placeholder="John Smith" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
             </div>
 
             <div class="space-y-2">
-              <label class="block text-xs font-bold uppercase tracking-wider text-neutral-500">Phone Number</label>
-              <input type="tel" name="phone" placeholder="(555) 555-5555" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
+              <label for="funnel-phone" class="block text-xs font-bold uppercase tracking-wider text-neutral-500">Phone Number</label>
+              <input id="funnel-phone" type="tel" name="phone" placeholder="(555) 555-5555" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
             </div>
-            
+
             <div class="space-y-2 sm:col-span-2">
-              <label class="block text-xs font-bold uppercase tracking-wider text-neutral-500">Email Address</label>
-              <input type="email" name="email" placeholder="john@example.com" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
+              <label for="funnel-email" class="block text-xs font-bold uppercase tracking-wider text-neutral-500">Email Address</label>
+              <input id="funnel-email" type="email" name="email" placeholder="john@example.com" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
             </div>
           </div>
+          <p data-error-for="step-2" class="hidden text-sm font-semibold text-red-600 dark:text-red-400" role="alert"></p>
 
           <div class="flex justify-between pt-6">
             <button type="button" id="prev-btn-2" class="px-6 py-3 text-sm font-semibold text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-white transition-colors">
@@ -94,7 +112,7 @@ const bgClass = isFlatPanel ? 'bg-white dark:bg-neutral-900' : 'bg-white/95 dark
             </button>
             <button type="button" id="next-btn-2" class="px-6 py-3.5 font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-md shadow-primary/20 transition-all flex items-center gap-2">
               Continue
-              <span>&rarr;</span>
+              <span aria-hidden="true">&rarr;</span>
             </button>
           </div>
         </div>
@@ -103,96 +121,178 @@ const bgClass = isFlatPanel ? 'bg-white dark:bg-neutral-900' : 'bg-white/95 dark
         <div id="step-3" class="space-y-6 hidden">
           <div class="flex justify-between items-center pb-4 border-b border-neutral-100 dark:border-neutral-900">
             <span class="text-sm font-bold text-primary">Step 3 of 3</span>
-            <span class="text-xs text-neutral-400 font-semibold uppercase">Project Location & Notes</span>
+            <span class="text-xs text-neutral-400 font-semibold uppercase">Project Location &amp; Notes</span>
           </div>
-          
-          <h3 class="text-xl sm:text-2xl font-bold text-neutral-950 dark:text-white">Tell us about your project</h3>
-          
+
+          <h3 tabindex="-1" class="text-xl sm:text-2xl font-bold text-neutral-950 dark:text-white outline-none">Tell us about your project</h3>
+
           <div class="space-y-4">
             <div class="grid grid-cols-2 gap-4">
               <div class="space-y-2">
-                <label class="block text-xs font-bold uppercase tracking-wider text-neutral-500">Street Address</label>
-                <input type="text" name="street" placeholder="123 Main St" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
+                <label for="funnel-street" class="block text-xs font-bold uppercase tracking-wider text-neutral-500">Street Address</label>
+                <input id="funnel-street" type="text" name="street" placeholder="123 Main St" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
               </div>
               <div class="space-y-2">
-                <label class="block text-xs font-bold uppercase tracking-wider text-neutral-500">City / Town</label>
-                <input type="text" name="city" placeholder="Nashville" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
+                <label for="funnel-city" class="block text-xs font-bold uppercase tracking-wider text-neutral-500">City / Town</label>
+                <input id="funnel-city" type="text" name="city" placeholder="Nashville" class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary" required />
               </div>
             </div>
-            
+
             <div class="space-y-2">
-              <label class="block text-xs font-bold uppercase tracking-wider text-neutral-500">Additional Details (Optional)</label>
-              <textarea name="details" rows="4" placeholder="Briefly describe what needs to be repaired or installed..." class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary"></textarea>
+              <label for="funnel-details" class="block text-xs font-bold uppercase tracking-wider text-neutral-500">Additional Details (Optional)</label>
+              <textarea id="funnel-details" name="details" rows="4" placeholder="Briefly describe the job..." class="w-full px-4 py-3 bg-neutral-100/70 dark:bg-neutral-900/70 border-0 rounded-lg text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary"></textarea>
             </div>
           </div>
+          <p data-error-for="step-3" class="hidden text-sm font-semibold text-red-600 dark:text-red-400" role="alert"></p>
 
           <div class="flex justify-between pt-6">
             <button type="button" id="prev-btn-3" class="px-6 py-3 text-sm font-semibold text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-white transition-colors">
               &larr; Back
             </button>
-            <button type="submit" class="px-8 py-4 font-bold text-white bg-accent hover:brightness-90 rounded-custom shadow-lg shadow-accent/25 transition-all hover:scale-102 flex items-center gap-2">
-              Submit Request
-              <span>&check;</span>
+            <button type="submit" id="funnel-submit-btn" class="px-8 py-4 font-bold text-white bg-accent hover:brightness-90 rounded-custom shadow-lg shadow-accent/25 transition-all hover:scale-102 flex items-center gap-2 disabled:opacity-60 disabled:pointer-events-none">
+              <span data-submit-label>Submit Request</span>
+              <span aria-hidden="true">&check;</span>
             </button>
           </div>
         </div>
       </form>
+
+      <!-- Success state -->
+      <div id="funnel-success" class="hidden text-center space-y-4 py-8" role="status">
+        <div class="w-14 h-14 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto text-2xl">&check;</div>
+        <h3 class="text-2xl font-bold text-neutral-950 dark:text-white">Request Sent</h3>
+        <p class="text-neutral-500 dark:text-neutral-400 max-w-sm mx-auto">
+          Thanks - we've got your details. We'll call or text you back shortly to talk through the job.
+        </p>
+      </div>
+
+      <!-- Error state: form endpoint failed, fall back to a direct call -->
+      <div id="funnel-error" class="hidden text-center space-y-4 py-8" role="alert">
+        <div class="w-14 h-14 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center mx-auto text-2xl">!</div>
+        <h3 class="text-2xl font-bold text-neutral-950 dark:text-white">Something Went Wrong</h3>
+        <p class="text-neutral-500 dark:text-neutral-400 max-w-sm mx-auto">
+          Your request didn't go through. Please call us directly and we'll get you taken care of.
+        </p>
+        <a href={`tel:${businessData.phone}`} class="inline-flex items-center justify-center px-6 py-3 font-bold text-white bg-primary hover:bg-primary-hover rounded-custom transition-all">
+          Call {businessData.phone}
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  const step1 = document.getElementById('step-1');
-  const step2 = document.getElementById('step-2');
-  const step3 = document.getElementById('step-3');
+  const form = document.getElementById('funnel-form') as HTMLFormElement | null;
+  const steps = {
+    1: document.getElementById('step-1'),
+    2: document.getElementById('step-2'),
+    3: document.getElementById('step-3'),
+  };
+  const progressBars = document.querySelectorAll('[data-progress-bar]');
+  const liveRegion = document.getElementById('funnel-live-region');
+  const successEl = document.getElementById('funnel-success');
+  const errorEl = document.getElementById('funnel-error');
+  const submitBtn = document.getElementById('funnel-submit-btn') as HTMLButtonElement | null;
+  const submitLabel = submitBtn?.querySelector('[data-submit-label]');
 
-  const next1 = document.getElementById('next-btn-1');
-  const next2 = document.getElementById('next-btn-2');
+  function showError(step: number, message: string) {
+    const el = document.querySelector(`[data-error-for="step-${step}"]`);
+    if (el) {
+      el.textContent = message;
+      el.classList.remove('hidden');
+    }
+    if (liveRegion) liveRegion.textContent = message;
+  }
 
-  const prev2 = document.getElementById('prev-btn-2');
-  const prev3 = document.getElementById('prev-btn-3');
+  function clearError(step: number) {
+    const el = document.querySelector(`[data-error-for="step-${step}"]`);
+    if (el) {
+      el.textContent = '';
+      el.classList.add('hidden');
+    }
+  }
 
-  // Simple vanilla JS navigation for the multi-step form
-  if (next1 && step1 && step2) {
-    next1.addEventListener('click', () => {
-      // Validate radio selection
-      const checked = document.querySelector('input[name="service_requested"]:checked');
-      if (!checked) {
-        alert('Please select a service before proceeding.');
-        return;
+  function goToStep(from: number, to: number) {
+    clearError(from);
+    steps[from as keyof typeof steps]?.classList.add('hidden');
+    steps[to as keyof typeof steps]?.classList.remove('hidden');
+    progressBars.forEach((bar, i) => {
+      bar.classList.toggle('bg-primary', i < to);
+      bar.classList.toggle('bg-neutral-200', i >= to);
+      bar.classList.toggle('dark:bg-neutral-800', i >= to);
+    });
+    const heading = steps[to as keyof typeof steps]?.querySelector('h3');
+    heading?.focus();
+    if (liveRegion) liveRegion.textContent = `Step ${to} of 3`;
+  }
+
+  document.getElementById('next-btn-1')?.addEventListener('click', () => {
+    const checked = document.querySelector('input[name="service_requested"]:checked');
+    if (!checked) {
+      showError(1, 'Please select a service before continuing.');
+      return;
+    }
+    goToStep(1, 2);
+  });
+
+  document.getElementById('next-btn-2')?.addEventListener('click', () => {
+    const name = document.getElementById('funnel-name') as HTMLInputElement;
+    const phone = document.getElementById('funnel-phone') as HTMLInputElement;
+    const email = document.getElementById('funnel-email') as HTMLInputElement;
+
+    if (!name?.value || !phone?.value || !email?.value) {
+      showError(2, 'Please fill out your name, phone, and email.');
+      return;
+    }
+    if (!email.checkValidity()) {
+      showError(2, 'Please enter a valid email address.');
+      return;
+    }
+    goToStep(2, 3);
+  });
+
+  document.getElementById('prev-btn-2')?.addEventListener('click', () => goToStep(2, 1));
+  document.getElementById('prev-btn-3')?.addEventListener('click', () => goToStep(3, 2));
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form.checkValidity()) {
+      showError(3, 'Please fill out the required fields.');
+      return;
+    }
+
+    if (submitBtn) submitBtn.disabled = true;
+    if (submitLabel) submitLabel.textContent = 'Sending...';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      const result = await response.json().catch(() => null);
+
+      // Web3Forms returns success:true even with a placeholder access_key
+      // ("It works. Please insert your actual form_id or access_key...") so
+      // the form can be test-driven before it's wired up for real. Without
+      // this check, a misconfigured key would show the customer a cheerful
+      // "Request Sent" while the lead silently never reaches the business -
+      // worse than an obvious failure, since no one would know to fix it.
+      const isPlaceholderKey = typeof result?.message === 'string' && /insert your actual/i.test(result.message);
+
+      if (response.ok && result?.success && !isPlaceholderKey) {
+        form.classList.add('hidden');
+        document.getElementById('funnel-progress')?.classList.add('hidden');
+        successEl?.classList.remove('hidden');
+        if (liveRegion) liveRegion.textContent = 'Request sent successfully.';
+      } else {
+        throw new Error(result?.message || 'Submission failed');
       }
-      step1.classList.add('hidden');
-      step2.classList.remove('hidden');
-    });
-  }
-
-  if (next2 && step2 && step3) {
-    next2.addEventListener('click', () => {
-      // Basic input validation
-      const name = document.querySelector('input[name="name"]') as HTMLInputElement;
-      const phone = document.querySelector('input[name="phone"]') as HTMLInputElement;
-      const email = document.querySelector('input[name="email"]') as HTMLInputElement;
-      
-      if (!name?.value || !phone?.value || !email?.value) {
-        alert('Please fill out all contact fields.');
-        return;
-      }
-      step2.classList.add('hidden');
-      step3.classList.remove('hidden');
-    });
-  }
-
-  if (prev2 && step1 && step2) {
-    prev2.addEventListener('click', () => {
-      step2.classList.add('hidden');
-      step1.classList.remove('hidden');
-    });
-  }
-
-  if (prev3 && step2 && step3) {
-    prev3.addEventListener('click', () => {
-      step3.classList.add('hidden');
-      step2.classList.remove('hidden');
-    });
-  }
+    } catch {
+      form.classList.add('hidden');
+      document.getElementById('funnel-progress')?.classList.add('hidden');
+      errorEl?.classList.remove('hidden');
+      if (liveRegion) liveRegion.textContent = 'Something went wrong sending your request.';
+    }
+  });
 </script>

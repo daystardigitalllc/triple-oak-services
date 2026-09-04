@@ -11,8 +11,7 @@ export default defineConfig({
     plugins: [tailwind()],
     resolve: {
       alias: {
-        '@': path.resolve('./src'),
-        'astro:assets': path.resolve('./src/lib/astro-assets-mock.ts')
+        '@': path.resolve('./src')
       }
     }
   },

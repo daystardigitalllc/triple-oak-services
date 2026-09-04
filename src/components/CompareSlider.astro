@@ -81,8 +81,14 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
             data-initial={initialPercentage}
             data-autoplay={autoplay ? 'true' : 'false'}
             data-autoplay-duration={autoplayDuration}
-            class="relative w-full aspect-[4/3] overflow-hidden rounded-custom shadow-lg select-none cursor-ew-resize bg-neutral-200 dark:bg-neutral-800"
+            class="relative w-full aspect-[4/3] overflow-hidden rounded-custom shadow-lg select-none cursor-ew-resize bg-neutral-200 dark:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
             style="touch-action: none;"
+            tabindex="0"
+            role="slider"
+            aria-label={`Before and after comparison${item.label ? `: ${item.label}` : ''}. Use the left and right arrow keys to compare.`}
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow={initialPercentage}
           >
             {/* After image (full, underneath) */}
             <img
@@ -150,6 +156,7 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
         percentage = clamp(p, 0, 100);
         beforeWrap.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
         if (handle) handle.style.left = `${percentage}%`;
+        card.setAttribute('aria-valuenow', String(Math.round(percentage)));
       }
 
       function percentageFromEvent(event) {
@@ -210,6 +217,29 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
           window.addEventListener('blur', endDrag);
         });
       }
+
+      // Keyboard support: this is a custom slider control, so it needs to
+      // be operable without a mouse or touch, not just draggable.
+      card.addEventListener('keydown', (event) => {
+        const step = event.shiftKey ? 20 : 5;
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+          event.preventDefault();
+          stopAutoplay();
+          setPercentage(percentage - step);
+        } else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          stopAutoplay();
+          setPercentage(percentage + step);
+        } else if (event.key === 'Home') {
+          event.preventDefault();
+          stopAutoplay();
+          setPercentage(0);
+        } else if (event.key === 'End') {
+          event.preventDefault();
+          stopAutoplay();
+          setPercentage(100);
+        }
+      });
 
       setPercentage(percentage);
       startAutoplay();
