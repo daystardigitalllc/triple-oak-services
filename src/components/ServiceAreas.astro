@@ -1,7 +1,10 @@
 ---
-// Homepage "areas we serve" strip. Real internal links into the location
-// hub-and-spoke, with the closer/higher-priority service areas listed
-// first so both users and crawlers see them before the wider list.
+// Homepage "areas we serve" section - a stylized map of Tennessee with
+// each service city plotted at its real (simplified) lat/lng position,
+// Nashville shown as the hub with connecting lines out to each city,
+// plus a plain link list underneath for accessibility/SEO (the SVG
+// carries real <a href> links too, but the list guarantees every city
+// is a crawlable, keyboard-reachable link even if the map fails to load).
 import locationsData from '../data/locations.json';
 import businessData from '../data/business.json';
 
@@ -12,24 +15,121 @@ const sorted = [
   ...priorityOrder.map((slug) => locationsData.find((l) => l.slug === slug)).filter(Boolean),
   ...locationsData.filter((l) => !priorityOrder.includes(l.slug)),
 ];
+
+// Simplified Tennessee bounding box used to project every city's lat/lng
+// onto the map's viewBox. Keeping the same projection for the state
+// outline and the city dots is what actually matters here - this is a
+// decorative, simplified map, not a survey-accurate one.
+const BOUNDS = { north: 36.69, south: 34.98, west: -90.31, east: -81.65 };
+const VIEW_W = 1000;
+const VIEW_H = 245;
+
+function project([lat, lng]: [number, number]) {
+  const x = ((lng - BOUNDS.west) / (BOUNDS.east - BOUNDS.west)) * VIEW_W;
+  const y = ((BOUNDS.north - lat) / (BOUNDS.north - BOUNDS.south)) * VIEW_H;
+  return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+}
+
+// Hand-simplified Tennessee outline (not survey-accurate - a stylized
+// backdrop, projected through the same function as the city dots above
+// so the cluster sits in the right place relative to the state shape).
+const outlinePoints: [number, number][] = [
+  [36.50, -89.65], [36.55, -88.00], [36.50, -85.50], [36.60, -81.95],
+  [36.20, -82.30], [35.90, -82.55], [35.65, -83.30], [35.45, -83.90],
+  [35.15, -84.30], [35.00, -84.32], [35.00, -85.60], [35.00, -87.50],
+  [35.00, -88.20], [34.99, -90.31], [35.15, -90.05], [35.60, -90.10],
+  [36.00, -89.90], [36.30, -89.60],
+];
+const outlinePath = outlinePoints
+  .map((p, i) => `${i === 0 ? 'M' : 'L'} ${project(p).x} ${project(p).y}`)
+  .join(' ') + ' Z';
+
+const hub = locationsData.find((l) => l.slug === 'nashville')!;
+const hubPos = project([hub.lat, hub.lng]);
+const spokes = locationsData.filter((l) => l.slug !== 'nashville');
 ---
 
-<section id="service-areas" class="py-20 bg-neutral-50 border-t border-neutral-100">
-  <div class="container mx-auto px-6 max-w-5xl">
-    <div class="max-w-2xl mx-auto text-center space-y-4 mb-12">
-      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 uppercase leading-[1.1]">
-        Areas We Serve
+<section id="service-areas" class="py-20 bg-neutral-950 border-t border-neutral-900 relative overflow-hidden text-white">
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-2xl mx-auto text-center space-y-4 mb-14">
+      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1.5 rounded-md border border-primary/20">
+        Service Area
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight uppercase leading-[1.1]">
+        Proudly Serving <span class="text-primary">Middle Tennessee</span>
       </h2>
-      <p class="text-base sm:text-lg text-neutral-500 font-normal">
-        {businessData.name} covers {locationsData.length} communities across Middle Tennessee.
+      <p class="text-neutral-400 text-base sm:text-lg leading-relaxed">
+        {businessData.name} covers {locationsData.length} communities across Middle Tennessee, based out of Nashville.
       </p>
     </div>
-    <div class="flex flex-wrap justify-center gap-3">
-      {sorted.map((loc) => (
-        <a href={`/locations/${loc.slug}`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white border border-neutral-200 text-neutral-700 hover:border-primary/40 hover:text-primary transition-all">
-          {loc.name}, TN
-        </a>
-      ))}
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-6 items-center">
+      {/* Map */}
+      <div class="lg:col-span-3">
+        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} class="w-full h-auto" role="img" aria-label={`Map of Tennessee showing our ${locationsData.length} service area communities in Middle Tennessee`}>
+          <path d={outlinePath} class="fill-neutral-900 stroke-neutral-700" stroke-width="2" stroke-linejoin="round" />
+
+          {/* Hub-and-spoke connecting lines from Nashville */}
+          {spokes.map((loc) => {
+            const p = project([loc.lat, loc.lng]);
+            return (
+              <line
+                x1={hubPos.x} y1={hubPos.y} x2={p.x} y2={p.y}
+                stroke="var(--color-primary)" stroke-opacity="0.35" stroke-width="1.5"
+              />
+            );
+          })}
+
+          {/* City dots + labels, each a real link into the location page */}
+          {spokes.map((loc) => {
+            const p = project([loc.lat, loc.lng]);
+            return (
+              <a href={`/locations/${loc.slug}`} aria-label={`${loc.name}, TN - view our ${loc.name} service page`}>
+                <circle cx={p.x} cy={p.y} r="8" fill="transparent" />
+                <circle cx={p.x} cy={p.y} r="4.5" class="fill-white stroke-primary transition-transform" stroke-width="2" />
+                <text x={p.x} y={p.y - 10} text-anchor="middle" class="fill-neutral-300 font-semibold" style="font-size: 11px;">
+                  {loc.name}
+                </text>
+              </a>
+            );
+          })}
+
+          {/* Nashville hub, drawn last so it sits above the spoke lines/dots */}
+          <a href={`/locations/${hub.slug}`} aria-label="Nashville, TN - view our Nashville service page">
+            <circle cx={hubPos.x} cy={hubPos.y} r="12" fill="var(--color-primary)" fill-opacity="0.18">
+              <animate attributeName="r" values="10;16;10" dur="2.5s" repeatCount="indefinite" />
+              <animate attributeName="fill-opacity" values="0.25;0.05;0.25" dur="2.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx={hubPos.x} cy={hubPos.y} r="7" class="fill-primary stroke-white" stroke-width="2" />
+            <text x={hubPos.x} y={hubPos.y - 15} text-anchor="middle" class="fill-white font-extrabold" style="font-size: 13px;">
+              Nashville
+            </text>
+          </a>
+        </svg>
+      </div>
+
+      {/* City list */}
+      <div class="lg:col-span-2">
+        <div class="grid grid-cols-2 gap-3">
+          {sorted.map((loc) => (
+            <a href={`/locations/${loc.slug}`} class="px-4 py-3 rounded-custom text-sm font-semibold bg-neutral-900/60 border border-neutral-800 text-neutral-200 hover:border-primary/50 hover:text-primary transition-all text-center">
+              {loc.name}, TN
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  #service-areas svg a circle:nth-of-type(2) {
+    cursor: pointer;
+  }
+  #service-areas svg a:hover circle:nth-of-type(2) {
+    r: 6.5;
+  }
+  #service-areas svg a:hover text {
+    fill: var(--color-primary);
+  }
+</style>
