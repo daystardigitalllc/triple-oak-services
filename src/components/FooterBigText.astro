@@ -18,6 +18,10 @@ const tagline = taglineOverride || contentData.footerBigText?.tagline || '';
 
 <footer class="relative bg-neutral-950 text-neutral-400 pt-20 pb-8 border-t border-neutral-900 overflow-hidden">
   <div class="container mx-auto px-6 relative z-10">
+    <a href="/" class="inline-block mb-8" aria-label={businessData.name}>
+      <img src={businessData.logo} alt={`${businessData.name} Logo`} class="h-16 w-auto object-contain" />
+    </a>
+
     {tagline && (
       <p class="text-2xl sm:text-3xl font-bold text-white max-w-xl mb-16 leading-tight">
         {tagline}
