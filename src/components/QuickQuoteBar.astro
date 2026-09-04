@@ -18,12 +18,12 @@ const { idPrefix = 'quickquote', compact = false } = Astro.props;
 const id = (name: string) => `${idPrefix}-${name}`;
 ---
 
-<div id={id('root')} class:list={['w-full', compact ? '' : 'bg-white border border-neutral-200 shadow-xl rounded-custom']}>
+<div id={id('root')} class:list={['w-full', compact ? '' : 'bg-white border-y border-neutral-200 shadow-xl']}>
   <form
     id={id('form')}
     action="https://api.web3forms.com/submit"
     method="POST"
-    class:list={['flex flex-col md:flex-row md:items-end gap-4', compact ? '' : 'p-5 md:p-6']}
+    class:list={['flex flex-col md:flex-row md:items-end gap-4', compact ? '' : 'px-6 py-5 md:px-12 md:py-6']}
   >
     <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
     <input type="hidden" name="subject" value={`New Quick Quote from ${businessData.name}`} />
