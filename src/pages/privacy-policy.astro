@@ -1,0 +1,66 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import businessData from '../data/business.json';
+
+const lastUpdated = 'September 2026';
+---
+
+<MainLayout title={`Privacy Policy | ${businessData.name}`} description={`Privacy policy for ${businessData.name}.`}>
+  <section class="py-24 bg-white">
+    <div class="container mx-auto px-6 max-w-3xl">
+      <p class="text-sm font-bold uppercase tracking-widest text-primary mb-4">Legal</p>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 uppercase mb-4">
+        Privacy Policy
+      </h1>
+      <p class="text-sm text-neutral-400 mb-12">Last updated: {lastUpdated}</p>
+
+      <div class="prose prose-neutral max-w-none space-y-8 text-neutral-700 leading-relaxed">
+        <p>
+          {businessData.name} ("we," "us," or "our") respects your privacy. This policy explains what information we collect through this website, how we use it, and the choices you have.
+        </p>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Information We Collect</h2>
+          <p>
+            When you request a free estimate or contact us through this site, we collect the information you provide directly: your name, phone number, email address, service address, and details about the job you're asking about. We do not collect payment information through this website.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">How We Use Your Information</h2>
+          <p>
+            We use the information you submit solely to respond to your request, provide a quote, schedule work, and communicate with you about services you've asked about. We do not sell or rent your personal information to third parties.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Third-Party Services</h2>
+          <p>
+            Form submissions on this site are processed through Resend, an email delivery service, solely to route your request to our team's inbox. We do not use third-party advertising trackers on this site.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Data Retention</h2>
+          <p>
+            We retain the information from your request for as long as reasonably needed to respond to you and, if you become a customer, to service and document the work performed.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Your Choices</h2>
+          <p>
+            You can ask us to delete the information you've submitted at any time by contacting us at {businessData.email} or {businessData.phone}.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Contact Us</h2>
+          <p>
+            Questions about this policy can be sent to {businessData.email} or {businessData.phone}.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

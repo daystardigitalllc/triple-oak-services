@@ -1,0 +1,26 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import businessData from '../data/business.json';
+---
+
+<MainLayout title={`Page Not Found | ${businessData.name}`} description="The page you're looking for doesn't exist.">
+  <section class="py-32 bg-white text-center">
+    <div class="container mx-auto px-6 max-w-xl">
+      <p class="text-sm font-bold uppercase tracking-widest text-primary mb-4">404 Error</p>
+      <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-neutral-900 uppercase mb-6">
+        Page Not Found
+      </h1>
+      <p class="text-neutral-500 text-base sm:text-lg leading-relaxed mb-10">
+        The page you're looking for doesn't exist or may have moved. Head back home, or give us a call if you need help finding something.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-lg shadow-primary/25 transition-all">
+          Back to Homepage
+        </a>
+        <a href={`tel:${businessData.phone}`} class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-neutral-700 bg-white border border-neutral-200 hover:bg-neutral-50 rounded-custom transition-all gap-2">
+          <i class="fa-solid fa-phone text-xs"></i> Call {businessData.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>

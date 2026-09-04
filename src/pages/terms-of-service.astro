@@ -1,0 +1,66 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import businessData from '../data/business.json';
+
+const lastUpdated = 'September 2026';
+---
+
+<MainLayout title={`Terms of Service | ${businessData.name}`} description={`Terms of service for ${businessData.name}.`}>
+  <section class="py-24 bg-white">
+    <div class="container mx-auto px-6 max-w-3xl">
+      <p class="text-sm font-bold uppercase tracking-widest text-primary mb-4">Legal</p>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 uppercase mb-4">
+        Terms of Service
+      </h1>
+      <p class="text-sm text-neutral-400 mb-12">Last updated: {lastUpdated}</p>
+
+      <div class="prose prose-neutral max-w-none space-y-8 text-neutral-700 leading-relaxed">
+        <p>
+          These terms govern your use of this website. By using this site, including submitting a quote request, you agree to the following.
+        </p>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Website Use</h2>
+          <p>
+            This website is provided for informational purposes and to let visitors request estimates for tree services from {businessData.name}. Content on this site, including text, photos, and video, is the property of {businessData.name} and may not be reproduced without permission.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Estimates &amp; Quotes</h2>
+          <p>
+            Information submitted through this site's forms is used to prepare a quote or estimate. Submitting a request does not create a contract for services; work begins only once both parties agree on scope and pricing, typically confirmed in person or in writing.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">No Warranty on Website Content</h2>
+          <p>
+            We make reasonable efforts to keep information on this site accurate and current, but we don't guarantee that every detail (pricing examples, service area, availability) is up to date at all times. Contact us directly to confirm details before making decisions based on this site.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Limitation of Liability</h2>
+          <p>
+            {businessData.name} is not liable for any damages arising from your use of this website. This does not limit any liability related to services actually performed at your property, which are governed by the terms agreed to at the time of that work.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Changes to These Terms</h2>
+          <p>
+            We may update these terms from time to time. Continued use of the site after changes are posted means you accept the updated terms.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 mb-2">Contact Us</h2>
+          <p>
+            Questions about these terms can be sent to {businessData.email} or {businessData.phone}.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

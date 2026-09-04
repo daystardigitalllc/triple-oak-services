@@ -35,12 +35,9 @@ const bgClass = isFlatPanel ? 'bg-white dark:bg-neutral-900' : 'bg-white/95 dark
       <!-- Announces step changes and validation errors to screen readers -->
       <p id="funnel-live-region" class="sr-only" role="status" aria-live="polite"></p>
 
-      <!-- Web3Forms integration - Free functional form endpoint -->
-      <form action="https://api.web3forms.com/submit" method="POST" id="funnel-form" class="space-y-8">
-        <!-- Web3Forms Config Key -->
-        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+      <!-- Submits to src/pages/api/quote.ts, which sends the lead via Resend -->
+      <form action="/api/quote" method="POST" id="funnel-form" class="space-y-8">
         <input type="hidden" name="subject" value={`New Lead from ${businessData.name}`} />
-        <input type="hidden" name="from_name" value={businessData.name} />
         <label class="hidden" aria-hidden="true">
           Leave this field blank
           <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
@@ -272,15 +269,7 @@ const bgClass = isFlatPanel ? 'bg-white dark:bg-neutral-900' : 'bg-white/95 dark
       });
       const result = await response.json().catch(() => null);
 
-      // Web3Forms returns success:true even with a placeholder access_key
-      // ("It works. Please insert your actual form_id or access_key...") so
-      // the form can be test-driven before it's wired up for real. Without
-      // this check, a misconfigured key would show the customer a cheerful
-      // "Request Sent" while the lead silently never reaches the business -
-      // worse than an obvious failure, since no one would know to fix it.
-      const isPlaceholderKey = typeof result?.message === 'string' && /insert your actual/i.test(result.message);
-
-      if (response.ok && result?.success && !isPlaceholderKey) {
+      if (response.ok && result?.success) {
         form.classList.add('hidden');
         document.getElementById('funnel-progress')?.classList.add('hidden');
         successEl?.classList.remove('hidden');

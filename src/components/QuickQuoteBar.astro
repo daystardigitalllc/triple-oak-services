@@ -2,10 +2,10 @@
 // A compact, single-row lead-capture form (name, phone, email, service,
 // submit) meant to sit right under the hero, above the marquee - the fast
 // path for someone who already knows they want a quote and doesn't want
-// to scroll to the full multi-step funnel further down the page. Same
-// Web3Forms endpoint and placeholder-key detection as QuoteFunnel.astro,
-// reused here via `idPrefix` so this component can also be dropped inside
-// the mobile "Get a Quote" popup without id collisions.
+// to scroll to the full multi-step funnel further down the page. Submits
+// to the same /api/quote (Resend) endpoint as QuoteFunnel.astro, reused
+// here via `idPrefix` so this component can also be dropped inside the
+// mobile "Get a Quote" popup without id collisions.
 import businessData from '../data/business.json';
 import contentData from '../data/content.json';
 
@@ -31,13 +31,11 @@ const fieldClass = compact
 <div id={id('root')} class:list={['w-full', compact ? '' : 'bg-neutral-950 border-y border-neutral-800 shadow-xl']}>
   <form
     id={id('form')}
-    action="https://api.web3forms.com/submit"
+    action="/api/quote"
     method="POST"
     class:list={['flex flex-col md:flex-row md:items-end gap-4', compact ? '' : 'px-6 py-5 md:px-12 md:py-6']}
   >
-    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
     <input type="hidden" name="subject" value={`New Quick Quote from ${businessData.name}`} />
-    <input type="hidden" name="from_name" value={businessData.name} />
     <label class="hidden" aria-hidden="true">
       Leave this field blank
       <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
@@ -108,14 +106,13 @@ const fieldClass = compact
           headers: { Accept: 'application/json' },
         });
         const result = await response.json().catch(() => null);
-        const isPlaceholderKey = typeof result?.message === 'string' && /insert your actual/i.test(result.message);
 
-        if (response.ok && result?.success && !isPlaceholderKey) {
+        if (response.ok && result?.success) {
           form.reset();
           form.classList.add('hidden');
           setFeedback("Thanks - we've got your info and will be in touch shortly.", false);
         } else {
-          throw new Error('placeholder or failed');
+          throw new Error(result?.message || 'Submission failed');
         }
       } catch {
         setFeedback('Something went wrong. Please call us directly instead.', true);
