@@ -7,17 +7,14 @@ import themeConfig from '../data/theme.config.json';
 <header id="site-header" class="fixed top-0 z-50 w-full site-header">
   <div class="container mx-auto px-6 py-5 flex items-center justify-between transition-all duration-300">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 group">
+    <a href="/" class="flex items-center gap-2 group" aria-label={businessData.name}>
       {businessData.logo && businessData.logo !== '/logo.svg' && businessData.logo !== '' ? (
-        <img src={businessData.logo} alt={`${businessData.name} Logo`} class="h-10 w-auto object-contain transition-all group-hover:scale-105" />
+        <img src={businessData.logo} alt={`${businessData.name} Logo`} class="h-14 w-auto object-contain transition-all group-hover:scale-105" />
       ) : (
         <div data-header-logo-badge class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-extrabold text-xl shadow-md shadow-primary/20 group-hover:scale-105 transition-all">
           {businessData.name.charAt(0)}
         </div>
       )}
-      <span data-header-text class="font-bold text-xl tracking-tight text-white transition-colors duration-300">
-        {businessData.name}
-      </span>
     </a>
 
     <!-- Desktop Navigation -->
