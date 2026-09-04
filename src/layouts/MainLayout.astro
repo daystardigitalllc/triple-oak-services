@@ -53,7 +53,22 @@ const schema = {
     businessData.socials?.facebook,
     businessData.socials?.instagram,
     businessData.socials?.google
-  ].filter(Boolean)
+  ].filter(Boolean),
+  ...(contentData.reviews && contentData.reviews.length > 0 ? {
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": (
+        contentData.reviews.reduce((sum, r) => sum + (r.rating || 5), 0) / contentData.reviews.length
+      ).toFixed(1),
+      "reviewCount": contentData.reviews.length
+    },
+    "review": contentData.reviews.map((r) => ({
+      "@type": "Review",
+      "author": { "@type": "Person", "name": r.author },
+      "reviewRating": { "@type": "Rating", "ratingValue": r.rating || 5, "bestRating": 5 },
+      "reviewBody": r.text
+    }))
+  } : {})
 };
 ---
 

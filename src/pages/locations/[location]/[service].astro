@@ -61,9 +61,20 @@ const otherServicesHere = contentData.services.filter((s) => s.slug !== service.
 
 const title = `${service.title} in ${loc.name}, TN | ${businessData.name}`;
 const description = `${service.title} in ${loc.name}, TN (${loc.county}). ${service.shortDescription} Licensed and insured, free estimates - call ${businessData.phone}.`;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Locations", "item": new URL('/locations', Astro.site).href },
+    { "@type": "ListItem", "position": 2, "name": loc.name, "item": new URL(`/locations/${loc.slug}`, Astro.site).href },
+    { "@type": "ListItem", "position": 3, "name": service.title, "item": new URL(`/locations/${loc.slug}/${service.slug}`, Astro.site).href }
+  ]
+};
 ---
 
 <MainLayout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <!-- Hero -->
   <section
     class="relative py-20 lg:py-28 bg-neutral-900 text-white overflow-hidden bg-cover bg-center"
