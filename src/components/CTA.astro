@@ -1,37 +1,65 @@
 ---
 import businessData from '../data/business.json';
-import themeConfig from '../data/theme.config.json';
 
-const isOakCity = themeConfig.style === 'oak-city';
+const stats = [
+  {
+    value: '#1',
+    label: 'Cause of Power Outages',
+    detail: 'Trees are the leading cause of power outages across the U.S.',
+  },
+  {
+    value: '$4,110',
+    label: 'Average Insurance Payout',
+    detail: 'What insurers pay, on average, to settle a tree-related property damage claim.',
+  },
+  {
+    value: '42%',
+    label: 'Of Insured Home Losses',
+    detail: 'Wind and storm damage - including falling trees and limbs - drives nearly half of all home insurance losses.',
+  },
+  {
+    value: '7%',
+    label: 'Of Home Insurance Claims',
+    detail: 'Come from a fallen tree, often one that showed warning signs long before it went down.',
+  },
+];
 ---
 
-<section class="py-20 bg-white relative overflow-hidden">
+<section class="py-20 bg-neutral-950 relative overflow-hidden text-white">
   <div class="container mx-auto px-6 relative z-10">
-    <div class="relative rounded-custom overflow-hidden shadow-2xl bg-gradient-to-br from-primary via-neutral-900 to-secondary text-white p-8 md:p-16">
-
-      <div class="max-w-2xl mx-auto space-y-6 relative z-10 text-center">
-        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight uppercase">
-          Get Your Free Estimate Today
-        </h2>
-
-        <p class="text-neutral-300 text-base sm:text-lg leading-relaxed">
-          Get a free, no-obligation quote from {businessData.name} today.
-        </p>
-
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 pt-4">
-          <a href="#quote-funnel" class:list={[
-            "inline-flex items-center justify-center px-8 py-4 text-base font-bold transition-all hover:scale-103 text-center",
-            isOakCity
-              ? "text-white bg-transparent border-2 border-white hover:bg-white hover:text-neutral-950 rounded-custom"
-              : "text-neutral-950 bg-white hover:bg-neutral-100 rounded-custom shadow-lg"
-          ]}>
-            {businessData.mainCta}
-          </a>
-          <a href={`tel:${businessData.phone}`} class="inline-flex items-center justify-center px-8 py-4 text-base font-bold border-2 border-white/20 hover:bg-white/10 rounded-custom transition-all text-center gap-2">
-            <i class="fa-solid fa-phone text-xs"></i> Call: {businessData.phone}
-          </a>
-        </div>
-      </div>
+    <div class="max-w-3xl mx-auto text-center space-y-4 mb-14">
+      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1.5 rounded-md border border-primary/20">
+        Why It Matters
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight uppercase leading-[1.1]">
+        Neglected Trees Are <span class="text-primary">a Real Risk</span>
+      </h2>
+      <p class="text-neutral-400 text-base sm:text-lg leading-relaxed">
+        Overgrown branches and dead or dying trees aren't just an eyesore - they're one of the most common causes of property damage and power outages in the country. Regular trimming and timely removal is cheap insurance against a much bigger bill.
+      </p>
     </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-14">
+      {stats.map((stat) => (
+        <div class="text-center p-5 sm:p-6 rounded-custom border border-neutral-800 bg-neutral-900/50">
+          <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-primary mb-2">{stat.value}</div>
+          <p class="text-xs sm:text-sm font-bold uppercase tracking-wide text-white mb-2">{stat.label}</p>
+          <p class="text-xs text-neutral-500 leading-relaxed">{stat.detail}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
+      <a href="#quote-funnel" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-neutral-950 bg-primary hover:bg-primary-hover rounded-custom shadow-lg shadow-primary/25 transition-all hover:scale-103 text-center">
+        {businessData.mainCta}
+      </a>
+      <a href={`tel:${businessData.phone}`} class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white border-2 border-white/20 hover:bg-white/10 rounded-custom transition-all text-center gap-2">
+        <i class="fa-solid fa-phone text-xs"></i> Call: {businessData.phone}
+      </a>
+    </div>
+
+    <p class="text-center text-[11px] text-neutral-600 mt-8">
+      Sources: Statista, Policygenius, Insurance Information Institute
+    </p>
   </div>
 </section>
