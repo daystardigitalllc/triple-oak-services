@@ -1,12 +1,12 @@
 ---
-// Homepage "areas we serve" section - a stylized map of Tennessee with
-// each service city plotted at its real (simplified) lat/lng position,
-// Nashville shown as the hub with connecting lines out to each city,
-// plus a plain link list underneath for accessibility/SEO (the SVG
-// carries real <a href> links too, but the list guarantees every city
-// is a crawlable, keyboard-reachable link even if the map fails to load).
+// Homepage "areas we serve" section - a real Tennessee county map (US
+// Census Bureau boundary data, CC0 / public domain, via Wikimedia
+// Commons: https://commons.wikimedia.org/wiki/File:Tennessee_county_map,_cb_500k.svg)
+// cropped to the counties we actually serve. Hovering a county on the
+// map or a city in the list highlights the same county on both sides.
 import locationsData from '../data/locations.json';
 import businessData from '../data/business.json';
+import rawCountyMap from '../data/tn-county-map.svg?raw';
 
 const priorityOrder = [
   'nashville', 'hendersonville', 'gallatin', 'white-house', 'portland', 'springfield',
@@ -16,68 +16,32 @@ const sorted = [
   ...locationsData.filter((l) => !priorityOrder.includes(l.slug)),
 ];
 
-// Simplified Tennessee bounding box used to project every city's lat/lng
-// onto the map's viewBox. Keeping the same projection for the state
-// outline and the city dots is what actually matters here - this is a
-// decorative, simplified map, not a survey-accurate one.
-const BOUNDS = { north: 36.69, south: 34.98, west: -90.31, east: -81.65 };
-const VIEW_W = 1000;
-const VIEW_H = 245;
+const serviceCountyIds = [...new Set(locationsData.flatMap((l) => l.countyIds))];
 
-function project([lat, lng]: [number, number]) {
-  const x = ((lng - BOUNDS.west) / (BOUNDS.east - BOUNDS.west)) * VIEW_W;
-  const y = ((BOUNDS.north - lat) / (BOUNDS.north - BOUNDS.south)) * VIEW_H;
-  return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+// County -> cities in it, for the map tooltip.
+const citiesByCounty = new Map<string, string[]>();
+for (const loc of locationsData) {
+  for (const county of loc.countyIds) {
+    citiesByCounty.set(county, [...(citiesByCounty.get(county) || []), loc.name]);
+  }
 }
 
-// Hand-simplified Tennessee outline (not survey-accurate - a stylized
-// backdrop, projected through the same function as the city dots above
-// so the cluster sits in the right place relative to the state shape).
-const outlinePoints: [number, number][] = [
-  [36.50, -89.65], [36.55, -88.00], [36.50, -85.50], [36.60, -81.95],
-  [36.20, -82.30], [35.90, -82.55], [35.65, -83.30], [35.45, -83.90],
-  [35.15, -84.30], [35.00, -84.32], [35.00, -85.60], [35.00, -87.50],
-  [35.00, -88.20], [34.99, -90.31], [35.15, -90.05], [35.60, -90.10],
-  [36.00, -89.90], [36.30, -89.60],
-];
-const outlinePath = outlinePoints
-  .map((p, i) => `${i === 0 ? 'M' : 'L'} ${project(p).x} ${project(p).y}`)
-  .join(' ') + ' Z';
+// Pull just the inner county <path> group out of the source file so we
+// control the outer <svg> (viewBox, classes) ourselves, and strip the
+// source's per-county fill colors so our own CSS drives the styling.
+const innerMatch = rawCountyMap.match(/<g[^>]*>([\s\S]*)<\/g>/);
+const countyPaths = (innerMatch ? innerMatch[1] : '')
+  .replace(/\s+fill="#[0-9a-fA-F]{3,6}"/g, '')
+  .replace(/<path /g, '<path tabindex="0" ');
 
-const hub = locationsData.find((l) => l.slug === 'nashville')!;
-const hubPos = project([hub.lat, hub.lng]);
-const spokes = locationsData.filter((l) => l.slug !== 'nashville');
-
-// Zoom the visible viewBox in on just the Middle TN cluster of cities
-// instead of showing the whole state (where the cluster would be a tiny
-// dot in the middle) - same coordinate space as the outline above, just
-// a cropped window into it.
-const allPositions = locationsData.map((l) => project([l.lat, l.lng]));
-const padX = 90;
-const padY = 90;
-const rawMinX = Math.min(...allPositions.map((p) => p.x)) - padX;
-const rawMaxX = Math.max(...allPositions.map((p) => p.x)) + padX;
-const rawMinY = Math.min(...allPositions.map((p) => p.y)) - padY;
-const rawMaxY = Math.max(...allPositions.map((p) => p.y)) + padY;
-
-// Force a consistent widescreen aspect ratio so the map doesn't look
-// squashed, by growing the shorter axis outward from its own center
-// rather than stretching either axis.
-const TARGET_RATIO = 2.15;
-let vbW = rawMaxX - rawMinX;
-let vbH = rawMaxY - rawMinY;
-let vbX = rawMinX;
-let vbY = rawMinY;
-if (vbW / vbH > TARGET_RATIO) {
-  const neededH = vbW / TARGET_RATIO;
-  vbY -= (neededH - vbH) / 2;
-  vbH = neededH;
-} else {
-  const neededW = vbH * TARGET_RATIO;
-  vbX -= (neededW - vbW) / 2;
-  vbW = neededW;
-}
-const zoomedViewBox = `${vbX.toFixed(1)} ${vbY.toFixed(1)} ${vbW.toFixed(1)} ${vbH.toFixed(1)}`;
+// Crop the map's own coordinate space down to the 6 counties we serve
+// (hand-measured from the source file's county paths), padded out and
+// forced to a widescreen aspect so it reads as "zoomed into Middle TN"
+// rather than the whole state.
+const vbX = 239.6;
+const vbY = -14.3;
+const vbW = 211.8;
+const vbH = 156.9;
 ---
 
 <section id="service-areas" class="py-20 bg-neutral-950 border-t border-neutral-900 relative overflow-hidden text-white">
@@ -90,52 +54,20 @@ const zoomedViewBox = `${vbX.toFixed(1)} ${vbY.toFixed(1)} ${vbW.toFixed(1)} ${v
         Proudly Serving <span class="text-primary">Middle Tennessee</span>
       </h2>
       <p class="text-neutral-400 text-base sm:text-lg leading-relaxed">
-        {businessData.name} covers {locationsData.length} communities across Middle Tennessee, based out of Nashville.
+        {businessData.name} covers {locationsData.length} communities across {serviceCountyIds.length} counties in Middle Tennessee, based out of Nashville.
       </p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-6 items-center">
       {/* Map */}
-      <div class="lg:col-span-3">
-        <svg viewBox={zoomedViewBox} class="w-full h-auto" role="img" aria-label={`Map of Middle Tennessee showing our ${locationsData.length} service area communities`}>
-          <path d={outlinePath} class="fill-neutral-900 stroke-neutral-700" stroke-width="2" stroke-linejoin="round" />
-
-          {/* Hub-and-spoke connecting lines from Nashville */}
-          {spokes.map((loc) => {
-            const p = project([loc.lat, loc.lng]);
-            return (
-              <line
-                x1={hubPos.x} y1={hubPos.y} x2={p.x} y2={p.y}
-                stroke="var(--color-primary)" stroke-opacity="0.35" stroke-width="1.5"
-              />
-            );
-          })}
-
-          {/* City dots + labels, each a real link into the location page */}
-          {spokes.map((loc) => {
-            const p = project([loc.lat, loc.lng]);
-            return (
-              <a href={`/locations/${loc.slug}`} aria-label={`${loc.name}, TN - view our ${loc.name} service page`}>
-                <circle cx={p.x} cy={p.y} r="7" fill="transparent" />
-                <circle cx={p.x} cy={p.y} r="3.5" class="fill-white stroke-primary transition-transform" stroke-width="1.5" />
-                <text x={p.x} y={p.y - 8} text-anchor="middle" class="fill-neutral-300 font-semibold" style="font-size: 8px;">
-                  {loc.name}
-                </text>
-              </a>
-            );
-          })}
-
-          {/* Nashville hub, drawn last so it sits above the spoke lines/dots */}
-          <a href={`/locations/${hub.slug}`} aria-label="Nashville, TN - view our Nashville service page">
-            <circle cx={hubPos.x} cy={hubPos.y} r="9" fill="var(--color-primary)" fill-opacity="0.18">
-              <animate attributeName="r" values="7;12;7" dur="2.5s" repeatCount="indefinite" />
-              <animate attributeName="fill-opacity" values="0.25;0.05;0.25" dur="2.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx={hubPos.x} cy={hubPos.y} r="5.5" class="fill-primary stroke-white" stroke-width="1.5" />
-            <text x={hubPos.x} y={hubPos.y - 11} text-anchor="middle" class="fill-white font-extrabold" style="font-size: 10px;">
-              Nashville
-            </text>
-          </a>
+      <div class="lg:col-span-3" id="tn-county-map-wrap">
+        <svg
+          viewBox={`${vbX} ${vbY} ${vbW} ${vbH}`}
+          class="w-full h-auto"
+          role="img"
+          aria-label={`Map of Middle Tennessee counties served by ${businessData.name}`}
+        >
+          <Fragment set:html={countyPaths} />
         </svg>
       </div>
 
@@ -143,7 +75,11 @@ const zoomedViewBox = `${vbX.toFixed(1)} ${vbY.toFixed(1)} ${vbW.toFixed(1)} ${v
       <div class="lg:col-span-2">
         <div class="grid grid-cols-2 gap-3">
           {sorted.map((loc) => (
-            <a href={`/locations/${loc.slug}`} class="px-4 py-3 rounded-custom text-sm font-semibold bg-neutral-900/60 border border-neutral-800 text-neutral-200 hover:border-primary/50 hover:text-primary transition-all text-center">
+            <a
+              href={`/locations/${loc.slug}`}
+              class="service-area-chip px-4 py-3 rounded-custom text-sm font-semibold bg-neutral-900/60 border border-neutral-800 text-neutral-200 hover:border-primary/50 hover:text-primary transition-all text-center"
+              data-counties={loc.countyIds.join(',')}
+            >
               {loc.name}, TN
             </a>
           ))}
@@ -153,14 +89,97 @@ const zoomedViewBox = `${vbX.toFixed(1)} ${vbY.toFixed(1)} ${vbW.toFixed(1)} ${v
   </div>
 </section>
 
-<style>
-  #service-areas svg a circle:nth-of-type(2) {
+<style define:vars={{ serviceCounties: JSON.stringify(serviceCountyIds) }}>
+  #tn-county-map-wrap :global(path) {
+    fill: #1c1c1f;
+    stroke: #3f3f46;
+    stroke-width: 0.4;
+  }
+
+  /* Counties we actually serve get a visible base tint and become
+     interactive; everything else stays flat/inert background context. */
+  #tn-county-map-wrap :global(path.is-served) {
+    fill: color-mix(in srgb, var(--color-primary) 16%, #1c1c1f);
+    stroke: color-mix(in srgb, var(--color-primary) 45%, #3f3f46);
     cursor: pointer;
+    transition: fill 0.25s ease, stroke 0.25s ease;
   }
-  #service-areas svg a:hover circle:nth-of-type(2) {
-    r: 6.5;
-  }
-  #service-areas svg a:hover text {
+  #tn-county-map-wrap :global(path.is-served:hover),
+  #tn-county-map-wrap :global(path.is-served.is-active) {
     fill: var(--color-primary);
+    stroke: white;
+  }
+  #tn-county-map-wrap :global(path.is-served:focus-visible) {
+    outline: 2px solid white;
+    outline-offset: 1px;
+  }
+
+  .service-area-chip.is-active {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
   }
 </style>
+
+<script define:vars={{ serviceCountyIds, citiesByCounty: Object.fromEntries(citiesByCounty) }}>
+  (() => {
+    const svg = document.querySelector('#tn-county-map-wrap svg');
+    if (!svg) return;
+
+    // Mark the counties we serve, add a native tooltip listing the
+    // cities in each, and hide the rest of the state's paths from
+    // assistive tech since they carry no useful information here.
+    const countyPaths = new Map();
+    svg.querySelectorAll('path[id]').forEach((path) => {
+      const id = path.getAttribute('id');
+      if (serviceCountyIds.includes(id)) {
+        path.classList.add('is-served');
+        path.setAttribute('role', 'link');
+        const cities = citiesByCounty[id] || [];
+        path.setAttribute('aria-label', `${id} County - ${cities.join(', ')}`);
+        const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+        title.textContent = `${id} County: ${cities.join(', ')}`;
+        path.appendChild(title);
+        countyPaths.set(id, path);
+      } else {
+        path.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    const chips = document.querySelectorAll('.service-area-chip');
+
+    function setActive(countyIds, active) {
+      countyIds.forEach((id) => {
+        countyPaths.get(id)?.classList.toggle('is-active', active);
+      });
+    }
+
+    // Hovering (or focusing) a county on the map highlights it directly
+    // via CSS (:hover/.is-served), so we only need JS for the other
+    // direction: hovering a city chip highlights its county on the map.
+    chips.forEach((chip) => {
+      const counties = (chip.getAttribute('data-counties') || '').split(',').filter(Boolean);
+      chip.addEventListener('mouseenter', () => setActive(counties, true));
+      chip.addEventListener('mouseleave', () => setActive(counties, false));
+      chip.addEventListener('focus', () => setActive(counties, true));
+      chip.addEventListener('blur', () => setActive(counties, false));
+    });
+
+    // The reverse: hovering/focusing a county on the map highlights the
+    // matching city chip(s) in the list below it.
+    countyPaths.forEach((path, id) => {
+      const matchingChips = [...chips].filter((chip) =>
+        (chip.getAttribute('data-counties') || '').split(',').includes(id)
+      );
+      const activate = (on) => matchingChips.forEach((chip) => chip.classList.toggle('is-active', on));
+      path.addEventListener('mouseenter', () => activate(true));
+      path.addEventListener('mouseleave', () => activate(false));
+      path.addEventListener('focus', () => activate(true));
+      path.addEventListener('blur', () => activate(false));
+      path.addEventListener('click', () => {
+        const firstCity = matchingChips[0];
+        if (firstCity) window.location.href = firstCity.getAttribute('href');
+      });
+    });
+  })();
+</script>

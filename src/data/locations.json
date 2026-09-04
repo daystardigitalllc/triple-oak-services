@@ -6,7 +6,10 @@
     "character": "Nashville's older neighborhoods, from East Nashville to Inglewood and Sylvan Park, are full of mature oaks, maples, and hackberries planted decades before the streets around them got busy.",
     "angle": "Big legacy trees next to closer-together lots and older utility lines mean more careful, close-quarters work than a wide-open suburban yard.",
     "lat": 36.1627,
-    "lng": -86.7816
+    "lng": -86.7816,
+    "countyIds": [
+      "Davidson"
+    ]
   },
   {
     "slug": "portland",
@@ -15,7 +18,10 @@
     "character": "Portland still carries its farming roots, with strawberry fields on the edge of town giving way to in-town lots shaded by tall, older trees.",
     "angle": "A lot of properties here back up to open farmland or fence lines, so windbreak trees and field-edge growth end up on the job list along with the yard.",
     "lat": 36.5834,
-    "lng": -86.5186
+    "lng": -86.5186,
+    "countyIds": [
+      "Sumner"
+    ]
   },
   {
     "slug": "white-house",
@@ -24,7 +30,11 @@
     "character": "White House has grown fast along US-31W, with new subdivisions built right up against what used to be pasture and woodland.",
     "angle": "Newer construction here often leaves builder-grade trees planted too close to the house, plus tree lines along the property edge that never got thinned.",
     "lat": 36.4695,
-    "lng": -86.665
+    "lng": -86.665,
+    "countyIds": [
+      "Sumner",
+      "Robertson"
+    ]
   },
   {
     "slug": "springfield",
@@ -33,7 +43,10 @@
     "character": "Springfield is the Robertson County seat, with a historic courthouse square and older residential streets lined with big, established shade trees.",
     "angle": "Those older shade trees are usually healthy, but decades of growth means storm-damaged limbs and overdue crown work are common calls.",
     "lat": 36.5034,
-    "lng": -86.8836
+    "lng": -86.8836,
+    "countyIds": [
+      "Robertson"
+    ]
   },
   {
     "slug": "mount-juliet",
@@ -42,7 +55,10 @@
     "character": "Mount Juliet is one of the fastest-growing cities in Middle Tennessee, with new subdivisions going in around Providence Marketplace and older farmland still holding out on the edges of town.",
     "angle": "New-build yards usually need young trees shaped up early, while the older properties nearby still have big legacy trees that need real attention.",
     "lat": 36.2001,
-    "lng": -86.5186
+    "lng": -86.5186,
+    "countyIds": [
+      "Wilson"
+    ]
   },
   {
     "slug": "lebanon",
@@ -51,7 +67,10 @@
     "character": "Lebanon's historic square and Cumberland University sit at the center of a city that's grown well past its old town limits along I-40.",
     "angle": "Between the older in-town streets and the newer growth toward the interstate, we see everything from mature hardwoods to first-year saplings that need training.",
     "lat": 36.2081,
-    "lng": -86.2911
+    "lng": -86.2911,
+    "countyIds": [
+      "Wilson"
+    ]
   },
   {
     "slug": "murfreesboro",
@@ -60,7 +79,10 @@
     "character": "Murfreesboro is the largest city in Middle Tennessee outside Nashville itself, with historic districts near MTSU and subdivisions spreading out in every direction.",
     "angle": "That mix means jobs range from tight, tree-lined in-town lots to newer subdivisions where storm damage and stump removal are the more common calls.",
     "lat": 35.8456,
-    "lng": -86.3903
+    "lng": -86.3903,
+    "countyIds": [
+      "Rutherford"
+    ]
   },
   {
     "slug": "franklin",
@@ -69,7 +91,10 @@
     "character": "Franklin's historic downtown and surrounding neighborhoods are known for heavy tree canopy, with big hardwoods that predate a lot of the houses around them.",
     "angle": "Property owners here tend to want trees preserved and shaped carefully, not just cut back, especially near the historic district.",
     "lat": 35.9251,
-    "lng": -86.8689
+    "lng": -86.8689,
+    "countyIds": [
+      "Williamson"
+    ]
   },
   {
     "slug": "brentwood",
@@ -78,7 +103,10 @@
     "character": "Brentwood's rolling, wooded lots and larger properties mean a lot of mature tree cover packed into HOA-governed subdivisions.",
     "angle": "Bigger lots and taller trees closer to the house make careful, well-equipped removal and trimming the norm rather than the exception.",
     "lat": 36.0331,
-    "lng": -86.7828
+    "lng": -86.7828,
+    "countyIds": [
+      "Williamson"
+    ]
   },
   {
     "slug": "madison",
@@ -87,7 +115,10 @@
     "character": "Madison's post-war neighborhoods were built with big front and back yards, and the shade trees planted back then have had 60-plus years to grow into them.",
     "angle": "A lot of the calls we get here are legacy trees that have outgrown the yard, with roots and limbs now pushing into driveways, fences, and roof lines.",
     "lat": 36.2609,
-    "lng": -86.7089
+    "lng": -86.7089,
+    "countyIds": [
+      "Davidson"
+    ]
   },
   {
     "slug": "hermitage",
@@ -96,7 +127,10 @@
     "character": "Hermitage takes its name from Andrew Jackson's historic estate nearby, and the community around Percy Priest Lake mixes older wooded lots with newer development.",
     "angle": "Lake-adjacent properties and older wooded lots both mean bigger trees, so storm cleanup and full removals come up more than routine trims.",
     "lat": 36.1815,
-    "lng": -86.6111
+    "lng": -86.6111,
+    "countyIds": [
+      "Davidson"
+    ]
   },
   {
     "slug": "gallatin",
@@ -105,7 +139,10 @@
     "character": "Gallatin is the Sumner County seat, sitting on Old Hickory Lake with a historic downtown square and neighborhoods that stretch from lakefront to farmland.",
     "angle": "Lakefront trees take a beating from wind off the water, so storm damage and leaning trees near the shoreline are a regular part of the work here.",
     "lat": 36.3884,
-    "lng": -86.4467
+    "lng": -86.4467,
+    "countyIds": [
+      "Sumner"
+    ]
   },
   {
     "slug": "hendersonville",
@@ -114,6 +151,9 @@
     "character": "Hendersonville is one of the larger Nashville-area suburbs, stretched along Old Hickory Lake with a mix of lakefront homes and inland residential streets.",
     "angle": "Between lake winds and dense residential lots, we handle a steady mix of storm cleanup, tree removal, and stump grinding for yards that are ready to be usable again.",
     "lat": 36.3048,
-    "lng": -86.62
+    "lng": -86.62,
+    "countyIds": [
+      "Sumner"
+    ]
   }
 ]
