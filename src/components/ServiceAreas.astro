@@ -1,0 +1,35 @@
+---
+// Homepage "areas we serve" strip. Real internal links into the location
+// hub-and-spoke, with the closer/higher-priority service areas listed
+// first so both users and crawlers see them before the wider list.
+import locationsData from '../data/locations.json';
+import businessData from '../data/business.json';
+
+const priorityOrder = [
+  'nashville', 'hendersonville', 'gallatin', 'white-house', 'portland', 'springfield',
+];
+const sorted = [
+  ...priorityOrder.map((slug) => locationsData.find((l) => l.slug === slug)).filter(Boolean),
+  ...locationsData.filter((l) => !priorityOrder.includes(l.slug)),
+];
+---
+
+<section id="service-areas" class="py-20 bg-neutral-50 dark:bg-neutral-900/40 border-t border-neutral-100 dark:border-neutral-900/60">
+  <div class="container mx-auto px-6 max-w-5xl">
+    <div class="max-w-2xl mx-auto text-center space-y-4 mb-12">
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white uppercase leading-[1.1]">
+        Areas We Serve
+      </h2>
+      <p class="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 font-normal">
+        {businessData.name} covers {locationsData.length} communities across Middle Tennessee.
+      </p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-3">
+      {sorted.map((loc) => (
+        <a href={`/locations/${loc.slug}`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-primary/40 hover:text-primary transition-all">
+          {loc.name}, TN
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
