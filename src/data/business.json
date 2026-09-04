@@ -18,13 +18,23 @@
     "google": "https://g.page/triple-oak-services"
   },
   "address": {
-    "street": "123 Main St",
     "city": "Nashville",
-    "state": "TN",
-    "zip": "37203"
+    "state": "TN"
   },
   "locations": [
-    "Nashville, TN"
+    "Nashville, TN",
+    "Portland, TN",
+    "White House, TN",
+    "Springfield, TN",
+    "Mount Juliet, TN",
+    "Lebanon, TN",
+    "Murfreesboro, TN",
+    "Franklin, TN",
+    "Brentwood, TN",
+    "Madison, TN",
+    "Hermitage, TN",
+    "Gallatin, TN",
+    "Hendersonville, TN"
   ],
   "services": [
     "Tree Trimming & Pruning",

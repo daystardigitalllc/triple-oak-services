@@ -2,6 +2,7 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import contentData from '../../data/content.json';
 import businessData from '../../data/business.json';
+import locationsData from '../../data/locations.json';
 import FAQ from '../../components/FAQ.astro';
 
 export async function getStaticPaths() {
@@ -14,9 +15,9 @@ export async function getStaticPaths() {
 const { service } = Astro.props;
 ---
 
-<MainLayout 
-  title={`${service.title} | ${businessData.name}`}
-  description={service.shortDescription}
+<MainLayout
+  title={`${service.title} in Middle Tennessee | ${businessData.name}`}
+  description={`${service.shortDescription} Serving Nashville, Franklin, Murfreesboro, and ${locationsData.length - 3} more Middle Tennessee communities. Call ${businessData.phone} for a free quote.`}
 >
   <!-- Service Hero Section -->
   <section
@@ -70,7 +71,7 @@ const { service } = Astro.props;
           <ul class="space-y-4 font-semibold text-sm text-neutral-700 dark:text-neutral-300">
             {service.features.map((feature) => (
               <li class="flex items-center gap-3">
-                <span class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs shrink-0">&check;</span>
+                <span class="w-6 h-6 rounded-custom bg-primary/10 text-primary flex items-center justify-center text-xs shrink-0">&check;</span>
                 {feature}
               </li>
             ))}
@@ -82,6 +83,22 @@ const { service } = Astro.props;
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- Available in every service area -->
+  <section class="py-16 bg-neutral-50 dark:bg-neutral-900/40 border-t border-neutral-100 dark:border-neutral-900/60">
+    <div class="container mx-auto px-6 max-w-4xl text-center space-y-6">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        {service.title} Available Across Middle Tennessee
+      </h2>
+      <div class="flex flex-wrap justify-center gap-3">
+        {locationsData.map((loc) => (
+          <a href={`/locations/${loc.slug}/${service.slug}`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-primary/40 hover:text-primary transition-all">
+            {loc.name}, TN
+          </a>
+        ))}
       </div>
     </div>
   </section>

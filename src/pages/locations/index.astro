@@ -1,32 +1,25 @@
 ---
 // src/pages/locations/index.astro
-// Locations Hub Page - lists and links to every location detail page.
+// Locations Hub Page - lists and links to every city page (which in turn
+// link to the service x city pages). Top of the location hub-and-spoke.
 import MainLayout from '../../layouts/MainLayout.astro';
-import contentData from '../../data/content.json';
+import locationsData from '../../data/locations.json';
 import businessData from '../../data/business.json';
 import CTA from '../../components/CTA.astro';
 ---
 
 <MainLayout
-  title={`Our Service Areas | ${businessData.name}`}
-  description={`${businessData.name} proudly serves ${businessData.locations.join(', ')} and the surrounding area.`}
+  title={`Tree Service Areas in Middle Tennessee | ${businessData.name}`}
+  description={`${businessData.name} serves ${locationsData.length} Middle Tennessee communities including Nashville, Franklin, Murfreesboro, and Hendersonville. Find tree trimming, removal, and stump grinding near you.`}
 >
   <!-- Hero Banner -->
   <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-neutral-950 text-white overflow-hidden text-center select-none">
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-primary/20 rounded-full blur-[100px] animate-pulse-slow"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-accent/15 rounded-full blur-[80px]"></div>
-    </div>
-
     <div class="container mx-auto px-6 relative z-10 max-w-3xl space-y-6">
-      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1.5 rounded-full">
-        Service Areas
-      </span>
       <h1 class="text-4xl sm:text-6xl font-black tracking-tight uppercase leading-[1.1] text-white">
-        Where We Serve
+        Where We Work
       </h1>
       <p class="text-base sm:text-lg text-neutral-300 max-w-xl mx-auto leading-relaxed">
-        Proudly serving customers throughout the area with licensed, professional {businessData.industry} services.
+        {businessData.name} covers {locationsData.length} communities across Middle Tennessee, from Nashville out to Wilson, Williamson, Sumner, and Robertson counties. Pick your city below for local service details, or just call {businessData.phone}.
       </p>
     </div>
   </section>
@@ -35,14 +28,15 @@ import CTA from '../../components/CTA.astro';
   <section class="py-24 bg-white dark:bg-neutral-950 relative border-t border-neutral-100 dark:border-neutral-900/60">
     <div class="container mx-auto px-6 max-w-5xl">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {contentData.locations.map((loc) => (
-          <div class="group relative flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-neutral-900/20 border border-neutral-800 rounded-2xl p-6 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5">
+        {locationsData.map((loc) => (
+          <div class="group relative flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-neutral-900/20 border border-neutral-800 rounded-custom p-6 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5">
             <div class="space-y-3">
               <div class="flex items-center gap-2 text-primary">
                 <i class="fa-solid fa-location-dot"></i>
-                <h3 class="text-lg font-bold text-white tracking-tight">{loc.name}</h3>
+                <h2 class="text-lg font-bold text-white tracking-tight">{loc.name}</h2>
               </div>
-              <p class="text-neutral-400 text-sm leading-relaxed">{loc.intro}</p>
+              <p class="text-neutral-500 text-xs font-semibold uppercase tracking-wide">{loc.county}</p>
+              <p class="text-neutral-400 text-sm leading-relaxed">{loc.character}</p>
             </div>
 
             <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between">
@@ -50,7 +44,7 @@ import CTA from '../../components/CTA.astro';
                 href={`/locations/${loc.slug}`}
                 class="text-xs font-extrabold uppercase tracking-widest text-primary hover:text-accent transition-colors flex items-center gap-1.5"
               >
-                Local Services <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                Tree Service in {loc.name} <i class="fa-solid fa-arrow-right text-[10px]"></i>
               </a>
             </div>
           </div>

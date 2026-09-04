@@ -21,35 +21,34 @@ interface Props {
 const {
   title = `${businessData.name} | Tree Trimming, Removal & Stump Grinding in ${businessData.locations?.[0] || 'Middle Tennessee'}`,
   description = `${businessData.name} offers tree trimming, removal, and stump grinding for homeowners in ${businessData.locations?.[0] || 'Middle Tennessee'}. Licensed and insured, with free estimates.`,
-  ogImage = '/og-image.jpg'
+  ogImage = '/images/bucket-truck.jpg'
 } = Astro.props;
 
 const fontName = themeConfig.fontFamily || 'Outfit';
 const fontUrl = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@300;400;500;600;700;800&display=swap`;
 
-// Create JSON-LD LocalBusiness Schema
+// Create JSON-LD LocalBusiness schema as a service-area business: no public
+// street address (we don't have a real storefront to publish), just the
+// region we operate out of and the full list of areaServed cities.
 const schema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": businessData.name,
-  "image": businessData.logo || "",
+  "image": new URL(businessData.logo || "/logo.png", Astro.url).href,
   "telephone": businessData.phone,
   "email": businessData.email,
   "url": Astro.url.origin,
   "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": businessData.address?.street || "123 Main St",
     "addressLocality": businessData.address?.city || "Nashville",
     "addressRegion": businessData.address?.state || "TN",
-    "postalCode": businessData.address?.zip || "37203",
     "addressCountry": "US"
   },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": businessData.geo?.latitude || "36.1627",
-    "longitude": businessData.geo?.longitude || "-86.7816"
-  },
+  "areaServed": (businessData.locations || []).map((city) => ({
+    "@type": "City",
+    "name": city
+  })),
   "sameAs": [
     businessData.socials?.facebook,
     businessData.socials?.instagram,
@@ -72,6 +71,7 @@ const schema = {
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />

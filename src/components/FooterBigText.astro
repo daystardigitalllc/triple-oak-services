@@ -6,6 +6,7 @@
 // footer collection, rebuilt from scratch in Astro + Tailwind.
 import businessData from '../data/business.json';
 import contentData from '../data/content.json';
+import locationsData from '../data/locations.json';
 
 interface Props {
   taglineOverride?: string;
@@ -38,9 +39,9 @@ const tagline = taglineOverride || contentData.footerBigText?.tagline || '';
       <div class="space-y-4">
         <h4 class="font-bold text-white text-sm uppercase tracking-wider">Locations</h4>
         <ul class="space-y-2 text-sm">
-          {businessData.locations.map((loc) => (
+          {locationsData.map((loc) => (
             <li>
-              <a href={`/locations/${loc.toLowerCase().replace(/ /g, '-')}`} class="hover:text-white transition-colors">{loc}</a>
+              <a href={`/locations/${loc.slug}`} class="hover:text-white transition-colors">{loc.name}</a>
             </li>
           ))}
         </ul>
