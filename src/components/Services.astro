@@ -31,7 +31,19 @@ const orderedServices = [
 
           {/* Card Image Header */}
           <div class:list={["w-full overflow-hidden relative z-0 shrink-0", service.slug === featuredSlug ? "aspect-[21/9]" : "aspect-video"]}>
-            <img src={service.image || `/service-${index + 1}.jpg`} alt={service.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            {service.video ? (
+              <video
+                src={service.video}
+                poster={service.videoPoster}
+                autoplay
+                loop
+                muted
+                playsinline
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <img src={service.image || `/service-${index + 1}.jpg`} alt={service.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            )}
             <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/20 to-transparent z-10"></div>
             {service.slug === featuredSlug && (
               <span class="absolute top-4 left-4 z-20 text-[10px] font-extrabold uppercase tracking-widest text-neutral-950 bg-primary px-3 py-1.5 rounded-custom">
