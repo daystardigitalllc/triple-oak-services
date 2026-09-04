@@ -209,8 +209,7 @@ import locationsData from '../data/locations.json';
     onScroll();
   }
 
-  // Services / Locations dropdowns: click-toggle (desktop hover still works via CSS),
-  // so the button actually responds when a user clicks it instead of only hovering.
+  // Services / Locations dropdowns: open on hover (desktop) or click (touch/mobile).
   const dropdowns = document.querySelectorAll('[data-nav-dropdown]');
   dropdowns.forEach((dropdown) => {
     const trigger = dropdown.querySelector('[data-nav-dropdown-trigger]');
@@ -236,6 +235,19 @@ import locationsData from '../data/locations.json';
       e.stopPropagation();
       const isOpen = trigger.getAttribute('aria-expanded') === 'true';
       isOpen ? close() : open();
+    });
+
+    // Desktop hover: open on enter, close on leave (with a short grace
+    // period so moving the mouse from the trigger down into the panel
+    // doesn't close it in transit). Touch/mobile still relies on the
+    // click handler above since there's no hover there.
+    let closeTimer = null;
+    dropdown.addEventListener('mouseenter', () => {
+      if (closeTimer) clearTimeout(closeTimer);
+      open();
+    });
+    dropdown.addEventListener('mouseleave', () => {
+      closeTimer = setTimeout(close, 150);
     });
   });
 

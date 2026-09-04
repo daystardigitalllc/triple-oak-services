@@ -99,6 +99,19 @@
         "View & sunlight clearing",
         "Storm-risk reduction"
       ],
+      "signals": [
+        "Limbs hanging over your roof, driveway, or power lines",
+        "Branches rubbing or crossing each other in the canopy",
+        "A tree that hasn't been trimmed in several years",
+        "Thin, lopsided, or patchy growth blocking light unevenly",
+        "Storm-damaged or split limbs still hanging in the tree"
+      ],
+      "process": [
+        "Free on-site walk-through to look at each tree and flag anything hazardous",
+        "We explain what we're cutting and why before any chainsaw starts",
+        "Proper pruning cuts, not topping, so the tree heals and grows back healthy",
+        "Full cleanup when we're done: branches chipped or hauled, yard raked clean"
+      ],
       "faq": [
         {
           "q": "How often should trees be trimmed?",
@@ -107,6 +120,14 @@
         {
           "q": "Will trimming hurt the tree?",
           "a": "Not when it's done right. We make cuts in the right spots so the tree heals and grows back healthy instead of getting stressed or damaged."
+        },
+        {
+          "q": "Do you top trees?",
+          "a": "No. Topping (cutting main branches back to stubs) weakens a tree and usually causes worse, weaker regrowth. We use proper crown reduction and thinning cuts instead."
+        },
+        {
+          "q": "What time of year is best for trimming?",
+          "a": "Late winter, while trees are dormant, is usually best for major pruning. Dead, damaged, or hazardous limbs get taken care of any time of year, storm or no storm."
         }
       ]
     },
@@ -122,6 +143,19 @@
         "Full debris haul-away",
         "Same-day emergency removal available"
       ],
+      "signals": [
+        "A dead, hollow, or visibly rotting trunk",
+        "A tree leaning more than it used to, or roots heaving near the base",
+        "Storm damage that's split the trunk or a major limb",
+        "A tree that's simply in the way of a new structure, driveway, or addition",
+        "Disease or pest damage that isn't getting better"
+      ],
+      "process": [
+        "Free assessment of the tree's lean, root condition, and proximity to structures or lines",
+        "We walk you through the plan and price before any cutting starts",
+        "Controlled, sectional removal in tight spots so nothing lands where it shouldn't",
+        "Full haul-away of branches and logs, with the stump left ready for grinding if you want it gone too"
+      ],
       "faq": [
         {
           "q": "How do you remove a tree near my house or power lines?",
@@ -130,6 +164,14 @@
         {
           "q": "Do I need a permit to remove a tree?",
           "a": "It depends on your city and whether the tree sits on a property line. We can help you sort out what's needed before we start the job."
+        },
+        {
+          "q": "What happens to the wood?",
+          "a": "We haul away everything by default, unless you'd like the logs left behind for firewood. Just let us know before we start and we'll leave what you want."
+        },
+        {
+          "q": "Will removing a tree tear up my yard?",
+          "a": "We're careful about how we get equipment in and out, and we clean up any ruts, debris, or sawdust before we call the job done."
         }
       ]
     },
@@ -145,6 +187,18 @@
         "Mulch clean-up & haul-off",
         "Yard-ready when we leave"
       ],
+      "signals": [
+        "A stump that's a mowing or tripping hazard",
+        "Wanting to replant, reseed, or landscape right over the spot",
+        "Getting a yard ready to sell",
+        "Old stumps left behind from tree work someone else did"
+      ],
+      "process": [
+        "We grind below grade, not just flush, so nothing's left to trip over or dull a mower blade",
+        "The root flare and visible surface roots get ground down along with the stump",
+        "Wood chips from the grind are left for you to use as mulch, or hauled off if you'd rather",
+        "Hole gets backfilled so the area is ready to landscape or reseed"
+      ],
       "faq": [
         {
           "q": "How far below the surface do you grind?",
@@ -153,20 +207,40 @@
         {
           "q": "What happens to the wood chips?",
           "a": "We can leave the mulch for you to use around your yard, or haul it off, whichever you'd rather have."
+        },
+        {
+          "q": "Do you remove the roots too?",
+          "a": "We grind down the visible root flare and surface roots near the stump. Deeper roots stay in the ground - they break down naturally over time and won't send up new sprouts once the stump itself is gone."
+        },
+        {
+          "q": "Can I plant something right where the stump was?",
+          "a": "Yes, once we've backfilled the hole. Give the ground a little time to settle first if you're planting something with real roots."
         }
       ]
     },
     {
       "slug": "storm-damage-cleanup",
-      "title": "Storm Damage Cleanup",
+      "title": "Storm Damage & Emergency Tree Removal",
       "image": "/images/storm-damage-1.jpg",
-      "shortDescription": "Rapid response tree and debris cleanup after storms, straight-line winds, and fallen limbs.",
+      "shortDescription": "Rapid response emergency tree removal and storm debris cleanup after high winds and fallen limbs.",
       "longDescription": "When a storm drops a tree on your property, you need someone there fast. We provide rapid-response storm cleanup, removing downed trees and limbs from roofs, driveways, fences, and yards, and clearing debris so your property is safe again.",
       "features": [
         "Emergency response",
         "Downed tree & limb removal",
         "Roof & structure-safe extraction",
         "Full property debris cleanup"
+      ],
+      "signals": [
+        "A tree or large limb already down on your property",
+        "A leaning tree that looks like it could go next",
+        "Storm damage blocking your driveway or the only way in or out",
+        "Limbs hung up in other trees after high wind - dangerous \"widowmakers\" waiting to fall"
+      ],
+      "process": [
+        "Call us - we prioritize storm and emergency calls ahead of routine scheduling",
+        "We assess what's actually dangerous first, like leaning trees or hung-up limbs, before touching anything else",
+        "Safe removal of downed trees and limbs off roofs, cars, fences, and driveways",
+        "Full property cleanup once everything is safely down and hauled off"
       ],
       "faq": [
         {
@@ -176,6 +250,14 @@
         {
           "q": "Can you help with my insurance claim?",
           "a": "We can document the damage with photos and notes from the job, which you can pass along to your homeowner's insurance."
+        },
+        {
+          "q": "How fast can you get here after a storm?",
+          "a": "We prioritize storm and emergency calls ahead of routine scheduling and do our best to get a crew out the same day. Call as soon as it's safe to do so."
+        },
+        {
+          "q": "Is storm damage covered by insurance?",
+          "a": "Often, yes, especially if a tree damaged your home, fence, or another structure. We can document the damage for your claim, but you'll want to confirm your specific coverage with your insurance company."
         }
       ]
     },
@@ -191,6 +273,18 @@
         "Property line clean-up",
         "Driveway & access clearing"
       ],
+      "signals": [
+        "Prepping a lot for a new build or addition",
+        "Opening up an overgrown property line or fence line",
+        "Reclaiming a backyard that's grown wild",
+        "Clearing brush for better visibility, access, or fire safety"
+      ],
+      "process": [
+        "We walk the property with you and mark what stays and what goes",
+        "Clear brush, undergrowth, and unwanted trees with equipment sized to the job",
+        "Haul off debris, or leave it stacked or chipped, whichever you'd rather",
+        "Leave the cleared area graded and usable, not just cut down and left"
+      ],
       "faq": [
         {
           "q": "What size lots can you clear?",
@@ -199,6 +293,14 @@
         {
           "q": "Can you work around fences or structures I want to keep?",
           "a": "Yes, we clear carefully around anything you point out ahead of time, whether it's a fence, shed, or landscaping."
+        },
+        {
+          "q": "Can you clear just part of my property?",
+          "a": "Yes. We mark boundaries with you beforehand so only the area you actually want cleared gets touched."
+        },
+        {
+          "q": "What happens to everything you clear?",
+          "a": "We haul off brush and debris by default. If you'd rather have it left stacked or chipped on site, just let us know before we start."
         }
       ]
     }

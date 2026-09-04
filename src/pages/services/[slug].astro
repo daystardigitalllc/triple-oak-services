@@ -13,12 +13,28 @@ export async function getStaticPaths() {
 }
 
 const { service } = Astro.props;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": service.title,
+  "name": `${service.title} | ${businessData.name}`,
+  "description": service.shortDescription,
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": businessData.name,
+    "telephone": businessData.phone
+  },
+  "areaServed": (businessData.locations || []).map((city) => ({ "@type": "City", "name": city }))
+};
+
 ---
 
 <MainLayout
   title={`${service.title} in Middle Tennessee | ${businessData.name}`}
   description={`${service.shortDescription} Serving Nashville, Franklin, Murfreesboro, and ${locationsData.length - 3} more Middle Tennessee communities. Call ${businessData.phone} for a free quote.`}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <!-- Service Hero Section -->
   <section
     class="relative py-20 lg:py-28 bg-neutral-900 text-white overflow-hidden bg-cover bg-center"
@@ -86,6 +102,44 @@ const { service } = Astro.props;
       </div>
     </div>
   </section>
+
+  <!-- Signals: when to consider this service -->
+  {service.signals && service.signals.length > 0 && (
+    <section class="py-20 bg-neutral-50 dark:bg-neutral-900/40 border-t border-neutral-100 dark:border-neutral-900/60">
+      <div class="container mx-auto px-6 max-w-4xl">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-neutral-900 dark:text-white text-center mb-10">
+          Signs You Need {service.title}
+        </h2>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {service.signals.map((signal) => (
+            <li class="flex items-start gap-3 p-4 rounded-custom bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800">
+              <i class="fa-solid fa-triangle-exclamation text-accent mt-1 shrink-0"></i>
+              <span class="text-sm text-neutral-700 dark:text-neutral-300 font-medium">{signal}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- Process: how it works -->
+  {service.process && service.process.length > 0 && (
+    <section class="py-20 bg-white dark:bg-neutral-950 border-t border-neutral-100 dark:border-neutral-900/60">
+      <div class="container mx-auto px-6 max-w-4xl">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-neutral-900 dark:text-white text-center mb-10">
+          How It Works
+        </h2>
+        <ol class="space-y-6">
+          {service.process.map((step, i) => (
+            <li class="flex items-start gap-5">
+              <span class="w-9 h-9 rounded-custom bg-primary text-neutral-950 font-extrabold flex items-center justify-center shrink-0">{i + 1}</span>
+              <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed pt-1">{step}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
 
   <!-- Available in every service area -->
   <section class="py-16 bg-neutral-50 dark:bg-neutral-900/40 border-t border-neutral-100 dark:border-neutral-900/60">
