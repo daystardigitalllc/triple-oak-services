@@ -4,6 +4,13 @@
 }
 
 @theme {
+  /* Dark charcoal instead of Tailwind's stock near-black neutral-800/900/950,
+     used everywhere as the site's dark backgrounds/borders. Softer, less
+     stark against white text than pure black. */
+  --color-neutral-950: #18181b;
+  --color-neutral-900: #232326;
+  --color-neutral-800: #323235;
+
   --color-primary: var(--primary-color, #16a34a);
   --color-primary-hover: var(--primary-color-hover, #15803d);
   --color-secondary: var(--secondary-color, #171717);
