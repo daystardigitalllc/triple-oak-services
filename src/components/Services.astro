@@ -24,13 +24,13 @@ const orderedServices = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {orderedServices.map((service, index) => (
         <div class:list={[
-          "group relative flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1",
+          "group relative flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1 h-full",
           service.slug === featuredSlug ? "lg:col-span-2" : "",
           "bg-white border border-neutral-200 rounded-custom hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 shadow-sm"
         ]} data-service-card={service.video ? true : undefined}>
 
           {/* Card Image Header */}
-          <div class:list={["w-full overflow-hidden relative z-0 shrink-0", service.slug === featuredSlug ? "aspect-[21/9]" : "aspect-video"]}>
+          <div class="w-full h-56 sm:h-64 lg:h-72 overflow-hidden relative z-0 shrink-0">
             {service.video ? (
               <video
                 data-hover-video
@@ -62,11 +62,11 @@ const orderedServices = [
               </div>
 
               {/* Content */}
-              <h3 class="text-2xl font-bold text-neutral-900 group-hover:text-primary transition-colors uppercase tracking-tight">
+              <h3 class="text-2xl font-bold text-neutral-900 group-hover:text-primary transition-colors uppercase tracking-tight min-h-16 flex items-center">
                 {service.title}
               </h3>
 
-              <p class="text-neutral-500 text-sm leading-relaxed font-normal">
+              <p class="text-neutral-500 text-sm leading-relaxed font-normal line-clamp-2">
                 {service.shortDescription}
               </p>
 
