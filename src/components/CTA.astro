@@ -42,9 +42,9 @@ const stats = [
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-14">
       {stats.map((stat) => (
         <div class="text-center p-5 sm:p-6 rounded-custom border border-neutral-800 bg-neutral-900/50">
-          <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-primary mb-2">{stat.value}</div>
-          <p class="text-xs sm:text-sm font-bold uppercase tracking-wide text-white mb-2">{stat.label}</p>
-          <p class="text-xs text-neutral-500 leading-relaxed">{stat.detail}</p>
+          <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-primary mb-3">{stat.value}</div>
+          <p class="text-sm sm:text-base font-bold uppercase tracking-wide text-white mb-2.5">{stat.label}</p>
+          <p class="text-sm text-neutral-300 leading-relaxed">{stat.detail}</p>
         </div>
       ))}
     </div>
