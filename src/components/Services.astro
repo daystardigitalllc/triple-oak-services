@@ -27,18 +27,19 @@ const orderedServices = [
           "group relative flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1",
           service.slug === featuredSlug ? "lg:col-span-2" : "",
           "bg-white border border-neutral-200 rounded-custom hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 shadow-sm"
-        ]}>
+        ]} data-service-card={service.video ? true : undefined}>
 
           {/* Card Image Header */}
           <div class:list={["w-full overflow-hidden relative z-0 shrink-0", service.slug === featuredSlug ? "aspect-[21/9]" : "aspect-video"]}>
             {service.video ? (
               <video
+                data-hover-video
                 src={service.video}
                 poster={service.videoPoster}
-                autoplay
                 loop
                 muted
                 playsinline
+                preload="metadata"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
@@ -97,3 +98,21 @@ const orderedServices = [
     </div>
   </div>
 </section>
+
+<script>
+  // Service card videos are paused by default (poster frame shown) and
+  // only play while the card is hovered - keeps the grid quiet until a
+  // visitor is actually looking at a specific card.
+  document.querySelectorAll('[data-service-card]').forEach((card) => {
+    const video = card.querySelector('[data-hover-video]');
+    if (!(video instanceof HTMLVideoElement)) return;
+
+    card.addEventListener('mouseenter', () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+    });
+  });
+</script>
