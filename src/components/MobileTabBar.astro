@@ -1,0 +1,59 @@
+---
+// Fixed bottom tab bar shown on mobile only: Call (direct tel: link) and
+// Get a Quote (opens a <dialog> popup with the same quick-quote form used
+// higher up the page, via a separate idPrefix so the two form instances
+// never collide). MainLayout adds matching bottom padding on mobile so
+// this bar never covers footer content.
+import businessData from '../data/business.json';
+import QuickQuoteBar from './QuickQuoteBar.astro';
+---
+
+<div id="mobile-tab-bar" class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-neutral-950 border-t border-neutral-800 flex" style="padding-bottom: env(safe-area-inset-bottom);">
+  <a
+    href={`tel:${businessData.phone}`}
+    class="flex-1 flex items-center justify-center gap-2 py-4 text-sm font-bold uppercase tracking-wide text-white border-r border-neutral-800 active:bg-neutral-900"
+  >
+    <i class="fa-solid fa-phone"></i>
+    Call Now
+  </a>
+  <button
+    type="button"
+    id="mobile-quote-trigger"
+    aria-haspopup="dialog"
+    aria-controls="mobile-quote-dialog"
+    class="flex-1 flex items-center justify-center gap-2 py-4 text-sm font-bold uppercase tracking-wide text-neutral-950 bg-primary active:bg-primary-hover"
+  >
+    <i class="fa-solid fa-file-invoice"></i>
+    Get Quote
+  </button>
+</div>
+
+<dialog id="mobile-quote-dialog" class="w-[92vw] max-w-md p-0 rounded-custom border border-neutral-200 backdrop:bg-neutral-950/70 m-auto">
+  <div class="relative p-5">
+    <button
+      type="button"
+      id="mobile-quote-close"
+      aria-label="Close"
+      class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full text-neutral-400 hover:bg-neutral-100 hover:text-neutral-700 transition-colors"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <h2 class="text-lg font-bold text-neutral-900 mb-4 pr-8">Get a Free Quote</h2>
+    <QuickQuoteBar idPrefix="quickquote-modal" compact={true} />
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('mobile-quote-dialog') as HTMLDialogElement | null;
+  const trigger = document.getElementById('mobile-quote-trigger');
+  const closeBtn = document.getElementById('mobile-quote-close');
+
+  trigger?.addEventListener('click', () => dialog?.showModal());
+  closeBtn?.addEventListener('click', () => dialog?.close());
+
+  // Click on the backdrop (the click target is the <dialog> itself, not
+  // its content, when you click outside the content box) closes it too.
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>

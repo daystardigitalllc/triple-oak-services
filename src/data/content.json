@@ -1,6 +1,7 @@
 {
   "layout": [
     "Hero",
+    "QuickQuoteBarSection",
     "Marquee",
     "TrustBar",
     "Services",

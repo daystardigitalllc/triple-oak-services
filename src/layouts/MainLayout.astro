@@ -7,6 +7,7 @@ import Header from '../components/Header.astro';
 import NavbarPill from '../components/NavbarPill.astro';
 import Footer from '../components/Footer.astro';
 import FooterBigText from '../components/FooterBigText.astro';
+import MobileTabBar from '../components/MobileTabBar.astro';
 
 // Render the selected navbar and footer styles
 const navbarStyle = themeConfig.navbarStyle || 'standard';
@@ -124,7 +125,7 @@ const schema = {
       'glow-display': (themeConfig.style === 'sharp-contractor' || themeConfig.style === 'oak-city') ? 'none' : 'block'
     }}></style>
   </head>
-  <body class="bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50 min-h-screen flex flex-col antialiased selection:bg-primary/20 selection:text-primary">
+  <body class="bg-white text-neutral-900 min-h-screen flex flex-col antialiased selection:bg-primary/20 selection:text-primary pb-16 md:pb-0">
     <!-- Top-level Background Glow (Modern Agency UI Touch) -->
     <div class="relative overflow-hidden w-full">
       <div class="glow-blob w-[500px] h-[500px] bg-primary top-[-200px] left-[-200px]"></div>
@@ -141,5 +142,8 @@ const schema = {
 
     <!-- Footer -->
     {footerStyle === 'big-text' ? <FooterBigText /> : <Footer />}
+
+    <!-- Mobile Sticky Tab Bar (Call / Get Quote) -->
+    <MobileTabBar />
   </body>
 </html>

@@ -9,53 +9,53 @@ import CTA from '../../components/CTA.astro';
 ---
 
 <MainLayout
-  title={`Tree Service Areas in Middle Tennessee | ${businessData.name}`}
-  description={`${businessData.name} serves ${locationsData.length} Middle Tennessee communities including Nashville, Franklin, Murfreesboro, and Hendersonville. Find tree trimming, removal, and stump grinding near you.`}
+ title={`Tree Service Areas in Middle Tennessee | ${businessData.name}`}
+ description={`${businessData.name} serves ${locationsData.length} Middle Tennessee communities including Nashville, Franklin, Murfreesboro, and Hendersonville. Find tree trimming, removal, and stump grinding near you.`}
 >
-  <!-- Hero Banner -->
-  <section
-    class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 text-white overflow-hidden text-center select-none bg-cover bg-center"
-    style="background-image: linear-gradient(to bottom, rgba(24, 24, 27, 0.82), rgba(24, 24, 27, 0.94)), url('/images/bucket-truck.jpg');"
-  >
-    <div class="container mx-auto px-6 relative z-10 max-w-3xl space-y-6">
-      <h1 class="text-4xl sm:text-6xl font-black tracking-tight uppercase leading-[1.1] text-white">
-        Where We Work
-      </h1>
-      <p class="text-base sm:text-lg text-neutral-300 max-w-xl mx-auto leading-relaxed">
-        {businessData.name} covers {locationsData.length} communities across Middle Tennessee, from Nashville out to Wilson, Williamson, Sumner, and Robertson counties. Pick your city below for local service details, or just call {businessData.phone}.
-      </p>
-    </div>
-  </section>
+ <!-- Hero Banner -->
+ <section
+ class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 text-white overflow-hidden text-center select-none bg-cover bg-center"
+ style="background-image: linear-gradient(to bottom, rgba(24, 24, 27, 0.82), rgba(24, 24, 27, 0.94)), url('/images/bucket-truck.jpg');"
+ >
+ <div class="container mx-auto px-6 relative z-10 max-w-3xl space-y-6">
+ <h1 class="text-4xl sm:text-6xl font-black tracking-tight uppercase leading-[1.1] text-white">
+ Where We Work
+ </h1>
+ <p class="text-base sm:text-lg text-neutral-300 max-w-xl mx-auto leading-relaxed">
+ {businessData.name} covers {locationsData.length} communities across Middle Tennessee, from Nashville out to Wilson, Williamson, Sumner, and Robertson counties. Pick your city below for local service details, or just call {businessData.phone}.
+ </p>
+ </div>
+ </section>
 
-  <!-- Locations Grid -->
-  <section class="py-24 bg-white dark:bg-neutral-950 relative border-t border-neutral-100 dark:border-neutral-900/60">
-    <div class="container mx-auto px-6 max-w-5xl">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {locationsData.map((loc) => (
-          <div class="group relative flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-neutral-900/20 border border-neutral-800 rounded-custom p-6 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5">
-            <div class="space-y-3">
-              <div class="flex items-center gap-2 text-primary">
-                <i class="fa-solid fa-location-dot"></i>
-                <h2 class="text-lg font-bold text-white tracking-tight">{loc.name}</h2>
-              </div>
-              <p class="text-neutral-500 text-xs font-semibold uppercase tracking-wide">{loc.county}</p>
-              <p class="text-neutral-400 text-sm leading-relaxed">{loc.character}</p>
-            </div>
+ <!-- Locations Grid -->
+ <section class="py-24 bg-white relative border-t border-neutral-100">
+ <div class="container mx-auto px-6 max-w-5xl">
+ <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+ {locationsData.map((loc) => (
+ <div class="group relative flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-neutral-900/20 border border-neutral-800 rounded-custom p-6 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5">
+ <div class="space-y-3">
+ <div class="flex items-center gap-2 text-primary">
+ <i class="fa-solid fa-location-dot"></i>
+ <h2 class="text-lg font-bold text-white tracking-tight">{loc.name}</h2>
+ </div>
+ <p class="text-neutral-500 text-xs font-semibold uppercase tracking-wide">{loc.county}</p>
+ <p class="text-neutral-400 text-sm leading-relaxed">{loc.character}</p>
+ </div>
 
-            <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between">
-              <a
-                href={`/locations/${loc.slug}`}
-                class="text-xs font-extrabold uppercase tracking-widest text-primary hover:text-accent transition-colors flex items-center gap-1.5"
-              >
-                Tree Service in {loc.name} <i class="fa-solid fa-arrow-right text-[10px]"></i>
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+ <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between">
+ <a
+ href={`/locations/${loc.slug}`}
+ class="text-xs font-extrabold uppercase tracking-widest text-primary hover:text-accent transition-colors flex items-center gap-1.5"
+ >
+ Tree Service in {loc.name} <i class="fa-solid fa-arrow-right text-[10px]"></i>
+ </a>
+ </div>
+ </div>
+ ))}
+ </div>
+ </div>
+ </section>
 
-  <!-- CTA Banner (shared component) -->
-  <CTA />
+ <!-- CTA Banner (shared component) -->
+ <CTA />
 </MainLayout>

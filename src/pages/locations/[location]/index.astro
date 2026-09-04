@@ -8,10 +8,10 @@ import businessData from '../../../data/business.json';
 import Reviews from '../../../components/Reviews.astro';
 
 export async function getStaticPaths() {
-  return locationsData.map((loc) => ({
-    params: { location: loc.slug },
-    props: { loc },
-  }));
+ return locationsData.map((loc) => ({
+ params: { location: loc.slug },
+ props: { loc },
+ }));
 }
 
 const { loc } = Astro.props;
@@ -20,109 +20,109 @@ const { loc } = Astro.props;
 // city page also points at its neighbors instead of dead-ending.
 const locIndex = locationsData.findIndex((l) => l.slug === loc.slug);
 const nearby = [
-  locationsData[(locIndex + 1) % locationsData.length],
-  locationsData[(locIndex + 2) % locationsData.length],
-  locationsData[(locIndex + 3) % locationsData.length],
+ locationsData[(locIndex + 1) % locationsData.length],
+ locationsData[(locIndex + 2) % locationsData.length],
+ locationsData[(locIndex + 3) % locationsData.length],
 ];
 
 // Rotate through real job photos so the 13 city heroes don't all show the
 // same image - picked by city index, not random, so it's stable per build.
 const heroPhotos = [
-  { src: '/images/after1.jpg', alt: 'Yard cleared after a tree removal' },
-  { src: '/images/bucket-truck.jpg', alt: 'Bucket truck on a tree trimming job' },
-  { src: '/images/storm-damage-1.jpg', alt: 'Storm-damaged tree cleanup' },
-  { src: '/images/after-stump1.jpg', alt: 'Yard leveled after stump grinding' },
-  { src: '/images/cleanup-trailer.jpg', alt: 'Cleanup trailer loaded after a job' },
-  { src: '/images/before2.jpg', alt: 'Large tree down before removal' },
-  { src: '/images/after2.jpg', alt: 'Property cleared and cleaned up after tree removal' },
-  { src: '/images/storm-damage-2.jpg', alt: 'Storm damage on a residential property' },
+ { src: '/images/after1.jpg', alt: 'Yard cleared after a tree removal' },
+ { src: '/images/bucket-truck.jpg', alt: 'Bucket truck on a tree trimming job' },
+ { src: '/images/storm-damage-1.jpg', alt: 'Storm-damaged tree cleanup' },
+ { src: '/images/after-stump1.jpg', alt: 'Yard leveled after stump grinding' },
+ { src: '/images/cleanup-trailer.jpg', alt: 'Cleanup trailer loaded after a job' },
+ { src: '/images/before2.jpg', alt: 'Large tree down before removal' },
+ { src: '/images/after2.jpg', alt: 'Property cleared and cleaned up after tree removal' },
+ { src: '/images/storm-damage-2.jpg', alt: 'Storm damage on a residential property' },
 ];
 const heroPhoto = heroPhotos[locIndex % heroPhotos.length];
 ---
 
 <MainLayout
-  title={`Tree Service in ${loc.name}, TN | ${businessData.name}`}
-  description={`${businessData.name} provides tree trimming, removal, stump grinding, storm cleanup, and land clearing in ${loc.name}, TN (${loc.county}). Licensed, insured, free estimates.`}
+ title={`Tree Service in ${loc.name}, TN | ${businessData.name}`}
+ description={`${businessData.name} provides tree trimming, removal, stump grinding, storm cleanup, and land clearing in ${loc.name}, TN (${loc.county}). Licensed, insured, free estimates.`}
 >
-  <!-- Location Hero Section -->
-  <section
-    class="relative py-24 lg:py-32 text-white overflow-hidden bg-cover bg-center"
-    style={`background-image: linear-gradient(to bottom, rgba(24, 24, 27, 0.8), rgba(24, 24, 27, 0.92)), url('${heroPhoto.src}');`}
-  >
-    <div class="container mx-auto px-6 relative z-10 text-center max-w-4xl space-y-6">
-      <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold tracking-wide uppercase text-primary bg-primary/10 rounded-custom">
-        {loc.county}
-      </span>
-      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight text-white">
-        Tree Service in <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{loc.name}</span>, TN
-      </h1>
-      <p class="text-lg md:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto">
-        {loc.character}
-      </p>
-      <p class="text-base text-neutral-400 font-normal leading-relaxed max-w-2xl mx-auto">
-        {loc.angle}
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-        <a href={`tel:${businessData.phone}`} class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-bold text-neutral-950 bg-white hover:bg-neutral-100 rounded-custom shadow-lg transition-all hover:scale-103">
-          Call {businessData.phone}
-        </a>
-        <a href="/#quote-funnel" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white border border-white/20 hover:bg-white/10 rounded-custom transition-all">
-          Get a Free Quote
-        </a>
-      </div>
-    </div>
-  </section>
+ <!-- Location Hero Section -->
+ <section
+ class="relative py-24 lg:py-32 text-white overflow-hidden bg-cover bg-center"
+ style={`background-image: linear-gradient(to bottom, rgba(24, 24, 27, 0.8), rgba(24, 24, 27, 0.92)), url('${heroPhoto.src}');`}
+ >
+ <div class="container mx-auto px-6 relative z-10 text-center max-w-4xl space-y-6">
+ <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold tracking-wide uppercase text-primary bg-primary/10 rounded-custom">
+ {loc.county}
+ </span>
+ <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight text-white">
+ Tree Service in <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{loc.name}</span>, TN
+ </h1>
+ <p class="text-lg md:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto">
+ {loc.character}
+ </p>
+ <p class="text-base text-neutral-400 font-normal leading-relaxed max-w-2xl mx-auto">
+ {loc.angle}
+ </p>
+ <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+ <a href={`tel:${businessData.phone}`} class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-bold text-neutral-950 bg-white hover:bg-neutral-100 rounded-custom shadow-lg transition-all hover:scale-103">
+ Call {businessData.phone}
+ </a>
+ <a href="/#quote-funnel" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white border border-white/20 hover:bg-white/10 rounded-custom transition-all">
+ Get a Free Quote
+ </a>
+ </div>
+ </div>
+ </section>
 
-  <!-- Services available in this city -->
-  <section class="py-24 bg-white dark:bg-neutral-950 relative border-t border-neutral-100 dark:border-neutral-900/60">
-    <div class="container mx-auto px-6 max-w-5xl">
-      <div class="max-w-2xl mx-auto text-center space-y-4 mb-16">
-        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white uppercase leading-[1.1]">
-          Services in {loc.name}
-        </h2>
-        <p class="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 font-normal">
-          Every service {businessData.name} offers, available to {loc.name} properties.
-        </p>
-      </div>
+ <!-- Services available in this city -->
+ <section class="py-24 bg-white relative border-t border-neutral-100">
+ <div class="container mx-auto px-6 max-w-5xl">
+ <div class="max-w-2xl mx-auto text-center space-y-4 mb-16">
+ <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 uppercase leading-[1.1]">
+ Services in {loc.name}
+ </h2>
+ <p class="text-base sm:text-lg text-neutral-500 font-normal">
+ Every service {businessData.name} offers, available to {loc.name} properties.
+ </p>
+ </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {contentData.services.map((service) => (
-          <a
-            href={`/locations/${loc.slug}/${service.slug}`}
-            class="group flex items-center justify-between gap-4 p-6 rounded-custom bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all"
-          >
-            <div>
-              <h3 class="font-bold text-lg text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
-                {service.title} in {loc.name}
-              </h3>
-              <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">{service.shortDescription}</p>
-            </div>
-            <i class="fa-solid fa-arrow-right text-primary shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+ {contentData.services.map((service) => (
+ <a
+ href={`/locations/${loc.slug}/${service.slug}`}
+ class="group flex items-center justify-between gap-4 p-6 rounded-custom bg-neutral-50 border border-neutral-100 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all"
+ >
+ <div>
+ <h3 class="font-bold text-lg text-neutral-900 group-hover:text-primary transition-colors">
+ {service.title} in {loc.name}
+ </h3>
+ <p class="text-sm text-neutral-500 mt-1">{service.shortDescription}</p>
+ </div>
+ <i class="fa-solid fa-arrow-right text-primary shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+ </a>
+ ))}
+ </div>
+ </div>
+ </section>
 
-  <!-- Nearby areas -->
-  <section class="py-16 bg-neutral-50 dark:bg-neutral-900/40 border-t border-neutral-100 dark:border-neutral-900/60">
-    <div class="container mx-auto px-6 max-w-3xl text-center space-y-4">
-      <h2 class="text-sm font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-        Also Serving Nearby
-      </h2>
-      <div class="flex flex-wrap justify-center gap-3">
-        {nearby.map((n) => (
-          <a href={`/locations/${n.slug}`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-primary/40 hover:text-primary transition-all">
-            {n.name}, TN
-          </a>
-        ))}
-        <a href="/locations" class="px-4 py-2 rounded-custom text-sm font-semibold text-primary hover:text-primary-hover transition-all">
-          View All Areas &rarr;
-        </a>
-      </div>
-    </div>
-  </section>
+ <!-- Nearby areas -->
+ <section class="py-16 bg-neutral-50 border-t border-neutral-100">
+ <div class="container mx-auto px-6 max-w-3xl text-center space-y-4">
+ <h2 class="text-sm font-bold uppercase tracking-wider text-neutral-500">
+ Also Serving Nearby
+ </h2>
+ <div class="flex flex-wrap justify-center gap-3">
+ {nearby.map((n) => (
+ <a href={`/locations/${n.slug}`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white border border-neutral-200 text-neutral-700 hover:border-primary/40 hover:text-primary transition-all">
+ {n.name}, TN
+ </a>
+ ))}
+ <a href="/locations" class="px-4 py-2 rounded-custom text-sm font-semibold text-primary hover:text-primary-hover transition-all">
+ View All Areas &rarr;
+ </a>
+ </div>
+ </div>
+ </section>
 
-  <!-- Reviews -->
-  <Reviews />
+ <!-- Reviews -->
+ <Reviews />
 </MainLayout>

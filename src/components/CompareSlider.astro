@@ -58,16 +58,16 @@ const autoplayDuration = autoplayDurationOverride ?? showcase?.autoplayDuration 
 const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
-<section id="transformations" data-compare-root={uid} class="py-24 bg-neutral-50 dark:bg-neutral-900/40 relative border-t border-neutral-100 dark:border-neutral-900/60">
+<section id="transformations" data-compare-root={uid} class="py-24 bg-white relative border-t border-neutral-100">
   <div class="container mx-auto px-6">
     <div class="max-w-3xl mx-auto text-center space-y-4 mb-14">
       <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
         {badge}
       </span>
-      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white uppercase leading-[1.1]">
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 uppercase leading-[1.1]">
         {heading}
       </h2>
-      <p class="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 font-normal">
+      <p class="text-base sm:text-lg text-neutral-500 font-normal">
         {subtitle}
       </p>
     </div>
@@ -81,7 +81,7 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
             data-initial={initialPercentage}
             data-autoplay={autoplay ? 'true' : 'false'}
             data-autoplay-duration={autoplayDuration}
-            class="relative w-full aspect-[4/3] overflow-hidden rounded-custom shadow-lg select-none cursor-ew-resize bg-neutral-200 dark:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+            class="relative w-full aspect-[4/3] overflow-hidden rounded-custom shadow-lg select-none cursor-ew-resize bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
             style="touch-action: none;"
             tabindex="0"
             role="slider"
@@ -126,7 +126,7 @@ const uid = `compare-${Math.random().toString(36).slice(2, 9)}`;
             )}
           </div>
           {item.label && (
-            <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 text-center">{item.label}</p>
+            <p class="text-sm font-semibold text-neutral-700 text-center">{item.label}</p>
           )}
         </div>
       ))}

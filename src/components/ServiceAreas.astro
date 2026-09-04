@@ -14,19 +14,19 @@ const sorted = [
 ];
 ---
 
-<section id="service-areas" class="py-20 bg-neutral-50 dark:bg-neutral-900/40 border-t border-neutral-100 dark:border-neutral-900/60">
+<section id="service-areas" class="py-20 bg-neutral-50 border-t border-neutral-100">
   <div class="container mx-auto px-6 max-w-5xl">
     <div class="max-w-2xl mx-auto text-center space-y-4 mb-12">
-      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white uppercase leading-[1.1]">
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 uppercase leading-[1.1]">
         Areas We Serve
       </h2>
-      <p class="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 font-normal">
+      <p class="text-base sm:text-lg text-neutral-500 font-normal">
         {businessData.name} covers {locationsData.length} communities across Middle Tennessee.
       </p>
     </div>
     <div class="flex flex-wrap justify-center gap-3">
       {sorted.map((loc) => (
-        <a href={`/locations/${loc.slug}`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-primary/40 hover:text-primary transition-all">
+        <a href={`/locations/${loc.slug}`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white border border-neutral-200 text-neutral-700 hover:border-primary/40 hover:text-primary transition-all">
           {loc.name}, TN
         </a>
       ))}
