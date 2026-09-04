@@ -35,6 +35,9 @@
       }
     ]
   },
+  "footerBigText": {
+    "tagline": "Straight talk, fair prices, and a crew that hauls off every branch before it calls the job done."
+  },
   "home": {
     "hero": {
       "h1": "Middle Tennessee Tree Removal",
@@ -58,7 +61,7 @@
       "ctaHref": "#quote-funnel"
     },
     "compareShowcase": {
-      "badge": "Real Results",
+      "badge": "Before & After",
       "heading": "See the Transformation",
       "subtitle": "Drag the slider to compare before and after on real Triple Oak Services job sites.",
       "mode": "drag",

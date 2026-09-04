@@ -1,6 +1,12 @@
 ---
 import contentData from '../data/content.json';
 import themeConfig from '../data/theme.config.json';
+
+const featuredSlug = 'tree-removal';
+const orderedServices = [
+  ...contentData.services.filter((s) => s.slug === featuredSlug),
+  ...contentData.services.filter((s) => s.slug !== featuredSlug),
+];
 ---
 
 <section id="services" class="py-24 bg-white dark:bg-neutral-950 relative border-t border-neutral-100 dark:border-neutral-900/60">
@@ -12,11 +18,8 @@ import themeConfig from '../data/theme.config.json';
   <div class="container mx-auto px-6">
     <!-- Section Header -->
     <div class="max-w-3xl mx-auto text-center space-y-4 mb-16 md:mb-20">
-      <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full">
-        Our Expertise
-      </span>
       <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white uppercase leading-[1.1]">
-        Services We Offer
+        Tree Work We Do
       </h2>
       <p class="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 font-normal">
         Tree care handled by a licensed, experienced crew, tailored to what your property actually needs.
@@ -25,19 +28,25 @@ import themeConfig from '../data/theme.config.json';
 
     <!-- Services Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {contentData.services.map((service, index) => (
+      {orderedServices.map((service, index) => (
         <div class:list={[
           "group relative flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1",
-          themeConfig.style === 'oak-city' 
-            ? "bg-neutral-900/20 border border-neutral-800 rounded-2xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5"
+          service.slug === featuredSlug ? "lg:col-span-2" : "",
+          themeConfig.style === 'oak-city'
+            ? "bg-neutral-900/20 border border-neutral-800 rounded-custom hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5"
             : "p-8 rounded-custom bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 hover:border-primary/20 dark:hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5"
         ]}>
-          
+
           {/* Card Image Header (Only for Oak City layout) */}
           {themeConfig.style === 'oak-city' && (
-            <div class="aspect-video w-full overflow-hidden relative z-0 shrink-0">
+            <div class:list={["w-full overflow-hidden relative z-0 shrink-0", service.slug === featuredSlug ? "aspect-[21/9]" : "aspect-video"]}>
               <img src={service.image || `/service-${index + 1}.jpg`} alt={service.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/20 to-transparent z-10"></div>
+              {service.slug === featuredSlug && (
+                <span class="absolute top-4 left-4 z-20 text-[10px] font-extrabold uppercase tracking-widest text-neutral-950 bg-primary px-3 py-1.5 rounded-custom">
+                  Most Requested
+                </span>
+              )}
             </div>
           )}
 
