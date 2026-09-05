@@ -72,8 +72,12 @@ export async function onRequestPost({ request, env }) {
     });
 
     if (!res.ok) {
+      // Never return 502/504/520-527 from here - Cloudflare's edge treats
+      // those as reserved origin-health signals and silently swaps in its
+      // own generic branded error page instead of passing this JSON body
+      // through, which is exactly what made this failure mode so opaque.
       const errorBody = await res.json().catch(() => null);
-      return Response.json({ success: false, message: errorBody?.message || 'Failed to send.' }, { status: 502 });
+      return Response.json({ success: false, message: errorBody?.message || 'Failed to send.' }, { status: 500 });
     }
 
     return Response.json({ success: true });
