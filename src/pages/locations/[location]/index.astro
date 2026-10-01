@@ -75,6 +75,21 @@ const local = loc.local;
  </div>
  </section>
 
+ <!-- Local intro (cities with researched local content) -->
+ {local && (
+ <section class="py-20 bg-white border-t border-neutral-100">
+ <div class="container mx-auto px-6 max-w-3xl space-y-6">
+ <h2 class="text-3xl font-extrabold text-neutral-900">Tree Service in {loc.name}, TN and {loc.county}</h2>
+ {local.hubIntro.map((p) => (<p class="text-neutral-600 text-base leading-relaxed">{p}</p>))}
+ <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 pt-4">Areas we work in around {loc.name}</h3>
+ <ul class="flex flex-wrap gap-2">
+ {local.areas.map((a) => (<li class="px-3 py-1.5 rounded-custom text-sm bg-neutral-50 border border-neutral-200 text-neutral-700">{a}</li>))}
+ </ul>
+ <p class="text-sm text-neutral-500">Zip codes: {local.zips.join(', ')}</p>
+ </div>
+ </section>
+ )}
+
  <!-- Services available in this city -->
  <section class="py-24 bg-white relative border-t border-neutral-100">
  <div class="container mx-auto px-6 max-w-5xl">
