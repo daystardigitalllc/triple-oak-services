@@ -1,159 +1,241 @@
 [
-  {
-    "slug": "nashville",
-    "name": "Nashville",
-    "county": "Davidson County",
-    "character": "Nashville's older neighborhoods, from East Nashville to Inglewood and Sylvan Park, are full of mature oaks, maples, and hackberries planted decades before the streets around them got busy.",
-    "angle": "Big legacy trees next to closer-together lots and older utility lines mean more careful, close-quarters work than a wide-open suburban yard.",
-    "lat": 36.1627,
-    "lng": -86.7816,
-    "countyIds": [
-      "Davidson"
-    ]
-  },
-  {
-    "slug": "portland",
-    "name": "Portland",
-    "county": "Sumner County",
-    "character": "Portland still carries its farming roots, with strawberry fields on the edge of town giving way to in-town lots shaded by tall, older trees.",
-    "angle": "A lot of properties here back up to open farmland or fence lines, so windbreak trees and field-edge growth end up on the job list along with the yard.",
-    "lat": 36.5834,
-    "lng": -86.5186,
-    "countyIds": [
-      "Sumner"
-    ]
-  },
-  {
-    "slug": "white-house",
-    "name": "White House",
-    "county": "Sumner / Robertson County",
-    "character": "White House has grown fast along US-31W, with new subdivisions built right up against what used to be pasture and woodland.",
-    "angle": "Newer construction here often leaves builder-grade trees planted too close to the house, plus tree lines along the property edge that never got thinned.",
-    "lat": 36.4695,
-    "lng": -86.665,
-    "countyIds": [
-      "Sumner",
-      "Robertson"
-    ]
-  },
-  {
-    "slug": "springfield",
-    "name": "Springfield",
-    "county": "Robertson County",
-    "character": "Springfield is the Robertson County seat, with a historic courthouse square and older residential streets lined with big, established shade trees.",
-    "angle": "Those older shade trees are usually healthy, but decades of growth means storm-damaged limbs and overdue crown work are common calls.",
-    "lat": 36.5034,
-    "lng": -86.8836,
-    "countyIds": [
-      "Robertson"
-    ]
-  },
-  {
-    "slug": "mount-juliet",
-    "name": "Mount Juliet",
-    "county": "Wilson County",
-    "character": "Mount Juliet is one of the fastest-growing cities in Middle Tennessee, with new subdivisions going in around Providence Marketplace and older farmland still holding out on the edges of town.",
-    "angle": "New-build yards usually need young trees shaped up early, while the older properties nearby still have big legacy trees that need real attention.",
-    "lat": 36.2001,
-    "lng": -86.5186,
-    "countyIds": [
-      "Wilson"
-    ]
-  },
-  {
-    "slug": "lebanon",
-    "name": "Lebanon",
-    "county": "Wilson County",
-    "character": "Lebanon's historic square and Cumberland University sit at the center of a city that's grown well past its old town limits along I-40.",
-    "angle": "Between the older in-town streets and the newer growth toward the interstate, we see everything from mature hardwoods to first-year saplings that need training.",
-    "lat": 36.2081,
-    "lng": -86.2911,
-    "countyIds": [
-      "Wilson"
-    ]
-  },
-  {
-    "slug": "murfreesboro",
-    "name": "Murfreesboro",
-    "county": "Rutherford County",
-    "character": "Murfreesboro is the largest city in Middle Tennessee outside Nashville itself, with historic districts near MTSU and subdivisions spreading out in every direction.",
-    "angle": "That mix means jobs range from tight, tree-lined in-town lots to newer subdivisions where storm damage and stump removal are the more common calls.",
-    "lat": 35.8456,
-    "lng": -86.3903,
-    "countyIds": [
-      "Rutherford"
-    ]
-  },
-  {
-    "slug": "franklin",
-    "name": "Franklin",
-    "county": "Williamson County",
-    "character": "Franklin's historic downtown and surrounding neighborhoods are known for heavy tree canopy, with big hardwoods that predate a lot of the houses around them.",
-    "angle": "Property owners here tend to want trees preserved and shaped carefully, not just cut back, especially near the historic district.",
-    "lat": 35.9251,
-    "lng": -86.8689,
-    "countyIds": [
-      "Williamson"
-    ]
-  },
-  {
-    "slug": "brentwood",
-    "name": "Brentwood",
-    "county": "Williamson County",
-    "character": "Brentwood's rolling, wooded lots and larger properties mean a lot of mature tree cover packed into HOA-governed subdivisions.",
-    "angle": "Bigger lots and taller trees closer to the house make careful, well-equipped removal and trimming the norm rather than the exception.",
-    "lat": 36.0331,
-    "lng": -86.7828,
-    "countyIds": [
-      "Williamson"
-    ]
-  },
-  {
-    "slug": "madison",
-    "name": "Madison",
-    "county": "Davidson County",
-    "character": "Madison's post-war neighborhoods were built with big front and back yards, and the shade trees planted back then have had 60-plus years to grow into them.",
-    "angle": "A lot of the calls we get here are legacy trees that have outgrown the yard, with roots and limbs now pushing into driveways, fences, and roof lines.",
-    "lat": 36.2609,
-    "lng": -86.7089,
-    "countyIds": [
-      "Davidson"
-    ]
-  },
-  {
-    "slug": "hermitage",
-    "name": "Hermitage",
-    "county": "Davidson County",
-    "character": "Hermitage takes its name from Andrew Jackson's historic estate nearby, and the community around Percy Priest Lake mixes older wooded lots with newer development.",
-    "angle": "Lake-adjacent properties and older wooded lots both mean bigger trees, so storm cleanup and full removals come up more than routine trims.",
-    "lat": 36.1815,
-    "lng": -86.6111,
-    "countyIds": [
-      "Davidson"
-    ]
-  },
-  {
-    "slug": "gallatin",
-    "name": "Gallatin",
-    "county": "Sumner County",
-    "character": "Gallatin is the Sumner County seat, sitting on Old Hickory Lake with a historic downtown square and neighborhoods that stretch from lakefront to farmland.",
-    "angle": "Lakefront trees take a beating from wind off the water, so storm damage and leaning trees near the shoreline are a regular part of the work here.",
-    "lat": 36.3884,
-    "lng": -86.4467,
-    "countyIds": [
-      "Sumner"
-    ]
-  },
-  {
-    "slug": "hendersonville",
-    "name": "Hendersonville",
-    "county": "Sumner County",
-    "character": "Hendersonville is one of the larger Nashville-area suburbs, stretched along Old Hickory Lake with a mix of lakefront homes and inland residential streets.",
-    "angle": "Between lake winds and dense residential lots, we handle a steady mix of storm cleanup, tree removal, and stump grinding for yards that are ready to be usable again.",
-    "lat": 36.3048,
-    "lng": -86.62,
-    "countyIds": [
-      "Sumner"
-    ]
+ {
+  "slug": "nashville",
+  "name": "Nashville",
+  "county": "Davidson County",
+  "character": "Nashville's older neighborhoods, from East Nashville to Inglewood and Sylvan Park, are full of mature oaks, maples, and hackberries planted decades before the streets around them got busy.",
+  "angle": "Big legacy trees next to closer-together lots and older utility lines mean more careful, close-quarters work than a wide-open suburban yard.",
+  "lat": 36.1627,
+  "lng": -86.7816,
+  "countyIds": [
+   "Davidson"
+  ]
+ },
+ {
+  "slug": "portland",
+  "name": "Portland",
+  "county": "Sumner County",
+  "character": "Portland still carries its farming roots, with strawberry fields on the edge of town giving way to in-town lots shaded by tall, older trees.",
+  "angle": "A lot of properties here back up to open farmland or fence lines, so windbreak trees and field-edge growth end up on the job list along with the yard.",
+  "lat": 36.5834,
+  "lng": -86.5186,
+  "countyIds": [
+   "Sumner"
+  ]
+ },
+ {
+  "slug": "white-house",
+  "name": "White House",
+  "county": "Sumner / Robertson County",
+  "character": "White House has grown fast along US-31W, with new subdivisions built right up against what used to be pasture and woodland.",
+  "angle": "Newer construction here often leaves builder-grade trees planted too close to the house, plus tree lines along the property edge that never got thinned.",
+  "lat": 36.4695,
+  "lng": -86.665,
+  "countyIds": [
+   "Sumner",
+   "Robertson"
+  ]
+ },
+ {
+  "slug": "springfield",
+  "name": "Springfield",
+  "county": "Robertson County",
+  "character": "Springfield is the Robertson County seat, with a historic courthouse square and older residential streets lined with big, established shade trees.",
+  "angle": "Those older shade trees are usually healthy, but decades of growth means storm-damaged limbs and overdue crown work are common calls.",
+  "lat": 36.5034,
+  "lng": -86.8836,
+  "countyIds": [
+   "Robertson"
+  ]
+ },
+ {
+  "slug": "mount-juliet",
+  "name": "Mount Juliet",
+  "county": "Wilson County",
+  "character": "Mount Juliet is one of the fastest-growing cities in Middle Tennessee, with new subdivisions going in around Providence Marketplace and older farmland still holding out on the edges of town.",
+  "angle": "New-build yards usually need young trees shaped up early, while the older properties nearby still have big legacy trees that need real attention.",
+  "lat": 36.2001,
+  "lng": -86.5186,
+  "countyIds": [
+   "Wilson"
+  ]
+ },
+ {
+  "slug": "lebanon",
+  "name": "Lebanon",
+  "county": "Wilson County",
+  "character": "Lebanon's historic square and Cumberland University sit at the center of a city that's grown well past its old town limits along I-40.",
+  "angle": "Between the older in-town streets and the newer growth toward the interstate, we see everything from mature hardwoods to first-year saplings that need training.",
+  "lat": 36.2081,
+  "lng": -86.2911,
+  "countyIds": [
+   "Wilson"
+  ]
+ },
+ {
+  "slug": "murfreesboro",
+  "name": "Murfreesboro",
+  "county": "Rutherford County",
+  "character": "Murfreesboro is the largest city in Middle Tennessee outside Nashville itself, with historic districts near MTSU and subdivisions spreading out in every direction.",
+  "angle": "That mix means jobs range from tight, tree-lined in-town lots to newer subdivisions where storm damage and stump removal are the more common calls.",
+  "lat": 35.8456,
+  "lng": -86.3903,
+  "countyIds": [
+   "Rutherford"
+  ]
+ },
+ {
+  "slug": "franklin",
+  "name": "Franklin",
+  "county": "Williamson County",
+  "character": "Franklin's historic downtown and surrounding neighborhoods are known for heavy tree canopy, with big hardwoods that predate a lot of the houses around them.",
+  "angle": "Property owners here tend to want trees preserved and shaped carefully, not just cut back, especially near the historic district.",
+  "lat": 35.9251,
+  "lng": -86.8689,
+  "countyIds": [
+   "Williamson"
+  ],
+  "local": {
+   "areas": [
+    "Historic Downtown Franklin and Main Street",
+    "the Public Square",
+    "Cool Springs",
+    "Westhaven",
+    "Berry Farms",
+    "Fieldstone Farms",
+    "Leiper's Fork",
+    "Thompson's Station",
+    "Brentwood and Spring Hill borders"
+   ],
+   "zips": [
+    "37064",
+    "37067",
+    "37069"
+   ],
+   "hubTitle": "Tree Service in Franklin, TN | Tree Removal, Trimming & Stump Grinding | Triple Oak Services",
+   "hubDescription": "Tree service in Franklin, TN and Williamson County: tree removal, tree trimming, stump grinding (37064, 37067, 37069), storm cleanup and land clearing. Licensed, insured, free estimates. Call 615-561-0472.",
+   "hubIntro": [
+    "Looking for a tree service in Franklin, TN? Triple Oak Services handles tree removal, tree trimming and pruning, stump grinding, storm damage cleanup and land clearing for homes and lots across Franklin and Williamson County, with free estimates and a clean yard when we leave.",
+    "Franklin's canopy is part of its character. Mature oaks, maples and hackberries line the streets around Historic Downtown Franklin, Main Street and the Public Square, and the same kind of big, established trees show up in neighborhoods from Cool Springs and Westhaven to Berry Farms and Fieldstone Farms. Out toward Leiper's Fork and Thompson's Station, properties get larger and tree lines, fence rows and field edges join the job list.",
+    "Whether it's a single oak that has to come down near the house, a few overdue limbs over the roof, an old stump that's in the way of a new patio, or a storm-damaged tree after a spring line of storms rolling through Williamson County, call for a free estimate and we'll look at the actual trees and give you a straight plan and price."
+   ],
+   "hubFaq": [
+    {
+     "q": "Do you provide tree service in Franklin, TN?",
+     "a": "Yes. We take tree removal, trimming, stump grinding, storm cleanup and land clearing calls in Franklin and the surrounding Williamson County area, including the 37064, 37067 and 37069 zip codes."
+    },
+    {
+     "q": "Do you serve areas near Franklin like Cool Springs, Leiper's Fork and Thompson's Station?",
+     "a": "Call or send a quote request with your address and we'll confirm we can get to you. Franklin is a core part of the area we work in, and nearby Williamson County communities are common calls."
+    }
+   ],
+   "services": {
+    "tree-removal": {
+     "title": "Tree Removal in Franklin, TN | Oak & Hazardous Tree Removal | Triple Oak Services",
+     "description": "Tree removal in Franklin, TN and Williamson County: oaks, dead or leaning trees and removals near homes and power lines. Full debris haul-away, free estimates. Call 615-561-0472.",
+     "paragraphs": [
+      "Tree removal in Franklin often means a big hardwood, usually an oak, that's too close to a house, a driveway or a fence. In older parts of town near Downtown Franklin and Main Street, lots are tighter and the trees are older, so we take trees down in controlled sections rather than dropping them whole.",
+      "Out in Cool Springs, Westhaven, Berry Farms and the newer Williamson County subdivisions, the call is more often a builder-grade tree planted too close to the foundation or a dead tree left after a dry summer. Out toward Leiper's Fork and Thompson's Station, it's usually a larger tree or a tree line that needs to come down on open acreage.",
+      "If you searched for tree removal near me in Franklin, tree removal in Williamson County or oak tree removal, call for a free estimate. We look at the lean, the roots and what's underneath it before we quote."
+     ]
+    },
+    "tree-trimming-pruning": {
+     "title": "Tree Trimming & Pruning in Franklin, TN | Triple Oak Services",
+     "description": "Tree trimming and pruning in Franklin, TN: crown thinning, deadwood removal and clearance over roofs and lines. Careful cuts that keep the tree healthy. Free estimates, 615-561-0472.",
+     "paragraphs": [
+      "Tree trimming in Franklin is as much about keeping trees as removing them. Around the Historic Downtown, Main Street and the older neighborhoods, owners tend to want established shade trees shaped and thinned carefully, not topped.",
+      "Common Franklin trimming calls include limbs over the roof, branches near power lines, dead wood in older oaks, and canopy that has grown into driveways or sightlines in Cool Springs, Westhaven and Fieldstone Farms.",
+      "Searching for tree pruning in Franklin, TN or tree trimming in Williamson County? We'll walk the trees with you, explain what we'd cut and why, and clean up every branch."
+     ]
+    },
+    "stump-grinding": {
+     "title": "Stump Grinding in Franklin, TN (37064, 37067) | Triple Oak Services",
+     "description": "Stump grinding and stump removal in Franklin, TN and Williamson County (37064, 37067, 37069). Ground below grade, ready for sod, mulch or landscaping. Free estimates, 615-561-0472.",
+     "paragraphs": [
+      "If you need stump grinding in Franklin, TN, we grind stumps and surface roots below grade so the spot can be sodded, mulched or landscaped. We work in 37064, 37067 and 37069, from Downtown Franklin to Cool Springs and Berry Farms.",
+      "Typical Franklin stump jobs are old oak and maple stumps left from earlier tree work, stumps in the way of a patio, fence or addition, and stumps in a yard that's about to be listed for sale.",
+      "Searching for stump removal near me in Franklin or stump grinding in 37064? Call for a free estimate and we'll look at the size, access and what's around the stump."
+     ]
+    },
+    "storm-damage-cleanup": {
+     "title": "Emergency Tree Service in Franklin, TN | Storm Damage Cleanup | Triple Oak Services",
+     "description": "Emergency tree service and storm damage cleanup in Franklin, TN and Williamson County: downed trees and limbs off roofs, fences and driveways. Call 615-561-0472.",
+     "paragraphs": [
+      "Middle Tennessee storms put limbs and whole trees on Franklin roofs, fences and driveways every year, and the older tree cover around Downtown Franklin, Harpeth River neighborhoods and the surrounding Williamson County subdivisions takes a lot of the hits.",
+      "When you call for emergency tree service in Franklin, we start with what's dangerous: leaning trees, hung-up limbs and anything on a structure. Then we clear the downed wood and finish with a full property cleanup.",
+      "Searching for emergency tree service near me? Call 615-561-0472 and tell us the address and what came down."
+     ]
+    },
+    "land-clearing-maintenance": {
+     "title": "Land Clearing & Lot Clearing in Franklin, TN | Triple Oak Services",
+     "description": "Land clearing, lot clearing and brush removal in Franklin, TN and Williamson County: building sites, fence lines and overgrown property. Free estimates, 615-561-0472.",
+     "paragraphs": [
+      "Land clearing in Franklin covers overgrown lots, fence lines and property edges, and building sites where trees and brush have to come out before work starts. Williamson County is growing fast, so we see a lot of lot clearing around new construction and in-fill sites.",
+      "We walk the property with you, mark what stays and what goes, and size the crew and equipment to the job. Properties toward Leiper's Fork and Thompson's Station are often larger acreage with tree lines and brush to clear.",
+      "Searching for land clearing in Franklin, TN or lot clearing in Williamson County? Call for a free estimate."
+     ]
+    }
+   }
   }
+ },
+ {
+  "slug": "brentwood",
+  "name": "Brentwood",
+  "county": "Williamson County",
+  "character": "Brentwood's rolling, wooded lots and larger properties mean a lot of mature tree cover packed into HOA-governed subdivisions.",
+  "angle": "Bigger lots and taller trees closer to the house make careful, well-equipped removal and trimming the norm rather than the exception.",
+  "lat": 36.0331,
+  "lng": -86.7828,
+  "countyIds": [
+   "Williamson"
+  ]
+ },
+ {
+  "slug": "madison",
+  "name": "Madison",
+  "county": "Davidson County",
+  "character": "Madison's post-war neighborhoods were built with big front and back yards, and the shade trees planted back then have had 60-plus years to grow into them.",
+  "angle": "A lot of the calls we get here are legacy trees that have outgrown the yard, with roots and limbs now pushing into driveways, fences, and roof lines.",
+  "lat": 36.2609,
+  "lng": -86.7089,
+  "countyIds": [
+   "Davidson"
+  ]
+ },
+ {
+  "slug": "hermitage",
+  "name": "Hermitage",
+  "county": "Davidson County",
+  "character": "Hermitage takes its name from Andrew Jackson's historic estate nearby, and the community around Percy Priest Lake mixes older wooded lots with newer development.",
+  "angle": "Lake-adjacent properties and older wooded lots both mean bigger trees, so storm cleanup and full removals come up more than routine trims.",
+  "lat": 36.1815,
+  "lng": -86.6111,
+  "countyIds": [
+   "Davidson"
+  ]
+ },
+ {
+  "slug": "gallatin",
+  "name": "Gallatin",
+  "county": "Sumner County",
+  "character": "Gallatin is the Sumner County seat, sitting on Old Hickory Lake with a historic downtown square and neighborhoods that stretch from lakefront to farmland.",
+  "angle": "Lakefront trees take a beating from wind off the water, so storm damage and leaning trees near the shoreline are a regular part of the work here.",
+  "lat": 36.3884,
+  "lng": -86.4467,
+  "countyIds": [
+   "Sumner"
+  ]
+ },
+ {
+  "slug": "hendersonville",
+  "name": "Hendersonville",
+  "county": "Sumner County",
+  "character": "Hendersonville is one of the larger Nashville-area suburbs, stretched along Old Hickory Lake with a mix of lakefront homes and inland residential streets.",
+  "angle": "Between lake winds and dense residential lots, we handle a steady mix of storm cleanup, tree removal, and stump grinding for yards that are ready to be usable again.",
+  "lat": 36.3048,
+  "lng": -86.62,
+  "countyIds": [
+   "Sumner"
+  ]
+ }
 ]

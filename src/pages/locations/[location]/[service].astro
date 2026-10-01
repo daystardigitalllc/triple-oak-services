@@ -29,8 +29,11 @@ const { loc, service, locIndex, serviceIndex } = Astro.props;
 const templateVariant = (locIndex + serviceIndex) % 3;
 const serviceLower = service.title.toLowerCase();
 
+const localService = loc.local?.services?.[service.slug];
 let paragraphs;
-if (templateVariant === 0) {
+if (localService) {
+ paragraphs = localService.paragraphs;
+} else if (templateVariant === 0) {
  paragraphs = [
  loc.character,
  loc.angle,
@@ -59,8 +62,8 @@ const nearbyForService = [
 ];
 const otherServicesHere = contentData.services.filter((s) => s.slug !== service.slug);
 
-const title = `${service.title} in ${loc.name}, TN | ${businessData.name}`;
-const description = `${service.title} in ${loc.name}, TN (${loc.county}). ${service.shortDescription} Licensed and insured, free estimates - call ${businessData.phone}.`;
+const title = localService?.title ?? `${service.title} in ${loc.name}, TN | ${businessData.name}`;
+const description = localService?.description ?? `${service.title} in ${loc.name}, TN (${loc.county}). ${service.shortDescription} Licensed and insured, free estimates - call ${businessData.phone}.`;
 
 const breadcrumbSchema = {
  "@context": "https://schema.org",
@@ -114,6 +117,12 @@ const breadcrumbSchema = {
  {paragraphs.map((p) => (
  <p class="text-neutral-600 text-base leading-relaxed">{p}</p>
  ))}
+ {loc.local && (
+ <div class="pt-2 space-y-2">
+ <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500">Areas we work in around {loc.name}</h3>
+ <p class="text-sm text-neutral-600">{loc.local.areas.join(' · ')} · Zip codes {loc.local.zips.join(', ')}</p>
+ </div>
+ )}
  </div>
 
  <div class="lg:col-span-5 p-8 rounded-custom bg-neutral-50 border border-neutral-200/50 space-y-6">

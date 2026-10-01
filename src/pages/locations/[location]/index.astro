@@ -6,6 +6,7 @@ import locationsData from '../../../data/locations.json';
 import contentData from '../../../data/content.json';
 import businessData from '../../../data/business.json';
 import Reviews from '../../../components/Reviews.astro';
+import FAQ from '../../../components/FAQ.astro';
 
 export async function getStaticPaths() {
  return locationsData.map((loc) => ({
@@ -38,11 +39,12 @@ const heroPhotos = [
  { src: '/images/storm-damage-2.jpg', alt: 'Storm damage on a residential property' },
 ];
 const heroPhoto = heroPhotos[locIndex % heroPhotos.length];
+const local = loc.local;
 ---
 
 <MainLayout
- title={`Tree Service in ${loc.name}, TN | ${businessData.name}`}
- description={`${businessData.name} provides tree trimming, removal, stump grinding, storm cleanup, and land clearing in ${loc.name}, TN (${loc.county}). Licensed, insured, free estimates.`}
+ title={local?.hubTitle ?? `Tree Service in ${loc.name}, TN | ${businessData.name}`}
+ description={local?.hubDescription ?? `${businessData.name} provides tree trimming, removal, stump grinding, storm cleanup, and land clearing in ${loc.name}, TN (${loc.county}). Licensed, insured, free estimates.`}
 >
  <!-- Location Hero Section -->
  <section
@@ -122,6 +124,8 @@ const heroPhoto = heroPhotos[locIndex % heroPhotos.length];
  </div>
  </div>
  </section>
+
+ {local?.hubFaq && <FAQ faqsOverride={local.hubFaq} />}
 
  <!-- Reviews -->
  <Reviews />

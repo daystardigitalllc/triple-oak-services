@@ -70,3 +70,11 @@ NAP to use: **Triple Oak Services**, 615-561-0472, https://tripleoakservices.com
 1. Owner supplies the Franklin facts and photos in section 4; then enrich the Franklin hub and the tree-removal and storm-cleanup pages.
 2. Pull GSC (Franklin queries and pages, 28/56/84 days against comparable periods, branded split from non-branded) and confirm the current positions.
 3. Add the Cloudflare www-to-apex 301 and verify the real Google Business Profile, then audit the core citation list above.
+
+## 8. Update: Franklin copy (applied from the GSC export)
+
+GSC export (last 3 months, downloaded 2026-10-01): Franklin hub 293 impressions / 3 clicks at position 55.8; `/locations/franklin/stump-grinding/` 85 impressions at 62.4; `/locations/franklin/tree-removal/` 37 at 73.1. Top queries: "tree service franklin tn", "stump grinding franklin tn", "stump grinding 37064", "tree removal franklin tn", "tree service thompsons station tn", "tree service leipers fork tn", "tree removal williamson county", "oak tree removal".
+
+Applied on the existing Franklin URLs only: rewritten titles and meta descriptions, a local intro and areas list (Downtown Franklin/Main Street, Public Square, Cool Springs, Westhaven, Berry Farms, Fieldstone Farms, Leiper's Fork, Thompson's Station; zips 37064/37067/37069) on the hub, a Franklin-specific body for each of the five service pages, and a two-question FAQ on the hub. Content lives in the `local` object on Franklin in `src/data/locations.json`; other cities are unchanged.
+
+Owner to confirm: the neighborhoods/areas listed are ones the crew really serves. The copy describes common job types and does not claim any specific completed project. Real project write-ups are still needed (section 4).
