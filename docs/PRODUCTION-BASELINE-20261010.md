@@ -1,0 +1,130 @@
+# Production baseline, 2026-10-10
+
+Snapshot taken 20261010T003309Z (UTC) from https://tripleoakservices.com.
+
+- Source of truth: the live production site. Deployed from `main` via Cloudflare Pages (Astro static site + Pages Function `functions/api/quote.js`).
+- Baseline code commit: 1d3c83e6a18726b0bde9b701c33238867719827a (`main` at snapshot time).
+- Verification: 88 sitemap pages and 114 referenced assets were fetched from production. A build of the baseline commit matches production on every page apart from Cloudflare edge email-obfuscation and per-build random IDs (home page showcase/compare widgets).
+- No database, plugins, uploads or WordPress core exist in this project. Server/edge configuration (Cloudflare DNS, Redirect Rules such as www to apex, email obfuscation) lives in the Cloudflare dashboard and is not stored in this repo.
+- No secrets are stored here. Secrets for the quote form are Cloudflare Pages environment variables.
+
+SHA-256 of production files fetched (path relative to site root):
+
+```
+84c831072b2a51a722fbdefc1c1f21e21e2ed84bbf7dcc9f4a4f68196c419bde  ./_astro/MainLayout.W4BVyZZ5.css
+3b3b0dbb19cc04527dbf02ad815be3ef0994b011ab42f14f535509de0c7e87ec  ./_headers
+12de4768767014fd2b020c4a7661bc2976beebb97833dfb2f90d2a21c4046112  ./apple-touch-icon.png
+8e2c75a6fe159825a8f79422c04f07ecfcfaf1b33017bef2076616b19a65e11e  ./cdn-cgi/l/email-protection
+2595496fe48df6fcf9b1bc57c29a744c121eb4dd11566466bc13d2e52e6bbcc8  ./cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js
+a414747dc5c4ef8a17d07a31ff8f735ed28681d37e987e3ffb82cc413b823746  ./favicon-32.png
+50c5f9900f958ff1c21f916f1638865c4aac9f63149824efb0707aee2564fd54  ./favicon-512.png
+ee204424ffdc51cb3f8069520b2f3aa81bfba4f7b972aab08d3d2c3dc30caa73  ./hero.mp4
+58951a050274137f78a6917bea67062ec4553780264a772192a726fb1d88ab19  ./images/after-stump1.jpg
+3bf5a5b99298c3b5aff93e6c86c101497be1d5472528941a91a5c78a716cf3d6  ./images/after1.jpg
+3414971210ef4f98ead25911d0491ed1a313c8602c4185ca472858ef34973e6a  ./images/after2.jpg
+9be36a8ed334a90361aae505a8de80466cf30d90310a070cc208ccc41eb5075b  ./images/before-stump1.jpg
+548122fb68a6f87de7a8d6d9653418884786708f0751ac2eef5ef056a563175c  ./images/before1.jpg
+87d0f36e0f11dd17d2e8619d2bb5e318cdb1a5c78377ebe577891cc7565e7ebc  ./images/before2.jpg
+4f61c505d97e703311c06891695babd28d68ff359bfadbdbd94e1aca39477acd  ./images/bucket-truck.jpg
+5698e917ec75cfd25a2fb05bbc120891bb0dcd3ed423210e945cab687482418f  ./images/cleanup-trailer.jpg
+6362c5b5420fa20efbbc097d97cbf2d62e4122eb6b431933e123581cb8d26b18  ./images/hero-tree.png
+947db55de8b5cc5034f227c4018e3431b755cf7b2807c6e58ea1787f04dd74c2  ./images/owner.jpg
+64c08006712b13cae4e127ad568904e5ea34c2d375fccb68d1721d963bb5b8af  ./images/storm-damage-1.jpg
+d2a67f37c56ebce0b32289bfafa841f6699f666435e1def09eefd9bb18a19b59  ./images/storm-damage-2.jpg
+a0d30d960d0cce2e7e690e263515618b3d2181b92a8ea650fed4c3ddd0569515  ./images/stump-grinding-poster.jpg
+a4b1507d9ebc27dff8ba169c4df511ad5033ee79705895772e8098d491ad6f23  ./images/tree-removal-poster.jpg
+4dd5d7c112027c9cc9e83b56c7bfdc7282d9c0f614c92b8007d23a3b53431ea6  ./images/tree-trimming-poster.jpg
+0e4e1c14eee5c74b506cb1cb4372426087e32856f1918a8cf3428a92e3a0c84f  ./index.html
+8d625a318eae8d1266abbd0a0d6b486ddbc845fa9fc01df7eba6df392f8c57cf  ./locations/brentwood/index.html
+7ed9584c6e173048641e6c762d6d22095740072e9be71d03f1327c9af0c5f826  ./locations/brentwood/land-clearing-maintenance/index.html
+e6b798dc6f031390225f366f28afe7fbcef516506cc690fbbb2eb4056ed35e2a  ./locations/brentwood/storm-damage-cleanup/index.html
+ad5c8cf22cd2de15feeb1fb587696e992581fa8df5df9ad2cdf64f554ef8fd49  ./locations/brentwood/stump-grinding/index.html
+40e8ae5b2d75e734c53b7ddc2a0b084ef247d795f8447631a739764bd6d751e6  ./locations/brentwood/tree-removal/index.html
+82776c0d58d4b0dd93d29ba6263156a95b0bcd59696c16d6a935314fabde569f  ./locations/brentwood/tree-trimming-pruning/index.html
+c2eea198f13da30a5d49fc4d4976d81a9be499b88828f9573075bed45c573168  ./locations/franklin/index.html
+64f0f17852b71e208aeaaa8cbe4c3d6d120a7fb4102ade932b2bcb83bf67995e  ./locations/franklin/land-clearing-maintenance/index.html
+9eb2d726590ca084a13e6f626373be567e8fedee8ec27ebfd288efd2822372fe  ./locations/franklin/storm-damage-cleanup/index.html
+5356ac2d21c623bc4d9db6202c7f614d7b6847fe36cbaeba0302b53081cedba9  ./locations/franklin/stump-grinding/index.html
+5cf362a41bb107a16c3ebe759f876844073a01079cda74cb8e2b4d76ef2500b5  ./locations/franklin/tree-removal/index.html
+e833b72208ec4ab2c09b5c75d4635111aa2f45611c01282da47686ecfb6fc135  ./locations/franklin/tree-trimming-pruning/index.html
+f83160ffde33c576552a8470b88c6c1b5f3b2c1918a1eea758b5ad9037f75561  ./locations/gallatin/index.html
+0c9c2ce12c53b4c2540b56dcdf9dd8f1e82870f876978b64ea593d892e6f9849  ./locations/gallatin/land-clearing-maintenance/index.html
+6a43958fc3039b6494171d518bbfd3b1bf588fc849e175d2a5cd4d749e8c8be6  ./locations/gallatin/storm-damage-cleanup/index.html
+5d59ee4c8857e1ea54ebd518cc54bf6f12d0e0b9eaefd455ea73d378c65ada57  ./locations/gallatin/stump-grinding/index.html
+c9b57b17d38ab8409df4cfb8bfcd181af72247639f3129fe0ce7e80287789825  ./locations/gallatin/tree-removal/index.html
+3e204151a0a20f7b891394ac0ad4b5f54a72ba8b11ecba41af6b4a63f37369a1  ./locations/gallatin/tree-trimming-pruning/index.html
+25d0fec8d1322e9ccad69fde5484866acab89609e3364815ee63d56be80baccb  ./locations/hendersonville/index.html
+410bcff3d2ab4a48b9504fa1801ea74449061359ee1511047e1520513d7fbd24  ./locations/hendersonville/land-clearing-maintenance/index.html
+3555c99f88863a4bc57996ac5995b2402bb7f7c8e0fc49453d1dc9b2a8de5735  ./locations/hendersonville/storm-damage-cleanup/index.html
+2b4aec0d80e5995dd2aa96b3d1c8715d169d9d91b45005291af9a009dc873572  ./locations/hendersonville/stump-grinding/index.html
+282234d5421349c27cddc0f1ae901dc7eeb3ce5fe746787d36049dd03451bdec  ./locations/hendersonville/tree-removal/index.html
+1c2c15b25ef74a3d33913002f1fb7af0b83929e7f605126503ca68d2b171747b  ./locations/hendersonville/tree-trimming-pruning/index.html
+f14a503a6e646126ca79e5fcaf6e0ca30abd2639862f2cf746d5c7aa8885235e  ./locations/hermitage/index.html
+f7641058dc54d137768df2673504cf4a7f62e16bb7e2578f0811a5775eabe6ba  ./locations/hermitage/land-clearing-maintenance/index.html
+3824e3545498986f93dbe85378653f4bde77b27864e25dd9ae1831d684979ad9  ./locations/hermitage/storm-damage-cleanup/index.html
+a53570092f3c72bdc03c66115b086e9878538e0405efa13277552036dc8dbdd7  ./locations/hermitage/stump-grinding/index.html
+9d7d7bb545b453f4c65d6eec87a3b98f372f74b6d416e7409707b631d30c4a91  ./locations/hermitage/tree-removal/index.html
+1eda1a1eade405564cd271e59a32e66cdb3f538e4cc833f045b8658ee19aa510  ./locations/hermitage/tree-trimming-pruning/index.html
+0543472a5c8bcf40c545ad6b91f1d78e6aa903c7fcc6bce91204095a6c852465  ./locations/index.html
+abd0a6d46e06bac445596c4a3c1cde35993fc279aabb0bda4a3594f48e5084a6  ./locations/lebanon/index.html
+52608986de8b87d7c7d1fb46220a292b66430e79e405060ed4148c39a7e4f2ae  ./locations/lebanon/land-clearing-maintenance/index.html
+4fc0b797ef1b5eacde6d6fdeb369914722fab80234daf60cc43b394a45002579  ./locations/lebanon/storm-damage-cleanup/index.html
+b25d6f11ddf042e46d4036ab656c47a4ca5c1ef3d1a5785b007bb6197215a744  ./locations/lebanon/stump-grinding/index.html
+2032f591b398b829768f37ef7a6438889f3f8158c3bd3dfd74a88f80a874d250  ./locations/lebanon/tree-removal/index.html
+b8e571d464517c61855d83774d16984272a94d68b1b9a933e7df5dbadbb22b6f  ./locations/lebanon/tree-trimming-pruning/index.html
+0767d224798706a94f11b98fa493cb98599f83759a91c9074d6c35425fb88068  ./locations/madison/index.html
+c449314d0604886601c1274e80816dd0d1eae3426b681e7671c97dbd2127e7b3  ./locations/madison/land-clearing-maintenance/index.html
+23ef2731c3b65695dc31a3554c9a811155f7e70b9ceef2a8784a8aaf55fad64f  ./locations/madison/storm-damage-cleanup/index.html
+d73627d7584a3e96d403617a3b984937a4e05e45e024d72753877f135a45c751  ./locations/madison/stump-grinding/index.html
+0ee9da1a7303c2733a951e8aa3837a57c77845c256500f3caf3ea195604452d9  ./locations/madison/tree-removal/index.html
+b3b2c833be7c2c66665810a08b8f5ed1d4cc2a863f2f725173be34aec13e49f7  ./locations/madison/tree-trimming-pruning/index.html
+1f078159d6c91e410d83ca18c2ea2979f59c590e94432bfcdaf6ee52b988bada  ./locations/mount-juliet/index.html
+da6c73ce0cca4139e32958005c934d4100acfc5becf2b5e9d00fe6453ab56e17  ./locations/mount-juliet/land-clearing-maintenance/index.html
+39fab05ecfa66b4578c3403f02e073181a83319a9968d6c9f439f77c23fc2c18  ./locations/mount-juliet/storm-damage-cleanup/index.html
+8569b645ffca643a20db36515417831b62aa3c2d59a199abc4a21fae9fc1ccd7  ./locations/mount-juliet/stump-grinding/index.html
+21b81c7687cc028815df01d2e2058122fc52e8440bab6543bd06cee82aa29d94  ./locations/mount-juliet/tree-removal/index.html
+8f848ea6df9cc9453cdda8326b06ab2ecb38f979dee9d850330d472c531c184b  ./locations/mount-juliet/tree-trimming-pruning/index.html
+8b2bcd6b415357d6f8bd8e508f6a1432d70c42c81f22aad80a232f132a14577c  ./locations/murfreesboro/index.html
+f99c6e84e79d94104a784ddf05f9dabab874f5252c04f855a0224c7060713de7  ./locations/murfreesboro/land-clearing-maintenance/index.html
+9ceaeccad8e94d40a2da12eab31a963b8113d4a68dccbf8599dd12013ac1c3fd  ./locations/murfreesboro/storm-damage-cleanup/index.html
+98664fc2f80419e353bdab1e2bb68e5a20a81aabef2de3d5c0263f0d9d92ec67  ./locations/murfreesboro/stump-grinding/index.html
+4fa2ae35d408fbdf3eb381ff489bbbe2b812232d7dd15cca1b84b381a17f0887  ./locations/murfreesboro/tree-removal/index.html
+566010dba148a262affad3ff9eac3afbada05aa40104454335071135e3c79512  ./locations/murfreesboro/tree-trimming-pruning/index.html
+5b35623c1af9bd80c3390b9014d377893482fdbfae494ad2aab010f2c352970d  ./locations/nashville/index.html
+9fd88b7df31ddeb74bb88d65f282f6ce58b24ccf1516e201a2a33e5f3a8360b7  ./locations/nashville/land-clearing-maintenance/index.html
+56a9141290782bad61bd7faab93adb3e610119e5ad48fea9e7f0cfc3da96b692  ./locations/nashville/storm-damage-cleanup/index.html
+2a4614ba1cf92e3b01cf31f437a436ad18b5cef7391b12b16cbd91668772cce4  ./locations/nashville/stump-grinding/index.html
+5efca72c3a7f3c11257f0cb2ccea067370eb3f1adda5a01b8fbe06f1288fd244  ./locations/nashville/tree-removal/index.html
+23c1a9068649aff4a2bcda15ec73cc07696e7930aec5f4d7d81f71373c2eca72  ./locations/nashville/tree-trimming-pruning/index.html
+52cd539016bd71ca89a2b8155d685b7bc4679ab41697d3d6efb5faddd792db67  ./locations/portland/index.html
+c090d57867af5f46b706b0aab8f2eb41b511e65b4b97bd23ae415771c32b5f0d  ./locations/portland/land-clearing-maintenance/index.html
+376e43b2e4e2a007355c1cb3c7df602c3a0bf0108c19f0d546ca7154570a4dd6  ./locations/portland/storm-damage-cleanup/index.html
+5a2db35ce68ca2b20258ea1e45df547218a5c832e7ea6fb3bde607eb93f9ca21  ./locations/portland/stump-grinding/index.html
+52f42174bf82598d3c94bcfc447270bb4f38df0df6dc2380bbbfcf22c6ab05f6  ./locations/portland/tree-removal/index.html
+3e8305688b3b51fc685dde5256bf0870a5787f2dce317405fd3c43bbca3adcc6  ./locations/portland/tree-trimming-pruning/index.html
+03e79d7c376604e51f982ccfd1ce3098faf78f43c43c75b8c006e3a8b758c742  ./locations/springfield/index.html
+4d542f470a429b94585430ca861bad7ad9d917b8244b0e0508baf13d73c39e82  ./locations/springfield/land-clearing-maintenance/index.html
+8e752232fee6aa3c65b2ddcfc487bd48121b79745fed3fda836dc0461720a5ea  ./locations/springfield/storm-damage-cleanup/index.html
+9e9e042deb2ff63f596acbf78114cdd716335315491f7794bf3c13a6e8b53154  ./locations/springfield/stump-grinding/index.html
+8c3c2bc7489b9391fcc811d821696fbaa836e4e64f4203a2bb71dfe087d76c7c  ./locations/springfield/tree-removal/index.html
+485128063dbd8686a817ac8812620febc4e1303507153ee6653653c5e8db3696  ./locations/springfield/tree-trimming-pruning/index.html
+7379edcfc08900d75283b07a7936d08f4a6bf1b0344f7376a7686f186e0158c3  ./locations/white-house/index.html
+617ba4721c729c4d5e66c732cbf6f6f390a4e2745392092f951a806fc0d1c022  ./locations/white-house/land-clearing-maintenance/index.html
+be08daf5007c24c7138b8a3da5a0bccffa5135c64ca6a9e83f7d28aa0c9787c8  ./locations/white-house/storm-damage-cleanup/index.html
+1e418cf74b96e966eba12c1a22f1323f730c911ee0dd0daf78c26f2da1465159  ./locations/white-house/stump-grinding/index.html
+1b14527f847142f826d01b35432551d7a0b875df0eb522dd6c6f62f43dcd93f0  ./locations/white-house/tree-removal/index.html
+6015ed62d50b309bf099659c9783f80825777b8904a8637953bf0cabbf3dd374  ./locations/white-house/tree-trimming-pruning/index.html
+9a579a667662261e5c5af8811f3b43131fb5f3408427372ba65ef18e975c4561  ./logo.png
+874d4ad3af6e7abe942d416a81c51fbd2d8ecbea1dc158981883f5f8391b8e08  ./privacy-policy/index.html
+01b27c3694fe69ee291f5681aed6fc4030bc7c06271e55df09b62d9e75b4a70e  ./robots.txt
+56336b6149a35febca08928ba71ad214388f7c6f8a48240a6447458916b98215  ./services/index.html
+b6bda05025145c0c19b126336d736526551a3bb9104411865e0a5288c45bf6ad  ./services/land-clearing-maintenance/index.html
+6a4cf9f6cf485c2e0f6a436d6e2d7195b765d87e4b597072c48a3b34985aab9c  ./services/storm-damage-cleanup/index.html
+40d766bc78d2439f1975775d5abea4f17be0afb8b2f95d44bcc27e25d3237871  ./services/stump-grinding/index.html
+d1f0f40e2e223fab09a773664f1d9f41f5316568d8b1119ebfd204bb6dae9794  ./services/tree-removal/index.html
+195f1fc9c6b5bf61a7fced0d92421ac2485af1ef4ad8ff40c4477ff48273ce9a  ./services/tree-trimming-pruning/index.html
+d70304aca7519f668a9d793189a65d12687fc5b8caf1c66c362cf95af46927dd  ./terms-of-service/index.html
+bf7450576be75450932411e52c070ce5c72b2a2a0e94a18f679e39aa78a18a83  ./videos/stump-grinding.mp4
+d91699fa1edb94659016e39aa997b4e5d3be5722036d7ff5f2089e80e0ce0fa2  ./videos/tree-removal.mp4
+da77eee6c4e080167a5d36d302244e068d5744b2cafee481127d8481dc43fce3  ./videos/tree-trimming.mp4
+```
