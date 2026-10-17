@@ -81,6 +81,17 @@ const local = loc.local;
  <div class="container mx-auto px-6 max-w-3xl space-y-6">
  <h2 class="text-3xl font-extrabold text-neutral-900">Tree Service in {loc.name}, TN and {loc.county}</h2>
  {local.hubIntro.map((p) => (<p class="text-neutral-600 text-base leading-relaxed">{p}</p>))}
+ {(local.sections || []).map((s) => (
+ <div class="space-y-4 pt-6">
+ <h2 class="text-2xl font-extrabold text-neutral-900">{s.h2}</h2>
+ {s.paragraphs.map((p) => (<p class="text-neutral-600 text-base leading-relaxed">{p}</p>))}
+ {s.bullets && (
+ <ul class="list-disc pl-6 space-y-2 text-neutral-600 text-base leading-relaxed">
+ {s.bullets.map((b) => (<li>{b}</li>))}
+ </ul>
+ )}
+ </div>
+ ))}
  <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 pt-4">Areas we work in around {loc.name}</h3>
  <ul class="flex flex-wrap gap-2">
  {local.areas.map((a) => (<li class="px-3 py-1.5 rounded-custom text-sm bg-neutral-50 border border-neutral-200 text-neutral-700">{a}</li>))}
@@ -118,6 +129,11 @@ const local = loc.local;
  </a>
  ))}
  </div>
+ {loc.slug === 'nashville' && (
+ <p class="text-center text-sm text-neutral-500 mt-8">
+ Need a tree taken down? Read our guide to <a href="/tree-removal-nashville-tn/" class="text-primary font-semibold hover:underline">tree removal in Nashville, TN</a>.
+ </p>
+ )}
  </div>
  </section>
 

@@ -1,0 +1,262 @@
+---
+// DRAFT landing page targeting "tree removal nashville tn". Not committed
+// or pushed yet - lives in the working tree only until approved.
+// Note: /locations/nashville/tree-removal/ already targets the same query;
+// this page is the richer, standalone version and both link to each other.
+import MainLayout from '../layouts/MainLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import locationsData from '../data/locations.json';
+import contentData from '../data/content.json';
+import businessData from '../data/business.json';
+
+const title = 'Tree Removal in Nashville, TN | Triple Oak Services';
+const description = `Locally owned, licensed and insured tree removal in Nashville, TN. Hazardous trees, storm damage, stump grinding. Free estimates. Call ${businessData.phone}.`;
+const removal = contentData.services.find((s) => s.slug === 'tree-removal');
+const heroImage = removal?.image || '/images/bucket-truck.jpg';
+
+const reasons = [
+  'A tree is leaning toward a house, garage, fence, or power line',
+  'A tree is dead, diseased, or rotting at the base',
+  'Storms brought down limbs or a whole tree',
+  'A tree is too close to a structure and the roots or branches are causing damage',
+  'You are clearing space for a build, a driveway, or a yard project',
+];
+
+const services = [
+  { href: '/services/tree-removal/', label: 'Tree removal', text: 'Hazardous trees, leaning trees, and trees near structures, with debris hauled away.' },
+  { href: '/services/storm-damage-cleanup/', label: 'Storm damage and emergency removal', text: 'Downed limbs and trees, with same-day emergency removal available.' },
+  { href: '/services/stump-grinding/', label: 'Stump grinding', text: 'Stumps ground below grade with root flare removal and cleanup.' },
+  { href: '/services/tree-trimming-pruning/', label: 'Tree trimming', text: 'Dead limb removal, crown thinning, view clearing, and storm-risk reduction.' },
+  { href: '/services/land-clearing-maintenance/', label: 'Land clearing', text: 'Brush clearing, building-site clearing, and driveway access.' },
+];
+
+const steps = [
+  { title: 'Free estimate.', text: 'Call or use the quote form. We look at the tree, the access, and what is around it.' },
+  { title: 'A clear plan and price.', text: 'We explain how the tree will come down and what the job includes before we start.' },
+  { title: 'Safe removal.', text: 'Our crew takes the tree down in sections or in one piece, depending on what is nearby.' },
+  { title: 'Cleanup.', text: 'We haul away the debris so you are not left with a mess.' },
+  { title: 'Stump (optional).', text: 'We can grind the stump below grade while we are there.' },
+];
+
+const whyUs = [
+  'Locally owned and based in Nashville.',
+  'Licensed and insured.',
+  'Free, no-obligation estimates.',
+  'Straight talk, fair prices. We tell you what the job needs and what it costs.',
+  'Safe work and a clean site.',
+];
+
+const costFactors = [
+  { label: 'Size and height.', text: 'Bigger trees take more time and equipment.' },
+  { label: 'Location.', text: 'A tree over a house, near power lines, or in a tight backyard is harder and riskier than one in an open yard.' },
+  { label: 'Condition.', text: 'Dead or storm-damaged trees can be unpredictable and take more care.' },
+  { label: 'Access.', text: 'Gates, fences, slopes, and distance from the street change the job.' },
+  { label: 'Extras.', text: 'Debris hauling is part of tree removal, and stump grinding can be added while we are on site.' },
+];
+
+const faqs = [
+  { q: 'How do I know if a tree needs to be removed?', a: 'Warning signs include a lean that is getting worse, large dead branches, fungus or rot at the base, cracks in the trunk, and roots lifting the ground. If you see any of these, have it looked at.' },
+  { q: 'Will you haul away the debris?', a: 'Yes. Debris is hauled away as part of tree removal.' },
+  { q: 'Can you remove the stump too?', a: 'Yes. We grind stumps below grade and clean up afterward.' },
+  { q: 'Do you do emergency tree removal in Nashville?', a: 'Yes, including same-day emergency removal after storms.' },
+  { q: 'Do I need a permit to remove a tree in Nashville?', a: 'Rules depend on the tree and the property, and can change. Check with Metro Nashville before removing a large or protected tree.' },
+  { q: 'Are you licensed and insured?', a: 'Yes. Triple Oak Services is licensed and insured.' },
+];
+
+const pageUrl = new URL('/tree-removal-nashville-tn/', Astro.site).href;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Tree Removal in Nashville, TN',
+  serviceType: 'Tree removal',
+  description,
+  url: pageUrl,
+  provider: { '@type': 'LocalBusiness', name: businessData.name, telephone: businessData.phone, url: Astro.site.origin },
+  areaServed: { '@type': 'City', name: 'Nashville', address: { '@type': 'PostalAddress', addressRegion: 'TN', addressCountry: 'US' } },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site.origin + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Tree Removal in Nashville, TN', item: pageUrl },
+  ],
+};
+---
+
+<MainLayout title={title} description={description} ogImage={heroImage}>
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <!-- Hero -->
+  <section
+    class="relative py-20 lg:py-28 bg-neutral-900 text-white overflow-hidden bg-cover bg-center"
+    style={`background-image: linear-gradient(to bottom, rgba(24, 24, 27, 0.75), rgba(24, 24, 27, 0.92)), url('${heroImage}');`}
+  >
+    <div class="container mx-auto px-6 relative z-10 max-w-4xl space-y-4">
+      <nav class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-400 mb-2" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-accent transition-colors">Home</a>
+        <span>/</span>
+        <span class="text-accent">Tree Removal in Nashville</span>
+      </nav>
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+        Tree Removal in <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Nashville, TN</span>
+      </h1>
+      <p class="text-lg md:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl">
+        Triple Oak Services is a locally owned tree company in Nashville. We remove hazardous, leaning, and storm-damaged trees, haul away the debris, and leave your property clean. Estimates are free and there is no obligation.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 pt-4">
+        <a href={`tel:${businessData.phone}`} class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-neutral-950 bg-white hover:bg-neutral-100 rounded-custom shadow-lg transition-all hover:scale-103">
+          Call {businessData.phone}
+        </a>
+        <a href="/#quote-funnel" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white border border-white/20 hover:bg-white/10 rounded-custom transition-all">
+          Get a Free Estimate
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- When you need removal + services -->
+  <section class="py-24 bg-white">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-6">
+          <h2 class="text-3xl font-extrabold text-neutral-900">When You Need Tree Removal</h2>
+          <p class="text-neutral-600 leading-relaxed">Not every tree has to come down, but some do. Common reasons Nashville homeowners call us:</p>
+          <ul class="space-y-3">
+            {reasons.map((r) => (
+              <li class="flex items-start gap-3 text-neutral-700">
+                <span class="w-6 h-6 rounded-custom bg-primary/10 text-primary flex items-center justify-center text-xs shrink-0 mt-0.5">&check;</span>
+                {r}
+              </li>
+            ))}
+          </ul>
+          <p class="text-neutral-600 leading-relaxed">
+            If you are not sure whether a tree needs to be removed, ask us. We will give you straight talk, and if trimming will solve the problem, we will tell you. See our <a href="/services/tree-trimming-pruning/" class="text-primary font-semibold hover:underline">tree trimming and pruning</a> service.
+          </p>
+        </div>
+
+        <div class="lg:col-span-5 p-8 rounded-custom bg-neutral-50 border border-neutral-200/50 space-y-5">
+          <h3 class="font-bold text-lg text-neutral-900 border-b border-neutral-200/50 pb-3">Why Choose {businessData.name}</h3>
+          <ul class="space-y-3 text-sm font-semibold text-neutral-700">
+            {whyUs.map((w) => (
+              <li class="flex items-start gap-3">
+                <span class="w-6 h-6 rounded-custom bg-primary/10 text-primary flex items-center justify-center text-xs shrink-0">&check;</span>
+                {w}
+              </li>
+            ))}
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-custom bg-primary/10 text-primary flex items-center justify-center text-xs shrink-0">&check;</span>
+              <span>Well reviewed. See the <a href="/#reviews" class="text-primary hover:underline">reviews section</a>.</span>
+            </li>
+          </ul>
+          <a href={`tel:${businessData.phone}`} class="block text-center px-4 py-3 font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-md transition-all">
+            Call Us: {businessData.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-20 bg-neutral-50 border-t border-neutral-100">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <h2 class="text-3xl font-extrabold text-neutral-900 text-center mb-10">Our Tree Removal Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {services.map((s) => (
+          <a href={s.href} class="group p-6 rounded-custom bg-white border border-neutral-100 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all">
+            <h3 class="font-bold text-lg text-neutral-900 group-hover:text-primary transition-colors">{s.label} &rarr;</h3>
+            <p class="text-sm text-neutral-500 mt-1">{s.text}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-20 bg-white border-t border-neutral-100">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <h2 class="text-3xl font-extrabold text-neutral-900 text-center mb-10">How Tree Removal Works</h2>
+      <ol class="space-y-6">
+        {steps.map((step, i) => (
+          <li class="flex items-start gap-5">
+            <span class="w-9 h-9 rounded-custom bg-primary text-neutral-950 font-extrabold flex items-center justify-center shrink-0">{i + 1}</span>
+            <p class="text-neutral-600 leading-relaxed pt-1"><strong class="text-neutral-900">{step.title}</strong> {step.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="text-center pt-10">
+        <a href="/#quote-funnel" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-primary hover:bg-primary-hover rounded-custom shadow-lg shadow-primary/25 transition-all">
+          Get a Free Quote
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency -->
+  <section class="py-16 bg-neutral-950 text-white">
+    <div class="container mx-auto px-6 max-w-3xl text-center space-y-4">
+      <h2 class="text-3xl font-extrabold">Emergency and Storm Damage Removal</h2>
+      <p class="text-neutral-300 leading-relaxed">
+        If a tree has fallen on your house, yard, or driveway, or a big limb is hanging, call right away. We offer storm damage and emergency tree removal, including same-day emergency removal. If anyone is in danger or a power line is involved, call 911 and your utility first, then call us.
+      </p>
+      <a href={`tel:${businessData.phone}`} class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-neutral-950 bg-white hover:bg-neutral-100 rounded-custom shadow-lg transition-all">
+        Call {businessData.phone}
+      </a>
+    </div>
+  </section>
+
+  <!-- Cost -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6 max-w-3xl space-y-6">
+      <h2 class="text-3xl font-extrabold text-neutral-900">What Affects the Cost of Tree Removal</h2>
+      <p class="text-neutral-600 leading-relaxed">Every tree is different, so we price after we see it. These things matter most:</p>
+      <ul class="space-y-3">
+        {costFactors.map((c) => (
+          <li class="text-neutral-600 leading-relaxed"><strong class="text-neutral-900">{c.label}</strong> {c.text}</li>
+        ))}
+      </ul>
+      <p class="text-neutral-600 leading-relaxed">
+        We do not do a one-size-fits-all number, so call for a free estimate. Ask about our current promotion.
+      </p>
+    </div>
+  </section>
+
+  <!-- Areas -->
+  <section class="py-16 bg-neutral-50 border-t border-neutral-100">
+    <div class="container mx-auto px-6 max-w-4xl text-center space-y-6">
+      <h2 class="text-3xl font-extrabold text-neutral-900">Areas We Serve</h2>
+      <p class="text-neutral-600">We are based in Nashville and serve {locationsData.length} communities across Middle Tennessee.</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        {locationsData.map((loc) => (
+          <a href={`/locations/${loc.slug}/`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white border border-neutral-200 text-neutral-700 hover:border-primary/40 hover:text-primary transition-all">
+            {loc.name}, TN
+          </a>
+        ))}
+      </div>
+      <p class="text-sm text-neutral-500">
+        See the <a href="/locations/nashville/" class="text-primary font-semibold hover:underline">Nashville service page</a> or the full <a href="/locations/" class="text-primary font-semibold hover:underline">locations list</a>.
+      </p>
+    </div>
+  </section>
+
+  <FAQ faqsOverride={faqs} />
+
+  <!-- Closing CTA -->
+  <section class="py-20 bg-neutral-950 text-white text-center">
+    <div class="container mx-auto px-6 max-w-2xl space-y-6">
+      <h2 class="text-3xl sm:text-4xl font-extrabold">Call for a Free Tree Removal Estimate</h2>
+      <p class="text-neutral-300">Call Triple Oak Services at <strong>{businessData.phone}</strong> or request a free estimate online.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href={`tel:${businessData.phone}`} class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-neutral-950 bg-white hover:bg-neutral-100 rounded-custom shadow-lg transition-all">
+          Call {businessData.phone}
+        </a>
+        <a href="/#quote-funnel" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white border border-white/20 hover:bg-white/10 rounded-custom transition-all">
+          Request an Estimate Online
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
