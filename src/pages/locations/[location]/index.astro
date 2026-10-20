@@ -116,7 +116,7 @@ const local = loc.local;
  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
  {contentData.services.map((service) => (
  <a
- href={`/locations/${loc.slug}/${service.slug}`}
+ href={`/locations/${loc.slug}/${service.slug}/`}
  class="group flex items-center justify-between gap-4 p-6 rounded-custom bg-neutral-50 border border-neutral-100 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all"
  >
  <div>
@@ -145,11 +145,11 @@ const local = loc.local;
  </h2>
  <div class="flex flex-wrap justify-center gap-3">
  {nearby.map((n) => (
- <a href={`/locations/${n.slug}`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white border border-neutral-200 text-neutral-700 hover:border-primary/40 hover:text-primary transition-all">
+ <a href={`/locations/${n.slug}/`} class="px-4 py-2 rounded-custom text-sm font-semibold bg-white border border-neutral-200 text-neutral-700 hover:border-primary/40 hover:text-primary transition-all">
  {n.name}, TN
  </a>
  ))}
- <a href="/locations" class="px-4 py-2 rounded-custom text-sm font-semibold text-primary hover:text-primary-hover transition-all">
+ <a href="/locations/" class="px-4 py-2 rounded-custom text-sm font-semibold text-primary hover:text-primary-hover transition-all">
  View All Areas &rarr;
  </a>
  </div>

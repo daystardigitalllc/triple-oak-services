@@ -85,9 +85,9 @@ const breadcrumbSchema = {
  >
  <div class="container mx-auto px-6 relative z-10 max-w-4xl space-y-4">
  <nav class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-400 mb-2" aria-label="Breadcrumb">
- <a href="/locations" class="hover:text-accent transition-colors">Locations</a>
+ <a href="/locations/" class="hover:text-accent transition-colors">Locations</a>
  <span>/</span>
- <a href={`/locations/${loc.slug}`} class="hover:text-accent transition-colors">{loc.name}</a>
+ <a href={`/locations/${loc.slug}/`} class="hover:text-accent transition-colors">{loc.name}</a>
  <span>/</span>
  <span class="text-accent">{service.title}</span>
  </nav>
@@ -159,7 +159,7 @@ const breadcrumbSchema = {
  <ul class="space-y-2">
  {otherServicesHere.map((s) => (
  <li>
- <a href={`/locations/${loc.slug}/${s.slug}`} class="text-neutral-700 hover:text-primary transition-colors text-sm font-semibold">
+ <a href={`/locations/${loc.slug}/${s.slug}/`} class="text-neutral-700 hover:text-primary transition-colors text-sm font-semibold">
  {s.title} in {loc.name} &rarr;
  </a>
  </li>
@@ -173,7 +173,7 @@ const breadcrumbSchema = {
  <ul class="space-y-2">
  {nearbyForService.map((n) => (
  <li>
- <a href={`/locations/${n.slug}/${service.slug}`} class="text-neutral-700 hover:text-primary transition-colors text-sm font-semibold">
+ <a href={`/locations/${n.slug}/${service.slug}/`} class="text-neutral-700 hover:text-primary transition-colors text-sm font-semibold">
  {service.title} in {n.name} &rarr;
  </a>
  </li>
