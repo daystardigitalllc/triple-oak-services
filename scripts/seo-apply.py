@@ -88,6 +88,17 @@ def main():
     run(['git', 'pull', '--ff-only'], cwd=repo, check=False)
     done, skipped = [], []
     for c in changes:
+        if c.get('kind') == 'patch':  # exact text patches for page content and links: each find must appear exactly once in the file
+            why = None; texts = {}
+            for pt in c.get('patches', []):
+                f = os.path.normpath(os.path.join(repo, pt['file']))
+                if not f.startswith(os.path.join(repo, 'src') + os.sep) or not os.path.isfile(f): why = 'file %s not found' % pt['file']; break
+                s = texts.get(f) or open(f, encoding='utf-8').read()
+                if s.count(pt['find']) != 1: why = '%s: the anchor text appears %d times' % (pt['file'], s.count(pt['find'])); break
+                texts[f] = s.replace(pt['find'], pt['replace'], 1)
+            if why: skipped.append((c, why)); continue
+            for f, s in texts.items(): open(f, 'w', encoding='utf-8', newline='').write(s)
+            done.append(c); continue
         edits = []; why = None
         for field in ('title', 'desc'):
             old, new = c['before'].get(field, ''), c['after'][field]
@@ -108,6 +119,11 @@ def main():
             run(['git', 'checkout', '--', 'src'], cwd=repo); sys.exit('Build failed, nothing changed.\n' + b.stdout[-1200:] + b.stderr[-1200:])
         bad = []
         for c in done:
+            if c.get('kind') == 'patch':
+                for ex in c.get('expects', []):
+                    pg = built_page(repo, ex['path'])
+                    if pg is None or html.unescape(ex['text']) not in html.unescape(pg): bad.append(c); break
+                continue
             pg = built_page(repo, c['path'])
             t, d = html.unescape(c['after']['title']), html.unescape(c['after']['desc'])
             if pg is None or html.unescape(pg).count(t) < 1 or html.unescape(pg).count(d) < 1: bad.append(c)
