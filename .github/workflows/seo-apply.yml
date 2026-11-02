@@ -1,0 +1,31 @@
+name: SEO apply
+run-name: SEO card ${{ inputs.card }}
+# Started by the DayStar dashboard when an approved page title/description card is accepted.
+# Edits the plain-text title/description in src/, builds, checks the built page, then commits and pushes (which publishes through Cloudflare).
+on:
+  workflow_dispatch:
+    inputs:
+      card: { description: Queue card id, required: true }
+      changes: { description: Base64 JSON of the approved change, required: true }
+      dry_run: { description: 'true = build and check only, publish nothing', default: 'false' }
+permissions:
+  contents: write
+concurrency: seo-apply
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm ci
+      - name: Apply the change
+        env:
+          CHANGES: ${{ inputs.changes }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          echo "$CHANGES" | base64 -d > "$RUNNER_TEMP/changes.json"
+          git config user.name "DayStar SEO"
+          git config user.email "info@daystardigital.co"
+          if [ "$DRY" = "true" ]; then FLAG="--dry-run"; else FLAG="--push"; fi
+          python3 scripts/seo-apply.py --repo . --changes "$RUNNER_TEMP/changes.json" $FLAG
