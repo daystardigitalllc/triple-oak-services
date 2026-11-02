@@ -124,6 +124,13 @@ const schema = {
       'font-family': `'${fontName}', sans-serif`,
       'glow-display': (themeConfig.style === 'sharp-contractor' || themeConfig.style === 'oak-city') ? 'none' : 'block'
     }}></style>
+    <!-- Google Analytics 4: page views plus phone taps, email taps and form submissions -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-28Y1YKDW49"></script>
+    <script is:inline>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-28Y1YKDW49');
+      document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(h.indexOf('tel:')===0)gtag('event','phone_click',{link_url:h});else if(h.indexOf('mailto:')===0)gtag('event','email_click',{link_url:h})},true);
+      document.addEventListener('submit',function(e){var f=e.target;if(!f||f.matches('[role=search],.search-form'))return;gtag('event','form_submit',{form_id:f.id||''})},true);
+    </script>
   </head>
   <body class="bg-white text-neutral-900 min-h-screen flex flex-col antialiased selection:bg-primary/20 selection:text-primary pb-16 md:pb-0">
     <!-- Top-level Background Glow (Modern Agency UI Touch) -->
