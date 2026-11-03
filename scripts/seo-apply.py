@@ -79,6 +79,25 @@ def override_file(repo):
 def norm_path(path):
     return '/' if path.strip('/') == '' else '/' + path.strip('/')
 
+def schema_file(repo):
+    p = os.path.join(repo, 'src', 'data', 'seo-schema.json')
+    return p if os.path.isfile(p) else None
+
+def ld_types(page):
+    """Every @type declared by the JSON-LD blocks of a built page."""
+    out = []
+    def walk(n):
+        if isinstance(n, dict):
+            t = n.get('@type')
+            if t: out.extend(t if isinstance(t, list) else [t])
+            for v in n.values(): walk(v)
+        elif isinstance(n, list):
+            for v in n: walk(v)
+    for blk in re.findall(r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>', page, re.S | re.I):
+        try: walk(json.loads(html.unescape(blk.strip())))
+        except ValueError: pass
+    return out
+
 def built_page(repo, path):
     for cand in (os.path.join(repo, 'dist', path.strip('/'), 'index.html'), os.path.join(repo, 'dist', path.strip('/') + '.html')):
         if os.path.exists(cand): return open(cand, encoding='utf-8', errors='ignore').read()
@@ -127,6 +146,15 @@ def main():
             if why: skipped.append((c, why)); continue
             for f, s in texts.items(): open(f, 'w', encoding='utf-8', newline='').write(s)
             done.append(c); continue
+        if c.get('kind') == 'schema':  # a JSON-LD block for one page, kept in src/data/seo-schema.json and printed by the layout
+            sf = schema_file(repo)
+            if not sf: skipped.append((c, 'this site has no src/data/seo-schema.json, so its layout does not print extra schema')); continue
+            try: data = json.loads(open(sf, encoding='utf-8').read() or '{}')
+            except ValueError: skipped.append((c, 'seo-schema.json is not valid JSON')); continue
+            blk = c['json']; key = norm_path(c['path'])
+            data[key] = [b for b in data.get(key, []) if b.get('@type') != blk.get('@type')] + [blk]
+            open(sf, 'w', encoding='utf-8', newline='\n').write(json.dumps(data, indent=2, ensure_ascii=False, sort_keys=True) + '\n')
+            done.append(c); continue
         edits = []; why = None
         for field in ('title', 'desc'):
             old, new = c['before'].get(field, ''), c['after'][field]
@@ -156,6 +184,10 @@ def main():
         for c in done:
             if c.get('kind') == 'remove':
                 if built_page(repo, c['path']) is not None: bad.append(c)
+                continue
+            if c.get('kind') == 'schema':
+                pg = built_page(repo, c['path']); want = c['json'].get('@type')
+                if pg is None or ld_types(pg).count(want) != 1: bad.append(c)
                 continue
             if c.get('kind') in ('patch', 'create'):
                 for ex in c.get('expects', []):

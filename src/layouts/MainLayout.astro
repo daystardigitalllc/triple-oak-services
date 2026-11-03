@@ -4,6 +4,7 @@ import themeConfig from '../data/theme.config.json';
 import businessData from '../data/business.json';
 import contentData from '../data/content.json';
 import seoOverrides from '../data/seo-overrides.json';
+import seoSchema from '../data/seo-schema.json';
 import Header from '../components/Header.astro';
 import NavbarPill from '../components/NavbarPill.astro';
 import Footer from '../components/Footer.astro';
@@ -29,6 +30,8 @@ const {
 // the DayStar SEO job writes approved title/description changes for template-built pages here (src/data/seo-overrides.json)
 const overridePath = Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, '') : '/';
 const override = (seoOverrides as Record<string, { title?: string; description?: string }>)[overridePath];
+// extra JSON-LD the DayStar SEO job adds for a page lives in src/data/seo-schema.json
+const extraLd = ((seoSchema as Record<string, object[]>)[overridePath] || []);
 const title = override?.title || pageTitle;
 const description = override?.description || pageDescription;
 
@@ -138,6 +141,7 @@ const schema = {
       document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(h.indexOf('tel:')===0)gtag('event','phone_click',{link_url:h});else if(h.indexOf('mailto:')===0)gtag('event','email_click',{link_url:h})},true);
       document.addEventListener('submit',function(e){var f=e.target;if(!f||f.matches('[role=search],.search-form'))return;gtag('event','form_submit',{form_id:f.id||''})},true);
     </script>
+    {extraLd.map((g) => <script type="application/ld+json" set:html={JSON.stringify(g)} />)}
   </head>
   <body class="bg-white text-neutral-900 min-h-screen flex flex-col antialiased selection:bg-primary/20 selection:text-primary pb-16 md:pb-0">
     <!-- Top-level Background Glow (Modern Agency UI Touch) -->
