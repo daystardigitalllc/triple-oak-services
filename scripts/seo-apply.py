@@ -151,8 +151,11 @@ def main():
             if not sf: skipped.append((c, 'this site has no src/data/seo-schema.json, so its layout does not print extra schema')); continue
             try: data = json.loads(open(sf, encoding='utf-8').read() or '{}')
             except ValueError: skipped.append((c, 'seo-schema.json is not valid JSON')); continue
-            blk = c['json']; key = norm_path(c['path'])
-            data[key] = [b for b in data.get(key, []) if b.get('@type') != blk.get('@type')] + [blk]
+            key = norm_path(c['path']); blk = c.get('json')
+            if blk is None:  # undo: take this type's block back out
+                data[key] = [b for b in data.get(key, []) if b.get('@type') != c['type']]
+                if not data[key]: data.pop(key, None)
+            else: data[key] = [b for b in data.get(key, []) if b.get('@type') != blk.get('@type')] + [blk]
             open(sf, 'w', encoding='utf-8', newline='\n').write(json.dumps(data, indent=2, ensure_ascii=False, sort_keys=True) + '\n')
             done.append(c); continue
         edits = []; why = None
@@ -186,8 +189,8 @@ def main():
                 if built_page(repo, c['path']) is not None: bad.append(c)
                 continue
             if c.get('kind') == 'schema':
-                pg = built_page(repo, c['path']); want = c['json'].get('@type')
-                if pg is None or ld_types(pg).count(want) != 1: bad.append(c)
+                pg = built_page(repo, c['path'])
+                if c.get('json') is not None and (pg is None or ld_types(pg).count(c['json'].get('@type')) != 1): bad.append(c)
                 continue
             if c.get('kind') in ('patch', 'create'):
                 for ex in c.get('expects', []):
