@@ -72,6 +72,13 @@ def escape_for(new, q, original_has_amp):
     if original_has_amp: t = t.replace('&', '&amp;')
     return t.replace('\\', '\\\\').replace(q, '\\' + q) if q in ('"', "'") else t
 
+def override_file(repo):
+    p = os.path.join(repo, 'src', 'data', 'seo-overrides.json')
+    return p if os.path.isfile(p) else None
+
+def norm_path(path):
+    return '/' if path.strip('/') == '' else '/' + path.strip('/')
+
 def built_page(repo, path):
     for cand in (os.path.join(repo, 'dist', path.strip('/'), 'index.html'), os.path.join(repo, 'dist', path.strip('/') + '.html')):
         if os.path.exists(cand): return open(cand, encoding='utf-8', errors='ignore').read()
@@ -127,6 +134,13 @@ def main():
             hit, err = place(repo, old)
             if err: why = '%s: %s' % (field, err); break
             edits.append((field, hit, new))
+        if why and override_file(repo):  # the page builds its text from a template or repeats it: record the approved text in the overrides file instead
+            of = override_file(repo)
+            try: data = json.loads(open(of, encoding='utf-8').read() or '{}')
+            except ValueError: skipped.append((c, 'seo-overrides.json is not valid JSON')); continue
+            data[norm_path(c['path'])] = {'title': html.unescape(c['after']['title']), 'description': html.unescape(c['after']['desc'])}
+            open(of, 'w', encoding='utf-8', newline='\n').write(json.dumps(data, indent=2, ensure_ascii=False, sort_keys=True) + '\n')
+            done.append(c); continue
         if why: skipped.append((c, why)); continue
         for field, hit, new in edits:
             f, lit, q, v, n = hit

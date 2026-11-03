@@ -3,6 +3,7 @@ import '../styles/global.css';
 import themeConfig from '../data/theme.config.json';
 import businessData from '../data/business.json';
 import contentData from '../data/content.json';
+import seoOverrides from '../data/seo-overrides.json';
 import Header from '../components/Header.astro';
 import NavbarPill from '../components/NavbarPill.astro';
 import Footer from '../components/Footer.astro';
@@ -20,10 +21,16 @@ interface Props {
 }
 
 const {
-  title = `${businessData.name} | Tree Trimming, Removal & Stump Grinding in ${businessData.locations?.[0] || 'Middle Tennessee'}`,
-  description = `${businessData.name} offers tree trimming, removal, and stump grinding for homeowners in ${businessData.locations?.[0] || 'Middle Tennessee'}. Licensed and insured, with free estimates.`,
+  title: pageTitle = `${businessData.name} | Tree Trimming, Removal & Stump Grinding in ${businessData.locations?.[0] || 'Middle Tennessee'}`,
+  description: pageDescription = `${businessData.name} offers tree trimming, removal, and stump grinding for homeowners in ${businessData.locations?.[0] || 'Middle Tennessee'}. Licensed and insured, with free estimates.`,
   ogImage = '/images/bucket-truck.jpg'
 } = Astro.props;
+
+// the DayStar SEO job writes approved title/description changes for template-built pages here (src/data/seo-overrides.json)
+const overridePath = Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, '') : '/';
+const override = (seoOverrides as Record<string, { title?: string; description?: string }>)[overridePath];
+const title = override?.title || pageTitle;
+const description = override?.description || pageDescription;
 
 const fontName = themeConfig.fontFamily || 'Outfit';
 const fontUrl = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@300;400;500;600;700;800&display=swap`;
