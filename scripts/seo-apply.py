@@ -86,8 +86,29 @@ def main():
     if not changes: print('Nothing approved and waiting for this site.'); return
     if run(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=repo).stdout.strip(): sys.exit('The repo has uncommitted changes. Commit or stash them first.')
     run(['git', 'pull', '--ff-only'], cwd=repo, check=False)
-    done, skipped = [], []
+    done, skipped, created = [], [], []
+    def revert():
+        run(['git', 'checkout', '--', 'src'], cwd=repo)
+        for f in created:
+            if os.path.exists(f): os.remove(f)
     for c in changes:
+        if c.get('kind') == 'create':  # a whole new page file; it must be a new .astro file under src/pages
+            f = os.path.normpath(os.path.join(repo, c['file'])); pages = os.path.join(repo, 'src', 'pages') + os.sep
+            if not f.startswith(pages) or not f.endswith('.astro'): skipped.append((c, 'file %s is not a page' % c['file'])); continue
+            if os.path.exists(f): skipped.append((c, 'file %s already exists' % c['file'])); continue
+            os.makedirs(os.path.dirname(f), exist_ok=True); open(f, 'w', encoding='utf-8', newline='').write(c['content']); created.append(f); done.append(c); continue
+        if c.get('kind') == 'remove':  # take a page this job created back out, and the link sentences that pointed to it
+            f = os.path.normpath(os.path.join(repo, c['file'])); pages = os.path.join(repo, 'src', 'pages') + os.sep; why = None; texts = {}
+            if not f.startswith(pages) or not os.path.isfile(f): skipped.append((c, 'file %s not found' % c['file'])); continue
+            for pt in c.get('patches', []):
+                g = os.path.normpath(os.path.join(repo, pt['file']))
+                if not g.startswith(os.path.join(repo, 'src') + os.sep) or not os.path.isfile(g): why = 'file %s not found' % pt['file']; break
+                s = texts.get(g) or open(g, encoding='utf-8').read()
+                if s.count(pt['replace']) != 1: why = '%s: the link sentence appears %d times' % (pt['file'], s.count(pt['replace'])); break
+                texts[g] = s.replace(pt['replace'], pt['find'], 1)
+            if why: skipped.append((c, why)); continue
+            for g, s in texts.items(): open(g, 'w', encoding='utf-8', newline='').write(s)
+            os.remove(f); done.append(c); continue
         if c.get('kind') == 'patch':  # exact text patches for page content and links: each find must appear exactly once in the file
             why = None; texts = {}
             for pt in c.get('patches', []):
@@ -116,10 +137,13 @@ def main():
     if done:
         print('Building...'); b = run('npm run build', cwd=repo, check=False)
         if b.returncode:
-            run(['git', 'checkout', '--', 'src'], cwd=repo); sys.exit('Build failed, nothing changed.\n' + b.stdout[-1200:] + b.stderr[-1200:])
+            revert(); sys.exit('Build failed, nothing changed.\n' + b.stdout[-1200:] + b.stderr[-1200:])
         bad = []
         for c in done:
-            if c.get('kind') == 'patch':
+            if c.get('kind') == 'remove':
+                if built_page(repo, c['path']) is not None: bad.append(c)
+                continue
+            if c.get('kind') in ('patch', 'create'):
                 for ex in c.get('expects', []):
                     pg = built_page(repo, ex['path'])
                     if pg is None or html.unescape(ex['text']) not in html.unescape(pg): bad.append(c); break
@@ -128,14 +152,14 @@ def main():
             t, d = html.unescape(c['after']['title']), html.unescape(c['after']['desc'])
             if pg is None or html.unescape(pg).count(t) < 1 or html.unescape(pg).count(d) < 1: bad.append(c)
         if bad:
-            run(['git', 'checkout', '--', 'src'], cwd=repo)
+            revert()
             sys.exit('The built page did not show the new text for: ' + ', '.join(c['path'] for c in bad) + '. Nothing was kept.')
         print('Verified in the built site: ' + ', '.join(c['path'] for c in done))
         if a.dry_run:
-            run(['git', 'checkout', '--', 'src'], cwd=repo); print('Dry run: changes reverted.')
+            revert(); print('Dry run: changes reverted.')
         else:
             run(['git', 'add', 'src'], cwd=repo)
-            run(['git', 'commit', '-q', '-m', 'SEO: approved titles and descriptions for ' + ', '.join(c['path'] for c in done) + '\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>'], cwd=repo)
+            run(['git', 'commit', '-q', '-m', 'SEO: approved changes for ' + ', '.join(c['path'] for c in done) + '\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>'], cwd=repo)
             sha = run(['git', 'rev-parse', '--short', 'HEAD'], cwd=repo).stdout.strip()
             if a.push:
                 run(['git', 'push', '-q'], cwd=repo)
