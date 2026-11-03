@@ -14,12 +14,15 @@ concurrency: seo-apply
 jobs:
   apply:
     runs-on: ubuntu-latest
+    outputs:
+      left: ${{ steps.apply.outputs.left }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - run: npm ci
       - name: Apply the change
+        id: apply
         env:
           CHANGES: ${{ inputs.changes }}
           DRY: ${{ inputs.dry_run }}
@@ -28,4 +31,14 @@ jobs:
           git config user.name "DayStar SEO"
           git config user.email "info@daystardigital.co"
           if [ "$DRY" = "true" ]; then FLAG="--dry-run"; else FLAG="--push"; fi
-          python3 scripts/seo-apply.py --repo . --changes "$RUNNER_TEMP/changes.json" $FLAG
+          # exit 3 = the text could not be placed and nothing was changed: finish normally so no failure email goes out
+          code=0; python3 scripts/seo-apply.py --repo . --changes "$RUNNER_TEMP/changes.json" $FLAG || code=$?
+          if [ "$code" = "3" ]; then echo "left=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          exit $code
+  left:
+    name: Left for a person
+    needs: apply
+    if: needs.apply.outputs.left == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The publish job could not place this change. Nothing was changed on the site."
