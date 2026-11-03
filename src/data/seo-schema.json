@@ -1,1 +1,43 @@
-{}
+{
+  "/locations/brentwood/storm-damage-cleanup": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Nashville"
+        },
+        {
+          "@type": "City",
+          "name": "Franklin"
+        },
+        {
+          "@type": "City",
+          "name": "Brentwood"
+        },
+        {
+          "@type": "City",
+          "name": "Gallatin"
+        },
+        {
+          "@type": "City",
+          "name": "Hendersonville"
+        },
+        {
+          "@type": "City",
+          "name": "Murfreesboro"
+        }
+      ],
+      "description": "Storm damage tree cleanup in Brentwood, TN: fallen trees, hanging limbs and emergency removal, including same-day service when available. Call 615-561-0472.",
+      "name": "Storm Damage & Emergency Tree Removal in Brentwood, TN",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Triple Oak Services",
+        "telephone": "(615) 561-0472",
+        "url": "https://tripleoakservices.com/"
+      },
+      "url": "https://tripleoakservices.com/locations/brentwood/storm-damage-cleanup"
+    }
+  ]
+}
