@@ -39,5 +39,46 @@
       },
       "url": "https://tripleoakservices.com/locations/brentwood/storm-damage-cleanup"
     }
+  ],
+  "/locations/franklin/storm-damage-cleanup": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Nashville"
+        },
+        {
+          "@type": "City",
+          "name": "Franklin"
+        },
+        {
+          "@type": "City",
+          "name": "Brentwood"
+        },
+        {
+          "@type": "City",
+          "name": "Gallatin"
+        },
+        {
+          "@type": "City",
+          "name": "Hendersonville"
+        },
+        {
+          "@type": "City",
+          "name": "Murfreesboro"
+        }
+      ],
+      "description": "Emergency tree service and storm damage cleanup in Franklin, TN and Williamson County: downed trees and limbs off roofs, fences and driveways. Call 615-561-0472.",
+      "name": "Storm Damage & Emergency Tree Removal in Franklin, TN",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Triple Oak Services",
+        "telephone": "(615) 561-0472",
+        "url": "https://tripleoakservices.com/"
+      },
+      "url": "https://tripleoakservices.com/locations/franklin/storm-damage-cleanup"
+    }
   ]
 }
